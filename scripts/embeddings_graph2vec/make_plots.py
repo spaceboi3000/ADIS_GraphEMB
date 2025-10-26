@@ -2,210 +2,235 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
-import os
+from pathlib import Path
+from typing import Tuple, List
 
-# Create plots directory if it doesn't exist
-os.makedirs('/c/Users/Nick/src/ADIS/scripts/embeddings_graph2vec/plots', exist_ok=True)
+# Configuration
+class Config:
+    """Centralized configuration for consistent styling."""
+    STYLE = 'seaborn-v0_8'
+    PALETTE = "husl"
+    DPI = 300
+    FIGSIZE_LARGE = (15, 12)
+    FIGSIZE_MEDIUM = (14, 6)
+    COLOR_FIT = '#2E86AB'
+    COLOR_EMBED = '#A23B72'
+    COLOR_PALETTE = ['#FF6B6B', '#4ECDC4', '#45B7D1']
+    PLOTS_DIR = Path('./plots')
 
-# Data from the CSV
-data = {
-    'dataset': ['MUTAG', 'MUTAG', 'MUTAG', 'ENZYMES', 'ENZYMES', 'ENZYMES', 'IMDB-MULTI', 'IMDB-MULTI', 'IMDB-MULTI'],
-    'method': ['Graph2Vec'] * 9,
-    'dim': [64, 128, 256, 64, 128, 256, 64, 128, 256],
-    'n_graphs': [188, 188, 188, 600, 600, 600, 1500, 1500, 1500],
-    'fit_time_s': [0.211, 0.1772, 0.1774, 0.9536, 0.9631, 1.2432, 1.4137, 1.5435, 1.481],
-    'embed_time_s': [0.0001, 0.0001, 0.0001, 0.0003, 0.0003, 0.0003, 0.0008, 0.0008, 0.0008],
-    'total_time_s': [0.2111, 0.1773, 0.1775, 0.9539, 0.9635, 1.2435, 1.4144, 1.5443, 1.4818],
-    'rss_before_mb': [347.5, 350.48, 354.56, 373.12, 383.89, 388.58, 389.89, 401.61, 403.56],
-    'rss_after_mb': [350.2, 350.89, 354.86, 378.89, 378.56, 335.61, 399.25, 401.09, 403.03],
-    'peak_tracemalloc_mb': [1.61, 1.39, 1.39, 9.89, 7.7, 7.7, 10.71, 8.28, 9.38]
-}
+# Initialize styling
+plt.style.use(Config.STYLE)
+sns.set_palette(Config.PALETTE)
+Config.PLOTS_DIR.mkdir(exist_ok=True)
 
-df = pd.DataFrame(data)
 
-# Set style
-plt.style.use('default')
-sns.set_palette("husl")
-
-# 1. Time Comparison with Log Scale (Main Insight)
-plt.figure(figsize=(14, 10))
-
-# Plot 1: Time components with log scale
-plt.subplot(2, 2, 1)
-x_pos = np.arange(len(df))
-bar_width = 0.8
-
-# Since embed time is so small, we'll plot fit time and total time separately
-fit_bars = plt.bar(x_pos, df['fit_time_s'], bar_width, 
-                   label='Fit Time', alpha=0.7, color='royalblue')
-embed_bars = plt.bar(x_pos, df['embed_time_s'], bar_width, 
-                     bottom=df['fit_time_s'], label='Embed Time', alpha=0.7, color='coral')
-
-plt.yscale('log')
-plt.ylabel('Time (seconds, log scale)')
-plt.title('Time Components: Fit vs Embed (Log Scale)')
-plt.xticks(x_pos, [f"{row['dataset']}\nDim{row['dim']}" for _, row in df.iterrows()], 
-           rotation=45)
-plt.legend()
-plt.grid(True, alpha=0.3, which='both')
-
-# Plot 2: Ratio of Fit Time to Embed Time
-plt.subplot(2, 2, 2)
-df['fit_embed_ratio'] = df['fit_time_s'] / df['embed_time_s']
-
-colors = ['red' if ratio > 1000 else 'blue' for ratio in df['fit_embed_ratio']]
-bars = plt.bar(range(len(df)), df['fit_embed_ratio'], color=colors, alpha=0.7)
-
-plt.ylabel('Fit Time / Embed Time Ratio')
-plt.title('Ratio of Fit Time to Embed Time\n(Red bars > 1000x)')
-plt.xticks(range(len(df)), [f"{row['dataset']}\nDim{row['dim']}" for _, row in df.iterrows()], 
-           rotation=45)
-plt.grid(True, alpha=0.3)
-
-# Add value labels on bars
-for i, bar in enumerate(bars):
-    height = bar.get_height()
-    plt.text(bar.get_x() + bar.get_width()/2., height,
-             f'{height:.0f}x', ha='center', va='bottom', fontsize=8)
-
-# Plot 3: Absolute time values with log scale by dataset
-plt.subplot(2, 2, 3)
-for dataset in df['dataset'].unique():
-    dataset_data = df[df['dataset'] == dataset]
+def load_and_prepare_data(filepath: str) -> pd.DataFrame:
+    """Load CSV and calculate derived metrics."""
+    df = pd.read_csv(filepath)
     
-    # Plot fit time (dominant)
-    plt.plot(dataset_data['dim'], dataset_data['fit_time_s'], 
-             marker='o', linewidth=3, markersize=8, 
-             label=f'{dataset} - Fit', linestyle='-')
+    # Validate required columns
+    required_cols = ['fit_time_s', 'embed_time_s', 'total_time_s', 'dataset', 'dim', 'n_graphs']
+    missing = set(required_cols) - set(df.columns)
+    if missing:
+        raise ValueError(f"Missing required columns: {missing}")
     
-    # Plot embed time (very small)
-    plt.plot(dataset_data['dim'], dataset_data['embed_time_s'], 
-             marker='s', linewidth=2, markersize=6, 
-             label=f'{dataset} - Embed', linestyle='--', alpha=0.8)
+    # Calculate derived metrics
+    df['fit_embed_ratio'] = df['fit_time_s'] / df['embed_time_s']
+    df['embed_percentage'] = (df['embed_time_s'] / df['total_time_s']) * 100
+    
+    return df
 
-plt.yscale('log')
-plt.xlabel('Embedding Dimension')
-plt.ylabel('Time (seconds, log scale)')
-plt.title('Fit vs Embed Time by Dataset (Log Scale)')
-plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
-plt.grid(True, alpha=0.3, which='both')
 
-# Plot 4: Percentage breakdown
-plt.subplot(2, 2, 4)
-df['embed_time_percentage'] = (df['embed_time_s'] / df['total_time_s']) * 100
+# --- Enhancements for prettier graphs ---
+sns.set_context("talk")  # larger font sizes
+sns.set_style("whitegrid")  # clean background
 
-plt.bar(range(len(df)), df['embed_time_percentage'], 
-        color='lightgreen', alpha=0.7, edgecolor='darkgreen')
-plt.ylabel('Embed Time as % of Total Time')
-plt.title('Embedding Time as Percentage of Total Time')
-plt.xticks(range(len(df)), [f"{row['dataset']}\nDim{row['dim']}" for _, row in df.iterrows()], 
-           rotation=45)
-plt.grid(True, alpha=0.3)
+def create_stacked_time_plot(df: pd.DataFrame, ax: plt.Axes, dataset: str) -> None:
+    """Create a polished stacked bar chart for time components (log scale)."""
+    data = df[df['dataset'] == dataset].sort_values('dim')
+    x = np.arange(len(data))
+    width = 0.7
 
-# Add percentage labels
-for i, percentage in enumerate(df['embed_time_percentage']):
-    plt.text(i, percentage + 0.1, f'{percentage:.3f}%', 
-             ha='center', va='bottom', fontsize=8)
+    # Avoid zero values for log scale
+    fit_times = data['fit_time_s'].replace(0, 1e-6)
+    embed_times = data['embed_time_s'].replace(0, 1e-6)
 
-plt.tight_layout()
-plt.savefig('./plots/time_analysis_log_scale.png', dpi=300, bbox_inches='tight')
-plt.close()
+    # Stacked bars
+    ax.bar(x, fit_times, width, label='Fit Time', color="#2E86AB", alpha=0.85)
+    ax.bar(x, embed_times, width, bottom=fit_times, label='Embed Time', color="#A23B72", alpha=0.85)
 
-# 2. Detailed Stacked Area Chart with Log Scale
-plt.figure(figsize=(12, 8))
+    # Log scale
+    ax.set_yscale('log')
+    ax.set_xticks(x)
+    ax.set_xticklabels(data['dim'].astype(int))
+    ax.set_title(f"{dataset} (n={data['n_graphs'].iloc[0]:,} graphs)", fontweight='bold', fontsize=12)
+    ax.set_xlabel('Embedding Dimension', fontsize=11)
+    ax.set_ylabel('Time (s, log scale)', fontsize=11)
+    ax.grid(True, which='both', linestyle='--', linewidth=0.5, alpha=0.3)
+    ax.legend(framealpha=0.9)
 
-# Create a more detailed visualization
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+    # Add embed time annotations (placed at top of embed bar, small offset)
+    for i, (fit, embed) in enumerate(zip(fit_times, embed_times)):
+        if embed > 0:
+            ax.text(i, fit + embed*1.05, f'{embed:.4f}s', ha='center', va='bottom',
+                    fontsize=8, fontweight='bold', color="#A23B72")
 
-# Left: Stacked bar chart with log scale
-ind = np.arange(len(df))
-width = 0.8
+    # Set y-limits to prevent overly tall plots
+    max_total = (fit_times + embed_times).max()
+    ax.set_ylim(1e-6, max_total * 1.15)  # 15% padding
 
-p1 = ax1.bar(ind, df['fit_time_s'], width, label='Fit Time', color='navy', alpha=0.8)
-p2 = ax1.bar(ind, df['embed_time_s'], width, bottom=df['fit_time_s'], 
-             label='Embed Time', color='red', alpha=0.8)
 
-ax1.set_ylabel('Time (seconds, log scale)')
-ax1.set_title('Stacked Time Components (Log Scale)\nEmbed Time Barely Visible!')
-ax1.set_xticks(ind)
-ax1.set_xticklabels([f"{row['dataset']}\nDim{row['dim']}" for _, row in df.iterrows()], 
-                    rotation=45)
-ax1.set_yscale('log')
-ax1.legend()
-ax1.grid(True, alpha=0.3, which='both')
+def plot_time_breakdown(df: pd.DataFrame, output_path: Path) -> None:
+    """Generate polished time breakdown visualization."""
+    datasets = df['dataset'].unique()
+    fig, axes = plt.subplots(2, 2, figsize=(16,12))
+    axes = axes.flatten()
 
-# Right: Just embed time (linear scale to see the actual values)
-ax2.bar(ind, df['embed_time_s'], width, color='red', alpha=0.8)
-ax2.set_ylabel('Embed Time (seconds, linear scale)')
-ax2.set_title('Embed Time Only (Linear Scale)')
-ax2.set_xticks(ind)
-ax2.set_xticklabels([f"{row['dataset']}\nDim{row['dim']}" for _, row in df.iterrows()], 
-                    rotation=45)
+    for i, dataset in enumerate(datasets[:3]):
+        create_stacked_time_plot(df, axes[i], dataset)
 
-# Add value labels on embed time bars
-for i, v in enumerate(df['embed_time_s']):
-    ax2.text(i, v + 0.0001, f'{v:.4f}s', ha='center', va='bottom', fontsize=8)
+    axes[3].remove()
+    ax_ratio = fig.add_subplot(2, 2, 4)
 
-ax2.grid(True, alpha=0.3)
+    # Plot fit/embed ratios
+    for dataset in datasets:
+        data = df[df['dataset'] == dataset].sort_values('dim')
+        ax_ratio.plot(data['dim'], data['fit_embed_ratio'], marker='o', linewidth=2.5, markersize=8,
+                      label=dataset, alpha=0.85)
+    
+    ax_ratio.set_yscale('log')
+    ax_ratio.set_xlabel('Embedding Dimension', fontsize=11)
+    ax_ratio.set_ylabel('Fit / Embed Time Ratio (log)', fontsize=11)
+    ax_ratio.set_title('Time Ratio Comparison', fontsize=12, fontweight='bold')
+    ax_ratio.grid(True, linestyle='--', alpha=0.3)
+    ax_ratio.legend(framealpha=0.9)
 
-plt.tight_layout()
-plt.savefig('./plots/time_comparison_detailed.png', dpi=300, bbox_inches='tight')
-plt.close()
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=Config.DPI, bbox_inches='tight')
+    plt.close()
 
-# 3. Time Ratios Heatmap
-plt.figure(figsize=(10, 6))
 
-# Calculate various ratios
-df['fit_embed_ratio'] = df['fit_time_s'] / df['embed_time_s']
-df['embed_percentage'] = (df['embed_time_s'] / df['total_time_s']) * 100
+def plot_embed_time_analysis(df: pd.DataFrame, output_path: Path) -> None:
+    """Polished embedding time analysis with dynamic y-axis scaling."""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=Config.FIGSIZE_MEDIUM)
+    
+    # Left: Embed times in milliseconds
+    max_val = 0
+    for dataset in df['dataset'].unique():
+        data = df[df['dataset'] == dataset].sort_values('dim')
+        embed_ms = data['embed_time_s'] * 1000
+        ax1.plot(data['dim'], embed_ms, marker='s', linewidth=2.5,
+                markersize=8, label=dataset, alpha=0.85)
+        
+        # Track max value for axis limit
+        max_val = max(max_val, embed_ms.max())
+        
+        # Annotate only the max dimension
+        max_row = data.iloc[-1]
+        ax1.annotate(f'{max_row["embed_time_s"]*1000:.1f}ms',
+                    xy=(max_row['dim'], max_row['embed_time_s']*1000),
+                    xytext=(5, 2), textcoords='offset points',
+                    fontsize=9, fontweight='bold')
+    
+    # Set y-axis limit with appropriate padding
+    ax1.set_ylim(0, max_val * 1.12)
+    ax1.set_xlabel('Embedding Dimension', fontsize=11)
+    ax1.set_ylabel('Embed Time (milliseconds)', fontsize=11)
+    ax1.set_title('Embedding Generation Time', fontweight='bold', fontsize=12)
+    ax1.legend(framealpha=0.9)
+    ax1.grid(True, alpha=0.3, linestyle='--', linewidth=0.5)
+    
+    # Right: Percentage contribution with dynamic scaling
+    labels = [f"{row['dataset']}\nDim {row['dim']}" for _, row in df.iterrows()]
+    x_pos = np.arange(len(df))
+    
+    bars = ax2.bar(x_pos, df['embed_percentage'], 
+                   color=Config.COLOR_PALETTE * (len(df) // len(Config.COLOR_PALETTE) + 1),
+                   alpha=0.85, edgecolor='black', linewidth=0.5)
+    
+    # Calculate appropriate y-axis limit based on data range
+    max_pct = df['embed_percentage'].max()
+    y_limit = max_pct * 1.15  # 15% padding for labels
+    
+    ax2.set_ylim(0, y_limit)
+    ax2.set_xlabel('Experiment Configuration', fontsize=11)
+    ax2.set_ylabel('Embed Time (% of Total)', fontsize=11)
+    ax2.set_title('Embed Time as % of Total Runtime', fontweight='bold', fontsize=12)
+    ax2.set_xticks(x_pos)
+    ax2.set_xticklabels(labels, rotation=45, ha='right', fontsize=9)
+    ax2.grid(True, alpha=0.3, axis='y', linestyle='--', linewidth=0.5)
+    
+    # Add percentage labels with dynamic offset
+    for bar, percentage in zip(bars, df['embed_percentage']):
+        height = bar.get_height()
+        # Dynamic offset: 2% of the y-axis limit
+        offset = y_limit * 0.02
+        ax2.text(bar.get_x() + bar.get_width()/2, height + offset,
+                f'{percentage:.3f}%', ha='center', va='bottom', 
+                fontsize=9, fontweight='bold')
+    
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=Config.DPI, bbox_inches='tight')
+    plt.close()
 
-# Create pivot tables
-ratio_pivot = df.pivot(index='dataset', columns='dim', values='fit_embed_ratio')
-percentage_pivot = df.pivot(index='dataset', columns='dim', values='embed_percentage')
+def plot_performance_heatmaps(df: pd.DataFrame, output_path: Path) -> None:
+    """Polished performance heatmaps."""
+    fig, axes = plt.subplots(1,2,figsize=(14,6))
+    
+    time_pivot = df.pivot(index='dataset', columns='dim', values='total_time_s')
+    ratio_pivot = df.pivot(index='dataset', columns='dim', values='fit_embed_ratio')
 
-plt.subplot(1, 2, 1)
-sns.heatmap(ratio_pivot, annot=True, fmt='.0f', cmap='Reds', 
-            cbar_kws={'label': 'Fit Time / Embed Time Ratio'})
-plt.title('Fit Time to Embed Time Ratio\n(Higher = more disparity)')
+    sns.heatmap(time_pivot, annot=True, fmt=".3f", cmap="YlOrRd", ax=axes[0], linewidths=0.5)
+    axes[0].set_title('Total Execution Time (s)', fontweight='bold', fontsize=12)
+    axes[0].set_xlabel('Embedding Dimension', fontsize=11)
+    axes[0].set_ylabel('Dataset', fontsize=11)
 
-plt.subplot(1, 2, 2)
-sns.heatmap(percentage_pivot, annot=True, fmt='.3f', cmap='Blues',
-            cbar_kws={'label': 'Embed Time % of Total'})
-plt.title('Embed Time as % of Total Time')
+    sns.heatmap(ratio_pivot, annot=True, fmt=".1f", cmap="RdPu", ax=axes[1], linewidths=0.5)
+    axes[1].set_title('Fit / Embed Time Ratio', fontweight='bold', fontsize=12)
+    axes[1].set_xlabel('Embedding Dimension', fontsize=11)
+    axes[1].set_ylabel('Dataset', fontsize=11)
 
-plt.tight_layout()
-plt.savefig('./plots/time_ratios_heatmap.png', dpi=300, bbox_inches='tight')
-plt.close()
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=Config.DPI, bbox_inches='tight')
+    plt.close()
 
-# 4. Magnitude Comparison
-plt.figure(figsize=(10, 6))
 
-# Calculate orders of magnitude difference
-df['magnitude_difference'] = np.log10(df['fit_time_s'] / df['embed_time_s'])
+def main():
+    """Main execution function."""
+    try:
+        # Load and prepare data
+        df = load_and_prepare_data('metrics_graph2vec.csv')
+        
+        # Generate all plots
+        plots = [
+            ('time_breakdown_clean.png', plot_time_breakdown),
+            ('embed_time_analysis.png', plot_embed_time_analysis),
+            ('performance_heatmaps_clean.png', plot_performance_heatmaps)
+        ]
+        
+        print(f"Generating plots in '{Config.PLOTS_DIR}'...\n")
+        
+        for filename, plot_func in plots:
+            output_path = Config.PLOTS_DIR / filename
+            plot_func(df, output_path)
+            print(f"✓ {filename} - {plot_func.__doc__}")
+        
+        print(f"\n✅ All plots successfully saved to '{Config.PLOTS_DIR}/'")
+        
+        # Print summary statistics
+        print("\n📊 Dataset Summary:")
+        print(df.groupby('dataset').agg({
+            'n_graphs': 'first',
+            'total_time_s': 'mean',
+            'embed_percentage': 'mean'
+        }).round(3))
+        
+    except FileNotFoundError:
+        print("❌ Error: 'metrics_graph2vec.csv' not found in current directory")
+    except Exception as e:
+        print(f"❌ Error: {e}")
+        raise
 
-plt.bar(range(len(df)), df['magnitude_difference'], 
-        color='purple', alpha=0.7, edgecolor='darkviolet')
 
-plt.ylabel('Orders of Magnitude Difference\n(log10(Fit Time / Embed Time))')
-plt.title('Orders of Magnitude Difference Between Fit and Embed Times')
-plt.xticks(range(len(df)), [f"{row['dataset']}\nDim{row['dim']}" for _, row in df.iterrows()], 
-           rotation=45)
-plt.grid(True, alpha=0.3)
-
-# Add value labels
-for i, mag in enumerate(df['magnitude_difference']):
-    plt.text(i, mag + 0.05, f'10^{mag:.1f}', ha='center', va='bottom', fontsize=8)
-
-plt.tight_layout()
-plt.savefig('./plots/magnitude_difference.png', dpi=300, bbox_inches='tight')
-plt.close()
-
-print("All log-scale plots have been saved to the './plots/' directory:")
-print("1. time_analysis_log_scale.png - Comprehensive log-scale analysis")
-print("2. time_comparison_detailed.png - Stacked bars with log scale")
-print("3. time_ratios_heatmap.png - Ratio heatmaps")
-print("4. magnitude_difference.png - Orders of magnitude difference")
-print("\nKey Insights:")
-print(f"- Fit time is {df['fit_embed_ratio'].min():.0f}x to {df['fit_embed_ratio'].max():.0f}x larger than embed time")
-print(f"- Embed time represents only {df['embed_percentage'].min():.4f}% to {df['embed_percentage'].max():.4f}% of total time")
-print(f"- Fit time dominates by 3-4 orders of magnitude (10^{df['magnitude_difference'].min():.1f} to 10^{df['magnitude_difference'].max():.1f})")
+if __name__ == "__main__":
+    main()
