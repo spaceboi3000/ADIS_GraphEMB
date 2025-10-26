@@ -1,18 +1,5 @@
-"""
-Task 1 (separate script): GIN (PyTorch Geometric) on TU datasets — embeddings + metrics + hyperparam sweep
----------------------------------------------------------------------------------------------------------
-• Trains a GIN graph-level model (supervised) on TU datasets using PyG.
-• Exports whole-graph embeddings (penultimate layer / pooled features) at multiple target dims.
-• Sweeps over batch size, epochs, learning rate, and weight decay; logs all in a metrics CSV.
-• Records training time, embed time, and memory (RSS + tracemalloc peak) for each config.
-• Saves embeddings as CSV/NPY with labels for each dataset & configuration.
-
-Requirements:
-  pip install torch torchvision torchaudio torch-geometric psutil scikit-learn
-"""
-
 from __future__ import annotations
-import os, time, tracemalloc, itertools
+import os, time, tracemalloc
 from pathlib import Path
 from typing import List, Tuple, Dict
 
@@ -29,17 +16,15 @@ from torch_geometric.loader import DataLoader
 from torch_geometric.nn import GINConv, global_mean_pool
 from sklearn.model_selection import StratifiedShuffleSplit
 
-#  Config 
-DATASETS_ROOT = Path("/content/drive/MyDrive/graph-emb/DATASETS")       
+#Config
+DATASETS_ROOT = Path("../DATASETS")       
 DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
-TARGET_DIMS = [64, 128, 256]                 # embedding sizes to compare
-# Hyperparameter grids (edit as you like)
-BATCH_SIZES = [32, 64]
-EPOCHS_LIST = [40, 80]
-LRS = [1e-3, 5e-4]
-WEIGHT_DECAYS = [0.0]
-
-OUT_DIR = Path("/content/drive/MyDrive/graph-emb/embeddings_gin")
+TARGET_DIMS = [64, 128, 256]                 # vary embedding size here
+BATCH_SIZE = 64
+EPOCHS = 80
+LR = 1e-3
+WEIGHT_DECAY = 0.0
+OUT_DIR = Path("./embeddings_task1_gin")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 SEED = 42
 
@@ -63,21 +48,25 @@ def get_device():
 
 
 #  Model 
-
 class GINNet(nn.Module):
     def __init__(self, in_channels: int, hidden: int, out_dim: int, num_classes: int, num_layers: int = 5):
         super().__init__()
+        self.num_layers = num_layers
+        self.emb_dim = out_dim
+
         def mlp_block(in_c, out_c):
             return nn.Sequential(
                 nn.Linear(in_c, out_c),
                 nn.ReLU(),
                 nn.Linear(out_c, out_c),
             )
+
         self.convs = nn.ModuleList()
         last_c = in_channels
         for _ in range(num_layers):
             self.convs.append(GINConv(mlp_block(last_c, hidden)))
             last_c = hidden
+
         self.proj = nn.Linear(hidden, out_dim)        # projection to target embedding dim
         self.classifier = nn.Linear(out_dim, num_classes)
 
@@ -91,7 +80,7 @@ class GINNet(nn.Module):
         return logits, z
 
 
-# Data & Training 
+# Data & Training
 
 def load_dataset(name: str) -> TUDataset:
     return TUDataset(root=str(DATASETS_ROOT), name=name)
@@ -109,29 +98,26 @@ def make_splits(y: np.ndarray, seed: int = SEED):
     return train_idx, val_idx, test_idx
 
 
-def train_one_config(name: str, dim: int, batch_size: int, epochs: int, lr: float, weight_decay: float, device):
+def train_one_dim(name: str, dim: int, device):
     set_seed(SEED)
     ds = load_dataset(name)
-    # Ensure node features exist; if not, use a constant feature
+    # Ensure node features exist; if not, use degree or ones
     from torch_geometric.transforms import Constant
     if ds.num_node_features == 0:
         ds.transform = Constant(value=1.0)
         ds = load_dataset(name)  # reload with transform applied
 
-    # labels = ds.data.y.cpu().numpy()
-    # SAFE: collect labels without touching ds.data
-    labels = np.array([int(d.y) for d in ds])
-
+    labels = ds.data.y.cpu().numpy()
     num_classes = int(labels.max() + 1)
     train_idx, val_idx, test_idx = make_splits(labels)
 
-    train_loader = DataLoader(ds[train_idx.tolist()], batch_size=batch_size, shuffle=True)
-    val_loader = DataLoader(ds[val_idx.tolist()], batch_size=batch_size)
-    test_loader = DataLoader(ds[test_idx.tolist()], batch_size=batch_size)
-    all_loader = DataLoader(ds, batch_size=batch_size)
+    train_loader = DataLoader(ds[train_idx.tolist()], batch_size=BATCH_SIZE, shuffle=True)
+    val_loader = DataLoader(ds[val_idx.tolist()], batch_size=BATCH_SIZE)
+    test_loader = DataLoader(ds[test_idx.tolist()], batch_size=BATCH_SIZE)
+    all_loader = DataLoader(ds, batch_size=BATCH_SIZE)
 
     model = GINNet(in_channels=max(ds.num_node_features, 1), hidden=dim, out_dim=dim, num_classes=num_classes).to(device)
-    opt = Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
+    opt = Adam(model.parameters(), lr=LR, weight_decay=WEIGHT_DECAY)
 
     # ---- Measure training time & memory ----
     proc = psutil.Process(os.getpid())
@@ -140,7 +126,7 @@ def train_one_config(name: str, dim: int, batch_size: int, epochs: int, lr: floa
 
     best_val = -1.0
     best_state = None
-    for epoch in range(epochs):
+    for epoch in range(EPOCHS):
         model.train()
         for batch in train_loader:
             batch = batch.to(device)
@@ -202,23 +188,21 @@ def train_one_config(name: str, dim: int, batch_size: int, epochs: int, lr: floa
     rss_after_mb = rss_after / (1024**2)
 
     # ---- Save embeddings ----
-    ds_dir = OUT_DIR / name / f"dim{dim}_bs{batch_size}_ep{epochs}_lr{lr:g}_wd{weight_decay:g}"
+    ds_dir = OUT_DIR / name / f"dim{dim}"
     ds_dir.mkdir(parents=True, exist_ok=True)
     np.save(ds_dir / "GIN_embeddings.npy", Z)
     df = pd.DataFrame(Z, columns=[f"dim{i}" for i in range(Z.shape[1])])
     df.insert(0, "label", Y)
     df.to_csv(ds_dir / "GIN_embeddings.csv", index=False)
 
-    # ---- Return metrics row ----
-    return {
+    # ---- Append metrics ----
+    mpath = OUT_DIR / "metrics_gin.csv"
+    row = {
         "dataset": name,
         "method": "GIN",
         "dim": dim,
         "n_graphs": len(ds),
-        "epochs": epochs,
-        "batch_size": batch_size,
-        "lr": lr,
-        "weight_decay": weight_decay,
+        "epochs": EPOCHS,
         "fit_time_s": round(fit_time, 4),
         "embed_time_s": round(embed_time, 4),
         "total_time_s": round(total_time, 4),
@@ -229,31 +213,24 @@ def train_one_config(name: str, dim: int, batch_size: int, epochs: int, lr: floa
         "rss_after_mb": round(rss_after_mb, 2),
         "device": str(device),
     }
+    mdf = pd.DataFrame([row])
+    if mpath.exists():
+        old = pd.read_csv(mpath)
+        mdf = pd.concat([old, mdf], ignore_index=True)
+    mdf.to_csv(mpath, index=False)
+    print(f"Saved embeddings + metrics (dim={dim}) -> {ds_dir}")
 
 
 def main():
     set_seed(SEED)
     device = get_device()
     print("Device:", device)
-
-    metrics_rows = []
     for name in DATASETS:
-        for dim, bs, epochs, lr, wd in itertools.product(TARGET_DIMS, BATCH_SIZES, EPOCHS_LIST, LRS, WEIGHT_DECAYS):
-            print(f"\n=== GIN :: {name} :: dim={dim} bs={bs} ep={epochs} lr={lr:g} wd={wd:g} ===")
+        for dim in TARGET_DIMS:
             try:
-                row = train_one_config(name, dim, bs, epochs, lr, wd, device)
-                metrics_rows.append(row)
+                train_one_dim(name, dim, device)
             except Exception as e:
-                print(f"[WARN] {name} dim={dim} bs={bs} ep={epochs} lr={lr:g} wd={wd:g}: {e}")
-
-    # Append metrics CSV
-    mpath = OUT_DIR / "metrics_gin.csv"
-    mdf = pd.DataFrame(metrics_rows)
-    if mpath.exists():
-        old = pd.read_csv(mpath)
-        mdf = pd.concat([old, mdf], ignore_index=True)
-    mdf.to_csv(mpath, index=False)
-    print(f"\nMetrics appended to {mpath}")
+                print(f"[WARN] {name} dim={dim}: {e}")
 
 
 if __name__ == "__main__":
