@@ -1,22 +1,3 @@
-"""
-Task 1 (separate script): NetLSD with KarateClub on local TU datasets
---------------------------------------------------------------------
-• Loads TU datasets (MUTAG, ENZYMES, IMDB-MULTI by default) from your local folder.
-• Uses PyTorch Geometric to read graphs, converts to NetworkX.
-• Fits NetLSD and saves embeddings (CSV + NPY) with labels.
-• Applies PCA to enforce a common TARGET_DIM (since NetLSD's raw signature length can differ).
-
-Setup (Colab or local):
-  pip install karateclub==1.3.3 scikit-learn torch torchvision torchaudio
-  # install PyG wheels matching your torch/CUDA from https://data.pyg.org/whl/
-
-Folder expectation (STRICT_LOCAL_ONLY=True):
-  DATASETS_ROOT/
-    MUTAG/processed/
-    ENZYMES/processed/
-    IMDB-MULTI/processed/
-  # Or under DATASETS_ROOT/TUDataset/<NAME>/processed/
-"""
 
 from __future__ import annotations
 import time
@@ -34,23 +15,22 @@ import torch
 from torch_geometric.datasets import TUDataset
 from torch_geometric.utils import to_networkx
 
-# ----------------- Config -----------------
-DATASETS_ROOT = Path("../DATASETS")     # <-- change to your local TU datasets root
-STRICT_LOCAL_ONLY = False               # don't download/process; fail if not present
-DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]  # change if your trio differs
+# Config
+DATASETS_ROOT = Path("../DATASETS")   
+STRICT_LOCAL_ONLY = False              
+DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"] 
 TARGET_DIM = 128
 OUT_DIR = Path("./embeddings_netlsd")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# NetLSD config — leaving defaults None uses KarateClub's defaults
-# NetLSD config — KarateClub's NetLSD does not accept a 'k' parameter in this version.
+
 NETLSD_PARAMS: Dict = dict(
     scale_min=None,
     scale_max=None,
     scale_n=None,
 )
 
-# --------------- Helpers -----------------
+#  Helpers 
 
 def _dense_netlsd_signatures(graphs: List[nx.Graph], scale_n: int = 250) -> np.ndarray:
     """Fallback NetLSD: compute heat trace signatures per-graph using dense eigendecomposition.
@@ -125,7 +105,7 @@ def save_embeddings(dataset: str, method: str, X: np.ndarray, y: np.ndarray):
     df.insert(0, "label", y)
     df.to_csv(ds_dir / f"{method}_embeddings.csv", index=False)
 
-# --------------- Main -----------------
+#  Main
 
 def run_netlsd_for_dataset(name: str):
     print(f"=== NetLSD :: {name} ===")
