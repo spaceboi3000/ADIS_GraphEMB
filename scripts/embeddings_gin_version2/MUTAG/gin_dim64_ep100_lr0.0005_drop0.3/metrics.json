@@ -1,0 +1,21 @@
+{
+  "dataset": "MUTAG",
+  "embedding_dim": 64,
+  "epochs": 100,
+  "lr": 0.0005,
+  "dropout": 0.3,
+  "batch_size": 64,
+  "num_layers": 5,
+  "pooling": "mean",
+  "train_time_sec": 6.9106764793396,
+  "embed_time_sec": 0.060373783111572266,
+  "total_time_sec": 6.971050262451172,
+  "val_best_acc": 0.9473684210526315,
+  "train_acc": 0.92,
+  "val_acc": 0.9473684210526315,
+  "test_acc": 0.8947368421052632,
+  "peak_tracemalloc_mb": 0.22319793701171875,
+  "rss_before_mb": 1443.66015625,
+  "rss_after_mb": 1443.67578125,
+  "device": "cuda"
+}

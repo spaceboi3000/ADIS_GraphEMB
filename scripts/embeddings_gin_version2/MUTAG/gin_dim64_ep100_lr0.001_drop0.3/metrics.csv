@@ -1,0 +1,2 @@
+dataset,dim,epochs,lr,dropout,it_time_s,embed_time_s,total_time_s,val_acc,test_acc,peak_tracemalloc_mb,rss_before_mb,rss_after_mb
+MUTAG,64,100,0.001,0.3,7.111891984939575,0.05905723571777344,7.170949220657349,0.9473684210526315,0.7894736842105263,0.22400665283203125,1443.546875,1443.6484375

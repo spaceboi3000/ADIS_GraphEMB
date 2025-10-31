@@ -1,0 +1,2 @@
+dataset,dim,epochs,lr,dropout,it_time_s,embed_time_s,total_time_s,val_acc,test_acc,peak_tracemalloc_mb,rss_before_mb,rss_after_mb
+IMDB-MULTI,64,100,0.001,0.0,52.08370566368103,0.4541795253753662,52.5378851890564,0.5333333333333333,0.48,0.5184059143066406,1465.43359375,1465.43359375

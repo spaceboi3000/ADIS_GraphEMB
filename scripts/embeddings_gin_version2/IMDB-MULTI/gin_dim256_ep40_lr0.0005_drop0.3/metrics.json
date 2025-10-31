@@ -1,0 +1,21 @@
+{
+  "dataset": "IMDB-MULTI",
+  "embedding_dim": 256,
+  "epochs": 40,
+  "lr": 0.0005,
+  "dropout": 0.3,
+  "batch_size": 64,
+  "num_layers": 5,
+  "pooling": "mean",
+  "train_time_sec": 21.19590139389038,
+  "embed_time_sec": 0.4620697498321533,
+  "total_time_sec": 21.657971143722534,
+  "val_best_acc": 0.5266666666666666,
+  "train_acc": 0.49416666666666664,
+  "val_acc": 0.5266666666666666,
+  "test_acc": 0.4533333333333333,
+  "peak_tracemalloc_mb": 1.5889310836791992,
+  "rss_before_mb": 1471.84765625,
+  "rss_after_mb": 1471.84765625,
+  "device": "cuda"
+}

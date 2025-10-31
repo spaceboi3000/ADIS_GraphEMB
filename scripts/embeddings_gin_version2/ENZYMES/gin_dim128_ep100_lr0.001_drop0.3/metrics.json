@@ -1,0 +1,21 @@
+{
+  "dataset": "ENZYMES",
+  "embedding_dim": 128,
+  "epochs": 100,
+  "lr": 0.001,
+  "dropout": 0.3,
+  "batch_size": 64,
+  "num_layers": 5,
+  "pooling": "mean",
+  "train_time_sec": 17.57303738594055,
+  "embed_time_sec": 0.13937878608703613,
+  "total_time_sec": 17.712416172027588,
+  "val_best_acc": 0.5245901639344263,
+  "train_acc": 0.8434237995824635,
+  "val_acc": 0.5245901639344263,
+  "test_acc": 0.36666666666666664,
+  "peak_tracemalloc_mb": 0.4329261779785156,
+  "rss_before_mb": 1455.0078125,
+  "rss_after_mb": 1455.0078125,
+  "device": "cuda"
+}
