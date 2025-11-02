@@ -9,12 +9,12 @@ from sklearn.model_selection import train_test_split
 from torch_geometric.nn import GINConv, global_mean_pool, global_add_pool, BatchNorm
 from torch_geometric.datasets import TUDataset
 from torch_geometric.utils import degree
-from torch_geometric.loader import DataLoader
+from torch_geometric.loader import DataLoader 
 from torch_geometric.transforms import BaseTransform
 import psutil
 import json
 
-
+from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, confusion_matrix, classification_report
 
 #config
 DATASETS_ROOT = Path("../DATASETS")      
@@ -45,6 +45,23 @@ def _append_csv_row(csv_path: Path, header: list, row: list):
             w.writerow(header)
         w.writerow(row)
 
+def compute_metrics(y_true, probs):
+    y_pred = probs.argmax(axis=1)
+    acc = accuracy_score(y_true, y_pred)
+    f1_macro = f1_score(y_true, y_pred, average='macro')
+
+    classes = np.unique(y_true)
+    try:
+        if len(classes) == 2:
+            # binary AUC expects positive class scores
+            pos_idx = np.argmax(classes)  # use the larger label as positive
+            auc_macro = roc_auc_score(y_true, probs[:, pos_idx])
+        else:
+            auc_macro = roc_auc_score(y_true, probs, multi_class='ovr', average='macro')
+    except Exception:
+        auc_macro = float('nan')
+
+    return acc, f1_macro, auc_macro, y_pred
 
 #transform-always ensure x
 class EnsureX(BaseTransform): 
@@ -119,9 +136,10 @@ def train_epoch(model, loader, optimizer, device):
 
 @torch.no_grad()
 def eval_epoch(model, loader, device):
-
-    model.eval(); correct = 0; total = 0
+    model.eval()
+    correct, total = 0, 0
     all_embeds, all_labels = [], []
+    all_logits = []
 
     for data in loader:
         data = data.to(device)
@@ -131,11 +149,14 @@ def eval_epoch(model, loader, device):
         total += data.num_graphs
         all_embeds.append(z.cpu().numpy())
         all_labels.append(data.y.view(-1).cpu().numpy())
+        all_logits.append(logits.cpu().numpy())
 
     acc = correct / max(total, 1)
     embeds = np.concatenate(all_embeds, axis=0) if all_embeds else np.zeros((0,))
     labels = np.concatenate(all_labels, axis=0) if all_labels else np.zeros((0,))
-    return acc, embeds, labels
+    logits = np.concatenate(all_logits, axis=0) if all_logits else np.zeros((0,))
+    probs = torch.softmax(torch.from_numpy(logits), dim=1).numpy() if logits.size else np.zeros((0,))
+    return acc, embeds, labels, logits, probs
 
 
 def split_dataset(dataset, test_size=0.1, val_size=0.1, seed=42):
@@ -176,7 +197,17 @@ def run(args):
     root = Path(args.data_root)
     out_root = Path(args.out_root); out_root.mkdir(parents=True, exist_ok=True)
     summary_csv = out_root / "metrics_summary.csv"
-    header = ["dataset","dim","epochs","lr","dropout","it_time_s","embed_time_s","total_time_s","val_acc","test_acc","peak_tracemalloc_mb","rss_before_mb","rss_after_mb"]
+    # header = ["dataset","dim","epochs","lr","dropout","it_time_s","embed_time_s","total_time_s","val_acc","test_acc","peak_tracemalloc_mb","rss_before_mb","rss_after_mb"]
+
+    summary_header = [
+        "dataset","dim","epochs","lr","dropout",
+        "it_time_s","embed_time_s","total_time_s",
+        "val_acc","test_acc",
+        "val_f1_macro","test_f1_macro",
+        "val_auc_macro","test_auc_macro",
+        "peak_tracemalloc_mb","rss_before_mb","rss_after_mb"
+    ]
+    perrun_header = summary_header  # same shape is fin
 
     for ds_name in args.datasets:
         ds_dir = out_root / ds_name
@@ -186,9 +217,14 @@ def run(args):
             num_classes = dataset.num_classes
             in_dim = dataset.num_features if (dataset.num_features and dataset.num_features > 0) else 1
             train_dataset, val_dataset, test_dataset, idx_train, idx_val, idx_test = split_dataset(dataset, 0.1, 0.1, 42)
-            train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
-            val_loader   = DataLoader(val_dataset,   batch_size=args.batch_size, shuffle=False)
-            test_loader  = DataLoader(test_dataset,  batch_size=args.batch_size, shuffle=False)
+            # train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
+            # val_loader   = DataLoader(val_dataset,   batch_size=args.batch_size, shuffle=False)
+            # test_loader  = DataLoader(test_dataset,  batch_size=args.batch_size, shuffle=False)
+            train_loader_tr = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)   # for training
+            train_loader_ev = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=False)  # for eval/exports
+            val_loader     = DataLoader(val_dataset,   batch_size=args.batch_size, shuffle=False)
+            test_loader    = DataLoader(test_dataset,  batch_size=args.batch_size, shuffle=False)
+
 
             for dim in args.dims:
                 for ep in args.epochs:
@@ -205,8 +241,8 @@ def run(args):
 
                             best_val, best_state = -1.0, None
                             for epoch in range(1, ep+1):
-                                loss = train_epoch(model, train_loader, optimizer, device)
-                                val_acc_cur, _, _ = eval_epoch(model, val_loader, device)
+                                loss = train_epoch(model, train_loader_tr, optimizer, device)
+                                val_acc_cur, *_ = eval_epoch(model, val_loader, device)
                                 if val_acc_cur > best_val:
                                     best_val = val_acc_cur
                                     best_state = {k:v.cpu() for k,v in model.state_dict().items()}
@@ -220,9 +256,27 @@ def run(args):
 
                             #embedding/generation timing
                             t_emb0 = time.time()
-                            train_acc, train_emb, train_lbl = eval_epoch(model, train_loader, device)
-                            val_acc,   val_emb,   val_lbl   = eval_epoch(model, val_loader, device)
-                            test_acc,  test_emb,  test_lbl  = eval_epoch(model, test_loader, device)
+                            train_acc, train_emb, train_lbl, _, train_probs = eval_epoch(model, train_loader_ev, device)
+                            val_acc,   val_emb,   val_lbl,   _, val_probs   = eval_epoch(model, val_loader,     device)
+                            test_acc,  test_emb,  test_lbl,  _, test_probs  = eval_epoch(model, test_loader,    device)
+                            embed_time_s = time.time() - t_emb0
+                                                        # train_acc, train_emb, train_lbl = eval_epoch(model, train_loader, device)
+                            # val_acc,   val_emb,   val_lbl   = eval_epoch(model, val_loader, device)
+                            # test_acc,  test_emb,  test_lbl  = eval_epoch(model, test_loader, device)
+                            
+                            # train_acc, train_emb, train_lbl, train_logits, train_probs = eval_epoch(model, train_loader, device)
+                            # val_acc,   val_emb,   val_lbl,   val_logits,   val_probs   = eval_epoch(model, val_loader, device)
+                            # test_acc,  test_emb,  test_lbl,  test_logits,  test_probs  = eval_epoch(model, test_loader, device)
+
+                            test_acc2, test_f1, test_auc, test_pred = compute_metrics(test_lbl, test_probs)
+                            val_acc2,  val_f1,  val_auc,  _         = compute_metrics(val_lbl,  val_probs)
+                            train_acc2,train_f1,train_auc,_         = compute_metrics(train_lbl, train_probs)
+
+                            test_acc = test_acc2
+                            val_acc  = val_acc2
+                            train_acc = train_acc2
+
+                            
                             embed_time_s = time.time() - t_emb0
 
                             current, peak = tracemalloc.get_traced_memory()
@@ -238,26 +292,52 @@ def run(args):
 
         
                             metrics = {
-                                "dataset": ds_name, "embedding_dim": dim, "epochs": ep, "lr": lr, "dropout": dropout,
+                                "dataset": ds_name,
+                                "embedding_dim": dim, "epochs": ep, "lr": lr, "dropout": dropout,
                                 "batch_size": args.batch_size, "num_layers": args.num_layers, "pooling": args.pool,
                                 "train_time_sec": float(it_time_s),
                                 "embed_time_sec": float(embed_time_s),
                                 "total_time_sec": float(total_time_s),
                                 "val_best_acc": float(best_val),
                                 "train_acc": float(train_acc), "val_acc": float(val_acc), "test_acc": float(test_acc),
+                                "train_f1_macro": float(train_f1), "val_f1_macro": float(val_f1), "test_f1_macro": float(test_f1),
+                                "train_auc_macro": float(train_auc), "val_auc_macro": float(val_auc), "test_auc_macro": float(test_auc),
                                 "peak_tracemalloc_mb": float(peak_tracemalloc_mb),
                                 "rss_before_mb": float(rss_before), "rss_after_mb": float(rss_after),
                                 "device": str(device),
                             }
                             (run_dir / "metrics.json").write_text(json.dumps(metrics, indent=2))
 
-    
+                            # Confusion matrix for test
+                            cm = confusion_matrix(test_lbl, test_pred)
+                            np.savetxt(run_dir / "test_confusion_matrix.csv", cm, delimiter=",", fmt="%d")
+                            (run_dir / "classification_report_test.txt").write_text(
+                                classification_report(test_lbl, test_pred, digits=4)
+                            )
+
+                            # And add the new columns in the CSV rows too:
+                            row = [ds_name, dim, ep, lr, dropout,
+                                it_time_s, embed_time_s, total_time_s,
+                                val_acc, test_acc, val_f1, test_f1, val_auc, test_auc,
+                                peak_tracemalloc_mb, rss_before, rss_after]
                             run_csv = run_dir / "metrics.csv"
-                            row = [ds_name, dim, ep, lr, dropout, it_time_s, embed_time_s, total_time_s, val_acc, test_acc, peak_tracemalloc_mb, rss_before, rss_after]
-                            _append_csv_row(run_csv, header, row)
+                            # row = [ds_name, dim, ep, lr, dropout, it_time_s, embed_time_s, total_time_s, val_acc, test_acc, peak_tracemalloc_mb, rss_before, rss_after]
+                            # row = [
+                            #     ds_name, dim, ep, lr, dropout,
+                            #     it_time_s, embed_time_s, total_time_s,
+                            #     val_acc2, test_acc2,
+                            #     val_f1, test_f1,
+                            #     val_auc, test_auc,
+                            #     peak_tracemalloc_mb, rss_before, rss_after
+                            # ]
+                            # _append_csv_row(run_csv, header, row)
 
-                            _append_csv_row(summary_csv, header, row)
-
+                            # _append_csv_row(summary_csv, header, row)
+                            # _append_csv_row(run_dir / "metrics.csv", perrun_header, row)
+                            # _append_csv_row(summary_csv,          summary_header, row)
+                            _append_csv_row(run_dir / "metrics.csv", summary_header, row)
+                            _append_csv_row(summary_csv,          summary_header, row)
+                            
                             torch.save(model.state_dict(), run_dir / "gin_classifier.pt")
                             print(f"[Saved] {run_dir} | test_acc={test_acc:.4f} | it={it_time_s:.1f}s | emb={embed_time_s:.1f}s | peak={peak_tracemalloc_mb:.1f}MB")
 

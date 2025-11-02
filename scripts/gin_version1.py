@@ -21,6 +21,10 @@ from torch_geometric.datasets import TUDataset
 from torch_geometric.transforms import Constant
 
 
+from sklearn.metrics import (
+    accuracy_score, f1_score, roc_auc_score, confusion_matrix, classification_report
+)
+from sklearn.preprocessing import label_binarize
 
 # Config 
 DATASETS_ROOT = Path("../DATASETS")      
@@ -105,6 +109,58 @@ def make_splits(y: np.ndarray, seed: int = SEED):       # 80/10/10 stratified
     test_idx = tmp_idx[test_idx]
     return train_idx, val_idx, test_idx
 
+@torch.no_grad()
+def evaluate_classification(model: nn.Module, loader: DataLoader, device, n_classes: int):
+    model.eval()
+    y_true, y_pred, y_prob = [], [], []
+
+    for batch in loader:
+        batch = batch.to(device)
+        logits, _ = model(batch.x.float(), batch.edge_index, batch.batch)
+        probs = F.softmax(logits, dim=-1).detach().cpu().numpy()
+        preds = probs.argmax(axis=1)
+        y = batch.y.detach().cpu().numpy().astype(int)
+
+        y_true.append(y)
+        y_pred.append(preds)
+        y_prob.append(probs)
+
+    y_true = np.concatenate(y_true)
+    y_pred = np.concatenate(y_pred)
+    y_prob = np.vstack(y_prob)
+
+    acc = accuracy_score(y_true, y_pred)
+    f1_macro = f1_score(y_true, y_pred, average="macro")
+    f1_micro = f1_score(y_true, y_pred, average="micro")
+
+    # ROC-AUC: handle binary and multiclass
+    try:
+        if n_classes == 2:
+            # y_prob[:,1] is positive class prob
+            auc_macro = roc_auc_score(y_true, y_prob[:, 1])
+            auc_micro = auc_macro
+        else:
+            Yb = label_binarize(y_true, classes=np.arange(n_classes))
+            auc_macro = roc_auc_score(Yb, y_prob, average="macro", multi_class="ovr")
+            auc_micro = roc_auc_score(Yb, y_prob, average="micro", multi_class="ovr")
+    except Exception:
+        # Some small splits can make AUC undefined; fall back gracefully.
+        auc_macro = np.nan
+        auc_micro = np.nan
+
+    cm = confusion_matrix(y_true, y_pred)
+
+    return {
+        "acc": acc,
+        "f1_macro": f1_macro,
+        "f1_micro": f1_micro,
+        "auc_macro": auc_macro,
+        "auc_micro": auc_micro,
+        "confusion_matrix": cm,
+        "y_true": y_true,
+        "y_pred": y_pred,
+    }
+
 
 def train_one_config(name: str, dim: int, batch_size: int, epochs: int, lr: float, weight_decay: float, device):
     
@@ -157,6 +213,10 @@ def train_one_config(name: str, dim: int, batch_size: int, epochs: int, lr: floa
         if val_acc > best_val:
             best_val = val_acc
             best_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
+        
+        val_metrics = evaluate_classification(model, val_loader, device, num_classes)
+        val_acc = val_metrics["acc"]
+
 
     fit_time = time.time() - t0
     current, peak = tracemalloc.get_traced_memory(); tracemalloc.stop()
@@ -166,6 +226,9 @@ def train_one_config(name: str, dim: int, batch_size: int, epochs: int, lr: floa
     if best_state is not None:
         model.load_state_dict({k: v.to(device) for k, v in best_state.items()})
 
+    # === TEST METRICS ===
+    test_metrics = evaluate_classification(model, test_loader, device, num_classes)
+    test_acc = test_metrics["acc"]
     #test accuracy 
     model.eval(); correct = total = 0
     with torch.no_grad():
@@ -223,6 +286,11 @@ def train_one_config(name: str, dim: int, batch_size: int, epochs: int, lr: floa
         "rss_before_mb": round(rss_before_mb, 2),
         "rss_after_mb": round(rss_after_mb, 2),
         "device": str(device),
+        "test_f1_macro": round(float(test_metrics["f1_macro"]), 4),
+        "test_f1_micro": round(float(test_metrics["f1_micro"]), 4),
+        "test_auc_macro": (None if np.isnan(test_metrics["auc_macro"]) else round(float(test_metrics["auc_macro"]), 4)),
+        "test_auc_micro": (None if np.isnan(test_metrics["auc_micro"]) else round(float(test_metrics["auc_micro"]), 4)),
+
     }
 
 
