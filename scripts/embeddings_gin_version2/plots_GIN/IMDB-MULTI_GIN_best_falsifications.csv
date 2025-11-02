@@ -1,0 +1,4 @@
+class,TP,FP,FN,TN,Support,MisclassificationRate
+0,10,12,40,88,50,0.8
+1,24,25,26,75,50,0.52
+2,38,41,12,59,50,0.24

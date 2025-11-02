@@ -1,2 +1,2 @@
-dataset,dim,epochs,lr,dropout,it_time_s,embed_time_s,total_time_s,val_acc,test_acc,peak_tracemalloc_mb,rss_before_mb,rss_after_mb
-ENZYMES,256,100,0.0005,0.3,17.839447498321533,0.1417546272277832,17.981202125549316,0.5245901639344263,0.3,0.7184915542602539,1457.51171875,1457.51171875
+dataset,dim,epochs,lr,dropout,it_time_s,embed_time_s,total_time_s,val_acc,test_acc,val_f1_macro,test_f1_macro,val_auc_macro,test_auc_macro,peak_tracemalloc_mb,rss_before_mb,rss_after_mb
+ENZYMES,256,100,0.0005,0.3,18.513856172561646,0.21716809272766113,18.731024265289307,0.5409836065573771,0.4,0.5289973539449221,0.3954191065511566,0.8000891265597149,0.7323333333333334,0.7862262725830078,1443.91015625,1443.91015625

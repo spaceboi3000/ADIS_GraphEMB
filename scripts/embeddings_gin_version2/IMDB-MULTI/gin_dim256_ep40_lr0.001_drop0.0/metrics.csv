@@ -1,2 +1,2 @@
-dataset,dim,epochs,lr,dropout,it_time_s,embed_time_s,total_time_s,val_acc,test_acc,peak_tracemalloc_mb,rss_before_mb,rss_after_mb
-IMDB-MULTI,256,40,0.001,0.0,20.988515615463257,0.4616565704345703,21.450172185897827,0.52,0.47333333333333333,1.5915346145629883,1468.51171875,1470.5546875
+dataset,dim,epochs,lr,dropout,it_time_s,embed_time_s,total_time_s,val_acc,test_acc,val_f1_macro,test_f1_macro,val_auc_macro,test_auc_macro,peak_tracemalloc_mb,rss_before_mb,rss_after_mb
+IMDB-MULTI,256,40,0.001,0.0,22.271872520446777,0.5362281799316406,22.808100700378418,0.5333333333333333,0.46,0.5304476815105407,0.4428162596204606,0.6813333333333333,0.6276333333333334,1.6866703033447266,1455.25390625,1458.72265625

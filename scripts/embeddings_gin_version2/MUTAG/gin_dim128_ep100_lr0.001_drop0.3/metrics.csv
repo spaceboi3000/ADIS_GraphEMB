@@ -1,2 +1,2 @@
-dataset,dim,epochs,lr,dropout,it_time_s,embed_time_s,total_time_s,val_acc,test_acc,peak_tracemalloc_mb,rss_before_mb,rss_after_mb
-MUTAG,128,100,0.001,0.3,6.7255964279174805,0.05778646469116211,6.783382892608643,0.9473684210526315,0.7894736842105263,0.26166248321533203,1445.203125,1445.40234375
+dataset,dim,epochs,lr,dropout,it_time_s,embed_time_s,total_time_s,val_acc,test_acc,val_f1_macro,test_f1_macro,val_auc_macro,test_auc_macro,peak_tracemalloc_mb,rss_before_mb,rss_after_mb
+MUTAG,128,100,0.001,0.3,6.944472074508667,0.0960988998413086,7.040570974349976,1.0,0.8421052631578947,1.0,0.8246153846153846,1.0,0.9487179487179488,0.2815380096435547,1431.03515625,1431.0546875
