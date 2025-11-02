@@ -4,10 +4,11 @@ import time
 from pathlib import Path
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
+from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 
 # Paths
-EMB_ROOT = Path("./scripts/embeddings_graph2vec")
+EMB_ROOT = Path("./embeddings_graph2vec")
 OUT_FILE = Path("./scripts/graph2vec_classification_results.csv")
 DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
 
@@ -31,26 +32,42 @@ for name in DATASETS:
         X, y, test_size=0.2, random_state=42, stratify=y
     )
 
-    # Train classifier
-    clf = SVC(kernel="rbf", probability=True)
-    start = time.time()
-    clf.fit(X_train, y_train)
-    train_time = time.time() - start
+    # Define classifiers
+    classifiers = {
+        "SVM": SVC(kernel="rbf", probability=True, random_state=42),
+        "MLP": MLPClassifier(hidden_layer_sizes=(100,), max_iter=500, random_state=42)
+    }
 
-    # Predictions
-    y_pred = clf.predict(X_test)
-    y_prob = clf.predict_proba(X_test)
+    for clf_name, clf in classifiers.items():
+        print(f"\nTraining {clf_name}...")
+        start = time.time()
+        clf.fit(X_train, y_train)
+        train_time = time.time() - start
 
-    if n_classes > 2:
-        auc = roc_auc_score(y_test, y_prob, multi_class="ovr")
-    else:
-        auc = roc_auc_score(y_test, y_prob[:, 1])
+        # Predictions
+        y_pred = clf.predict(X_test)
+        y_prob = clf.predict_proba(X_test)
 
-    acc = accuracy_score(y_test, y_pred)
-    f1 = f1_score(y_test, y_pred, average="weighted")
+        # Metrics
+        if n_classes > 2:
+            auc = roc_auc_score(y_test, y_prob, multi_class="ovr")
+        else:
+            auc = roc_auc_score(y_test, y_prob[:, 1])
 
-    print(f"Accuracy: {acc:.3f} | F1: {f1:.3f} | AUC: {auc:.3f} | TrainT: {train_time:.2f}s")
-    results.append(dict(Dataset=name, Accuracy=acc, F1=f1, AUC=auc, TrainTime=train_time))
+        acc = accuracy_score(y_test, y_pred)
+        f1 = f1_score(y_test, y_pred, average="weighted")
+
+        print(f"{clf_name} | Accuracy: {acc:.3f} | F1: {f1:.3f} | AUC: {auc:.3f} | TrainT: {train_time:.2f}s")
+        
+        # Save results
+        results.append({
+            "Dataset": name,
+            "Classifier": clf_name,
+            "Accuracy": acc,
+            "F1": f1,
+            "AUC": auc,
+            "TrainTime": train_time
+        })
 
 # Save summary
 res_df = pd.DataFrame(results)
