@@ -4,6 +4,7 @@ import time
 from pathlib import Path
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
+from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 
 # Paths
@@ -14,11 +15,35 @@ DIMS = ["dim64", "dim128", "dim256"]
 
 results = []
 
+def evaluate_model(model_name, clf, X_train, X_test, y_train, y_test, n_classes):
+    start = time.time()
+    clf.fit(X_train, y_train)
+    train_time = time.time() - start
+
+    y_pred = clf.predict(X_test)
+    if hasattr(clf, "predict_proba"):
+        y_prob = clf.predict_proba(X_test)
+    else:
+        # For MLP without probability=True, use decision_function
+        y_prob = clf.decision_function(X_test)
+        if y_prob.ndim == 1:
+            y_prob = np.vstack([1 - y_prob, y_prob]).T
+
+    if n_classes > 2:
+        auc = roc_auc_score(y_test, y_prob, multi_class="ovr")
+    else:
+        auc = roc_auc_score(y_test, y_prob[:, 1])
+
+    acc = accuracy_score(y_test, y_pred)
+    f1 = f1_score(y_test, y_pred, average="weighted")
+
+    return dict(Accuracy=acc, F1=f1, AUC=auc, TrainTime=train_time, Model=model_name)
+
+# === MAIN LOOP ===
 for name in DATASETS:
     for dim in DIMS:
         csv_path = EMB_ROOT / name / dim / "NetLSD_embeddings.csv"
         if not csv_path.exists():
-            print(csv_path)
             print(f"[WARN] Missing embeddings for {name} ({dim}), skipping.")
             continue
 
@@ -29,40 +54,32 @@ for name in DATASETS:
         n_classes = len(set(y))
         print(f"Loaded {X.shape[0]} samples × {X.shape[1]} dims, {n_classes} classes.")
 
-        # Train/test split
+        # Split data
         X_train, X_test, y_train, y_test = train_test_split(
             X, y, test_size=0.2, random_state=42, stratify=y
         )
 
-        # Train classifier
-        clf = SVC(kernel="rbf", probability=True)
-        start = time.time()
-        clf.fit(X_train, y_train)
-        train_time = time.time() - start
+        # --- Classifier 1: SVM ---
+        svm = SVC(kernel="rbf", probability=True)
+        metrics_svm = evaluate_model("SVM", svm, X_train, X_test, y_train, y_test, n_classes)
 
-        # Predictions
-        y_pred = clf.predict(X_test)
-        y_prob = clf.predict_proba(X_test)
+        # --- Classifier 2: MLP ---
+        mlp = MLPClassifier(hidden_layer_sizes=(128, 64), activation="relu",
+                            solver="adam", max_iter=500, random_state=42)
+        metrics_mlp = evaluate_model("MLP", mlp, X_train, X_test, y_train, y_test, n_classes)
 
-        if n_classes > 2:
-            auc = roc_auc_score(y_test, y_prob, multi_class="ovr")
-        else:
-            auc = roc_auc_score(y_test, y_prob[:, 1])
+        for m in [metrics_svm, metrics_mlp]:
+            results.append(dict(
+                Dataset=name,
+                Dim=dim,
+                Model=m["Model"],
+                Accuracy=m["Accuracy"],
+                F1=m["F1"],
+                AUC=m["AUC"],
+                TrainTime=m["TrainTime"]
+            ))
 
-        acc = accuracy_score(y_test, y_pred)
-        f1 = f1_score(y_test, y_pred, average="weighted")
-
-        print(f"Accuracy: {acc:.3f} | F1: {f1:.3f} | AUC: {auc:.3f} | TrainT: {train_time:.2f}s")
-        results.append(dict(
-            Dataset=name,
-            Dim=dim,
-            Accuracy=acc,
-            F1=f1,
-            AUC=auc,
-            TrainTime=train_time
-        ))
-
-# Save summary
+# === SAVE SUMMARY ===
 res_df = pd.DataFrame(results)
 res_df.to_csv(OUT_FILE, index=False)
 print("\nSaved results →", OUT_FILE)
