@@ -1,4 +1,0 @@
-dataset,dim,epochs,batch_size,lr,val_acc,test_acc,f1_macro,auc_macro,total_time_s,peak_tracemalloc_mb
-ENZYMES,128,40,64,0.001,0.3833,0.4167,0.3734,0.664,8.4174,0.21
-IMDB-MULTI,256,40,32,0.0005,0.4933,0.48,0.4274,0.5996,26.7844,0.33
-MUTAG,128,100,64,0.001,0.8947,0.7895,0.7841,0.8929,8.6117,0.2

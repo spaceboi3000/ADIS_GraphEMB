@@ -202,9 +202,9 @@ def run(args):
     summary_header = [
         "dataset","dim","epochs","lr","dropout",
         "it_time_s","embed_time_s","total_time_s",
-        "val_acc","test_acc",
-        "val_f1_macro","test_f1_macro",
-        "val_auc_macro","test_auc_macro",
+        "train_acc","val_acc","test_acc",
+        "train_f1_macro","val_f1_macro","test_f1_macro",
+        "train_auc_macro","val_auc_macro","test_auc_macro",
         "peak_tracemalloc_mb","rss_before_mb","rss_after_mb"
     ]
     perrun_header = summary_header  # same shape is fin
@@ -318,7 +318,7 @@ def run(args):
                             # And add the new columns in the CSV rows too:
                             row = [ds_name, dim, ep, lr, dropout,
                                 it_time_s, embed_time_s, total_time_s,
-                                val_acc, test_acc, val_f1, test_f1, val_auc, test_auc,
+                                train_acc,val_acc, test_acc,train_f1, val_f1, test_f1,train_auc, val_auc, test_auc,
                                 peak_tracemalloc_mb, rss_before, rss_after]
                             run_csv = run_dir / "metrics.csv"
                             # row = [ds_name, dim, ep, lr, dropout, it_time_s, embed_time_s, total_time_s, val_acc, test_acc, peak_tracemalloc_mb, rss_before, rss_after]
