@@ -1,2 +1,0 @@
-dataset,dim,epochs,lr,dropout,it_time_s,embed_time_s,total_time_s,val_acc,test_acc,val_f1_macro,test_f1_macro,val_auc_macro,test_auc_macro,peak_tracemalloc_mb,rss_before_mb,rss_after_mb
-ENZYMES,64,40,0.001,0.3,7.486801624298096,0.2204453945159912,7.707247018814087,0.4098360655737705,0.3,0.3641618891618892,0.2679467900520532,0.6901901366607249,0.642,0.33683109283447266,1437.47265625,1437.5859375
