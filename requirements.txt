@@ -8,10 +8,23 @@ tqdm==4.66.5
 umap-learn==0.5.6
 networkx==3.3
 
-# ---- PyTorch (install first) ----
+# ---- PyTorch (install first - choose CUDA/CPU build) ----
+# Example (CUDA 12.1):
+#   pip install torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 \
+#        --index-url https://download.pytorch.org/whl/cu121
 torch==2.4.1
 torchvision==0.19.1
 torchaudio==2.4.1
+
+# ---- PyTorch Geometric Stack -----
+# These must be installed via PyG's wheel index, e.g.:
+#   pip install -r requirements.txt -f https://data.pyg.org/whl/torch-2.4.1+${CUDA_VERSION}.html
+# Replace ${CUDA_VERSION} with cu121, cu118, or cpu
+torch-geometric==2.5.3
+torch-scatter==2.1.2
+torch-sparse==0.6.18
+torch-cluster==1.6.3
+torch-spline-conv==1.2.2
 
 # ---- Graph Embedding Libraries ----
 karateclub @ git+https://github.com/benedekrozemberczki/karateclub.git@master
@@ -19,3 +32,6 @@ karateclub @ git+https://github.com/benedekrozemberczki/karateclub.git@master
 # ---- Visualization / Notebook ----
 seaborn==0.13.2
 jupyterlab==4.2.5
+
+# ---- System Utilities ----
+psutil==6.1.0

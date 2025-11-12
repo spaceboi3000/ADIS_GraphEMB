@@ -17,10 +17,10 @@ import json
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, confusion_matrix, classification_report
 
 #config
-DATASETS_ROOT = Path("../DATASETS")      
+DATASETS_ROOT = Path("../../DATASETS")      
 DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
 
-OUT_DIR = Path("./embeddings_gin")
+OUT_DIR = Path("../../embeddings/embeddings_classification_gin")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 SEED = 42
 
@@ -53,7 +53,6 @@ def compute_metrics(y_true, probs):
     classes = np.unique(y_true)
     try:
         if len(classes) == 2:
-            # binary AUC expects positive class scores
             pos_idx = np.argmax(classes)  # use the larger label as positive
             auc_macro = roc_auc_score(y_true, probs[:, pos_idx])
         else:
@@ -352,9 +351,9 @@ if __name__ == "__main__":
     
     p.add_argument("--data_root", type=str, default=str(DATASETS_ROOT))
     p.add_argument("--out_root", type=str, default=str(OUT_DIR))
-    p.add_argument("--datasets", nargs="+", default=DATASETS)
+    p.add_argument("--datasets", nargs="+", default="ENZYMES")
     p.add_argument("--dims", nargs="+", type=int, default=[64,128,256])
-    p.add_argument("--epochs", nargs="+", type=int, default=[40,100])
+    p.add_argument("--epochs", nargs="+", type=int, default=[300])
     p.add_argument("--lrs", nargs="+", type=float, default=[1e-3,5e-4])
     p.add_argument("--dropouts", nargs="+", type=float, default=[0.0,0.3])
     p.add_argument("--batch_size", type=int, default=64)
