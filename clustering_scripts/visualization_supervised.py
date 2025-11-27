@@ -100,7 +100,7 @@ def scatter_plot(
     save_path: Path,
     legend_title: str,
 ):
-    plt.figure(figsize=(6, 5))
+    plt.figure(figsize=(15,11))
     unique_labels = np.unique(labels)
 
     for lab in unique_labels:
@@ -116,8 +116,8 @@ def scatter_plot(
     plt.title(title)
     plt.xlabel("dim 1")
     plt.ylabel("dim 2")
-    plt.legend(title=legend_title, fontsize=8, loc="best")
-    plt.tight_layout()
+    plt.legend(title=legend_title, fontsize=7, loc="best")
+    # plt.tight_layout()
     plt.savefig(save_path, dpi=300)
     plt.close()
 
