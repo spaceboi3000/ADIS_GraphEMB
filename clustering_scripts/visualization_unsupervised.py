@@ -1,12 +1,12 @@
 from __future__ import annotations
 from pathlib import Path
-from typing import Tuple, Dict, Optional
+from typing import Tuple, Dict
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans, SpectralClustering
 from sklearn.manifold import TSNE
 import umap  # pip install umap-learn
 
@@ -28,13 +28,13 @@ METHODS: Dict[str, Dict] = {
     },
 }
 
-# === IMPORTANT: new visualization folder ===
-VIS_BASE = Path("./cluster_visualizations")  # OUTSIDE embeddings/
+# Visualization folder OUTSIDE embeddings/
+VIS_BASE = Path("./cluster_visualizations")
 VIS_BASE.mkdir(exist_ok=True)
 
 RANDOM_STATE = 42
 KMEANS_N_INIT = 10
-KMEANS_MAX_ITER = 300
+KMEANS_MAX_ITER = 3000
 
 
 def load_embeddings_csv(
@@ -66,6 +66,16 @@ def run_kmeans(X: np.ndarray, n_clusters: int) -> np.ndarray:
         max_iter=KMEANS_MAX_ITER,
     )
     return km.fit_predict(X)
+
+
+def run_spectral(X: np.ndarray, n_clusters: int) -> np.ndarray:
+    sc = SpectralClustering(
+        n_clusters=n_clusters,
+        affinity="nearest_neighbors",
+        assign_labels="kmeans",
+        random_state=RANDOM_STATE,
+    )
+    return sc.fit_predict(X)
 
 
 def compute_tsne(X: np.ndarray) -> np.ndarray:
@@ -141,9 +151,17 @@ def main():
                 y_vis = y
 
                 # 1) Cluster assignments
-                y_cluster = run_kmeans(X_vis, n_clusters)
+                print("   Running KMeans...")
+                y_kmeans = run_kmeans(X_vis, n_clusters)
 
-                # 2) t-SNE / UMAP
+                print("   Running Spectral clustering...")
+                try:
+                    y_spectral = run_spectral(X_vis, n_clusters)
+                except Exception as e:
+                    print(f"   [WARN] Spectral clustering failed for {method} {dataset} dim={dim}: {e}")
+                    y_spectral = None
+
+                # 2) t-SNE / UMAP (only once)
                 print("   Computing t-SNE...")
                 X_tsne = compute_tsne(X_vis)
 
@@ -155,23 +173,75 @@ def main():
                 ds_dir = VIS_BASE / method / dataset / f"dim{dim}"
                 ds_dir.mkdir(parents=True, exist_ok=True)
 
-                # Filenames
+                # Filenames: labels, kmeans, spectral
                 tsne_label_path = ds_dir / f"{method}_dim{dim}_tsne_by_label.png"
-                tsne_cluster_path = ds_dir / f"{method}_dim{dim}_tsne_by_cluster.png"
-                umap_label_path = ds_dir / f"{method}_dim{dim}_umap_by_label.png"
-                umap_cluster_path = ds_dir / f"{method}_dim{dim}_umap_by_cluster.png"
+                tsne_km_path    = ds_dir / f"{method}_dim{dim}_tsne_by_kmeans.png"
+                tsne_sp_path    = ds_dir / f"{method}_dim{dim}_tsne_by_spectral.png"
 
-                # Save
-                scatter_plot(X_tsne, y_vis, f"{method} - t-SNE (labels)", tsne_label_path, "Label")
-                scatter_plot(X_tsne, y_cluster, f"{method} - t-SNE (clusters)", tsne_cluster_path, "Cluster")
-                scatter_plot(X_umap, y_vis, f"{method} - UMAP (labels)", umap_label_path, "Label")
-                scatter_plot(X_umap, y_cluster, f"{method} - UMAP (clusters)", umap_cluster_path, "Cluster")
+                umap_label_path = ds_dir / f"{method}_dim{dim}_umap_by_label.png"
+                umap_km_path    = ds_dir / f"{method}_dim{dim}_umap_by_kmeans.png"
+                umap_sp_path    = ds_dir / f"{method}_dim{dim}_umap_by_spectral.png"
+
+                # 3) Save plots
+
+                # True labels
+                scatter_plot(
+                    X_tsne,
+                    y_vis,
+                    f"{method} - t-SNE (true labels)",
+                    tsne_label_path,
+                    "Label",
+                )
+                scatter_plot(
+                    X_umap,
+                    y_vis,
+                    f"{method} - UMAP (true labels)",
+                    umap_label_path,
+                    "Label",
+                )
+
+                # KMeans clusters
+                scatter_plot(
+                    X_tsne,
+                    y_kmeans,
+                    f"{method} - t-SNE (KMeans clusters)",
+                    tsne_km_path,
+                    "Cluster (KMeans)",
+                )
+                scatter_plot(
+                    X_umap,
+                    y_kmeans,
+                    f"{method} - UMAP (KMeans clusters)",
+                    umap_km_path,
+                    "Cluster (KMeans)",
+                )
+
+                # Spectral clusters (only if it worked)
+                if y_spectral is not None:
+                    scatter_plot(
+                        X_tsne,
+                        y_spectral,
+                        f"{method} - t-SNE (Spectral clusters)",
+                        tsne_sp_path,
+                        "Cluster (Spectral)",
+                    )
+                    scatter_plot(
+                        X_umap,
+                        y_spectral,
+                        f"{method} - UMAP (Spectral clusters)",
+                        umap_sp_path,
+                        "Cluster (Spectral)",
+                    )
 
                 print("   Saved:")
                 print(f"      {tsne_label_path}")
-                print(f"      {tsne_cluster_path}")
+                print(f"      {tsne_km_path}")
+                if y_spectral is not None:
+                    print(f"      {tsne_sp_path}")
                 print(f"      {umap_label_path}")
-                print(f"      {umap_cluster_path}")
+                print(f"      {umap_km_path}")
+                if y_spectral is not None:
+                    print(f"      {umap_sp_path}")
 
 
 if __name__ == "__main__":
