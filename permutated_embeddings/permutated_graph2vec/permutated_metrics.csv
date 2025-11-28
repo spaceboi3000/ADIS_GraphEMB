@@ -1,0 +1,10 @@
+dataset,method,dim,n_graphs,fit_time_s,embed_time_s,total_time_s,rss_before_mb,rss_after_mb,peak_tracemalloc_mb
+MUTAG,Graph2Vec_permutated,64,188,0.2312,0.0001,0.2313,632.48,635.86,1.45
+MUTAG,Graph2Vec_permutated,128,188,0.128,0.0001,0.1281,638.11,638.36,1.39
+MUTAG,Graph2Vec_permutated,256,188,0.1202,0.0001,0.1203,638.88,638.88,1.39
+ENZYMES,Graph2Vec_permutated,64,600,0.5966,0.0004,0.597,650.46,667.96,7.73
+ENZYMES,Graph2Vec_permutated,128,600,0.7097,0.0004,0.7101,671.96,669.78,7.7
+ENZYMES,Graph2Vec_permutated,256,600,0.5777,0.0005,0.5782,670.08,671.08,7.7
+IMDB-MULTI,Graph2Vec_permutated,64,1500,1.039,0.0009,1.0399,669.2,672.45,8.28
+IMDB-MULTI,Graph2Vec_permutated,128,1500,0.9549,0.001,0.9559,676.32,676.32,8.28
+IMDB-MULTI,Graph2Vec_permutated,256,1500,0.9974,0.0011,0.9985,678.7,678.82,8.27

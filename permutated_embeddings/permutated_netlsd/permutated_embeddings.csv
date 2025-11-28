@@ -1,0 +1,10 @@
+dataset,method,dim,n_graphs,fit_time_s,pca_time_s,total_time_s,rss_before_mb,rss_after_mb,peak_tracemalloc_mb,raw_sig_len
+MUTAG,NetLSD_permutated_dense,64,188,0.0256,0.0784,0.104,618.88,621.13,1.13,250
+MUTAG,NetLSD_permutated_dense,128,188,0.0256,0.0034,0.029,623.75,623.75,1.09,250
+MUTAG,NetLSD_permutated_dense,256,188,0.0256,0.0,0.0256,624.61,624.61,0.36,250
+ENZYMES,NetLSD_permutated_dense,64,600,0.1584,0.101,0.2595,637.73,639.61,1.2,250
+ENZYMES,NetLSD_permutated_dense,128,600,0.1584,0.1077,0.2662,645.36,645.73,1.75,250
+ENZYMES,NetLSD_permutated_dense,256,600,0.1584,0.0001,0.1585,646.14,646.14,1.16,250
+IMDB-MULTI,NetLSD_permutated_dense,64,1500,0.1721,0.2291,0.4012,643.47,644.09,2.81,250
+IMDB-MULTI,NetLSD_permutated_dense,128,1500,0.1721,0.2267,0.3987,653.62,653.87,4.03,250
+IMDB-MULTI,NetLSD_permutated_dense,256,1500,0.1721,0.0004,0.1724,656.62,656.62,2.9,250
