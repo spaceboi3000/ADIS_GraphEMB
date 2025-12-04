@@ -5,7 +5,7 @@ from pathlib import Path
 from torch_geometric.datasets import TUDataset
 from torch_geometric.utils import to_undirected, add_self_loops, remove_self_loops
 
-# === USER SETTINGS ===
+
 DATASETS_ROOT = Path("../DATASETS")  
 OUTPUT_ROOT = Path("../permutated_DATASETS")
 OUTPUT_ROOT.mkdir(exist_ok=True)
@@ -14,6 +14,10 @@ DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
 PERTURB_EDGE_PERCENT = 0.10    # 10% edges removed + 10% added
 SHUFFLE_NODE_ATTR = True       # random permutation of node features
 
+
+#we permutated the graphs by chaning edge_index (removing/adding edges) but not updating edge_attr
+#So edge_attr, still 1296 rows from the original graph
+#in the generations of new embs will just use the edge_index
 
 def perturb_graph(data, perturb_ratio=0.10, shuffle_attr=False):
     

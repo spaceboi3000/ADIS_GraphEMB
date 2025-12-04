@@ -21,7 +21,7 @@ TARGET_DIMS = [64, 128, 256]
 OUT_DIR = Path("../permutated_embeddings/permutated_netlsd")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-METRICS_PATH = OUT_DIR / "permutated_embeddings.csv"
+METRICS_PATH = OUT_DIR / "permutated_metrics.csv"
 
 # Length of NetLSD heat kernel signature before dimensionality reduction
 NETLSD_SCALE_N = 250 
