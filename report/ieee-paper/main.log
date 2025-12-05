@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (TeX Live 2023)  (format=lualatex 2025.11.3)  5 DEC 2025 01:57
+This is LuaHBTeX, Version 1.17.0 (TeX Live 2023)  (format=lualatex 2025.11.3)  5 DEC 2025 02:38
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/home/nick/Uni/ADIS_GraphEMB/report/ieee-paper/main.tex
@@ -347,7 +347,56 @@ Underfull \hbox (badness 10000) in paragraph at lines 40--43
 []\TU/lmr/bx/it/9 In-dex Terms\TU/lmr/bx/n/9 ---Graph Em-bed-ding, Graph2Vec,
  []
 
-) (./sections/introduction.tex) (./sections/preparation.tex) (./sections/references.tex)
+) (./sections/introduction.tex
+Underfull \hbox (badness 10000) in paragraph at lines 11--17
+[]\TU/ptm/bx/it/10 Sev-eral em-bed-ding meth-ods ex-ist with dif-fer-ent
+ []
+
+
+Underfull \hbox (badness 2253) in paragraph at lines 11--17
+\TU/ptm/bx/it/10 strengths. Graph2Vec cap-tures sub-graph pat-terns to
+ []
+
+
+Underfull \hbox (badness 7540) in paragraph at lines 11--17
+\TU/ptm/bx/it/10 pro-duce graph-level em-bed-dings ef-fi-ciently. NetLSD
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--17
+\TU/ptm/bx/it/10 en-codes graphs via spec-tral de-scrip-tors, pro-vid-ing
+ []
+
+
+Underfull \hbox (badness 5316) in paragraph at lines 11--17
+\TU/ptm/bx/it/10 neigh-bor-hood in-for-ma-tion, achiev-ing high pre-dic-tive
+ []
+
+) (./sections/related_work.tex) (./sections/methods.tex) (./sections/datasets.tex) (./sections/evaluation.tex [1
+Non-PDF special ignored!{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]) (./sections/results.tex) (./sections/references.tex
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 6.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 6.
+
+Underfull \hbox (badness 7558) in paragraph at lines 30--31
+[]\TU/lmr/m/n/8 D. P. Kingma and M. Welling, ``Auto-encoding vari-a-
+ []
+
+
+Underfull \hbox (badness 4967) in paragraph at lines 30--31
+\TU/lmr/m/n/8 tional Bayes,'' 2013, arXiv:1312.6114. [On-line]. Avail-able:
+ []
+
+
+Underfull \hbox (badness 3271) in paragraph at lines 32--33
+\TU/lmr/m/n/8 man Ser-vices, Sub-stance Abuse and Men-tal Health Ser-
+ []
+
+)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -359,10 +408,7 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[1
-Non-PDF special ignored!{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
-
+[2
 
 ] (./main.aux)
 
@@ -371,19 +417,19 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 )
 
 Here is how much of LuaTeX's memory you used:
- 4548 strings out of 478285
- 100000,1977958 words of node,token memory allocated
- 509 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 3 glue, 4 kern, 1 glyph, 8 attribute, 54 glue_spec, 8 attribute_list, 1 write nodes
-   avail lists: 2:312,3:110,4:33,5:315,6:33,7:6431,8:2,9:430,10:16,11:591
- 24521 multiletter control sequences out of 65536+600000
- 72 fonts using 7189935 bytes
- 60i,8n,62p,273b,307s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmromancaps10-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman9-bold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-bolditalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman8-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman6-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman17-regular.otf>
-Output written on main.pdf (1 page, 31289 bytes).
+ 4611 strings out of 478285
+ 125011,1977958 words of node,token memory allocated
+ 505 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 3 glue, 4 kern, 1 glyph, 7 attribute, 54 glue_spec, 7 attribute_list, 1 write nodes
+   avail lists: 2:418,3:267,4:56,5:655,6:99,7:13747,8:4,9:619,10:17,11:1334
+ 24556 multiletter control sequences out of 65536+600000
+ 82 fonts using 7852447 bytes
+ 60i,8n,62p,376b,307s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmromancaps10-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman9-bold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-bolditalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman8-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman6-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman17-regular.otf></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi10.pfb>
+Output written on main.pdf (2 pages, 53663 bytes).
 
-PDF statistics: 64 PDF objects out of 1000 (max. 8388607)
- 36 compressed objects within 1 object stream
+PDF statistics: 79 PDF objects out of 1000 (max. 8388607)
+ 46 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 
