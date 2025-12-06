@@ -1,0 +1,2 @@
+dataset,dim,epochs,lr,dropout,it_time_s,embed_time_s,total_time_s,train_acc,val_acc,test_acc,train_f1_macro,val_f1_macro,test_f1_macro,train_auc_macro,val_auc_macro,test_auc_macro,peak_tracemalloc_mb,rss_before_mb,rss_after_mb
+IMDB-MULTI,128,200,0.0005,0.4,27.43502974510193,0.09795641899108887,27.532986164093018,0.455,0.5,0.38,0.44276366760057145,0.48924380704041726,0.3654639814738235,0.6429119791666668,0.6771666666666666,0.5791333333333334,2.8870506286621094,1705.46484375,1705.58984375

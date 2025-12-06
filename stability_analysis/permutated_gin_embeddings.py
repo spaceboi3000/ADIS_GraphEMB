@@ -600,18 +600,17 @@ def run(args):
 
 
 # MUTAG epochs 500 // dropout 0.0, 0.4 // num_layers 5 // weight_decay 5e-4 //batch_size 64
-# ENZYMES epochs 500 // dropout 0.0, 0.5 // num_layers 6 // weight_decay 5e-4 //batch_size 32 
+# ENZYMES epochs 500 // dropout 0.0, 0.4 // num_layers 6 // weight_decay 5e-4 //batch_size 32 
 # IMDB-MULTI epochs 200 // dropout 0.0, 0.4 // num_layers 3 // weight_decay 1e-4 //batch_size 64
-
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description="GIN embeddings exporter for EMB1 on PERMUTATED datasets")
     p.add_argument("--data_root", type=str, default=str(DATASETS_ROOT))
     p.add_argument("--out_root", type=str, default=str(OUT_DIR))
     p.add_argument("--datasets", nargs="+", default=["IMDB-MULTI"])
     p.add_argument("--dims", nargs="+", type=int, default=[64, 128, 256])
-    p.add_argument("--epochs", nargs="+", type=int, default=[50, 200])
+    p.add_argument("--epochs", nargs="+", type=int, default=[200, 500])
     p.add_argument("--lrs", nargs="+", type=float, default=[1e-3, 5e-4])
-    p.add_argument("--dropouts", nargs="+", type=float, default=[0.0, 0.3])
+    p.add_argument("--dropouts", nargs="+", type=float, default=[0.0, 0.4])
     p.add_argument("--batch_size", type=int, default=64)
     p.add_argument("--num_layers", type=int, default=3)
     p.add_argument("--pool", type=str, default="add", choices=["mean", "add", "concat"])
@@ -620,7 +619,7 @@ if __name__ == "__main__":
     p.add_argument("--use_node_attr", action="store_true")
     p.add_argument("--label_smoothing", type=float, default=0.05)
     p.add_argument("--dropedge", type=float, default=0.2)
-    p.add_argument("--weight_decay", type=float, default=5e-4)
+    p.add_argument("--weight_decay", type=float, default=1e-4)
     p.add_argument("--patience", type=int, default=50)
     p.add_argument("--grad_clip", type=float, default=1.0)
     p.add_argument("--device", type=str, default=("cuda" if torch.cuda.is_available() else "cpu"))
