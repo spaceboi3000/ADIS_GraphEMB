@@ -80,3 +80,29 @@ and regularization affect both classification accuracy and the quality of the le
 \subsection{Clustering for Supervised Embeddings}
 
 \subsection{Stability Analysis}
+Because real world applications involve noisy data, for example edges may be missing 
+and node atttributes may be corrupted, it is important to evaluate the robustness of our graph embeddings to such perturbations.
+So, we compute a stability analysis by introducing random permutations to the graph structures and node features.
+
+For each dataset, we generated perturbed versions by applying 2 types of permutations:
+First, we apply edge pertubation, removing 10\% of existing edges and add the same amount of new random edges.
+And secondly, we shuffle node attributes by randomly swapping features between pairs of nodes within each graph.
+
+After generating these new datasets, we recompute embeddings using Graph2Vec, NetLSD and GIN with the same scripts and configurations as before.
+This ensures that any observed changes in the embeddings are solely due to the introduced perturbations and so we can fairly and safely make our comparisons between original and perturbed embeddings.
+To quality how much the embeddings have changed, we use two complementary measures:
+\begin{enumerate}
+    \item Cosine Similarity: For each graph, we compute the cosine similarity between its original embedding and the perturbed embedding. 
+    When we receive values close to 1, then the embeddings are very similar to the original one.
+    \[ \cos (z_i, z_i') = \frac{z_i^T \cdot z_i'}{||z_i||_2 \cdot ||z_i'||_2} \]
+    \item Euclidean Distancw (L2 norm):
+    \[ ||z_i-z_i'||_2\]
+    where smaller distance means higher similarity between original and perturbed embeddings.
+\end{enumerate}
+
+For each dataset, method and config, we report mean, median, and standard deviation of cosine similarity and L2 distance and then 
+we compare its method in order to obseved somehow any difference in the stabilization logic.
+
+After computing the above stability analysis, we further evaluate the practical impact of graph perturbations by repeating the classification and clustering experiments on the perturbed datasets
+with the same scripts and configs us we mentioned in the previous sections. 
+Every result is reported and discussed in section \textit{VI}.
