@@ -1,22 +1,18 @@
 
-\section{Introduction} Chatia alla mou arese.
-Graphs are widely used to model complex relational data in 
-domains such as social networks, bioinformatics, and chemistry. 
-Applying standard machine learning methods to graphs is challenging 
-due to their irregular structure. Graph embedding techniques address 
-this by mapping graphs into low-dimensional vector spaces that 
-preserve structural information, enabling tasks such as classification 
-and clustering.
+\section{Introduction}Graphs provide a powerful representation for complex relational data and are widely used in domains such as network analysis, bioinformatics and chemistry. In many scenarios, the learning task is defined at the graph level, such as classifying molecular graphs by biological activity. However, graphs have irregular structure with variable sizes, unordered nodes and complex connectivity patterns, features that make them face challenges to traditional machine learning algorithms, which typically require fixed dimensional vector inputs. 
 
-Several embedding methods exist with different strengths. 
-Graph2Vec captures subgraph patterns to produce graph-level embeddings efficiently. 
-NetLSD encodes graphs via spectral descriptors, providing compact and 
-calable representations. Graph Isomorphism Networks (GIN) use neural architectures 
-to aggregate neighborhood information, achieving high predictive performance but 
-at higher computational cost.
+Graph embedding methods address this challenge by mapping entire graphs into continuous vector representations that preserve the structural and semantic information of the graph. These kinds of representations enable the use of standard machine learning techniques for downstream tasks such as graph classification, clustering and similarity search. As a result, graph embeddings have successfully become a core component of modern graph based learning pipelines. 
 
-In this study, we evaluate these three methods on IMDB-MULTI, ENZYMES 
-and MUTAG, comparing accuracy, robustness, scalability, and computational 
-efficiency. The results highlight the trade-offs of each method and provide 
-guidance for selecting appropriate embeddings based on dataset characteristics 
-and task requirements.
+Early approaches relied on handcrafted features or graph kernels, which often suffer from high computational complexity or limited expressiveness [CITATIONS NA VROYME]. Recent approaches automatically learn graph representations and can be categorized into unsupervised[CITATIONS] and supervised techniques[CITATIONS]. Unsupervised methods learn graph representations without relying on labeled data exploiting often structural patterns. In this category belong Graph2Vec [CITATION], which adapts the skip-gram model to learn graph level embeddings from rooted substructures, and NetLSD, which uses heat kernel signatures derived from the graph Laplacian to capture global topological characteristics. On the other hand, supervised procedures, which are based on graph neural networks (GNNS) [CITAITON], learn task specific embeddings through end-to-end training. Among these, the Graph Isomorphism Network (GIN) [CITATION] has gained significant attention due to its strong theoretical expressiveness. GIN can learn highly discriminative graph representations while achieving superior performance on graph classification benchmarks. However, choosing this type of procedure typically comes with the cost of increased computational complexity, higher memory consumption and the need for labeled training data, which is often not provided to us.
+
+
+Despite the development of graph embedding techniques[CITATIONS], comparisons between unsupervised and supervised methods remain limited[CITATIONS]. Many existing studies focus primarly on classification accuracy and overlooking significant considerations such as computational cost, embedding dimensionality and robustness to structural permutations. These are critical when working with real world small datasets (EMB1), where overfitting, instability and minimum training data can easily affect the model's performance.
+
+In this work, we focus on EMB1 and we evaluate and compare unsupervised and supervised graph embedding methods on small benchmark datasets from the TUDataset collection: MUTAG, ENZYMES, and IMDB-MULTI. Studying small datasets is as meaningful as big ones, as they represent realistic scenarios in domains such as chemistry and biology, where labeled data is costly to obtain and sometimes no where to be found and model robustness is essential. From the unsupervised category, we use Graph2Vec and NetLSD and from the supervised GIN. To ensure fairness, all methods are evaluated using a unified experimental pipeline with minimal difference from GIN. The evaluation extends beyond standard classification and includes clustering behavior, computational efficiency and stability under random perturbations in the graphs structure.
+
+The main contributions are summarized as follows:
+\begin{itemize}
+    \item We present a comparative evaluation of unsupervised and supervised whole-graph embedding methods on widely used real-world datasets,
+    \item We analyze the trade-off between classification accuracy and computational cost, highlighting practical considerations for method selection, 
+    \item We perform a stability analysis under structural permutations, assessing the robustness of different embedding paradigms
+\end{itemize}
