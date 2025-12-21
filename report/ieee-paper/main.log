@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.12.21)  21 DEC 2025 19:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.12.21)  21 DEC 2025 20:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -448,33 +448,7 @@ Package hyperref Info: Link coloring ON on input line 9.
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
- (./sections/titlepage.tex
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 24.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/omllmm.fd
-File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 24.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/omslmsy.fd
-File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 24.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/omxlmex.fd
-File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 24.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 24.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 24.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 24.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 24.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)) (./sections/introduction.tex
+ (./sections/titlepage.tex) (./sections/introduction.tex
 
 
 Underfull \hbox (badness 1748) in paragraph at lines 6--7
@@ -497,14 +471,35 @@ Underfull \hbox (badness 1472) in paragraph at lines 9--10
 
 
 {/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-rmsc.enc}]
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 15.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 15.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 15.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10> on input line 15.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 15.
-) (./sections/related_work.tex) (./sections/methods.tex
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 15.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 15.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 15.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)) (./sections/related_work.tex) (./sections/methods.tex
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 20.
 
-Underfull \vbox (badness 2726) has occurred while \output is active []
+Underfull \vbox (badness 5802) has occurred while \output is active []
 
 
 
@@ -516,43 +511,13 @@ Underfull \hbox (badness 3769) in paragraph at lines 134--135
  []
 
 
-Underfull \vbox (badness 1400) has occurred while \output is active []
+Underfull \vbox (badness 3375) has occurred while \output is active []
 
 
 
-) (./sections/datasets.tex) (./sections/evaluation.tex
+) (./sections/datasets.tex
 
-[3{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]) (./sections/results.tex) (./sections/references.tex
-Underfull \hbox (badness 7522) in paragraph at lines 30--31
-[]\OT1/lmr/m/n/8 D. P. Kingma and M. Welling, ``Auto-encoding vari-a-
- []
-
-
-Underfull \hbox (badness 4913) in paragraph at lines 30--31
-\OT1/lmr/m/n/8 tional Bayes,'' 2013, arXiv:1312.6114. [On-line]. Avail-able:
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 31--32
-[]\OT1/lmr/m/n/8 S. Liu, ``Wi-Fi En-ergy De-tec-tion Testbed (12MTC),''
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 31--32
-\OT1/lmr/m/n/8 2023, gitHub repos-i-tory. [On-line]. Avail-able:
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 31--32
-\OT1/lmr/m/n/8 https://github.com/liustone99/Wi-Fi-Energy-Detection-
- []
-
-
-Underfull \hbox (badness 3240) in paragraph at lines 32--33
-\OT1/lmr/m/n/8 man Ser-vices, Sub-stance Abuse and Men-tal Health Ser-
- []
-
-
+[3{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]) (./sections/evaluation.tex) (./sections/results.tex) (./sections/references.tex
 
 )
 
@@ -574,21 +539,21 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 761AFB0B35FFADDC507480F025E9F7F7;1541.
+(rerunfilecheck)             Checksum: AD76FF32D3CDA4A861CCF06D9972B137;1825.
  ) 
 Here is how much of TeX's memory you used:
- 12101 strings out of 473190
- 189856 string characters out of 5715799
- 608372 words of memory out of 5000000
- 35098 multiletter control sequences out of 15000+600000
- 740045 words of font info for 141 fonts, out of 8000000 for 9000
+ 12080 strings out of 473190
+ 189870 string characters out of 5715799
+ 609305 words of memory out of 5000000
+ 35086 multiletter control sequences out of 15000+600000
+ 734968 words of font info for 132 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,8n,82p,1462b,441s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (4 pages, 324851 bytes).
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (4 pages, 345801 bytes).
 PDF statistics:
- 208 PDF objects out of 1000 (max. 8388607)
- 166 compressed objects within 2 object streams
- 36 named destinations out of 1000 (max. 500000)
- 113 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 210 PDF objects out of 1000 (max. 8388607)
+ 168 compressed objects within 2 object streams
+ 32 named destinations out of 1000 (max. 500000)
+ 137 words of extra memory for PDF output out of 10000 (max. 10000000)
 

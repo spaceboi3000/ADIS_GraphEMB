@@ -10,7 +10,7 @@
 
 This section describes the graph embedding methods evaluated in this work, along with the implementation details and experimental setup used to ensure fair comparison across models.
 \subsection{Graph2Vec}
-Graph2Vec, inspired by document representation techniques in natural language processing, 
+Graph2Vec~\cite{narayanangraph2vec}, inspired by document representation techniques in natural language processing, 
 represents each graph as a set of rooted subgraphs, which are treated like words are in a document. 
 These subgraphs are extracted using the Weisfeiler Lehman (WL) relabeling process and in order to train the skipgram model it is being assigned a unique label for all the rooted subgraphs in the vocabulary.
 So the graph2vec's algorithm first generate those rooted subgraphs around every node in a given graph and then learns embeddings of the given graphs[CITE].
@@ -73,7 +73,7 @@ So, graphs sharing similar local structural patterns are embedded closer in the 
 Graph2Vec doesn't require node attributes and is fully unsupervised, making it suitable for datasets with limited or noisy labels.
 
 \subsection{NetLSD}
-NetLSD represent a given graph using heat kernel signatures derived from the Laplacian Spectrum.
+NetLSD~\cite{tsitsulin2018netlsd} represent a given graph using heat kernel signatures derived from the Laplacian Spectrum.
 Specifically, it computes a graph descriptor based on the trace of the heat kernel at different time scales and  
 manages to capture both local and global structural properties. The NetLSD's algorithm is shown below:
 
@@ -113,7 +113,7 @@ To improve computational efficiency, it approximates the Laplacian eigenvalue di
 This hepls NetLSD to maintain stable performace even for large graphs. 
 
 \subsection{GIN}
-The Graph Isomorphism Network (GIN), known as a supervised graph neural network, is designed to maximize discriminative power among GNNs [CITE].
+The Graph Isomorphism Network (GIN)~\cite{xu2019gin}, known as a supervised graph neural network, is designed to maximize discriminative power among GNNs.
 GIN's node representation are updated by aggregating context from neighbor nodes.
 At each layer, node features are updated using a sum aggregation function followed by a multilayer perceptron (MLP), 
 allowing the model to distinguish different graph structures effectively as shown in Algorithm~\ref{alg:gin_forward}.
