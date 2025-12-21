@@ -319,8 +319,6 @@ INPUT ./sections/results.tex
 INPUT sections/results.tex
 INPUT ./sections/references.tex
 INPUT ./sections/references.tex
-INPUT ./sections/references.tex
-INPUT ./sections/references.tex
 INPUT sections/references.tex
 INPUT main.aux
 INPUT ./main.out
