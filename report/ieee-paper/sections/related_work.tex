@@ -1,6 +1,23 @@
 \section{Related Work}
+% % Briefly discuss prior graph embedding techniques (unsupervised vs. supervised).
+% % Mention previous benchmarks and known trade-offs.
+
+% Graph representation learning has emerged as a fundamental approach for analyzing structured data by mapping graphs into continuous vector spaces. 
+% Early work in this area focused on node level embeddings, such as DeepWalk[CITE] and node2vec[CITE], which learn representations based on random walks and local neighborhoods. 
+% More recent research has shifted toward whole graph embedding methods, which aim to encode global structural properties and are particularly suited for tasks such as graph classification and clustering.
+
+% \subsection{Unsupervised Embedding Methods}
+% Unsupervised techniques learn representations without relying on labels making them attractive for limited label settings. One of the earliest methods in this category is 
+% Graph2Vec[CITE], which is inspired from document embedding models such as Doc2Vec [CITE].
+% Graph2Vec represents graphs as collections of rooted subgraphs obtained via Weisfeiler–Lehman relabeling and learns embeddings by predicting substructures in a skip-gram framework.
+% This approach has shown strong performance on small datasets, while keeping computational cost low.
+
+% Another significant unsupervised method is NetLSD, which captures global graph structure through spectral descriptors derived from the graph Laplacian.
+% By modeling the heat diffusion process over multiple time scales, NetLSD produces embeddings that are invariant to node permutations and robust to minor structural changes.
+% NetLSD focuses on global topology resulting in better stabilization across random permutations, but limited discriminative power for classification tasks.
+
+% \subsection{Supervised Graph Neural Network Models}
 
 
-Briefly discuss prior graph embedding techniques (unsupervised vs. supervised).
 
-Mention previous benchmarks and known trade-offs.
+% \subsection{Benchmarking and Trade-offs}
