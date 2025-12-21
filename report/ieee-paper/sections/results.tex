@@ -2,6 +2,101 @@
 % Tables and figures summarizing all tasks.
 % Highlight trade-offs: performance vs. efficiency vs. stability.
 
-For the graph classification tasks, we present the performance of each embedding method across the three TUDatasets.
-We report accuracy, F1-score, and AUC for each method, along with computational metrics such as training time and memory usage.
-% The results are summarized in Tables ~\ref{tab:classification_results} and ~\ref{tab:computational_metrics}.
+For the graph classification tasks, we present the performance of each embedding method across the three TUDatasets with  accuracy, F1-score and AUC metrics for each method, along with computational metrics such as training time and memory usage.
+The results for GIN are summarized in Table ~\ref{tab:gin_compact}. 
+We preferered to show only the best test configuration per dataset x dim results and for the epochs 200 and 300 for the reason we mentioned in earlier section.
+
+% \begin{table*}[t]
+% \centering
+% \caption{GIN classification results (filtered to epochs 200 or 300). For each dataset and embedding dimension, we report the best configuration by test accuracy (ties broken by validation accuracy).}
+% \label{tab:gin_200_300}
+% \begin{tabular}{l|c|c|c|c|c|c|c}
+% \hline
+% \textbf{Dataset} & \textbf{Dim} & \textbf{Epochs} & \textbf{LR} & \textbf{Dropout} & \textbf{Test Acc} & \textbf{Test F1 (macro)} & \textbf{Test AUC (macro)} \\
+% \hline
+% MUTAG      & 64  & 200 & 0.001  & 0.4 & 0.8421 & 0.8246 & 0.8846 \\
+% MUTAG      & 128 & 200 & 0.0005 & 0.0 & 0.8421 & 0.8081 & 0.8846 \\
+% MUTAG      & 256 & 200 & 0.0005 & 0.4 & 0.8947 & 0.8643 & 0.8590 \\
+% \hline
+% ENZYMES    & 64  & 300 & 0.001  & 0.0 & 0.4333 & 0.4277 & 0.7027 \\
+% ENZYMES    & 128 & 300 & 0.0005 & 0.0 & 0.4833 & 0.4915 & 0.7437 \\
+% ENZYMES    & 256 & 300 & 0.001  & 0.4 & 0.6167 & 0.6147 & 0.8087 \\
+% \hline
+% IMDB-MULTI & 64  & 200 & 0.0005 & 0.4 & 0.5000 & 0.4955 & 0.6857 \\
+% IMDB-MULTI & 128 & 200 & 0.001  & 0.0 & 0.5000 & 0.4861 & 0.6783 \\
+% IMDB-MULTI & 256 & 200 & 0.001  & 0.4 & 0.5067 & 0.4782 & 0.7136 \\
+% \hline
+% \end{tabular}
+% \end{table*}
+
+\begin{table}[t]
+\centering
+\caption{GIN classification performance on EMB1 datasets (epochs $\in\{200,300\}$). Best configuration per embedding dimension is reported.}
+\label{tab:gin_compact}
+\begin{tabular}{l c c c c}
+\hline
+\textbf{Dataset} & \textbf{Dim} & \textbf{Epochs} & \textbf{Acc} & \textbf{F1} \\
+\hline
+MUTAG      & 64  & 200 & 0.842 & 0.825 \\
+MUTAG      & 128 & 200 & 0.842 & 0.808 \\
+MUTAG      & 256 & 200 & 0.895 & 0.864 \\
+\hline
+ENZYMES    & 64  & 300 & 0.433 & 0.428 \\
+ENZYMES    & 128 & 300 & 0.483 & 0.492 \\
+ENZYMES    & 256 & 300 & 0.617 & 0.615 \\
+\hline
+IMDB-MULTI & 64  & 200 & 0.500 & 0.496 \\
+IMDB-MULTI & 128 & 200 & 0.500 & 0.486 \\
+IMDB-MULTI & 256 & 200 & 0.507 & 0.478 \\
+\hline
+\end{tabular}
+\end{table}
+
+The results for Graph2Vec and NetLSD are shown in Tables~\ref{tab:graph2vec_best} and ~\ref{tab:netlsd_best} respectively.
+\begin{table}[t]
+\centering
+\caption{Best Graph2Vec classification results per dataset and embedding dimension. For each dataset--dimension pair, the classifier with the highest test accuracy is reported.}
+\label{tab:graph2vec_best}
+\begin{tabular}{l c c c c}
+\hline
+\textbf{Dataset} & \textbf{Dim} & \textbf{Model} & \textbf{Acc} & \textbf{F1} \\
+\hline
+MUTAG      & 64  & RF & 0.711 & 0.656 \\
+MUTAG      & 128 & RF & 0.763 & 0.754 \\
+MUTAG      & 256 & RF & 0.737 & 0.731 \\
+\hline
+ENZYMES    & 64  & Ens & 0.258 & 0.252 \\
+ENZYMES    & 128 & RF  & 0.225 & 0.219 \\
+ENZYMES    & 256 & RF  & 0.317 & 0.310 \\
+\hline
+IMDB-MULTI & 64  & RF  & 0.437 & 0.435 \\
+IMDB-MULTI & 128 & GB  & 0.427 & 0.426 \\
+IMDB-MULTI & 256 & SVM & 0.433 & 0.426 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[t]
+\centering
+\caption{Best NetLSD classification results per dataset and embedding dimension. For each dataset--dimension pair, the classifier with the highest test accuracy is reported.}
+\label{tab:netlsd_best}
+\begin{tabular}{l c c c c}
+\hline
+\textbf{Dataset} & \textbf{Dim} & \textbf{Model} & \textbf{Acc} & \textbf{F1} \\
+\hline
+MUTAG      & 64  & Ens & 0.895 & 0.892 \\
+MUTAG      & 128 & Ens & 0.868 & 0.867 \\
+MUTAG      & 256 & LR  & 0.868 & 0.867 \\
+\hline
+ENZYMES    & 64  & RF  & 0.300 & 0.302 \\
+ENZYMES    & 128 & RF  & 0.308 & 0.312 \\
+ENZYMES    & 256 & RF  & 0.325 & 0.324 \\
+\hline
+IMDB-MULTI & 64  & SVM & 0.480 & 0.477 \\
+IMDB-MULTI & 128 & RF  & 0.463 & 0.465 \\
+IMDB-MULTI & 256 & RF  & 0.457 & 0.456 \\
+\hline
+\end{tabular}
+\end{table}
+
