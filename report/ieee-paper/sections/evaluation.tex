@@ -44,7 +44,7 @@ We choose 5 different classifiers:
     \item Gradient Boosting with moderate depth 
 \end{itemize}
 
-In addition, we combine Random Forest, Gradient Boosting and SVM to see if we'll get better classification results by ensembling different classifiers.
+In addition, we combine Random Forest, Gradient Boosting and SVM to observe if we'll get better classification results by ensembling different classifiers. We named this combination as \textit{Voting Classifier}.
 All results are shown and discussed in section \textit{VI}.
 
 \subsection{Supervised Classification}
@@ -72,7 +72,8 @@ Dropout is applied with rates of 0.0 and 0.4 to assess the impact of regularizat
 For IMDB-MULTI, which contains larger graphs but no node attributes, we use a batch size of 64, while the number of GIN layers is set to 3, reflecting the shallower architecture required for social network graphs.
 
 This hyperparameter exploration allows us to analyze how architectural depth, embedding dimensionality 
-and regularization affect both classification accuracy and the quality of the learned graph embeddings.
+and regularization affect both classification accuracy and the quality of the learned graph embeddings. 
+The results of these experiments are presented and discussed in section \textit{VI}.
 \subsection{Clustering Evaluation}
 
 \subsection{Clustering for Unsupervised Embeddings}
