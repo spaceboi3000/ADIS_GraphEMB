@@ -11,16 +11,16 @@ and this helps the ML techniques to work efficiently to downstream tasks, such a
 As a result, graph embeddings have successfully become a core component for current graph based learning pipelines. 
 
 Early approaches relied on handcrafted features or graph kernels, which often suffer 
-from high computational complexity or limited expressiveness [CITATIONS NA VROYME]. 
-Recent approaches automatically learn graph representations and can be categorized into unsupervised[CITATIONS] 
-and supervised techniques[CITATIONS]. Unsupervised methods learn graph representations without relying on 
-labeled data exploiting often structural patterns. In this category belong Graph2Vec [CITATION], 
-which adapts the skip-gram model to learn graph level embeddings from rooted substructures, 
-and NetLSD, which uses heat kernel signatures derived from the graph Laplacian to capture global 
+from high computational complexity or limited expressiveness~\cite{shervashidze2011wl},~\cite{vishwanathan2010graphkernels}. 
+Now recent approaches automatically learn graph representations and can be categorized into unsupervised~\cite{narayanangraph2vec},~\cite{tsitsulin2018netlsd} 
+and supervised techniques~\cite{xu2019gin}. Unsupervised methods learn graph representations without relying on 
+labeled data exploiting often structural patterns. In this category belong Graph2Vec~\cite{narayanangraph2vec}, 
+which adapts the skipgram model to learn graph level embeddings from rooted substructures, 
+and NetLSD~\cite{tsitsulin2018netlsd}, which uses heat kernel signatures derived from the graph Laplacian to capture global 
 topological characteristics. On the other hand, supervised procedures, which are based on graph neural 
 networks (GNNS) [CITAITON], learn task specific embeddings through end-to-end training. 
 Among these, the Graph Isomorphism Network (GIN) [CITATION] has gained significant attention due to its 
-strong theoretical expressiveness. GIN can learn highly discriminative graph representations while achieving superior performance on graph classification benchmarks. 
+strong theoretical expressiveness. GIN can learn highly discriminative graph representations while achieving great performance on graph classification benchmarks. 
 However, choosing this type of procedure typically comes with the cost of increased computational complexity, higher memory consumption and the need for labeled training data, which is often not provided to us.
 
 
