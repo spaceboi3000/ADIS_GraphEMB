@@ -60,7 +60,7 @@ To further enhance representational capacity, we employ jumping Knowledge with c
 To improve classification results we add several additional design choices and training options.
 First, we run our experiments enabling -gfeat option, which concatenates simple graph level statistics (like the number of nodes, edges and graph density) to the learned embedding.
 Second, we use additive global pooling (--pool\ add), which is known to provide stable performance across datasets. 
-Thrid, we apply feature normalization (--norm\_feats) after constructing node features and we observed that the optimization behavior improved.
+Third, we apply feature normalization (--norm\_feats) after constructing node features and we observed that the optimization behavior improved.
 Finally, we apply label smoothing during training with value  0.05 (--label\_smoothing 0.05) in the cross entropy loss to reduce overconfidence and improve generalization on small datasets.
 
 To further study the effect of model capacity and training configuration, we systematically vary several GIN hyperparameters during experimentation.
