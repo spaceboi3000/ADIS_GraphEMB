@@ -24,7 +24,8 @@ We evaluate the graph embeddings using the three TUDataset as we mentioned earli
 All methods are assessed under a consistent pipeline to enable fair comparison across unsupervised and supervised approaches. 
 Performace is reported using Accuracy, F1 score and AUC with extra computational measurments such as training time for Graph2Vec and NetLSD and
 peak tracemalloc mb, rss before mb, rss after mb for GIN. 
-In addition we study the influence of different embedding dimensionality evaluating on 64, 128 and 256 dim sizes.
+In addition we study the influence of different embedding dimensionality evaluating on the different dim sizes (64, 128 and 256).
+
 
 \subsection{Classification Using Unsupervised Embeddings}
 For each dataset and embedding dim we load each graph's embedding from CSV files.
