@@ -21,10 +21,11 @@
 
 \subsection{Evaluation Protocol for Graph Classification}
 We evaluate the graph embeddings using the three TUDataset as we mentioned earlier. 
-All methods are assessed under a consistent pipeline to enable fair comparison across unsupervised and supervised approaches. 
-Performace is reported using Accuracy, F1 score and AUC with extra computational measurments such as training time for Graph2Vec and NetLSD and
-peak tracemalloc mb, rss before mb, rss after mb for GIN. 
-In addition we study the influence of different embedding dimensionality evaluating on the different dim sizes (64, 128 and 256).
+Methods Graph2Vec and NetLSD are proccesses under the same pipeline for the classification, 
+while supervised GIN follows its own supervised training protocol for the classification task.
+Performance for this task is reported using Accuracy, F1 score and AUC with extra computational measurments such as training time for all methods and
+peak tracemalloc mb, rss before mb, rss after mb for GIN, meaning memory usage during training. 
+In addition we study the influence of different embedding dimensionality evaluating on the different dim sizes as we mentioned in earlier section (64, 128 and 256).
 
 
 \subsection{Classification Using Unsupervised Embeddings}
@@ -51,11 +52,12 @@ All results are shown and discussed in section \textit{VI}.
 \subsection{Supervised Classification}
 Unlike Graph2Vec and NetLSD, GIN is trained in a supervised manner. 
 Our implementation uses PyTorch Geometric and follows the architecture and training protocol described in Algorithms ~\ref{alg:gin_forward} and ~\ref{alg:gin_train}.
-So unlike the unsupervised methods, we don't use 5 different classifiers on top of GIN embeddings, because GIN itself is already a classifier.
+So in contrast with the unsupervised methods, we don't use 5 different classifiers on top of GIN embeddings, because GIN itself is already a classifier.
+We computed the graph embeddings by training GIN and in parallel we optimize the loss for the classifiication metrics.
 As will be shown in the experimental results, this supervised training allows GIN to outperform the unsupervised methods on graph classification tasks. 
 
 The GIN model consists of stacked GINConv layers, each parameterized by an MLP, followed by batch normalization, ReLU activation, dropout and a residual connection.
-These design choices help the model learn complex graph structures while avoiding overfitting.
+This design helps the model to learn complex graph structures while avoiding overfitting.
 To further enhance representational capacity, we employ jumping Knowledge with concatenation allowing the final graph embedding to incorporate information from all intermediate layers.
 
 To improve classification results we add several additional design choices and training options.
@@ -64,13 +66,16 @@ Second, we use additive global pooling (--pool\ add), which is known to provide 
 Thrid, we apply feature normalization (--norm\_feats) after constructing node features and we observed that the optimization behavior improved.
 Finally, we apply label smoothing during training with value  0.05 (--label\_smoothing 0.05) in the cross entropy loss to reduce overconfidence and improve generalization on small datasets.
 
-To further study the effect of model capacity and training configuration, we systematically vary several GIN hyperparameters during experimentation.
+
+To further study the effect of model capacity and training configuration, we vary multiple GIN hyperparameters during experimentation.
 Like the unsupervised methods, we evaluate GIN with embedding dimensions of 64, 128 and 256. 
-We trained for 200, 300, 500 and 800 epochs, depending on the dataset, 
-but it is right to mention that this was a little bit overkill and that we should stick to better difference 50-200 epochs.
+We, also, trained for 200, 300, 500 and 800 epochs, depending on the dataset, 
+but it is right to mention that this was a little bit overkill and that would be better if we could stick to better difference 50-200 epochs.
+Having, also, early stopping made the different epochs less critical.
 We explore, also, two learning rates $1 \cdot 10^{-3}$ and $5 \cdot 10^{-4}$, which are commonly used for training.
 Dropout is applied with rates of 0.0 and 0.4 to assess the impact of regularization on small datasets.
-For IMDB-MULTI, which contains larger graphs but no node attributes, we use a batch size of 64, while the number of GIN layers is set to 3, reflecting the shallower architecture required for social network graphs.
+For IMDB-MULTI, which contains larger graphs but no node attributes, we use a batch size of 64 (the same for MUTAG, while ENZYMES's batxhsize is set to 32), while the number of GIN layers is set to 3, reflecting the shallower architecture required for social network graphs.
+The number of layers for MUTAG is set to 5 and for ENZYMES to 6.
 
 This hyperparameter exploration allows us to analyze how architectural depth, embedding dimensionality 
 and regularization affect both classification accuracy and the quality of the learned graph embeddings. 
@@ -83,7 +88,7 @@ The results of these experiments are presented and discussed in section \textit{
 
 \subsection{Stability Analysis}
 Because real world applications involve noisy data, for example edges may be missing 
-and node atttributes may be corrupted, it is important to evaluate the robustness of our graph embeddings to such perturbations.
+and data in general may be corrupted, it is important to evaluate the robustness of our graph embeddings to such perturbations.
 So, we compute a stability analysis by introducing random permutations to the graph structures and node features.
 
 For each dataset, we generated perturbed versions by applying 2 types of permutations:
@@ -105,6 +110,7 @@ To quality how much the embeddings have changed, we use two complementary measur
 For each dataset, method and config, we report mean, median, and standard deviation of cosine similarity and L2 distance and then 
 we compare its method in order to obseved somehow any difference in the stabilization logic.
 
-After computing the above stability analysis, we further evaluate the practical impact of graph perturbations by repeating the classification and clustering experiments on the perturbed datasets
-with the same scripts and configs us we mentioned in the previous sections. 
+After computing the above stability analysis, we further evaluate the practical impact 
+of graph perturbations by repeating the classification and clustering experiments on the perturbed datasets
+with the same scripts and configs as we mentioned in the previous sections. 
 Every result is reported and discussed in section \textit{VI}.
