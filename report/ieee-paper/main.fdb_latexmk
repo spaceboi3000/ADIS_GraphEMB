@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1766679364.67451 "/Users/nodys/Desktop/ADIS/ADIS_GraphEMB/report/ieee-paper/main.tex" "main.pdf" "main" 1766679365.30427 0
+["pdflatex"] 1766685719.22785 "/Users/nodys/Desktop/ADIS/ADIS_GraphEMB/report/ieee-paper/main.tex" "main.pdf" "main" 1766685719.90061 0
   "/Users/nodys/Desktop/ADIS/ADIS_GraphEMB/report/ieee-paper/main.tex" 1766352680.02031 570 b7485eb60061d083220e9ab8d40872b9 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -138,8 +138,8 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1766323158 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1766323149 3345744 2f38e698af4f6da697fad307c37999ec ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "main.aux" 1766679365.20426 6344 4d3b137ff90e50df02900217ab3dfd82 "pdflatex"
-  "main.out" 1766679365.20507 3022 b40e023574a4d0febbdf2630c6e739df "pdflatex"
+  "main.aux" 1766685719.78388 6341 26a370cdf1c26dbd91635fb3e79c5a86 "pdflatex"
+  "main.out" 1766685719.78451 3022 b40e023574a4d0febbdf2630c6e739df "pdflatex"
   "main.tex" 1766352680.02031 570 b7485eb60061d083220e9ab8d40872b9 ""
   "preamble/colors.tex" 1766321185.1701 52 fb09043011d5d6d63b044cef92136425 ""
   "preamble/fonts.tex" 1766321185.17017 109 c3577f62c0f85a878ed0aced786b0025 ""
@@ -151,7 +151,7 @@
   "sections/methods.tex" 1766581787.35325 8661 a577e3ff4574dce7b116172473880656 ""
   "sections/references.tex" 1766581856.98207 4058 22db0e84c4878e929e26c7e207fed4cb ""
   "sections/related_work.tex" 1766335695.58328 1884 a2e21935e08b40529a715589c2565b1e ""
-  "sections/results.tex" 1766679314.7121 4216 5a9f36e262e6a6020802bfe8d36b6345 ""
+  "sections/results.tex" 1766685719.00935 4292 d00620f2ba22a660015f0d343fc8e910 ""
   "sections/titlepage.tex" 1766340287.61365 2110 b030468f53793c371c079d2d74e582d7 ""
   (generated)
   "main.aux"
