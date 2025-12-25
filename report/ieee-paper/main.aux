@@ -24,21 +24,22 @@
 \@writefile{toc}{\contentsline {section}{\numberline {III}Methods}{2}{section.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Graph2Vec}{2}{subsection.3.1}\protected@file@percent }
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Graph2Vec}}{2}{algorithm.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{alg:graph2vec}{{1}{2}{Graph2Vec}{algorithm.1}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces GetWLSubgraph}}{2}{algorithm.2}\protected@file@percent }
-\newlabel{alg:getwlsubgraph}{{2}{2}{Graph2Vec}{algorithm.2}{}}
+\newlabel{alg:getwlsubgraph}{{2}{2}{GetWLSubgraph}{algorithm.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}NetLSD}{2}{subsection.3.2}\protected@file@percent }
 \citation{xu2019gin}
 \citation{karateclub}
 \citation{fey2019pyg}
 \citation{narayanangraph2vec,tsitsulin2018netlsd,xu2019gin}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces NetLSD (Heat Trace Graph Signature)}}{3}{algorithm.3}\protected@file@percent }
-\newlabel{alg:netlsd}{{3}{3}{NetLSD}{algorithm.3}{}}
+\newlabel{alg:netlsd}{{3}{3}{NetLSD (Heat Trace Graph Signature)}{algorithm.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}GIN}{3}{subsection.3.3}\protected@file@percent }
 \@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces GIN Forward Pass (Graph Embedding)}}{3}{algorithm.4}\protected@file@percent }
-\newlabel{alg:gin_forward}{{4}{3}{GIN}{algorithm.4}{}}
+\newlabel{alg:gin_forward}{{4}{3}{GIN Forward Pass (Graph Embedding)}{algorithm.4}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces Training a GIN for Graph Classification}}{3}{algorithm.5}\protected@file@percent }
-\newlabel{alg:gin_train}{{5}{3}{GIN}{algorithm.5}{}}
+\newlabel{alg:gin_train}{{5}{3}{Training a GIN for Graph Classification}{algorithm.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Implementation Details}{3}{subsection.3.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {IV}Datasets}{3}{section.4}\protected@file@percent }
 \citation{debnath1991mutag}
@@ -55,14 +56,25 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-E}}Clustering for Unsupervised Embeddings}{5}{subsection.5.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-F}}Clustering for Supervised Embeddings}{5}{subsection.5.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-G}}Stability Analysis}{5}{subsection.5.7}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces GIN classification performance on EMB1 datasets (epochs $\in \{200,300\}$). Best configuration per embedding dimension is reported.}}{5}{table.1}\protected@file@percent }
-\newlabel{tab:gin_best}{{I}{5}{GIN classification performance on EMB1 datasets (epochs $\in \{200,300\}$). Best configuration per embedding dimension is reported}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces GIN classification performance on EMB1 datasets (epochs $\in \{200,300\}$). Best configuration per embedding dimension is reported.}}{5}{table.caption.1}\protected@file@percent }
+\newlabel{tab:gin_best}{{I}{5}{GIN classification performance on EMB1 datasets (epochs $\in \{200,300\}$). Best configuration per embedding dimension is reported}{table.caption.1}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {VI}Results}{5}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-A}}Before Permutation}{5}{subsection.6.1}\protected@file@percent }
 \bibcite{narayanangraph2vec}{1}
 \bibcite{tsitsulin2018netlsd}{2}
 \bibcite{xu2019gin}{3}
 \bibcite{debnath1991mutag}{4}
 \bibcite{rossi2015networkrepository}{5}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Best Graph2Vec classification results per dataset and embedding dimension. For each dataset--dimension pair, the classifier with the highest test accuracy is reported.}}{6}{table.caption.2}\protected@file@percent }
+\newlabel{tab:graph2vec_best}{{II}{6}{Best Graph2Vec classification results per dataset and embedding dimension. For each dataset--dimension pair, the classifier with the highest test accuracy is reported}{table.caption.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Best NetLSD classification results per dataset and embedding dimension. For each dataset--dimension pair, the classifier with the highest test accuracy is reported.}}{6}{table.caption.3}\protected@file@percent }
+\newlabel{tab:netlsd_best}{{III}{6}{Best NetLSD classification results per dataset and embedding dimension. For each dataset--dimension pair, the classifier with the highest test accuracy is reported}{table.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Average accuracy heatmap across methods and embedding dimensions.}}{6}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:heatmap}{{1}{6}{Average accuracy heatmap across methods and embedding dimensions}{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Pareto frontier illustrating the trade-off between accuracy and normalized compute cost.}}{6}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:pareto}{{2}{6}{Pareto frontier illustrating the trade-off between accuracy and normalized compute cost}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-B}}After Permutation}{6}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{6}{section*.7}\protected@file@percent }
 \bibcite{shervashidze2011wl}{6}
 \bibcite{vishwanathan2010graphkernels}{7}
 \bibcite{scarselli2009gnn}{8}
@@ -70,9 +82,12 @@
 \bibcite{dwivedi2020benchmarking}{10}
 \bibcite{karateclub}{11}
 \bibcite{fey2019pyg}{12}
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Best Graph2Vec classification results per dataset and embedding dimension. For each dataset--dimension pair, the classifier with the highest test accuracy is reported.}}{6}{table.2}\protected@file@percent }
-\newlabel{tab:graph2vec_best}{{II}{6}{Best Graph2Vec classification results per dataset and embedding dimension. For each dataset--dimension pair, the classifier with the highest test accuracy is reported}{table.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Best NetLSD classification results per dataset and embedding dimension. For each dataset--dimension pair, the classifier with the highest test accuracy is reported.}}{6}{table.3}\protected@file@percent }
-\newlabel{tab:netlsd_best}{{III}{6}{Best NetLSD classification results per dataset and embedding dimension. For each dataset--dimension pair, the classifier with the highest test accuracy is reported}{table.3}{}}
-\@writefile{toc}{\contentsline {section}{References}{6}{section*.1}\protected@file@percent }
-\gdef \@abspage@last{6}
+\newlabel{fig:embed_time}{{3a}{7}{Embedding time}{figure.caption.6}{}}
+\newlabel{sub@fig:embed_time}{{a}{7}{Embedding time}{figure.caption.6}{}}
+\newlabel{fig:train_time}{{3b}{7}{Training time}{figure.caption.6}{}}
+\newlabel{sub@fig:train_time}{{b}{7}{Training time}{figure.caption.6}{}}
+\newlabel{fig:peak_mem}{{3c}{7}{Peak memory}{figure.caption.6}{}}
+\newlabel{sub@fig:peak_mem}{{c}{7}{Peak memory}{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Compute cost components as a function of embedding dimension. Bubble size indicates average accuracy.}}{7}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:cost_breakdown}{{3}{7}{Compute cost components as a function of embedding dimension. Bubble size indicates average accuracy}{figure.caption.6}{}}
+\gdef \@abspage@last{7}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.12.21)  25 DEC 2025 20:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.12.21)  26 DEC 2025 00:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -393,13 +393,45 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
 \Hy@SectionHShift=\skip58
-)) (./preamble/colors.tex) (./preamble/fonts.tex) (./preamble/formatting.tex)
+)) (/usr/local/texlive/2025/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen180
+\captionmargin=\dimen181
+\caption@leftmargin=\dimen182
+\caption@rightmargin=\dimen183
+\caption@width=\dimen184
+\caption@indent=\dimen185
+\caption@parindent=\dimen186
+\caption@hangindent=\dimen187
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used.
+Package caption Info: \@makecaption = \long macro:#1#2->\ifx \@captype \@IEEEtablestring \footnotesize \bgroup \par \centering \@IEEEtabletopskipstrut {\normalfont \footnotesize #1}\\{\normalfont \footnotesize \scshape #2}\par \addvspace {0.5\baselineskip }\egroup \@IEEEtablecaptionsepspace \else \@IEEEfigurecaptionsepspace \setbox \@tempboxa \hbox {\normalfont \footnotesize {#1.}\nobreakspace \nobreakspace #2}\ifdim \wd \@tempboxa >\hsize \setbox \@tempboxa \hbox {\normalfont \footnotesize {#1.}\nobreakspace \nobreakspace }\parbox [t]{\hsize }{\normalfont \footnotesize \noindent \unhbox \@tempboxa #2}\else \ifCLASSOPTIONconference \hbox to\hsize {\normalfont \footnotesize \hfil \box \@tempboxa \hfil }\else \hbox to\hsize {\normalfont \footnotesize \box \@tempboxa \hfil }\fi \fi \fi  on input line 1175.
+)
+
+Package caption Warning: Unknown document class (or package),
+(caption)                standard defaults will be used.
+See the caption package documentation for explanation.
+
+\c@caption@flags=\count310
+\c@continuedfloat=\count311
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count312
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count313
+) (./preamble/colors.tex) (./preamble/fonts.tex) (./preamble/formatting.tex)
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 9.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count310
+\l__color_backend_stack_int=\count314
 \l__pdf_internal_box=\box58
 ) (./main.aux)
 \openout1 = `main.aux'.
@@ -426,16 +458,16 @@ LaTeX Font Info:    ... okay on input line 9.
 -- Lines per column: 56 (exact).
 (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count311
-\scratchdimen=\dimen180
+\scratchcounter=\count315
+\scratchdimen=\dimen188
 \scratchbox=\box59
-\nofMPsegments=\count312
-\nofMParguments=\count313
+\nofMPsegments=\count316
+\nofMParguments=\count317
 \everyMPshowfont=\toks27
-\MPscratchCnt=\count314
-\MPscratchDim=\dimen181
-\MPnumerator=\count315
-\makeMPintoPDFobject=\count316
+\MPscratchCnt=\count318
+\MPscratchDim=\dimen189
+\MPnumerator=\count319
+\makeMPintoPDFobject=\count320
 \everyMPtoPDFconversion=\toks28
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -448,6 +480,8 @@ Package hyperref Info: Link coloring ON on input line 9.
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
  (./sections/titlepage.tex) (./sections/introduction.tex
 
 
@@ -506,15 +540,47 @@ Underfull \hbox (badness 3769) in paragraph at lines 141--142
 [4]
 
 ) (./sections/results.tex
+Underfull \hbox (badness 1881) in paragraph at lines 12--12
+[]\OT1/lmr/m/n/10 TABLE I: |GIN clas-si-fi-ca-tion per-for-mance on EMB1
+ []
+
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 12.
+(Font)              <8> on input line 14.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 12.
+(Font)              <6> on input line 14.
 
 
-[5]) (./sections/references.tex
+[5]
+<figures/HEATMAP_AVG_accuracy_bef.png, id=192, 917.1063pt x 423.7431pt>
+File: figures/HEATMAP_AVG_accuracy_bef.png Graphic file (type png)
+<use figures/HEATMAP_AVG_accuracy_bef.png>
+Package pdftex.def Info: figures/HEATMAP_AVG_accuracy_bef.png  used on input line 101.
+(pdftex.def)             Requested size: 252.0pt x 116.43594pt.
+<figures/PARETO_AVG_acc_vs_compute_cost_bef.png, id=194, 1002.6258pt x 423.7431pt>
+File: figures/PARETO_AVG_acc_vs_compute_cost_bef.png Graphic file (type png)
+<use figures/PARETO_AVG_acc_vs_compute_cost_bef.png>
+Package pdftex.def Info: figures/PARETO_AVG_acc_vs_compute_cost_bef.png  used on input line 108.
+(pdftex.def)             Requested size: 252.0pt x 106.5045pt.
+<figures/gen_bef.png, id=195, 464.73625pt x 359.3425pt>
+File: figures/gen_bef.png Graphic file (type png)
+<use figures/gen_bef.png>
+Package pdftex.def Info: figures/gen_bef.png  used on input line 117.
+(pdftex.def)             Requested size: 165.12378pt x 127.6744pt.
+<figures/train_bef.png, id=196, 464.73625pt x 359.3425pt>
+File: figures/train_bef.png Graphic file (type png)
+<use figures/train_bef.png>
+Package pdftex.def Info: figures/train_bef.png  used on input line 124.
+(pdftex.def)             Requested size: 165.12378pt x 127.6744pt.
+<figures/mem_bef.png, id=197, 464.73625pt x 359.3425pt>
+File: figures/mem_bef.png Graphic file (type png)
+<use figures/mem_bef.png>
+Package pdftex.def Info: figures/mem_bef.png  used on input line 131.
+(pdftex.def)             Requested size: 165.12378pt x 127.6744pt.
 
-)
+
+) (./sections/references.tex
+
+[6 <./figures/HEATMAP_AVG_accuracy_bef.png> <./figures/PARETO_AVG_acc_vs_compute_cost_bef.png>])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -528,27 +594,31 @@ Before submitting the final camera ready copy, remember to:
 
 
 
-[6] (./main.aux)
+
+
+[7
+
+ <./figures/gen_bef.png> <./figures/train_bef.png> <./figures/mem_bef.png>] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B40E023574A4D0FEBBDF2630C6E739DF;3022.
+(rerunfilecheck)             Checksum: F1CE89FE5015369776794B70090B7E45;3319.
  ) 
 Here is how much of TeX's memory you used:
- 12138 strings out of 473190
- 190777 string characters out of 5715799
- 613104 words of memory out of 5000000
- 35121 multiletter control sequences out of 15000+600000
- 742793 words of font info for 142 fonts, out of 8000000 for 9000
+ 13618 strings out of 473190
+ 220077 string characters out of 5715799
+ 638411 words of memory out of 5000000
+ 36586 multiletter control sequences out of 15000+600000
+ 740045 words of font info for 141 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,9n,82p,861b,442s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (6 pages, 397500 bytes).
+ 80i,9n,82p,861b,583s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (7 pages, 1081388 bytes).
 PDF statistics:
- 293 PDF objects out of 1000 (max. 8388607)
- 242 compressed objects within 3 object streams
- 50 named destinations out of 1000 (max. 500000)
- 169 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 325 PDF objects out of 1000 (max. 8388607)
+ 265 compressed objects within 3 object streams
+ 56 named destinations out of 1000 (max. 500000)
+ 210 words of extra memory for PDF output out of 10000 (max. 10000000)
 
