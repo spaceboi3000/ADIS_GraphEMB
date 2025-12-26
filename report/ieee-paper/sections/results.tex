@@ -1,102 +1,487 @@
 \section{Results}
 % Tables and figures summarizing all tasks.
 % Highlight trade-offs: performance vs. efficiency vs. stability.
+\subsection{Before Permutation}
+For the graph classification tasks before any pertubation, we present the performance of each embedding method across the three TUDatasets with  accuracy, F1-score and AUC metrics for each method in Tables~\ref{tab:gin_best}, ~\ref{tab:graph2vec_best} and ~\ref{tab:netlsd_best}. 
+% along with computational metrics such as training time and memory usage.
+We preferered to show only the best test configuration per dataset x dim results and for the epochs 200 and 300 (for GIN) for the reason we mentioned in earlier section.
 
-For the graph classification tasks, we present the performance of each embedding method across the three TUDatasets with  accuracy, F1-score and AUC metrics for each method, along with computational metrics such as training time and memory usage.
-The results for GIN are summarized in Table ~\ref{tab:gin_compact}. 
-We preferered to show only the best test configuration per dataset x dim results and for the epochs 200 and 300 for the reason we mentioned in earlier section.
-
-% \begin{table*}[t]
-% \centering
-% \caption{GIN classification results (filtered to epochs 200 or 300). For each dataset and embedding dimension, we report the best configuration by test accuracy (ties broken by validation accuracy).}
-% \label{tab:gin_200_300}
-% \begin{tabular}{l|c|c|c|c|c|c|c}
-% \hline
-% \textbf{Dataset} & \textbf{Dim} & \textbf{Epochs} & \textbf{LR} & \textbf{Dropout} & \textbf{Test Acc} & \textbf{Test F1 (macro)} & \textbf{Test AUC (macro)} \\
-% \hline
-% MUTAG      & 64  & 200 & 0.001  & 0.4 & 0.8421 & 0.8246 & 0.8846 \\
-% MUTAG      & 128 & 200 & 0.0005 & 0.0 & 0.8421 & 0.8081 & 0.8846 \\
-% MUTAG      & 256 & 200 & 0.0005 & 0.4 & 0.8947 & 0.8643 & 0.8590 \\
-% \hline
-% ENZYMES    & 64  & 300 & 0.001  & 0.0 & 0.4333 & 0.4277 & 0.7027 \\
-% ENZYMES    & 128 & 300 & 0.0005 & 0.0 & 0.4833 & 0.4915 & 0.7437 \\
-% ENZYMES    & 256 & 300 & 0.001  & 0.4 & 0.6167 & 0.6147 & 0.8087 \\
-% \hline
-% IMDB-MULTI & 64  & 200 & 0.0005 & 0.4 & 0.5000 & 0.4955 & 0.6857 \\
-% IMDB-MULTI & 128 & 200 & 0.001  & 0.0 & 0.5000 & 0.4861 & 0.6783 \\
-% IMDB-MULTI & 256 & 200 & 0.001  & 0.4 & 0.5067 & 0.4782 & 0.7136 \\
-% \hline
-% \end{tabular}
-% \end{table*}
 
 \begin{table}[t]
 \centering
 \caption{GIN classification performance on EMB1 datasets (epochs $\in\{200,300\}$). Best configuration per embedding dimension is reported.}
-\label{tab:gin_compact}
-\begin{tabular}{l c c c c}
+\label{tab:gin_best}
+\begin{tabular}{l c c c c c}
 \hline
-\textbf{Dataset} & \textbf{Dim} & \textbf{Epochs} & \textbf{Acc} & \textbf{F1} \\
+\textbf{Dataset} & \textbf{Dim} & \textbf{Epochs} & \textbf{Acc} & \textbf{F1} & \textbf{AUC} \\
 \hline
-MUTAG      & 64  & 200 & 0.842 & 0.825 \\
-MUTAG      & 128 & 200 & 0.842 & 0.808 \\
-MUTAG      & 256 & 200 & 0.895 & 0.864 \\
+     & 64  & 200 & 0.842 & 0.825 & 0.885 \\
+MUTAG      & 128 & 200 & 0.842 & 0.808 & 0.885 \\
+      & 256 & 200 & 0.895 & 0.864 & 0.859 \\
 \hline
-ENZYMES    & 64  & 300 & 0.433 & 0.428 \\
-ENZYMES    & 128 & 300 & 0.483 & 0.492 \\
-ENZYMES    & 256 & 300 & 0.617 & 0.615 \\
+    & 64  & 300 & 0.433 & 0.428 & 0.703 \\
+ENZYMES    & 128 & 300 & 0.483 & 0.492 & 0.744 \\
+  & 256 & 300 & 0.617 & 0.615 & 0.809 \\
 \hline
-IMDB-MULTI & 64  & 200 & 0.500 & 0.496 \\
-IMDB-MULTI & 128 & 200 & 0.500 & 0.486 \\
-IMDB-MULTI & 256 & 200 & 0.507 & 0.478 \\
+ & 64  & 200 & 0.500 & 0.496 & 0.686 \\
+IMDB-MULTI & 128 & 200 & 0.500 & 0.486 & 0.678 \\
+ & 256 & 200 & 0.507 & 0.478 & 0.714 \\
 \hline
 \end{tabular}
 \end{table}
 
-The results for Graph2Vec and NetLSD are shown in Tables~\ref{tab:graph2vec_best} and ~\ref{tab:netlsd_best} respectively.
+
 \begin{table}[t]
 \centering
-\caption{Best Graph2Vec classification results per dataset and embedding dimension. For each dataset--dimension pair, the classifier with the highest test accuracy is reported.}
+\caption{Best Graph2Vec classification results per dataset and embedding dimension. 
+For each dataset--dimension pair, the classifier with the highest test accuracy is reported.}
 \label{tab:graph2vec_best}
-\begin{tabular}{l c c c c}
+\begin{tabular}{l c c c c c}
 \hline
-\textbf{Dataset} & \textbf{Dim} & \textbf{Model} & \textbf{Acc} & \textbf{F1} \\
+\textbf{Dataset} & \textbf{Dim} & \textbf{Model} & \textbf{Acc} & \textbf{F1} & \textbf{AUC} \\
 \hline
-MUTAG      & 64  & RF & 0.711 & 0.656 \\
-MUTAG      & 128 & RF & 0.763 & 0.754 \\
-MUTAG      & 256 & RF & 0.737 & 0.731 \\
+      & 64  & RF  & 0.711 & 0.656 & 0.775 \\
+MUTAG      & 128 & RF  & 0.763 & 0.754 & 0.797 \\
+     & 256 & RF  & 0.737 & 0.731 & 0.745 \\
 \hline
-ENZYMES    & 64  & Ens & 0.258 & 0.252 \\
-ENZYMES    & 128 & RF  & 0.225 & 0.219 \\
-ENZYMES    & 256 & RF  & 0.317 & 0.310 \\
+    & 64  & Ens & 0.258 & 0.252 & 0.571 \\
+ENZYMES    & 128 & RF  & 0.225 & 0.219 & 0.600 \\
+   & 256 & RF  & 0.317 & 0.310 & 0.591 \\
 \hline
-IMDB-MULTI & 64  & RF  & 0.437 & 0.435 \\
-IMDB-MULTI & 128 & GB  & 0.427 & 0.426 \\
-IMDB-MULTI & 256 & SVM & 0.433 & 0.426 \\
+ & 64  & RF  & 0.437 & 0.435 & 0.601 \\
+IMDB-MULTI & 128 & GB  & 0.427 & 0.426 & 0.583 \\
+ & 256 & SVM & 0.433 & 0.426 & 0.599 \\
 \hline
 \end{tabular}
 \end{table}
+
 
 
 \begin{table}[t]
 \centering
-\caption{Best NetLSD classification results per dataset and embedding dimension. For each dataset--dimension pair, the classifier with the highest test accuracy is reported.}
+\caption{Best NetLSD classification results per dataset and embedding dimension. 
+For each dataset--dimension pair, the classifier with the highest test accuracy is reported.}
 \label{tab:netlsd_best}
-\begin{tabular}{l c c c c}
+\begin{tabular}{l c c c c c}
 \hline
-\textbf{Dataset} & \textbf{Dim} & \textbf{Model} & \textbf{Acc} & \textbf{F1} \\
+\textbf{Dataset} & \textbf{Dim} & \textbf{Model} & \textbf{Acc} & \textbf{F1} & \textbf{AUC} \\
 \hline
-MUTAG      & 64  & Ens & 0.895 & 0.892 \\
-MUTAG      & 128 & Ens & 0.868 & 0.867 \\
-MUTAG      & 256 & LR  & 0.868 & 0.867 \\
+     & 64  & Ens & 0.895 & 0.892 & 0.908 \\
+MUTAG      & 128 & Ens & 0.868 & 0.867 & 0.883 \\
+     & 256 & LR  & 0.868 & 0.867 & 0.929 \\
 \hline
-ENZYMES    & 64  & RF  & 0.300 & 0.302 \\
-ENZYMES    & 128 & RF  & 0.308 & 0.312 \\
-ENZYMES    & 256 & RF  & 0.325 & 0.324 \\
+   & 64  & RF  & 0.300 & 0.302 & 0.666 \\
+ENZYMES    & 128 & RF  & 0.308 & 0.312 & 0.653 \\
+    & 256 & RF  & 0.325 & 0.324 & 0.673 \\
 \hline
-IMDB-MULTI & 64  & SVM & 0.480 & 0.477 \\
-IMDB-MULTI & 128 & RF  & 0.463 & 0.465 \\
-IMDB-MULTI & 256 & RF  & 0.457 & 0.456 \\
+ & 64  & SVM & 0.480 & 0.477 & 0.625 \\
+IMDB-MULTI & 128 & RF  & 0.463 & 0.465 & 0.633 \\
+ & 256 & RF  & 0.457 & 0.456 & 0.648 \\
 \hline
 \end{tabular}
 \end{table}
+
+For the MUTAG, we can see that GIN excels in classification accuracy, but NetLSD provides 
+superior probabilistic separation as indicated by its higher AUC scores. 
+AUC slightly decreases with increasing dimensions for GIN, showing that 
+higher classification accuray does not always mean that the method 
+has confidence in its predictions. 
+So, our conclusion is that spectral info captured by NetLSD is beneficial for this dataset.
+For ENZYMES, the gap between GIN and the other two methods is clearer in all metrics.
+GIN clearly dominates here and AUC metric confirms that GIN is more confident in its predictions.
+For IMDB-MULTI, when node features are absent, GIN and NetLSD have similar behavior, with GIN slightly ahead.
+
+So overall, GIN is the most effective method and NetLSD is second best, 
+while Graph2Vec shows the weakest performance across all datasets and metrics.
+The results confirm that supervised GNNs provide the highest predictive power, while spectral descriptors such as 
+NetLSD remain surprisingly strong for unsupervised graph representation learning.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figures/HEATMAP_AVG_accuracy_bef.png}
+    \caption{Average accuracy heatmap across methods and embedding dimensions.}
+    \label{fig:heatmap}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figures/PARETO_AVG_acc_vs_compute_cost_bef.png}
+    \caption{Pareto frontier illustrating the trade-off between accuracy and normalized compute cost.}
+    \label{fig:pareto}
+\end{figure}
+
+\begin{figure*}[t]
+    \centering
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/gen_bef.png}
+        \caption{Embedding time}
+        \label{fig:embed_time}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/train_bef.png}
+        \caption{Training time}
+        \label{fig:train_time}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/mem_bef.png}
+        \caption{Peak memory}
+        \label{fig:peak_mem}
+    \end{subfigure}
+
+    \caption{Compute cost components as a function of embedding dimension. Bubble size indicates average accuracy.}
+    \label{fig:cost_breakdown}
+\end{figure*}
+
+
+
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=\linewidth]{figures/DUAL_AVG_acc_vs_compute_cost_bef.png}
+%     \caption{Accuracy and total compute cost versus embedding dimension (averaged across datasets).}
+%     \label{fig:acc_vs_cost}
+% \end{figure}
+
+
+
+The experimental results reveal clear trade offs between classification 
+accuracy and computational efficiency across GIN, Graph2Vec and NetLSD, 
+as illustrated in Figures~\ref{fig:heatmap}-\ref{fig:cost_breakdown}. All figures are computed with the 
+average results across the three dimensions and three datasets.
+We chose these 3 images (from the 39 we generated for the classification section) to summarize and make our conclusions.
+
+Figure~\ref{fig:heatmap} presents a heatmap of average accuracy across methods and embedding dimensions.
+We can confirm that GIN consistently outperforms the other two methods across all dimensions.
+
+The Pareto frontier in Figure~\ref{fig:pareto} highlights the balance between efficiency and performance.
+NetLSD lies on the left most side of the optimal region, meaning that it achieves reasonable accuracy with minimal compute cost.
+GIN dominates with its accuracy, but with a significantlt higher compute cost.
+Graph2Vec is at the lower part of the graph, showing both lower accuracy from both other methods  and higher compute cost, than NetLSD.
+From the same figure, we can see that GIN 
+benefits monotonically from increased embedding dimensionality, 
+achieving the highest average accuracy at 256 dimensions.
+In contrast, Graph2Vec and NetLSD reach their peak accuracy at 128 dimensions,
+beyond which performance declines, indicating diminishing returns with higher dimensions.
+
+Figure~\ref{fig:cost_breakdown} breaks down the compute cost into embedding time, training time and peak memory usage.
+Training time (Figure~\ref{fig:train_time}) is dominated by GIN and increases substantially with embedding dimension.
+Embedding time (Figure~\ref{fig:embed_time}) is highest for NetLSD at lower dimensions 
+due to its spectral computations but decreases at higher dim sizes.
+Peak memory usage (Figure~\ref{fig:peak_mem}) is highest for Graph2Vec,
+while NetLSD remains more memory efficient. 
+
+Tables ~\ref{tab:graph2vec_cluster_best}, ~\ref{tab:netlsd_cluster_best} and ~\ref{tab:gin_cluster_best} 
+are a compact version from the original clustering results tables.
+Best metrics are chosen based on highest ACC and silhouette as a tiebreaker.
+
+% \begin{table}[t]
+% \centering
+% \caption{Best Graph2Vec clustering results per dataset and embedding dimension. For each dataset--dimension pair, the clustering algorithm with the highest ACC is reported (ties broken by silhouette).}
+% \label{tab:graph2vec_cluster_best}
+% \begin{tabular}{l c c c c c c}
+% \hline
+% \textbf{Dataset} & \textbf{Dim} & \textbf{Alg} & \textbf{NMI} & \textbf{ARI} & \textbf{ACC} & \textbf{Sil} \\
+% \hline
+% MUTAG      & 64  & spectral & 0.048 & -0.019 & 0.532 & 0.285 \\
+% MUTAG      & 128 & kmeans   & 0.033 & -0.019 & 0.521 & 0.305 \\
+% MUTAG      & 256 & spectral & 0.037 & -0.027 & 0.511 & 0.315 \\
+% \hline
+% ENZYMES    & 64  & kmeans   & 0.027 & 0.006  & 0.223 & 0.205 \\
+% ENZYMES    & 128 & kmeans   & 0.030 & 0.010  & 0.220 & 0.283 \\
+% ENZYMES    & 256 & spectral & 0.021 & 0.005  & 0.220 & 0.210 \\
+% \hline
+% IMDB-MULTI & 64  & kmeans   & 0.013 & 0.011  & 0.402 & 0.506 \\
+% IMDB-MULTI & 128 & kmeans   & 0.011 & 0.010  & 0.399 & 0.552 \\
+% IMDB-MULTI & 256 & kmeans   & 0.011 & 0.010  & 0.400 & 0.584 \\
+% \hline
+% \end{tabular}
+% \end{table}
+
+\begin{table}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{Best Graph2Vec clustering per dataset and dimension (highest ACC; ties by Silhouette).}
+\label{tab:graph2vec_cluster_best}
+\begin{tabular}{l c c c c c c}
+\toprule
+\textbf{Data} & \textbf{Dim} & \textbf{Alg} & \textbf{NMI} & \textbf{ARI} & \textbf{ACC} & \textbf{Sil} \\
+\midrule
+ & 64  & spec & 0.048 & -0.019 & 0.532 & 0.285 \\
+   MUTAG     & 128 & km   & 0.033 & -0.019 & 0.521 & 0.305 \\
+       & 256 & spec & 0.037 & -0.027 & 0.511 & 0.315 \\
+\midrule
+    & 64  & km   & 0.027 & 0.006  & 0.223 & 0.205 \\
+   ENZ    & 128 & km   & 0.030 & 0.010  & 0.220 & 0.283 \\
+       & 256 & spec & 0.021 & 0.005  & 0.220 & 0.210 \\
+\midrule
+   & 64  & km   & 0.013 & 0.011  & 0.402 & 0.506 \\
+IMDB       & 128 & km   & 0.011 & 0.010  & 0.399 & 0.552 \\
+       & 256 & km   & 0.011 & 0.010  & 0.400 & 0.584 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+Graph2Vec shows the weakest clustering performance. Something we expected
+based on its classification results and its confidence in seperations (as seen from AUC scores).
+Wwith the low ACC scores and zero or negative ARI scores, 
+we can say that Graph2Vec has poor aligment with the true class labels.
+
+% \begin{table}[t]
+% \centering
+% \caption{Best NetLSD clustering results per dataset and embedding dimension. For each dataset--dimension pair, the clustering algorithm with the highest ACC is reported (ties broken by silhouette).}
+% \label{tab:netlsd_cluster_best}
+% \begin{tabular}{l c c c c c c}
+% \hline
+% \textbf{Dataset} & \textbf{Dim} & \textbf{Alg} & \textbf{NMI} & \textbf{ARI} & \textbf{ACC} & \textbf{Sil} \\
+% \hline
+% MUTAG      & 64  & kmeans   & 0.247 & 0.302 & 0.777 & 0.576 \\
+% MUTAG      & 128 & kmeans   & 0.247 & 0.302 & 0.777 & 0.576 \\
+% MUTAG      & 256 & kmeans   & 0.247 & 0.302 & 0.777 & 0.576 \\
+% \hline
+% ENZYMES    & 64  & spectral & 0.038 & 0.014 & 0.250 & 0.168 \\
+% ENZYMES    & 128 & spectral & 0.038 & 0.014 & 0.250 & 0.168 \\
+% ENZYMES    & 256 & spectral & 0.038 & 0.014 & 0.250 & 0.168 \\
+% \hline
+% IMDB-MULTI & 64  & kmeans   & 0.021 & 0.016 & 0.410 & 0.546 \\
+% IMDB-MULTI & 128 & kmeans   & 0.021 & 0.016 & 0.410 & 0.546 \\
+% IMDB-MULTI & 256 & kmeans   & 0.021 & 0.016 & 0.410 & 0.546 \\
+% \hline
+% \end{tabular}
+% \end{table}
+\begin{table}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{Best NetLSD clustering per dataset and dimension (highest ACC).}
+\label{tab:netlsd_cluster_best}
+\begin{tabular}{l c c c c c c}
+\toprule
+\textbf{Data} & \textbf{Dim} & \textbf{Alg} & \textbf{NMI} & \textbf{ARI} & \textbf{ACC} & \textbf{Sil} \\
+\midrule
+ & 64  & km & 0.247 & 0.302 & 0.777 & 0.576 \\
+MUTAG        & 128 & km & 0.247 & 0.302 & 0.777 & 0.576 \\
+       & 256 & km & 0.247 & 0.302 & 0.777 & 0.576 \\
+\midrule
+    & 64  & spec & 0.038 & 0.014 & 0.250 & 0.168 \\
+ENZ       & 128 & spec & 0.038 & 0.014 & 0.250 & 0.168 \\
+       & 256 & spec & 0.038 & 0.014 & 0.250 & 0.168 \\
+\midrule
+   & 64  & km & 0.021 & 0.016 & 0.410 & 0.546 \\
+IMDB       & 128 & km & 0.021 & 0.016 & 0.410 & 0.546 \\
+       & 256 & km & 0.021 & 0.016 & 0.410 & 0.546 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+NetLSD has the strongest clustering performance among the three methods.
+For MUTAG, it achieves high ACC and solid NMI and ARI scores indicating good alignment with true labels.
+For ENZYMES and IMDB-MULTI, it consistently outperforms Graph2Vec,
+though the overall clustering quality is moderate.  
+
+
+% \begin{table}[t]
+% \centering
+% \caption{Best GIN clustering results per dataset and embedding dimension. For each dataset--dimension pair, the configuration (including clustering algorithm) with the highest ACC is reported (ties broken by silhouette).}
+% \label{tab:gin_cluster_best}
+% \begin{tabular}{l c c c c c c}
+% \hline
+% \textbf{Dataset} & \textbf{Dim} & \textbf{Alg} & \textbf{NMI} & \textbf{ARI} & \textbf{ACC} & \textbf{Sil} \\
+% \hline
+% MUTAG      & 64  & kmeans   & 0.244 & 0.236 & 0.745 & 0.445 \\
+% MUTAG      & 128 & kmeans   & 0.209 & 0.176 & 0.713 & 0.406 \\
+% MUTAG      & 256 & kmeans   & 0.298 & 0.135 & 0.691 & 0.621 \\
+% \hline
+% ENZYMES    & 64  & spectral & 0.082 & 0.028 & 0.282 & 0.029 \\
+% ENZYMES    & 128 & spectral & 0.088 & 0.014 & 0.288 & 0.050 \\
+% ENZYMES    & 256 & spectral & 0.221 & 0.128 & 0.365 & 0.076 \\
+% \hline
+% IMDB-MULTI & 64  & spectral & 0.014 & 0.008 & 0.378 & -0.535 \\
+% IMDB-MULTI & 128 & spectral & 0.011 & 0.004 & 0.379 & -0.308 \\
+% IMDB-MULTI & 256 & spectral & 0.010 & 0.006 & 0.391 & -0.245 \\
+% \hline
+% \end{tabular}
+% \end{table}
+
+\begin{table}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{Best GIN clustering per dataset and dimension (highest ACC).}
+\label{tab:gin_cluster_best}
+\begin{tabular}{l c c c c c c}
+\toprule
+\textbf{Data} & \textbf{Dim} & \textbf{Alg} & \textbf{NMI} & \textbf{ARI} & \textbf{ACC} & \textbf{Sil} \\
+\midrule
+       & 64  & km   & 0.244 & 0.236 & 0.745 & 0.445 \\
+    MUTAG   & 128 & km   & 0.209 & 0.176 & 0.713 & 0.406 \\
+       & 256 & km   & 0.298 & 0.135 & 0.691 & 0.621 \\
+\midrule
+    & 64  & spec & 0.082 & 0.028 & 0.282 & 0.029 \\
+ENZ       & 128 & spec & 0.088 & 0.014 & 0.288 & 0.050 \\
+       & 256 & spec & 0.221 & 0.128 & 0.365 & 0.076 \\
+\midrule
+   & 64  & spec & 0.014 & 0.008 & 0.378 & -0.535 \\
+IMDB       & 128 & spec & 0.011 & 0.004 & 0.379 & -0.308 \\
+       & 256 & spec & 0.010 & 0.006 & 0.391 & -0.245 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+GIN creates mixed feelings here. The fact that is 
+a supervised representation makes it not optimal for clustering tasks, meaning for unsupervised tasks.
+GIN performs better than Graph2Vec, but worse than NetLSD.
+
+\subsection{After Permutation}
+
+So after the permutations we did where we explain in detail
+in the section \textit{V}, we present the stability results for each method in Tables ~\ref{tab:stability_gin_best_cos}, ~\ref{tab:stability_gin_best_l2} ~\ref{tab:stability_graph2vec} and ~\ref{tab:stability_netlsd}.
+
+
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{GIN embedding stability (best per dataset--dim by highest cosine mean, dropout = 0.0)}
+\label{tab:stability_gin_best_cos}
+\begin{tabular}{l c c c c c c}
+\hline
+\textbf{Data} & \textbf{D} & \textbf{LR} &
+\textbf{Cos} & \textbf{$\sigma$} &
+\textbf{L2} & \textbf{$\sigma$} \\
+\hline
+ & 64  & 1e-3 & 0.918 & 0.027 & 256 & 131 \\
+MUTAG & 128 & 1e-3 & 0.862 & 0.032 & 454 & 197 \\
+ & 256 & 1e-3 & 0.869 & 0.032 & 783 & 381 \\
+\hline
+   & 64  & 5e-4 & 0.817 & 0.041 & 1312 & 1965 \\
+ENZ   & 128 & 5e-4 & 0.783 & 0.040 & 1100 & 813 \\
+   & 256 & 5e-4 & 0.796 & 0.038 & 1804 & 1743 \\
+\hline
+ & 64  & 5e-4 & 0.664 & 0.070 & 117 & 160 \\
+IMDB  & 128 & 5e-4 & 0.671 & 0.072 & 138 & 259 \\
+  & 256 & 1e-3 & 0.666 & 0.066 & 182 & 363 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{GIN embedding stability (best per dataset--dim by lowest L2 mean, dropout = 0.4).}
+\label{tab:stability_gin_best_l2}
+\begin{tabular}{l c c c c c c}
+\hline
+\textbf{Data} & \textbf{D} & \textbf{LR} &
+\textbf{L2} & \textbf{$\sigma$} &
+\textbf{Cos} & \textbf{$\sigma$} \\
+\hline
+ & 64  & 5e-4 & 168 & 43  & 0.775 & 0.016 \\
+MUTAG & 128 & 1e-3 & 263 & 77  & 0.781 & 0.030 \\
+ & 256 & 5e-4 & 455 & 167 & 0.752 & 0.028 \\
+\hline
+   & 64  & 5e-4 & 402 & 457 & 0.563 & 0.056 \\
+ENZ   & 128 & 1e-3 & 483 & 1835& 0.297 & 0.085 \\
+  & 256 & 1e-3 & 460 & 1579& 0.126 & 0.080 \\
+\hline
+  & 64  & 1e-3 & 69  & 118 & 0.663 & 0.066 \\
+IMDB  & 128 & 1e-3 & 105 & 182 & 0.625 & 0.068 \\
+  & 256 & 1e-3 & 66  & 132 & 0.126 & 0.072 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+The stability behavior of GIN is strongly influenced by training configuration and dataset characteristics.
+When we optimize for max  cosine (closer to value ~1),
+we take models with dropout 0.0 and we have high cosine similarity values (0.66-0.91 range) 
+with gradually decreasing cosine similarity as dimensionality increases.
+However, the corresponding L2 distances are relatively large (ranging from ~100 to ~1800),
+meaning significant magnitude changes in embeddings despite relatively preserved directions.
+
+When we optimize for min L2 (closer to value ~0),
+we take models with dropout 0.4 and we have lower cosine similarity values (0.12-0.77 range),
+indicating more directional changes.
+However, the L2 distances are much smaller (ranging from ~66 to ~483), showing reduced magnitude changes.
+This inverse relationship between cosine similarity and L2 distance across configurations
+highlights the trade off between preserving direction versus magnitude in GIN embeddings under perturbations.
+
+
+
+
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Graph2Vec embedding stability under perturbations.}
+\label{tab:stability_graph2vec}
+\begin{tabular}{l c c c c c}
+\hline
+\textbf{Data} & \textbf{D} & \textbf{Cos} & \textbf{$\sigma$} & \textbf{L2} & \textbf{$\sigma$} \\
+\hline
+ & 64  & 0.899 & 0.018 & 0.133 & 0.052 \\
+MUTAG & 128 & 0.910 & 0.023 & 0.095 & 0.039 \\
+ & 256 & 0.899 & 0.027 & 0.068 & 0.027 \\
+\hline
+   & 64  & 0.825 & 0.029 & 0.603 & 0.138 \\
+ENZ   & 128 & 0.863 & 0.022 & 0.545 & 0.124 \\
+   & 256 & 0.896 & 0.020 & 0.487 & 0.117 \\
+\hline
+ & 64  & 0.719 & 0.062 & 0.672 & 0.325 \\
+IMDB  & 128 & 0.696 & 0.046 & 0.680 & 0.317 \\
+  & 256 & 0.661 & 0.025 & 0.691 & 0.323 \\
+\hline
+\end{tabular}
+\end{table}
+
+Graph2Vec shows strong stability across all datasets and dimensions.
+Cosine similarity has closer to 1 values and l2 distances are very small.
+This indicates that Graph2Vec embeddings are robust to structural and feature perturbations,
+maintaining both direction and magnitude.
+
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{NetLSD embedding stability under perturbations.}
+\label{tab:stability_netlsd}
+\begin{tabular}{l c c c c c}
+\hline
+\textbf{Data} & \textbf{D} & \textbf{Cos} & \textbf{$\sigma$} & \textbf{L2} & \textbf{$\sigma$} \\
+\hline
+ & 64  & -0.818 & 0.366 & 52.3 & 30.2 \\
+MUTAG & 128 & -0.818 & 0.366 & 52.3 & 30.2 \\
+ & 256 & 0.875  & 0.029 & 216  & 58.7 \\
+\hline
+   & 64  & 0.942 & 0.169 & 26.8 & 30.6 \\
+ENZ   & 128 & 0.942 & 0.169 & 26.8 & 30.6 \\
+   & 256 & 0.964 & 0.013 & 104  & 66.4 \\
+\hline
+ & 64  & 0.658 & 0.566 & 58.8 & 61.6 \\
+IMDB  & 128 & 0.658 & 0.566 & 58.8 & 61.6 \\
+  & 256 & 0.962 & 0.027 & 127  & 83.9 \\
+\hline
+\end{tabular}
+\end{table}
+
+Finally, NetLSD shows mixed stability results. We observe that with dim sizes 256,
+we have high cosine similarity values and in general small L2 distances (if we compare with GIN).
+However, at lower dimensions (64 and 128), cosine similarity drops significantly (except for ENZYMES), 
+even becoming negative for MUTAG. 
+L2 distances increase with dimensionality but remain moderate relative to GIN. 
+
+So, across the three methods, Graph2Vec is the king of stability,
+NetLSD achieves very strong stability only at higher dim sizes
+and GIN shows the most sensitivity to perturbations. 
+
+Executing again the classification task after perturbing the graphs ....
 

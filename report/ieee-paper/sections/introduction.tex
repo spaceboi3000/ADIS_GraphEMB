@@ -1,45 +1,35 @@
 
-\section{Introduction}Graphs are known to provide a powerful representation for complex relational data and are 
-widely used in domains such as network analysis, bioinformatics and chemistry. 
-In many scenarios, the learning task is defined at the graph level, such as classifying molecular graphs 
-by biological activity. However, graphs have irregular structure with different variable sizes, unordered nodes and 
-complex connectivity patterns, features that make them face challenges to traditional machine learning 
-algorithms, which typically work with fixed dimensional vector inputs. 
+\section{Introduction}
+Graphs are widely uses to model relationship and interactions
+in data from multiple domains such as network analysis, bioinformatics and chemistry.
+Many learning tasks are defined at the graph level. 
+However, graphs have irregular structure with different variable sizes, features that 
+make them face challenges to traditional machine learning algorithms. 
 
-Graph embedding methods address this challenge by mapping entire graphs into continuous vector representations that preserve the structural and semantic information of the graph 
-and this helps the ML techniques to work efficiently to downstream tasks, such as classification or clustering and even similarity search.
-As a result, graph embeddings have successfully become a core component for current graph based learning pipelines. 
-
-Early approaches relied on handcrafted features or graph kernels, which often suffer 
-from high computational complexity or limited expressiveness~\cite{shervashidze2011wl},~\cite{vishwanathan2010graphkernels}. 
+Graph embedding methods address this limitation by mapping entire graphs 
+into fixed size vector representations and 
+this helps the ML techniques to work efficiently to downstream tasks.
+Early approaches relied on handcrafted features or graph kernels 
+suffer from high computational complexity or limited expressiveness~\cite{shervashidze2011wl},~\cite{vishwanathan2010graphkernels}. 
 Now recent approaches automatically learn graph representations and can be categorized into unsupervised~\cite{narayanangraph2vec},~\cite{tsitsulin2018netlsd} 
-and supervised techniques~\cite{xu2019gin}. Unsupervised methods learn graph representations without relying on 
-labeled data exploiting often structural patterns. In this category belong Graph2Vec~\cite{narayanangraph2vec}, 
-which adapts the skipgram model to learn graph level embeddings from rooted substructures, 
-and NetLSD~\cite{tsitsulin2018netlsd}, which uses heat kernel signatures derived from the graph Laplacian to capture global 
-topological characteristics. On the other hand, supervised procedures, which are based on graph neural 
-networks (GNNS) [CITAITON], learn task specific embeddings through end-to-end training. 
-Among these, the Graph Isomorphism Network (GIN) [CITATION] has gained significant attention due to its 
-strong theoretical expressiveness. GIN can learn highly discriminative graph representations while achieving great performance on graph classification benchmarks. 
-However, choosing this type of procedure typically comes with the cost of increased computational complexity, higher memory consumption and the need for labeled training data, which is often not provided to us.
+and supervised techniques~\cite{xu2019gin}. 
+
+Despite their success, supervised methods require labeled data 
+and often involve higher computational costs due to iterative training.
+While unsupervised methods are often more efficient and label free. 
+However, comparisons between these two remain limited, especially 
+on small benchmark datasets where robustness and efficiency are critical~\cite{errica2019fairgnn,dwivedi2020benchmarking}..
 
 
-Despite the development of graph embedding techniques [CITATIONS], 
-comparisons between unsupervised and supervised methods remain limited[CITATIONS]. 
-Many existing studies focus primarly on classification accuracy and overlooking significant considerations such as computational cost, 
-embedding dimensionality and robustness to structural permutations. 
-These are critical when working with real world small datasets (EMB1), 
-where overfitting, instability and minimum training data can easily affect the model's performance.
+In this work, we focus on EMB1 and we compare unsupervised and supervised 
+graph embedding methods on small benchmark datasets from TUDataset. 
+We evaluate Graph2Vec, NetLSD and GIN under a unified experimental 
+franework, focusing not only on classification performance 
+but also on clustering quality, computational cost and stability to structural perturbations.
 
-In this work, we focus on EMB1 and we evaluate and compare unsupervised and supervised graph embedding methods on small benchmark datasets from the TUDataset collection: MUTAG, ENZYMES, and IMDB-MULTI. 
-Studying small datasets is as meaningful as big ones, as they represent realistic scenarios in domains such as chemistry and biology, where labeled data is costly to obtain and sometimes no where to be found and model robustness is essential. 
-From the unsupervised category, we use Graph2Vec and NetLSD and from the supervised GIN. 
-To ensure fairness, all methods are evaluated using a unified experimental pipeline with minimal difference from GIN. The evaluation extends beyond standard classification and includes clustering behavior, 
-computational efficiency and stability under random perturbations in the graphs structure.
-
-The main contributions are summarized as follows:
+Our contributions are summarized as follows:
 \begin{itemize}
-    \item We present a comparative evaluation of unsupervised and supervised whole-graph embedding methods on widely used real-world datasets,
-    \item We analyze the trade-off between classification accuracy and computational cost, highlighting practical considerations for method selection, 
-    \item We perform a stability analysis under structural permutations, assessing the robustness of different embedding paradigms
+    \item A comparative study of unsupervised and supervised graph embedding methods on small datasets
+    \item An analysis of performance–efficiency trade offs, and
+    \item An evaluation of embedding robustness under structural perturbations. 
 \end{itemize}
