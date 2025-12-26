@@ -19,57 +19,96 @@ will be very close in the learned vector space.
 
 % These subgraphs are extracted using the Weisfeiler Lehman (WL) relabeling process and in order to train the skipgram model it is being assigned a unique label for all the rooted subgraphs in the vocabulary.
 % So the graph2vec's algorithm first generate those rooted subgraphs around every node in a given graph and then learns embeddings of the given graphs.
-The Graph2Vec's algorithm is shown below (from original paper):
-\begin{algorithm}[H]
+The Graph2Vec's algorithm is shown below:
+% \begin{algorithm}[H]
+% \caption{Graph2Vec}
+% \label{alg:graph2vec}
+% \begin{algorithmic}[1]
+% \Require 
+% $\mathcal{G} = \{G_1, G_2, \dots, G_{|\mathcal{G}|}\}$: set of graphs, where each $G_i = (N_i, E_i, \lambda_i)$ \\
+% $D$: maximum WL depth \\
+% $\delta$: embedding dimension \\
+% $e$: number of epochs \\
+% $\alpha$: learning rate
+% \Ensure 
+% Graph embedding matrix $\Phi \in \mathbb{R}^{|\mathcal{G}| \times \delta}$
+
+% \State Initialize $\Phi \sim \mathcal{U}(-0.5/\delta, 0.5/\delta)$
+% \For{$epoch = 1$ to $e$}
+%     \State Shuffle $\mathcal{G}$
+%     \For{each graph $G_i \in \mathcal{G}$}
+%         \For{each node $n \in N_i$}
+%             \For{$d = 0$ to $D$}
+%                 \State $sg \gets \textsc{GetWLSubgraph}(n, G_i, d)$
+%                 \State Update $\Phi_i$ using Skip-Gram with learning rate $\alpha$
+%             \EndFor
+%         \EndFor
+%     \EndFor
+% \EndFor
+% \State \Return $\Phi$
+% \end{algorithmic}
+% \end{algorithm}
+\begin{algorithm}[t]
+\footnotesize
 \caption{Graph2Vec}
 \label{alg:graph2vec}
 \begin{algorithmic}[1]
-\Require 
-$\mathcal{G} = \{G_1, G_2, \dots, G_{|\mathcal{G}|}\}$: set of graphs, where each $G_i = (N_i, E_i, \lambda_i)$ \\
-$D$: maximum WL depth \\
-$\delta$: embedding dimension \\
-$e$: number of epochs \\
-$\alpha$: learning rate
-\Ensure 
-Graph embedding matrix $\Phi \in \mathbb{R}^{|\mathcal{G}| \times \delta}$
+\Require Graph set $\mathcal{G}$, WL depth $D$, dim $\delta$, epochs $e$, lr $\alpha$
+\Ensure Graph embeddings $\Phi \in \mathbb{R}^{|\mathcal{G}| \times \delta}$
 
 \State Initialize $\Phi \sim \mathcal{U}(-0.5/\delta, 0.5/\delta)$
-\For{$epoch = 1$ to $e$}
-    \State Shuffle $\mathcal{G}$
-    \For{each graph $G_i \in \mathcal{G}$}
-        \For{each node $n \in N_i$}
-            \For{$d = 0$ to $D$}
-                \State $sg \gets \textsc{GetWLSubgraph}(n, G_i, d)$
-                \State Update $\Phi_i$ using Skip-Gram with learning rate $\alpha$
-            \EndFor
-        \EndFor
+\For{$epoch=1$ to $e$}
+  \State Shuffle $\mathcal{G}$
+  \For{each $G_i \in \mathcal{G}$}
+    \For{$d=0$ to $D$}
+      \For{each node $n \in G_i$}
+        \State $sg \gets \textsc{WLSubgraph}(n,G_i,d)$
+        \State Update $\Phi_i$ via Skip-Gram($sg,\alpha$)
+      \EndFor
     \EndFor
+  \EndFor
 \EndFor
 \State \Return $\Phi$
 \end{algorithmic}
 \end{algorithm}
 
 
-\begin{algorithm}[H]
-\caption{GetWLSubgraph}
+% \begin{algorithm}[H]
+% \caption{GetWLSubgraph}
+% \label{alg:getwlsubgraph}
+% \begin{algorithmic}[1]
+% \Require 
+% $n$: root node \\
+% $G = (N, E, \lambda)$: input graph \\
+% $d$: WL iteration depth
+% \Ensure 
+% Rooted subgraph label $sg$
+
+% \State $sg \gets \lambda(n)$
+% \For{$i = 1$ to $d$}
+%     \State Collect multiset of neighbor labels of $n$
+%     \State Concatenate and hash labels
+%     \State Update $sg$
+% \EndFor
+% \State \Return $sg$
+% \end{algorithmic}
+% \end{algorithm}
+\begin{algorithm}[t]
+\footnotesize
+\caption{WLSubgraph}
 \label{alg:getwlsubgraph}
 \begin{algorithmic}[1]
-\Require 
-$n$: root node \\
-$G = (N, E, \lambda)$: input graph \\
-$d$: WL iteration depth
-\Ensure 
-Rooted subgraph label $sg$
+\Require Node $n$, graph $G=(N,E,\lambda)$, depth $d$
+\Ensure Rooted subgraph label $sg$
 
 \State $sg \gets \lambda(n)$
-\For{$i = 1$ to $d$}
-    \State Collect multiset of neighbor labels of $n$
-    \State Concatenate and hash labels
-    \State Update $sg$
+\For{$i=1$ to $d$}
+  \State $sg \gets \text{hash}\big(sg \,\|\, \{\lambda(u): u \in \mathcal{N}(n)\}\big)$
 \EndFor
 \State \Return $sg$
 \end{algorithmic}
 \end{algorithm}
+
 
 So analytically, Graph2Vec first applies the Weisfeiler-Lehman (WL) relabeling process in order to extract rooted subgraphs around each node up to a specified depth $D$ (Algorithm~\ref{alg:getwlsubgraph}).
 Then, it creates a vocabulary called \textit{bag of subgraphs} containing all rooted subgraphs. This vocabulary is formed by collecting the multiset of rooted subgraphs obtained across WL iterations for all graphs.
@@ -82,35 +121,59 @@ Its main idea is that every graph has a Laplacian matrix whose eigenvalues encod
 Instead of directly using the raw eigenvalues, it summarizes them using diffusion process, specifically the Heat Kernel.
 
 
-The NetLSD's algorithm is shown below (not from original paper):
+The NetLSD's algorithm is shown below:
 
-\begin{algorithm}[H]
-\caption{NetLSD (Heat Trace Graph Signature)}
+% \begin{algorithm}[H]
+% \caption{NetLSD (Heat Trace Graph Signature)}
+% \label{alg:netlsd}
+% \begin{algorithmic}[1]
+% \Require Graph $G=(V,E)$
+% \Require $T = \{t_1,\dots,t_K\}$: set of time scales (log-spaced)
+% \Require $\mathcal{L}$: Laplacian type (\emph{normalized} or \emph{combinatorial})
+% \Require $m$: number of eigenvalues to use (optional; $m=|V|$ for exact)
+% \Ensure Signature vector $s \in \mathbb{R}^{K}$ (optionally normalized)
+
+% \State Construct adjacency matrix $A$ of $G$ and degree matrix $D$
+% \If{$\mathcal{L}$ is normalized}
+%     \State $L \gets I - D^{-1/2} A D^{-1/2}$
+% \Else
+%     \State $L \gets D - A$
+% \EndIf
+
+% \State Compute smallest $m$ eigenvalues $\{\lambda_1,\dots,\lambda_m\}$ of $L$
+% \For{$k \gets 1$ to $K$}
+%     \State $s_k \gets \sum_{i=1}^{m} \exp(-t_k \lambda_i)$ \Comment{heat trace}
+% \EndFor
+
+% \State $s \gets \log(s)$ \Comment{optional but common (stabilizes scale)}
+% \State $s \gets \textsc{Normalize}(s)$ \Comment{e.g., $s/\|s\|_2$ (optional)}
+% \State \Return $s$
+% \end{algorithmic}
+% \end{algorithm}
+\begin{algorithm}[t]
+\footnotesize
+\caption{NetLSD (Heat Trace Signature)}
 \label{alg:netlsd}
 \begin{algorithmic}[1]
-\Require Graph $G=(V,E)$
-\Require $T = \{t_1,\dots,t_K\}$: set of time scales (log-spaced)
-\Require $\mathcal{L}$: Laplacian type (\emph{normalized} or \emph{combinatorial})
-\Require $m$: number of eigenvalues to use (optional; $m=|V|$ for exact)
-\Ensure Signature vector $s \in \mathbb{R}^{K}$ (optionally normalized)
+\Require Graph $G=(V,E)$, times $T=\{t_k\}_{k=1}^K$, Laplacian type $\mathcal{L}$, eigenvalues $m$
+\Ensure Graph signature $s \in \mathbb{R}^K$
 
-\State Construct adjacency matrix $A$ of $G$ and degree matrix $D$
-\If{$\mathcal{L}$ is normalized}
-    \State $L \gets I - D^{-1/2} A D^{-1/2}$
-\Else
-    \State $L \gets D - A$
-\EndIf
+\State Build adjacency $A$ and degree $D$
+\State $L \gets \begin{cases}
+I - D^{-1/2}AD^{-1/2}, & \mathcal{L}=\text{norm} \\
+D-A, & \mathcal{L}=\text{comb}
+\end{cases}$
 
-\State Compute smallest $m$ eigenvalues $\{\lambda_1,\dots,\lambda_m\}$ of $L$
-\For{$k \gets 1$ to $K$}
-    \State $s_k \gets \sum_{i=1}^{m} \exp(-t_k \lambda_i)$ \Comment{heat trace}
+\State Compute smallest $m$ eigenvalues $\{\lambda_i\}_{i=1}^m$ of $L$
+\For{$k=1$ to $K$}
+  \State $s_k \gets \sum_{i=1}^m e^{-t_k\lambda_i}$
 \EndFor
-
-\State $s \gets \log(s)$ \Comment{optional but common (stabilizes scale)}
-\State $s \gets \textsc{Normalize}(s)$ \Comment{e.g., $s/\|s\|_2$ (optional)}
+\State $s \gets \log(s)$ \Comment{optional}
+\State $s \gets \textsc{Normalize}(s)$ \Comment{optional}
 \State \Return $s$
 \end{algorithmic}
 \end{algorithm}
+
 
 The key advantage of this method lies in its permutation invariance and scalability as we will explore and confirm later..
 To improve computational efficiency, it approximates the Laplacian eigenvalue distribution using stochastic trace estimation and so it avoids full eigendecomposition.
@@ -128,59 +191,93 @@ In contrast to unsupervised methods, GIN learns task specific embeddings optimiz
 While this leads to great performances, it requires labeled datasets (which is difficult to obtain) 
 and needs higher computational cost because it's iterative training.
 
-It's algorithm is shown below (not from original paper):
-\begin{algorithm}[H]
-\caption{GIN Forward Pass (Graph Embedding)}
+It's algorithm is shown below:
+% \begin{algorithm}[H]
+% \caption{GIN Forward Pass (Graph Embedding)}
+% \label{alg:gin_forward}
+% \begin{algorithmic}[1]
+% \Require Graph $G=(V,E)$, node features $\{h_v^{(0)}\}_{v\in V}$
+% \Require $L$: number of GIN layers
+% \Require $\{\epsilon^{(k)}\}_{k=1}^{L}$: learnable or fixed scalars
+% \Require $\{\textsc{MLP}^{(k)}\}_{k=1}^{L}$: layer-wise MLPs
+% \Require \textsc{READOUT}: permutation-invariant pooling (sum/mean/max)
+% \Ensure Graph embedding $z_G$
+
+% \For{$k \gets 1$ to $L$}
+%     \ForAll{$v \in V$}
+%         \State $m_v^{(k)} \gets \sum_{u \in \mathcal{N}(v)} h_u^{(k-1)}$
+%         \State $h_v^{(k)} \gets \textsc{MLP}^{(k)}\!\Big((1+\epsilon^{(k)})\,h_v^{(k-1)} + m_v^{(k)}\Big)$
+%     \EndFor
+% \EndFor
+
+% \State $z_G \gets \textsc{READOUT}\big(\{h_v^{(L)}\}_{v\in V}\big)$
+% \State \Return $z_G$
+% \end{algorithmic}
+% \end{algorithm}
+
+% \begin{algorithm}[H]
+% \caption{Training a GIN for Graph Classification}
+% \label{alg:gin_train}
+% \begin{algorithmic}[1]
+% \Require Dataset $\mathcal{D}=\{(G_i,y_i)\}_{i=1}^{N}$
+% \Require $L$: number of layers, epochs $E$, learning rate $\alpha$, batch size $B$
+% \Require Loss function $\ell(\cdot,\cdot)$ (e.g., cross-entropy)
+% \Ensure Trained parameters $\Theta$ of GIN + classifier
+
+% \State Initialize model parameters $\Theta$
+% \For{$epoch \gets 1$ to $E$}
+%     \State Shuffle $\mathcal{D}$
+%     \For{each mini-batch $\mathcal{B} \subset \mathcal{D}$ of size $B$}
+%         \ForAll{$(G,y) \in \mathcal{B}$}
+%             \State $z_G \gets \textsc{GINForward}(G)$ \Comment{Alg.~\ref{alg:gin_forward}}
+%             \State $\hat{y} \gets \textsc{Classifier}(z_G)$
+%         \EndFor
+%         \State $\mathcal{L} \gets \frac{1}{|\mathcal{B}|}\sum_{(G,y)\in\mathcal{B}} \ell(\hat{y},y)$
+%         \State Update $\Theta \gets \Theta - \alpha \nabla_{\Theta}\mathcal{L}$ \Comment{e.g., Adam}
+%     \EndFor
+% \EndFor
+% \State \Return $\Theta$
+% \end{algorithmic}
+% \end{algorithm}
+
+\begin{algorithm}[t]
+\footnotesize
+\caption{GIN Forward Pass}
 \label{alg:gin_forward}
 \begin{algorithmic}[1]
-\Require Graph $G=(V,E)$, node features $\{h_v^{(0)}\}_{v\in V}$
-\Require $L$: number of GIN layers
-\Require $\{\epsilon^{(k)}\}_{k=1}^{L}$: learnable or fixed scalars
-\Require $\{\textsc{MLP}^{(k)}\}_{k=1}^{L}$: layer-wise MLPs
-\Require \textsc{READOUT}: permutation-invariant pooling (sum/mean/max)
+\Require Graph $G=(V,E)$, node features $\{h_v^{(0)}\}$, layers $L$
 \Ensure Graph embedding $z_G$
 
-\For{$k \gets 1$ to $L$}
-    \ForAll{$v \in V$}
-        \State $m_v^{(k)} \gets \sum_{u \in \mathcal{N}(v)} h_u^{(k-1)}$
-        \State $h_v^{(k)} \gets \textsc{MLP}^{(k)}\!\Big((1+\epsilon^{(k)})\,h_v^{(k-1)} + m_v^{(k)}\Big)$
-    \EndFor
+\For{$k=1$ to $L$}
+  \ForAll{$v \in V$}
+    \State $h_v^{(k)} \gets \textsc{MLP}^{(k)}\!\Big((1+\epsilon^{(k)})h_v^{(k-1)}
+    + \sum_{u\in\mathcal{N}(v)} h_u^{(k-1)}\Big)$
+  \EndFor
 \EndFor
-
-\State $z_G \gets \textsc{READOUT}\big(\{h_v^{(L)}\}_{v\in V}\big)$
+\State $z_G \gets \textsc{READOUT}(\{h_v^{(L)}\})$
 \State \Return $z_G$
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]
-\caption{Training a GIN for Graph Classification}
+\begin{algorithm}[t]
+\footnotesize
+\caption{Training GIN}
 \label{alg:gin_train}
 \begin{algorithmic}[1]
-\Require Dataset $\mathcal{D}=\{(G_i,y_i)\}_{i=1}^{N}$
-\Require $L$: number of layers, epochs $E$, learning rate $\alpha$, batch size $B$
-\Require Loss function $\ell(\cdot,\cdot)$ (e.g., cross-entropy)
-\Ensure Trained parameters $\Theta$ of GIN + classifier
+\Require Dataset $\mathcal{D}$, epochs $E$, lr $\alpha$, batch size $B$
+\Ensure Trained parameters $\Theta$
 
-\State Initialize model parameters $\Theta$
-\For{$epoch \gets 1$ to $E$}
-    \State Shuffle $\mathcal{D}$
-    \For{each mini-batch $\mathcal{B} \subset \mathcal{D}$ of size $B$}
-        \ForAll{$(G,y) \in \mathcal{B}$}
-            \State $z_G \gets \textsc{GINForward}(G)$ \Comment{Alg.~\ref{alg:gin_forward}}
-            \State $\hat{y} \gets \textsc{Classifier}(z_G)$
-        \EndFor
-        \State $\mathcal{L} \gets \frac{1}{|\mathcal{B}|}\sum_{(G,y)\in\mathcal{B}} \ell(\hat{y},y)$
-        \State Update $\Theta \gets \Theta - \alpha \nabla_{\Theta}\mathcal{L}$ \Comment{e.g., Adam}
+\State Initialize $\Theta$
+\For{$epoch=1$ to $E$}
+  \For{mini-batch $\mathcal{B}\subset\mathcal{D}$}
+    \ForAll{$(G,y)\in\mathcal{B}$}
+      \State $z_G \gets \textsc{GINForward}(G)$
+      \State $\hat y \gets \textsc{Classifier}(z_G)$
     \EndFor
+    \State $\mathcal{L}\!\gets\!\frac{1}{|\mathcal{B}|}\!\sum\ell(\hat y,y)$
+    \State Update $\Theta$ (e.g., Adam)
+  \EndFor
 \EndFor
 \State \Return $\Theta$
 \end{algorithmic}
 \end{algorithm}
-
-% \subsection{Implementation Details}
-% We implemented Graph2Vec and NetLSD using the KarateClub library~\cite{karateclub}, 
-% while GIN was implemented using PyTorch Geometric~\cite{fey2019pyg}. 
-% For all methods, we experimented with embedding dimensions of 64, 128, and 256. 
-
-
-
