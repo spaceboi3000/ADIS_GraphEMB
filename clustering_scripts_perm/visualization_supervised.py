@@ -14,13 +14,13 @@ import umap  # pip install umap-learn
 
 DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
 
-GIN_OUT_ROOT = Path("../embeddings/embeddings_gin")
+GIN_OUT_ROOT = Path("../permutated_embeddings/embeddings_gin")
 METHOD_NAME = "GIN"
 
 SPLITS = ["train", "val", "test"]  
 
 
-VIS_BASE = Path("./cluster_visualizations")
+VIS_BASE = Path("./perm_cluster_visualizations")
 VIS_BASE.mkdir(exist_ok=True)
 
 RANDOM_STATE = 42

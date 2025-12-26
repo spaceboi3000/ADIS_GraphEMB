@@ -18,7 +18,7 @@ from scipy.optimize import linear_sum_assignment
 # ================== CONFIG ==================
 DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
 
-GIN_OUT_ROOT = Path("../embeddings/embeddings_gin")
+GIN_OUT_ROOT = Path("../permutated_embeddings/embeddings_gin")
 
 METHOD_NAME = "GIN"
 SPLITS = ["train", "val", "test"] 
