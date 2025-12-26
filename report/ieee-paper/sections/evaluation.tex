@@ -26,7 +26,8 @@ while supervised GIN follows its own supervised training protocol for the classi
 Performance for this task is reported using Accuracy, F1 score and AUC with extra computational measurments such as training time, generation time and
 peak tracemalloc mb, rss before mb, rss after mb, meaning memory usage during training. 
 In addition we study the influence of different embedding dimensionality evaluating on the different dim sizes as we mentioned in earlier section (64, 128 and 256).
-
+We thought to use smaller dimensions to reduce computational cost and memory usage, but we observed that with higher dims, we get better 
+results as we will see in the results section.
 
 \subsection{Classification Using Unsupervised Embeddings}
 For each dataset and embedding dim we load each graph's embedding from CSV files.
@@ -109,6 +110,9 @@ To quality how much the embeddings have changed, we use two complementary measur
 
 For each dataset, method and config, we report mean, median, and standard deviation of cosine similarity and L2 distance and then 
 we compare its method in order to obseved somehow any difference in the stabilization logic.
+In general, cosine similarity is usually better for stability. It measures directional consistensy,
+while L2 mixes direction and scale. Two embeddings can be semantically indentical 
+but far apart in L2. 
 
 After computing the above stability analysis, we further evaluate the practical impact 
 of graph perturbations by repeating the classification and clustering experiments on the perturbed datasets

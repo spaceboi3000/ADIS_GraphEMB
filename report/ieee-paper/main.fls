@@ -85,6 +85,8 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/textcomp.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/textcomp.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty
@@ -364,6 +366,7 @@ INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx10.pfb
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx7.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx8.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx9.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb
@@ -371,6 +374,7 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmex10.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi10.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi7.pfb
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi8.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr10.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr17.pfb
