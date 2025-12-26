@@ -81,7 +81,19 @@ The number of layers for MUTAG is set to 5 and for ENZYMES to 6.
 This hyperparameter exploration allows us to analyze how architectural depth, embedding dimensionality 
 and regularization affect both classification accuracy and the quality of the learned graph embeddings. 
 The results of these experiments are presented and discussed in section \textit{VI}.
+
 \subsection{Clustering Evaluation}
+In order to study the differences between different embedding methods, we performed clustering of the embedded graphs.
+Clustering performance is primarily defined by how well an embedding preserves graph-to-graph distances in the absence of label supervision.
+Embeddings that encode global structural properties are expected to perform better at clustering than those optimized for discriminative classification.
+
+The graph2vec method emphasizes on local rooted substructures treating graphs as unorderdered colections of neighborhood patterns. 
+This method is effective  for capturing local similarities while it lacks a mechanism for representing global structures. 
+On the contrary NetLSD embeds grpahs using spectral summaries of the Laplacian, which are permutation invariant and capture global diffusion behaviour.
+Such characteristics are well suited for clustering. This exlplains why NetLSD consitently forms semantically coherent clusters despite being label-free.
+GIN embeddings are designed to maximise separablity rather than maintaining inter-graph distances. Consequently embeddings using GIN perform poorly during 
+clustering.
+The theoretic differences are  clearly represented below: >>>>>>> ?????
 
 \subsection{Clustering for Unsupervised Embeddings}
 

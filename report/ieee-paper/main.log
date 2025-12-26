@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (TeX Live 2023)  (format=lualatex 2025.11.3)  26 DEC 2025 23:53
+This is LuaHBTeX, Version 1.17.0 (TeX Live 2023)  (format=lualatex 2025.11.3)  27 DEC 2025 00:20
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/home/nick/Uni/ADIS_GraphEMB/report/ieee-paper/main.tex
@@ -550,43 +550,48 @@ Underfull \hbox (badness 1371) in paragraph at lines 6--10
 \TU/ptm/bx/it/10 datasets from TU-Dataset: MU-TAG, EN-ZYMES, and
  []
 
-[2]) (./sections/evaluation.tex [3]) (./sections/results.tex
+[2]) (./sections/evaluation.tex [3]
+Underfull \vbox (badness 2635) has occurred while \output is active []
+
+) (./sections/results.tex [4]
 Underfull \hbox (badness 1881) in paragraph at lines 12--12
 []\TU/ptm/bx/it/10 TA-BLE I: |GIN clas-si-fi-ca-tion per-for-mance on EMB1
  []
 
-[4]
-<figures/HEATMAP_AVG_accuracy_bef.png, id=182, 917.1063pt x 423.7431pt>
+<figures/HEATMAP_AVG_accuracy_bef.png, id=178, 917.1063pt x 423.7431pt>
 File: figures/HEATMAP_AVG_accuracy_bef.png Graphic file (type png)
 <use figures/HEATMAP_AVG_accuracy_bef.png>
 Package luatex.def Info: figures/HEATMAP_AVG_accuracy_bef.png  used on input line 101.
 (luatex.def)             Requested size: 252.0pt x 116.43594pt.
-<figures/PARETO_AVG_acc_vs_compute_cost_bef.png, id=183, 1002.6258pt x 423.7431pt>
+<figures/PARETO_AVG_acc_vs_compute_cost_bef.png, id=179, 1002.6258pt x 423.7431pt>
 File: figures/PARETO_AVG_acc_vs_compute_cost_bef.png Graphic file (type png)
 <use figures/PARETO_AVG_acc_vs_compute_cost_bef.png>
 Package luatex.def Info: figures/PARETO_AVG_acc_vs_compute_cost_bef.png  used on input line 108.
 (luatex.def)             Requested size: 252.0pt x 106.5045pt.
-<figures/gen_bef.png, id=184, 464.73625pt x 359.3425pt>
+<figures/gen_bef.png, id=180, 464.73625pt x 359.3425pt>
 File: figures/gen_bef.png Graphic file (type png)
 <use figures/gen_bef.png>
 Package luatex.def Info: figures/gen_bef.png  used on input line 117.
 (luatex.def)             Requested size: 165.12378pt x 127.6744pt.
-<figures/train_bef.png, id=185, 464.73625pt x 359.3425pt>
+<figures/train_bef.png, id=181, 464.73625pt x 359.3425pt>
 File: figures/train_bef.png Graphic file (type png)
 <use figures/train_bef.png>
 Package luatex.def Info: figures/train_bef.png  used on input line 124.
 (luatex.def)             Requested size: 165.12378pt x 127.6744pt.
-<figures/mem_bef.png, id=186, 464.73625pt x 359.3425pt>
+<figures/mem_bef.png, id=182, 464.73625pt x 359.3425pt>
 File: figures/mem_bef.png Graphic file (type png)
 <use figures/mem_bef.png>
 Package luatex.def Info: figures/mem_bef.png  used on input line 131.
 (luatex.def)             Requested size: 165.12378pt x 127.6744pt.
-
+[5<./figures/HEATMAP_AVG_accuracy_bef.png>]
 Underfull \hbox (badness 3690) in paragraph at lines 283--287
 []\TU/ptm/bx/it/10 NetLSD has the strongest clus-ter-ing per-for-mance
  []
 
-[5<./figures/HEATMAP_AVG_accuracy_bef.png><./figures/PARETO_AVG_acc_vs_compute_cost_bef.png>] [6<./figures/gen_bef.png><./figures/train_bef.png><./figures/mem_bef.png>]) (./sections/references.tex)
+) (./sections/references.tex
+Underfull \vbox (badness 4660) has occurred while \output is active []
+
+ [6<./figures/PARETO_AVG_acc_vs_compute_cost_bef.png>])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -598,7 +603,7 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[7] (./main.aux)
+[7<./figures/gen_bef.png><./figures/train_bef.png><./figures/mem_bef.png>] (./main.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -611,15 +616,15 @@ Here is how much of LuaTeX's memory you used:
  195340,1977958 words of node,token memory allocated
  531 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 14 attribute, 55 glue_spec, 14 attribute_list, 1 write nodes
-   avail lists: 1:2,2:2609,3:611,4:284,5:951,6:153,7:16435,8:47,9:1390,10:19,11:1400
+   avail lists: 1:1,2:3104,3:612,4:284,5:951,6:153,7:16435,8:47,9:1441,10:19,11:1400
  33578 multiletter control sequences out of 65536+600000
  85 fonts using 8244151 bytes
  77i,12n,77p,851b,522s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman8-italic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman7-bold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman9-regular.otf>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman8-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman8-bold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmromancaps10-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman9-bold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-bolditalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman17-regular.otf></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (7 pages, 885844 bytes).
+</usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman8-italic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman9-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman7-bold.otf>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman8-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman8-bold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmromancaps10-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman9-bold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-bolditalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmroman17-regular.otf></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (7 pages, 886982 bytes).
 
-PDF statistics: 379 PDF objects out of 1000 (max. 8388607)
- 300 compressed objects within 3 object streams
+PDF statistics: 378 PDF objects out of 1000 (max. 8388607)
+ 299 compressed objects within 3 object streams
  62 named destinations out of 1000 (max. 131072)
  177 words of extra memory for PDF output out of 10000 (max. 100000000)
 
