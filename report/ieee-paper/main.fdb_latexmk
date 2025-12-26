@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1766774981.65686 "/Users/nodys/Desktop/ADIS/ADIS_GraphEMB/report/ieee-paper/main.tex" "main.pdf" "main" 1766774983.32685 0
+["pdflatex"] 1766776897.11895 "/Users/nodys/Desktop/ADIS/ADIS_GraphEMB/report/ieee-paper/main.tex" "main.pdf" "main" 1766776899.05277 0
   "/Users/nodys/Desktop/ADIS/ADIS_GraphEMB/report/ieee-paper/main.tex" 1766352680.02031 570 b7485eb60061d083220e9ab8d40872b9 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -148,8 +148,8 @@
   "figures/gen_bef.png" 1766697905.50289 142663 3506b3ed7145bc91bd22d1ad4d67ca68 ""
   "figures/mem_bef.png" 1766697905.50924 165571 aef165e3480b668bb3ca95c06624193d ""
   "figures/train_bef.png" 1766697905.51917 159882 e26c0cfff81989cf0c26175007316787 ""
-  "main.aux" 1766774983.20705 10320 446d67f5c65559089cb515d777abe0ed "pdflatex"
-  "main.out" 1766774983.2081 3149 2961b66945003c9e0fe0d1be1cfd7fb6 "pdflatex"
+  "main.aux" 1766776898.91294 10088 6261a06d557266899f87f82dc2b813a6 "pdflatex"
+  "main.out" 1766776898.91384 3149 2961b66945003c9e0fe0d1be1cfd7fb6 "pdflatex"
   "main.tex" 1766352680.02031 570 b7485eb60061d083220e9ab8d40872b9 ""
   "preamble/colors.tex" 1766321185.1701 52 fb09043011d5d6d63b044cef92136425 ""
   "preamble/fonts.tex" 1766321185.17017 109 c3577f62c0f85a878ed0aced786b0025 ""
@@ -157,12 +157,12 @@
   "preamble/packages.tex" 1766774406.17767 352 717d874b5df43125d704e99516f567f3 ""
   "sections/datasets.tex" 1766661578.96874 1944 c04bb43af4854532fedfca36fb17e30b ""
   "sections/evaluation.tex" 1766774895.93804 8888 669c0f509057ea1678e785391e6863e7 ""
-  "sections/introduction.tex" 1766774981.45397 4157 2beda39b02872f46c5f0b7378444bf28 ""
-  "sections/methods.tex" 1766774888.19159 8485 98bc570bb56a80323393dcb1350b7bd4 ""
+  "sections/introduction.tex" 1766776591.43356 2066 0c9a7b20fc7a343d04f833ea5ee92ede ""
+  "sections/methods.tex" 1766776896.68671 8434 b2f123ba895893bedf0e461f34e24d9c ""
   "sections/references.tex" 1766581856.98207 4058 22db0e84c4878e929e26c7e207fed4cb ""
   "sections/related_work.tex" 1766335695.58328 1884 a2e21935e08b40529a715589c2565b1e ""
   "sections/results.tex" 1766774733.92491 20123 373089d4d25a018e302d9faaec54add7 ""
-  "sections/titlepage.tex" 1766340287.61365 2110 b030468f53793c371c079d2d74e582d7 ""
+  "sections/titlepage.tex" 1766776842.23453 3064 7b92b2c287ef37987aad185bea17da5b ""
   (generated)
   "main.aux"
   "main.log"
