@@ -1,35 +1,45 @@
 
 \section{Introduction}
-Graphs are widely uses to model relationship and interactions
+Graphs are widely used to model relationship and interactions
 in data from multiple domains such as network analysis, bioinformatics and chemistry.
 Many learning tasks are defined at the graph level. 
 However, graphs have irregular structure with different variable sizes, features that 
 make them face challenges to traditional machine learning algorithms. 
 
 Graph embedding methods address this limitation by mapping entire graphs 
-into fixed size vector representations and 
-this helps the ML techniques to work efficiently to downstream tasks.
-Early approaches relied on handcrafted features or graph kernels 
+into fixed size vector representations.
+This helps the ML techniques to work efficiently with downstream tasks.
+Early approaches based on handcrafted features or graph kernels 
 suffer from high computational complexity or limited expressiveness~\cite{shervashidze2011wl},~\cite{vishwanathan2010graphkernels}. 
 Now recent approaches automatically learn graph representations and can be categorized into unsupervised~\cite{narayanangraph2vec},~\cite{tsitsulin2018netlsd} 
 and supervised techniques~\cite{xu2019gin}. 
 
+
 Despite their success, supervised methods require labeled data 
-and often involve higher computational costs due to iterative training.
-While unsupervised methods are often more efficient and label free. 
-However, comparisons between these two remain limited, especially 
-on small benchmark datasets where robustness and efficiency are critical~\cite{errica2019fairgnn,dwivedi2020benchmarking}..
+and typically incur higher computational costs due to iterative training, 
+whereas unsupervised methods are generally more efficient and label-free. 
+However, comparisons between these two paradigms remain limited, especially 
+on small benchmark datasets where robustness and efficiency are critical~\cite{errica2019fairgnn,dwivedi2020benchmarking}.
 
 
-In this work, we focus on EMB1 and we compare unsupervised and supervised 
+In this work, we focus on the EMB1 setting and compare unsupervised and supervised 
 graph embedding methods on small benchmark datasets from TUDataset. 
 We evaluate Graph2Vec, NetLSD and GIN under a unified experimental 
-franework, focusing not only on classification performance 
-but also on clustering quality, computational cost and stability to structural perturbations.
+framework, considering not only classification performance 
+but also clustering quality, computational cost and stability to structural perturbations.
 
 Our contributions are summarized as follows:
 \begin{itemize}
     \item A comparative study of unsupervised and supervised graph embedding methods on small datasets
     \item An analysis of performance–efficiency trade offs, and
     \item An evaluation of embedding robustness under structural perturbations. 
+\end{itemize}
+
+To guide our empirical evaluation, we address the following research questions:
+
+\begin{itemize}
+    \item \textbf{RQ1:} How do unsupervised graph embedding methods compare to supervised GNN-based approaches in terms of classification performance on small benchmark datasets?
+    \item \textbf{RQ2:} How well do different graph embeddings capture graph similarity, as reflected by clustering quality?
+    \item \textbf{RQ3:} What are the computational efficiency trade-offs between unsupervised and supervised methods?
+    \item \textbf{RQ4:} How robust are graph embeddings to structural perturbations of the input graphs?
 \end{itemize}
