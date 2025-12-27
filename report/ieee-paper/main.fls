@@ -310,6 +310,7 @@ INPUT ./sections/related_work.tex
 INPUT ./sections/related_work.tex
 INPUT ./sections/methods.tex
 INPUT ./sections/methods.tex
+INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/lm/rm-lmr8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/lm/rm-lmr6.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/lm/lmmi8.tfm
@@ -321,7 +322,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /home/nick/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman6-regular.luc
-INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT ./sections/datasets.tex
 INPUT ./sections/datasets.tex
 INPUT ./sections/evaluation.tex
