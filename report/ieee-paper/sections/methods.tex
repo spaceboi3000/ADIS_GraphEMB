@@ -1,4 +1,4 @@
-\section{Methods}
+\section{Graph Embedding Methods}
 % Graph2Vec: how it captures subgraph patterns.
 
 % NetLSD: spectral descriptors, computational efficiency.
@@ -10,16 +10,15 @@
 
 This section describes the graph embedding methods evaluated in this work.% and experimental setup used to ensure fair comparison across models.
 \subsection{Graph2Vec}
-Starting with Graph2Vec~\cite{narayanangraph2vec}, this is an unsupervised graph embedding method that learns 
-a fixed length vector representation in a way analogous to how Doc2Vec learns embeddings for documents.
-So it's core idea is a graph treated like a document and the rooted subgraphs within it (meaning the local neighborhoods around nodes) 
-are treated like words. The logic is that if two graphs share similar structural patterns their embeddings 
-will be very close in the learned vector space.
+We begin with Graph2Vec~\cite{narayanangraph2vec}, an unsupervised whole-graph embedding method that learns 
+fixed-length vector representations in a manner analogous to Doc2Vec for documents. 
+The core idea is to treat each graph as a document and its rooted subgraphs, corresponding to local node neighborhoods, as words. 
+Under this formulation, graphs that share similar structural patterns are expected to be mapped to nearby points in the embedding space.
 
 
 % These subgraphs are extracted using the Weisfeiler Lehman (WL) relabeling process and in order to train the skipgram model it is being assigned a unique label for all the rooted subgraphs in the vocabulary.
 % So the graph2vec's algorithm first generate those rooted subgraphs around every node in a given graph and then learns embeddings of the given graphs.
-The Graph2Vec's algorithm is shown below:
+
 % \begin{algorithm}[H]
 % \caption{Graph2Vec}
 % \label{alg:graph2vec}
@@ -110,18 +109,19 @@ The Graph2Vec's algorithm is shown below:
 \end{algorithm}
 
 
-So analytically, Graph2Vec first applies the Weisfeiler-Lehman (WL) relabeling process in order to extract rooted subgraphs around each node up to a specified depth $D$ (Algorithm~\ref{alg:getwlsubgraph}).
-Then, it creates a vocabulary called \textit{bag of subgraphs} containing all rooted subgraphs. This vocabulary is formed by collecting the multiset of rooted subgraphs obtained across WL iterations for all graphs.
-And finally, it employs a skipgram model to learn graph embeddings by maximizing the likelihood of observing the subgraphs within each graph (Algorithm~\ref{alg:graph2vec}).
 
+More specifically, Graph2Vec first applies the Weisfeiler--Lehman (WL) relabeling procedure to extract rooted subgraphs around each node up to a specified depth $D$ (Algorithm~\ref{alg:getwlsubgraph}). 
+These rooted subgraphs are then aggregated across all graphs and WL iterations to form a global vocabulary, referred to as a \emph{bag of subgraphs}. 
+Finally, a skip-gram model is trained to learn graph-level embeddings by maximizing the likelihood of observing the rooted subgraphs associated with each graph (Algorithm~\ref{alg:graph2vec}).
 
 \subsection{NetLSD}
-NetLSD~\cite{tsitsulin2018netlsd} represent a given graph based on the spectrum of the graph Laplacian capturing global stactural information.
-Its main idea is that every graph has a Laplacian matrix whose eigenvalues encode important structural information.
-Instead of directly using the raw eigenvalues, it summarizes them using diffusion process, specifically the Heat Kernel.
+NetLSD~\cite{tsitsulin2018netlsd} represents a graph using the spectrum of its graph Laplacian, 
+capturing global structural information. 
+The underlying idea is that the eigenvalues of the Laplacian matrix encode important properties 
+of the graph structure. 
+Rather than using the raw eigenvalues directly, NetLSD summarizes the spectral information 
+through a diffusion process, specifically via the heat kernel (Algorithm ~\ref{alg:netlsd}).
 
-
-The NetLSD's algorithm is shown below:
 
 % \begin{algorithm}[H]
 % \caption{NetLSD (Heat Trace Graph Signature)}
@@ -175,23 +175,24 @@ D-A, & \mathcal{L}=\text{comb}
 \end{algorithm}
 
 
-The key advantage of this method lies in its permutation invariance and scalability as we will explore and confirm later..
-To improve computational efficiency, it approximates the Laplacian eigenvalue distribution using stochastic trace estimation and so it avoids full eigendecomposition.
-This hepls NetLSD to maintain stable performace even for large graphs. 
-
+A key advantage of NetLSD is its permutation invariance and scalability. 
+To improve computational efficiency, the method approximates the Laplacian spectral distribution 
+using stochastic trace estimation, thereby avoiding full eigendecomposition. 
+As a result, NetLSD maintains stable performance even for large graphs.
 \subsection{GIN}
-The Graph Isomorphism Network (GIN)~\cite{xu2019gin}, known as a supervised graph neural network, is designed to maximize discriminative power among GNNs.
-GIN's node representation are updated by aggregating context from neighbor nodes.
+The Graph Isomorphism Network (GIN)~\cite{xu2019gin} is a supervised graph neural network designed to maximize 
+the discriminative power of GNNs. 
+In GIN, node representations are iteratively updated by aggregating information from neighboring nodes. 
 At each layer, node features are updated using a sum aggregation function followed by a multilayer perceptron (MLP), 
-allowing the model to distinguish different graph structures effectively as shown in Algorithm~\ref{alg:gin_forward}.
-Node embeddings are then aggregated using a global pooling operation to produce a graph representation. 
-This representation is then passed to a classifier and trained end-to-end using labeled data as shown in Algorithm~\ref{alg:gin_train}.
+which enables the model to distinguish different graph structures effectively (Algorithm~\ref{alg:gin_forward}). 
+The resulting node embeddings are then aggregated via a global pooling operation to obtain a graph-level representation. 
+This representation is subsequently passed to a classifier and trained end-to-end using labeled data 
+(Algorithm~\ref{alg:gin_train}).
 
-In contrast to unsupervised methods, GIN learns task specific embeddings optimized directly for classification accuracy. 
-While this leads to great performances, it requires labeled datasets (which is difficult to obtain) 
-and needs higher computational cost because it's iterative training.
+In contrast to unsupervised methods, GIN learns task-specific embeddings that are optimized directly for classification performance. 
+While this typically leads to higher accuracy, it requires labeled datasets, which are often difficult to obtain, 
+and incurs higher computational costs due to iterative training.
 
-It's algorithm is shown below:
 % \begin{algorithm}[H]
 % \caption{GIN Forward Pass (Graph Embedding)}
 % \label{alg:gin_forward}

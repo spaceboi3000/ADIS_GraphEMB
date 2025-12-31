@@ -4,25 +4,23 @@
 
 % Any preprocessing steps.
 The experiments in this work are conducted on three datasets from TUDataset: MUTAG, ENZYMES, and IMDB-MULTI.
-These datasets are small but diverse since they cover chemistry, biology and social networks. 
-They are standard benchmarks used in the graph representation learning literature~\cite{narayanangraph2vec,tsitsulin2018netlsd,xu2019gin} 
-for evaluating graph embedding and classification methods.
+These datasets are small but diverse, covering domains such as chemistry, biology, and social networks.
+They are standard benchmarks in the graph representation learning literature~\cite{narayanangraph2vec,tsitsulin2018netlsd,xu2019gin}
+and are commonly used to evaluate graph embedding and classification methods.
 
 \subsection{MUTAG}
-MUTAG~\cite{debnath1991mutag} is a molecular graph dataset consisting of chemical compounds where each graph represents a molecule, nodes correspond to atoms 
-and edges represent chemical bonds between nodes/atoms. 
+MUTAG~\cite{debnath1991mutag} is a molecular graph dataset consisting of chemical compounds, where each graph represents a molecule,
+nodes correspond to atoms, and edges represent chemical bonds.
 The task is to classify molecules into two classes according to their mutagenic effect on a bacterium.
-The dataset contains a small number of graphs with discrete node labels representing atom types. 
-Graphs in MUTAG are known to be relatively small and sparse, so it is usefull for fast experimentation. 
+The dataset contains a relatively small number of graphs with discrete node labels representing atom types.
+Graphs in MUTAG are typically small and sparse, making the dataset suitable for fast experimentation.
 
 \subsection{ENZYMES}
-The ENZYMES~\cite{rossi2015networkrepository} dataset is derived from protein tertiary structures and contains graphs representing enzymes. 
-Nodes correspond to secondary structure elements like amino acids and 
-edges indicate spatial proximity or interactions between residues. 
-Each graph is labeled according to the enzyme’s functional class and as a result we have a multi class classification task, specifically 6 enzyme classes.
+The ENZYMES~\cite{rossi2015networkrepository} dataset is derived from protein tertiary structures and consists of graphs representing enzymes.
+Nodes correspond to secondary structure elements, while edges indicate spatial proximity or interactions between residues.
+Each graph is labeled according to the enzyme's functional class, resulting in a multiclass classification task with six classes.
 
 \subsection{IMDB-MULTI}
-MDB-MULTI~\cite{rossi2015networkrepository} is a social network dataset constructed from movie collaboration data. 
-Each graph represents the ego network of actors appearing in a movie, nodes represent actors and edges show the coappearance relationships in the same movie. 
-Unlike molecular datasets, IMDB-MULTI does not provide node labels or attributes.
-
+IMDB-MULTI~\cite{rossi2015networkrepository} is a social network dataset constructed from movie collaboration data.
+Each graph represents the ego network of actors appearing in a movie, where nodes correspond to actors and edges represent co-appearance relationships.
+Unlike molecular and biological datasets, IMDB-MULTI does not provide node labels or attributes.

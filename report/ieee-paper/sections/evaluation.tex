@@ -1,4 +1,4 @@
-\section{Experiments and Evaluation}
+\section{Evaluation Methodology}
 % \subsection{Classification}
 % SVM/MLP classifier for embeddings.
 
@@ -19,114 +19,91 @@
 
 % Compare embedding changes and drop in classification accuracy.
 
-\subsection{Evaluation Protocol for Graph Classification}
-We evaluate the graph embeddings using the three TUDataset as we mentioned earlier. 
-Methods Graph2Vec and NetLSD are proccesses under the same pipeline for the classification, 
-while supervised GIN follows its own supervised training protocol for the classification task.
-Performance for this task is reported using Accuracy, F1 score and AUC with extra computational measurments such as training time, generation time and
-peak tracemalloc mb, rss before mb, rss after mb, meaning memory usage during training. 
-In addition we study the influence of different embedding dimensionality evaluating on the different dim sizes as we mentioned in earlier section (64, 128 and 256).
-We thought to use smaller dimensions to reduce computational cost and memory usage, but we observed that with higher dims, we get better 
-results as we will see in the results section.
+\subsection{Graph Classification Evaluation}
+We evaluate graph embeddings on three benchmark datasets from TUDataset.
+Unsupervised methods (Graph2Vec and NetLSD) are evaluated under a common downstream
+classification pipeline, while the supervised GIN model follows its native
+end-to-end training protocol.
 
-\subsection{Classification Using Unsupervised Embeddings}
-For each dataset and embedding dim we load each graph's embedding from CSV files.
-Each CSV contains one row per graph with a label columb and d embedding feature columns. 
-For each configuration, meaning dataset and dimension, we split our embeddings into 80\% train and 20\% test.
+Classification performance is assessed using Accuracy, F1-score, and Area Under the ROC Curve (AUC).
+In addition to predictive performance, we report computational metrics including
+training time, embedding generation time, and memory consumption, measured via
+peak memory usage and resident set size (RSS).
+To study the effect of representation capacity, all methods are evaluated using
+embedding dimensions of 64, 128, and 256. Smaller embedding dimensions were initially considered to reduce computational cost and memory consumption.
+However, evaluating higher-dimensional representations allows us to examine the trade-off between efficiency
+and representational capacity, as discussed in the results section.
 
-Before training any classifier, embeddings are standardized using sklearn's StandardScaler.
-This step is critical when training to distance and margin based classifier, like SVM, MLP etc., and ensures 
-a consistent scale across all features.
-Since Graph2Vec and NetLSD are unsupervised, their embeddings are evaluated by training standard classifiers on top of the learned graph vectors.
-We choose 5 different classifiers:
+
+\subsection{Evaluation of Unsupervised Embeddings}
+For unsupervised methods, graph embeddings are evaluated by training standard
+classifiers on top of the learned representations.
+Embeddings are split into 80\% training and 20\% test sets for each dataset and
+embedding dimensionality.
+
+Prior to classification, embeddings are standardized using a z-score normalization (sklearn’s StandardScaler)
+to ensure consistent feature scaling, which is particularly important for
+distance- and margin-based classifiers.
+The following classifiers are used for evaluation: 
 \begin{itemize}
-    \item Support Vector Machine (SVM) with RBF kernel and probability calibration enabled. for AUC computation,
-    \item Multi layer Perceptron (MLP), whose hidden layer sizes are adapted based on embedding dimensionality. We chose for larger embeddings to use deeper networks,
-    \item Random Forest Classifier with with the number of trees and maximum depth adapted to dataset size to mitigate overfitting on small datasets,
-    \item Logistic Regression with multinomial option for multiclass datasets, and 
-    \item Gradient Boosting with moderate depth 
+    \item Support Vector Machine (SVM) with an RBF kernel and probability calibration enabled for AUC computation,
+    \item Multilayer Perceptron (MLP), with hidden layer sizes adapted to the embedding dimensionality, using deeper architectures for higher-dimensional embeddings,
+    \item Random Forest classifier, with the number of trees and maximum depth adjusted according to dataset size to mitigate overfitting on small benchmarks,
+    \item Logistic Regression with a multinomial formulation for multiclass datasets, and
+    \item Gradient Boosting classifier with moderate tree depth.
 \end{itemize}
-
-In addition, we combine Random Forest, Gradient Boosting and SVM to observe if we'll get better classification results by ensembling different classifiers. We named this combination as \textit{Voting Classifier}.
-All results are shown and discussed in section \textit{VI}.
-
-\subsection{Supervised Classification}
-Unlike Graph2Vec and NetLSD, GIN is trained in a supervised manner. 
-Our implementation uses PyTorch Geometric and follows the architecture and training protocol described in Algorithms ~\ref{alg:gin_forward} and ~\ref{alg:gin_train}.
-So in contrast with the unsupervised methods, we don't use 5 different classifiers on top of GIN embeddings, because GIN itself is already a classifier.
-We computed the graph embeddings by training GIN and in parallel we optimize the loss for the classifiication metrics.
-As will be shown in the experimental results, this supervised training allows GIN to outperform the unsupervised methods on graph classification tasks. 
-
-The GIN model consists of stacked GINConv layers, each parameterized by an MLP, followed by batch normalization, ReLU activation, dropout and a residual connection.
-This design helps the model to learn complex graph structures while avoiding overfitting.
-To further enhance representational capacity, we employ jumping Knowledge with concatenation allowing the final graph embedding to incorporate information from all intermediate layers.
-
-To improve classification results we add several additional design choices and training options.
-First, we run our experiments enabling -gfeat option, which concatenates simple graph level statistics (like the number of nodes, edges and graph density) to the learned embedding.
-Second, we use additive global pooling (--pool\ add), which is known to provide stable performance across datasets. 
-Thrid, we apply feature normalization (--norm\_feats) after constructing node features and we observed that the optimization behavior improved.
-Finally, we apply label smoothing during training with value  0.05 (--label\_smoothing 0.05) in the cross entropy loss to reduce overconfidence and improve generalization on small datasets.
+In addition, an ensemble Voting Classifier combining Random Forest, Gradient Boosting and SVM is employed to assess the benefits of
+combining heterogeneous decision boundaries.
 
 
-To further study the effect of model capacity and training configuration, we vary multiple GIN hyperparameters during experimentation.
-Like the unsupervised methods, we evaluate GIN with embedding dimensions of 64, 128 and 256. 
-We, also, trained for 200, 300, 500 and 800 epochs, depending on the dataset, 
-but it is right to mention that this was a little bit overkill and that would be better if we could stick to better difference 50-200 epochs.
-Having, also, early stopping made the different epochs less critical.
-We explore, also, two learning rates $1 \cdot 10^{-3}$ and $5 \cdot 10^{-4}$, which are commonly used for training.
-Dropout is applied with rates of 0.0 and 0.4 to assess the impact of regularization on small datasets.
-For IMDB-MULTI, which contains larger graphs but no node attributes, we use a batch size of 64 (the same for MUTAG, while ENZYMES's batxhsize is set to 32), while the number of GIN layers is set to 3, reflecting the shallower architecture required for social network graphs.
-The number of layers for MUTAG is set to 5 and for ENZYMES to 6.
+\subsection{Evaluation of Supervised Graph Embeddings}
+For supervised evaluation, GIN produces graph-level representations through
+global pooling of node embeddings and is trained end-to-end using labeled data.
+The resulting graph representations are evaluated directly through the model’s
+classification output, without training additional downstream classifiers.
 
-This hyperparameter exploration allows us to analyze how architectural depth, embedding dimensionality 
-and regularization affect both classification accuracy and the quality of the learned graph embeddings. 
-The results of these experiments are presented and discussed in section \textit{VI}.
 
 \subsection{Clustering Evaluation}
-In order to study the differences between different embedding methods, we performed clustering of the embedded graphs.
-Clustering performance is primarily defined by how well an embedding preserves graph-to-graph distances in the absence of label supervision.
+To assess how well graph embeddings preserve graph-to-graph similarity, we
+evaluate clustering performance on the learned representations.
+Clustering quality reflects the ability of an embedding to capture global
+structural properties in the absence of label supervision.
 Embeddings that encode global structural properties are expected to perform better at clustering than those optimized for discriminative classification.
 
-The graph2vec method emphasizes on local rooted substructures treating graphs as unorderdered colections of neighborhood patterns. 
-This method is effective  for capturing local similarities while it lacks a mechanism for representing global structures. 
-On the contrary NetLSD embeds grpahs using spectral summaries of the Laplacian, which are permutation invariant and capture global diffusion behaviour.
-Such characteristics are well suited for clustering. This exlplains why NetLSD consitently forms semantically coherent clusters despite being label-free.
-GIN embeddings are designed to maximise separablity rather than maintaining inter-graph distances. Consequently embeddings using GIN perform poorly during 
-clustering.
-The theoretic differences are  clearly represented below: >>>>>>> ?????
 
-\subsection{Clustering for Unsupervised Embeddings}
-
-\subsection{Clustering for Supervised Embeddings}
 
 \subsection{Stability Analysis}
-Because real world applications involve noisy data, for example edges may be missing 
-and data in general may be corrupted, it is important to evaluate the robustness of our graph embeddings to such perturbations.
-So, we compute a stability analysis by introducing random permutations to the graph structures and node features.
+Real-world graph data are often noisy, with missing edges or corrupted node attributes.
+To assess the robustness of graph embeddings under such perturbations, we perform a
+stability analysis by introducing controlled modifications to graph structures and
+node features.
 
-For each dataset, we generated perturbed versions by applying 2 types of permutations:
-First, we apply edge pertubation, removing 10\% of existing edges and add the same amount of new random edges.
-And secondly, we shuffle node attributes by randomly swapping features between pairs of nodes within each graph.
+For each dataset, perturbed versions of the graphs are generated using two types of
+perturbations.
+First, edge perturbation is applied by randomly removing 10\% of existing edges and
+adding an equal number of randomly generated edges.
+Second, node attribute perturbation is introduced by randomly shuffling node features
+between pairs of nodes within each graph.
 
-After generating these new datasets, we recompute embeddings using Graph2Vec, NetLSD and GIN with the same scripts and configurations as before.
-This ensures that any observed changes in the embeddings are solely due to the introduced perturbations and so we can fairly and safely make our comparisons between original and perturbed embeddings.
-To quality how much the embeddings have changed, we use two complementary measures:
-\begin{enumerate}
-    \item Cosine Similarity: For each graph, we compute the cosine similarity between its original embedding and the perturbed embedding. 
-    When we receive values close to 1, then the embeddings are very similar to the original one.
-    \[ \cos (z_i, z_i') = \frac{z_i^T \cdot z_i'}{||z_i||_2 \cdot ||z_i'||_2} \]
-    \item Euclidean Distancw (L2 norm):
-    \[ ||z_i-z_i'||_2\]
-    where smaller distance means higher similarity between original and perturbed embeddings.
-\end{enumerate}
+After perturbation, graph embeddings are recomputed using Graph2Vec, NetLSD, and GIN
+with the same scripts and configurations as in the original experiments.
+This ensures that any observed differences in the embeddings are attributable solely
+to the introduced perturbations.
 
-For each dataset, method and config, we report mean, median, and standard deviation of cosine similarity and L2 distance and then 
-we compare its method in order to obseved somehow any difference in the stabilization logic.
-In general, cosine similarity is usually better for stability. It measures directional consistensy,
-while L2 mixes direction and scale. Two embeddings can be semantically indentical 
-but far apart in L2. 
+Embedding stability is quantified using two complementary similarity measures.
+Cosine similarity is used to assess directional consistency between the original and
+perturbed embeddings,
+\[
+\cos (z_i, z_i') = \frac{z_i^\top z_i'}{\lVert z_i \rVert_2 \lVert z_i' \rVert_2},
+\]
+while the Euclidean distance measures absolute deviation,
+\[
+\lVert z_i - z_i' \rVert_2.
+\]
 
-After computing the above stability analysis, we further evaluate the practical impact 
-of graph perturbations by repeating the classification and clustering experiments on the perturbed datasets
-with the same scripts and configs as we mentioned in the previous sections. 
-Every result is reported and discussed in section \textit{VI}.
+For each dataset, method, and experimental configuration, we report the mean, median,
+and standard deviation of both cosine similarity and Euclidean distance across all
+graphs.
+To evaluate the practical impact of perturbations, we additionally repeat the graph
+classification and clustering experiments on the perturbed datasets using the same
+evaluation protocols.

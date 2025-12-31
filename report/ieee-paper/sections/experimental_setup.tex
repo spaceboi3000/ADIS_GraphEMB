@@ -1,0 +1,84 @@
+\section{Experimental Setup}
+
+\subsection{Experimental Pipeline}
+Our experimental pipeline follows a unified and reproducible procedure across all datasets and methods.
+For each dataset, graphs are first converted into fixed-length vector representations using the selected
+graph embedding methods. These embeddings are then used for downstream tasks including graph classification,
+clustering, and stability analysis.
+
+For unsupervised methods (Graph2Vec and NetLSD), graph embeddings are computed independently of any labels
+and stored for subsequent evaluation. Classification is performed by training standard machine learning
+models on top of the learned graph vectors.
+For the supervised method (GIN), graph embeddings are learned jointly with the classification objective
+through end-to-end training.
+
+All experiments are conducted consistently across embedding dimensions of 64, 128, and 256 in order to
+study the effect of representation capacity on performance and computational cost.
+
+\subsection{Data Splits and Reproducibility}
+For each dataset and embedding dimensionality, embeddings are split into 80\% training and 20\% test sets.
+To ensure fair comparison across methods, the same data splits are used for all embedding approaches
+within each experimental configuration.
+
+Random seeds are fixed across all experiments to reduce variability due to stochastic effects.
+All reported results are obtained using identical splits, configurations, and evaluation scripts
+for each method.
+
+\subsection{Implementation and Software}
+Unsupervised graph embeddings are generated using publicly available implementations of Graph2Vec
+and NetLSD. The resulting embeddings are stored in CSV format, with one row per graph containing
+the graph label and the corresponding embedding vector.
+
+Downstream classification for unsupervised embeddings is performed using \texttt{scikit-learn}.
+Prior to training, all embeddings are standardized using \texttt{StandardScaler}.
+The following classifiers are employed: Support Vector Machines with RBF kernel, Multilayer Perceptrons,
+Random Forests, Logistic Regression, Gradient Boosting, and a Voting Classifier combining heterogeneous
+models.
+
+The supervised GIN model is implemented using PyTorch Geometric and follows the architecture and
+training protocol described in Algorithms~\ref{alg:gin_forward} and~\ref{alg:gin_train}.
+GIN models consist of stacked GINConv layers parameterized by multilayer perceptrons, followed by
+batch normalization, ReLU activation, dropout, and residual connections.
+Graph-level representations are obtained using additive global pooling.
+Jumping Knowledge with concatenation is employed to aggregate information from multiple layers.
+
+Several training options are enabled to improve stability and generalization, including feature
+normalization, graph-level feature augmentation, and label smoothing.
+Early stopping is applied during training to prevent overfitting on small datasets.
+
+\subsection{Hyperparameter Configuration}
+For Graph2Vec and NetLSD, experiments are conducted using embedding dimensions of 64, 128, and 256.
+Classifier hyperparameters are adapted to dataset size to mitigate overfitting on small benchmarks.
+
+For GIN, multiple training configurations are explored to analyze the effect of model capacity
+and regularization.
+Embedding dimensions are set to 64, 128, and 256.
+Training is performed using learning rates of $1 \times 10^{-3}$ and $5 \times 10^{-4}$.
+Dropout rates of 0.0 and 0.4 are evaluated to assess the impact of regularization on small datasets.
+The number of GIN layers is selected per dataset, with shallower architectures used for social
+network graphs and deeper architectures for molecular and biological graphs.
+Specifically, the number of layers is set to 3 for IMDB-MULTI, 5 for MUTAG, and 6 for ENZYMES.
+Batch sizes are set to 64 for MUTAG and IMDB-MULTI, and 32 for ENZYMES.
+
+In addition to architectural variations, several training options and design choices are enabled
+to improve stability and generalization.
+Graph-level feature augmentation is applied by concatenating simple structural statistics,
+including the number of nodes, number of edges, and graph density, to the learned graph embeddings.
+Additive global pooling is employed to aggregate node representations into graph-level embeddings,
+as it has been shown to provide stable performance across datasets.
+Feature normalization is applied after node feature construction to improve optimization behavior.
+Furthermore, label smoothing with a factor of 0.05 is applied to the cross-entropy loss in order
+to reduce overconfidence during training.
+
+Training is conducted for up to 200, 300, 500, or 800 epochs depending on the dataset, with early
+stopping enabled to mitigate overfitting and reduce sensitivity to the maximum number of epochs.
+
+This hyperparameter exploration allows us to analyze how architectural depth, embedding dimensionality 
+and regularization affect both classification accuracy and the quality of the learned graph embeddings. 
+
+\subsection{Hardware Configuration}
+All experiments are executed on a Linux-based system equipped with a multi-core CPU and sufficient
+memory to support large-scale embedding computation and training.
+Supervised GIN models are trained using GPU acceleration when available.
+Memory usage is monitored during execution to capture peak allocation and resident set size
+for computational efficiency analysis.
