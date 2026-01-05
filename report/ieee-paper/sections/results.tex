@@ -2,12 +2,13 @@
 % Tables and figures summarizing all tasks.
 % Highlight trade-offs: performance vs. efficiency vs. stability.
 \subsection{Before Permutation}
+ 
 For the graph classification tasks before any perturbations, we present the performance of each embedding method across the three TUDatasets with  accuracy, F1-score and AUC metrics for each method in Tables~\ref{tab:gin_best}, ~\ref{tab:graph2vec_best} and ~\ref{tab:netlsd_best}. 
 % along with computational metrics such as training time and memory usage.
 We preferered to show only the best test configuration per dataset x dim results and for the epochs 200 and 300 (for GIN) for the reason we mentioned in earlier section.
 
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \caption{GIN classification performance on EMB1 datasets (epochs $\in\{200,300\}$). Best configuration per embedding dimension is reported.}
 \label{tab:gin_best}
@@ -31,7 +32,7 @@ IMDB-MULTI & 128 & 200 & 0.500 & 0.486 & 0.678 \\
 \end{table}
 
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \caption{Best Graph2Vec classification results per dataset and embedding dimension. 
 For each dataset--dimension pair, the classifier with the highest test accuracy is reported.}
@@ -57,7 +58,7 @@ IMDB-MULTI & 128 & GB  & 0.427 & 0.426 & 0.583 \\
 
 
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \caption{Best NetLSD classification results per dataset and embedding dimension. 
 For each dataset--dimension pair, the classifier with the highest test accuracy is reported.}
@@ -96,50 +97,45 @@ while Graph2Vec shows the weakest performance across all datasets and metrics.
 The results confirm that supervised GNNs provide the highest predictive power, while spectral descriptors such as 
 NetLSD remain surprisingly strong for unsupervised graph representation learning.
 
-\begin{figure}[t]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{figures/HEATMAP_AVG_accuracy_bef.png}
     \caption{Average accuracy heatmap across methods and embedding dimensions.}
     \label{fig:heatmap}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{figures/PARETO_AVG_acc_vs_compute_cost_bef.png}
     \caption{Pareto frontier illustrating the trade-off between accuracy and normalized compute cost.}
     \label{fig:pareto}
 \end{figure}
 
-\begin{figure*}[t]
+\begin{figure}[h!]
     \centering
-    \begin{subfigure}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figures/gen_bef.png}
-        \caption{Embedding time}
-        \label{fig:embed_time}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figures/train_bef.png}
-        \caption{Training time}
-        \label{fig:train_time}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figures/mem_bef.png}
-        \caption{Peak memory}
-        \label{fig:peak_mem}
-    \end{subfigure}
+    \includegraphics[width=0.8\linewidth]{figures/gen_bef.png}
+    \caption{Embedding time as a function of embedding dimension.}
+    \label{fig:embed_time}
+\end{figure}
 
-    \caption{Compute cost components as a function of embedding dimension. Bubble size indicates average accuracy.}
-    \label{fig:cost_breakdown}
-\end{figure*}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/train_bef.png}
+    \caption{Training time as a function of embedding dimension.}
+    \label{fig:train_time}
+\end{figure}
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/mem_bef.png}
+    \caption{Peak memory usage as a function of embedding dimension.}
+    \label{fig:peak_mem}
+\end{figure}
 
 
 
-% \begin{figure}[t]
+% \begin{figure}[H]
 %     \centering
 %     \includegraphics[width=\linewidth]{figures/DUAL_AVG_acc_vs_compute_cost_bef.png}
 %     \caption{Accuracy and total compute cost versus embedding dimension (averaged across datasets).}
@@ -178,7 +174,7 @@ Tables ~\ref{tab:graph2vec_cluster_best}, ~\ref{tab:netlsd_cluster_best} and ~\r
 are a compact version from the original clustering results tables.
 Best metrics are chosen based on highest ACC and silhouette as a tiebreaker.
 
-% \begin{table}[t]
+% \begin{table}[H]
 % \centering
 % \caption{Best Graph2Vec clustering results per dataset and embedding dimension. For each dataset--dimension pair, the clustering algorithm with the highest ACC is reported (ties broken by silhouette).}
 % \label{tab:graph2vec_cluster_best}
@@ -201,7 +197,7 @@ Best metrics are chosen based on highest ACC and silhouette as a tiebreaker.
 % \end{tabular}
 % \end{table}
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \scriptsize
 \setlength{\tabcolsep}{4pt}
@@ -232,7 +228,7 @@ based on its classification results and its confidence in seperations (as seen f
 Wwith the low ACC scores and zero or negative ARI scores, 
 we can say that Graph2Vec has poor aligment with the true class labels.
 
-% \begin{table}[t]
+% \begin{table}[H]
 % \centering
 % \caption{Best NetLSD clustering results per dataset and embedding dimension. For each dataset--dimension pair, the clustering algorithm with the highest ACC is reported (ties broken by silhouette).}
 % \label{tab:netlsd_cluster_best}
@@ -254,7 +250,7 @@ we can say that Graph2Vec has poor aligment with the true class labels.
 % \hline
 % \end{tabular}
 % \end{table}
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \scriptsize
 \setlength{\tabcolsep}{4pt}
@@ -286,7 +282,7 @@ For ENZYMES and IMDB-MULTI, it consistently outperforms Graph2Vec,
 though the overall clustering quality is moderate.  
 
 
-% \begin{table}[t]
+% \begin{table}[H]
 % \centering
 % \caption{Best GIN clustering results per dataset and embedding dimension. For each dataset--dimension pair, the configuration (including clustering algorithm) with the highest ACC is reported (ties broken by silhouette).}
 % \label{tab:gin_cluster_best}
@@ -309,7 +305,7 @@ though the overall clustering quality is moderate.
 % \end{tabular}
 % \end{table}
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \scriptsize
 \setlength{\tabcolsep}{4pt}
@@ -343,11 +339,62 @@ GIN performs better than Graph2Vec, but worse than NetLSD.
 The experimental results for clustering evaluation are well supported by the theoretical facts. More specifically, the graph2vec method 
 emphasizes on local rooted substructures treating graphs as unorderdered colections of neighborhood patterns. 
 This method is effective  for capturing local similarities while it lacks a mechanism for representing global structures. 
-On the contrary NetLSD embeds grpahs using spectral summaries of the Laplacian, which are permutation invariant and capture global diffusion behaviour.
+On the contrary NetLSD embeds graphs using spectral summaries of the Laplacian, which are permutation invariant and capture global diffusion behaviour.
 Such characteristics are well suited for clustering. This exlplains why NetLSD consitently forms semantically coherent clusters despite being label-free.
 GIN embeddings are designed to maximise separablity rather than maintaining inter-graph distances. Consequently embeddings using GIN perform poorly during 
 clustering.
-The theoretic differences are  clearly represented below: >>>>>>> ?????
+The theoretic differences are  clearly represented in figures~\ref{fig:netlsd_kmeans} to ~\ref{fig:gin_spectral}
+
+
+% --- Figure: NetLSD K-Means ---
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/NetLSD_kmeans_performance.png}
+    \caption{\textbf{NetLSD K-Means Performance.} It outperforms others in stability.}
+    \label{fig:netlsd_kmeans}
+\end{figure}
+
+% --- Figure: Graph2Vec K-Means ---
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/Graph2Vec_kmeans_performance.png}
+    \caption{\textbf{Graph2Vec K-Means Performance.}}
+    \label{fig:g2v_kmeans}
+\end{figure}
+
+% --- Figure: GIN K-Means ---
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/GIN_kmeans_performance.png}
+    \caption{\textbf{GIN K-Means Performance.}}
+    \label{fig:gin_kmeans}
+\end{figure}
+
+% --- Figure: NetLSD Spectral ---
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/NetLSD_spectral_performance.png}
+    \caption{\textbf{NetLSD Spectral Clustering.} The trend mirrors K-Means.}
+    \label{fig:netlsd_spectral}
+\end{figure}
+
+% --- Figure: Graph2Vec Spectral ---
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/Graph2Vec_spectral_performance.png}
+    \caption{\textbf{Graph2Vec Spectral Clustering.}}
+    \label{fig:g2v_spectral}
+\end{figure}
+
+% --- Figure: GIN Spectral ---
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/GIN_spectral_performance.png}
+    \caption{\textbf{GIN Spectral Clustering.} Consistently mirrors structural properties.}
+    \label{fig:gin_spectral}
+\end{figure}
+
+
 
 \subsection{After Permutation}
 
@@ -493,4 +540,3 @@ NetLSD achieves very strong stability only at higher dim sizes
 and GIN shows the most sensitivity to perturbations. 
 
 Executing again the classification task after perturbing the graphs ....
-

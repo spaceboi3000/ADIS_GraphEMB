@@ -68,8 +68,16 @@ To assess how well graph embeddings preserve graph-to-graph similarity, we
 evaluate clustering performance on the learned representations.
 Clustering quality reflects the ability of an embedding to capture global
 structural properties in the absence of label supervision.
-Embeddings that encode global structural properties are expected to perform better at clustering than those optimized for discriminative classification.
 
+We applied both K-Means and Spectral clustering accross all dataset-embedding
+combinations in order to observe how embedding methods and embedding dimensions
+impact performance. We evaluated the clustering quality using 
+Normalized Mutual Information (NMI), Adjusted Rand Index (ARI), Accuracy 
+and Silhouette scores. We visualized the clustering results using scatter plots
+and provided a holistic overview  of the results using line plots that showed the 
+performance of each algorithm on every dataset with respect to the embedding dimension.
+We need to note that while Graph2Vec and NetLSD utilized standard dimensions (64, 128, 256), 
+the GIN embeddings employed dataset-dependent dimensions.
 
 
 \subsection{Stability Analysis}
