@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2026.1.20)  20 JAN 2026 15:19
+This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2026.1.20)  20 JAN 2026 15:24
  restricted system commands enabled.
 **/home/nodys/Documents/ADIS/ADIS_GraphEMB/report/ieee-paper/main
 (/home/nodys/Documents/ADIS/ADIS_GraphEMB/report/ieee-paper/main.tex
@@ -545,12 +545,12 @@ Here is how much of LuaTeX's memory you used:
  156269,662416 words of node,token memory allocated
  521 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 14 attribute, 53 glue_spec, 14 attribute_list, 1 write nodes
-   avail lists: 2:1839,3:435,4:172,5:1139,6:118,7:14157,8:47,9:977,10:20,11:1390
+   avail lists: 2:1839,3:435,4:172,5:1138,6:119,7:14157,8:47,9:977,10:20,11:1390
  29255 multiletter control sequences out of 65536+600000
  126 fonts using 14241887 bytes
  73i,12n,84p,859b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
 <</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi7.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr7.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy10.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr10.pk>></usr/share/texmf/fonts/opentype/public/lm/lmmono10-regular.otf><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi5.600pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr6.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/amsfonts/cmextra/cmex8.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi6.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmsy6.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/amsfonts/symbols/msbm10.480pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr8.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi8.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmsy8.600pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi10.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy7.pk>></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-bold.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-bolditalic.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-italic.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf>
-Output written on main.pdf (10 pages, 1589394 bytes).
+Output written on main.pdf (10 pages, 1589622 bytes).
 
 PDF statistics: 284 PDF objects out of 1000 (max. 8388607)
  102 compressed objects within 2 object streams
