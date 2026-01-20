@@ -21,16 +21,16 @@
 
 \subsection{Graph Classification Evaluation}
 We evaluate graph embeddings on three benchmark datasets from TUDataset.
-Unsupervised methods (Graph2Vec and NetLSD) are evaluated under a common downstream
-classification pipeline, while the supervised GIN model follows its native
+Unsupervised methods are evaluated under a common downstream
+classification pipeline, while the supervised model follows its native
 end-to-end training protocol.
 
 Classification performance is assessed using Accuracy, F1-score, and Area Under the ROC Curve (AUC).
 In addition to predictive performance, we report computational metrics including
 training time, embedding generation time, and memory consumption, measured via
 peak memory usage and resident set size (RSS).
-To study the effect of representation capacity, all methods are evaluated using
-embedding dimensions of 64, 128, and 256. Smaller embedding dimensions were initially considered to reduce computational cost and memory consumption.
+To study the effect of representation capacity, all methods are evaluated using three different
+embedding dimensions. Smaller embedding dimensions were initially considered to reduce computational cost and memory consumption.
 However, evaluating higher-dimensional representations allows us to examine the trade-off between efficiency
 and representational capacity, as discussed in the results section.
 
@@ -38,8 +38,6 @@ and representational capacity, as discussed in the results section.
 \subsection{Evaluation of Unsupervised Embeddings}
 For unsupervised methods, graph embeddings are evaluated by training standard
 classifiers on top of the learned representations.
-Embeddings are split into 80\% training and 20\% test sets for each dataset and
-embedding dimensionality.
 
 Prior to classification, embeddings are standardized using a z-score normalization (sklearn’s StandardScaler)
 to ensure consistent feature scaling, which is particularly important for
@@ -76,12 +74,12 @@ Normalized Mutual Information (NMI), Adjusted Rand Index (ARI), Accuracy
 and Silhouette scores. We visualized the clustering results using scatter plots
 and provided a holistic overview  of the results using line plots that showed the 
 performance of each algorithm on every dataset with respect to the embedding dimension.
-We need to note that while Graph2Vec and NetLSD utilized standard dimensions (64, 128, 256), 
+We need to note that while Graph2Vec and NetLSD utilized standard dimensions, 
 the GIN embeddings employed dataset-dependent dimensions.
 
 
 \subsection{Stability Analysis}
-Real-world graph data are often noisy, with missing edges or corrupted node attributes.
+Real world graph data are often noisy, with missing edges or corrupted node attributes.
 To assess the robustness of graph embeddings under such perturbations, we perform a
 stability analysis by introducing controlled modifications to graph structures and
 node features.
@@ -109,7 +107,7 @@ while the Euclidean distance measures absolute deviation,
 \lVert z_i - z_i' \rVert_2.
 \]
 
-For each dataset, method, and experimental configuration, we report the mean, median,
+For each dataset, method and experimental configuration, we report the mean, median
 and standard deviation of both cosine similarity and Euclidean distance across all
 graphs.
 To evaluate the practical impact of perturbations, we additionally repeat the graph

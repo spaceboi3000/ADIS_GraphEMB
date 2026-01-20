@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2026.1.20)  20 JAN 2026 17:42
+This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2026.1.20)  20 JAN 2026 18:35
  restricted system commands enabled.
 **/home/nodys/Documents/ADIS/ADIS_GraphEMB/report/ieee-paper/main
 (/home/nodys/Documents/ADIS/ADIS_GraphEMB/report/ieee-paper/main.tex
@@ -271,4 +271,270 @@ Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
 \caption@hangindent=\dimen191
 Package caption Info: Unknown document class (or package),
 (caption)             standard defaults will be used.
-Package caption Info: \@makecaption = \long macro:#1#2->\ifx \@captype \@IEEEtablestring \footnotesize \bgroup \par \centering \@IEEEtabletopskipstrut {\normalfont \footnotesize #1}\\{\normalfont \footnotesize \scshape #2}\par \addvspace {0.5\baselineskip }\egroup \@IEEEtablecaptionsepspace \else \@IEEEfigurecaptionsepspace \setbox \@tempboxa \hbox {\normalfont \footnotesize {#1.}\nobreakspace \no
+Package caption Info: \@makecaption = \long macro:#1#2->\ifx \@captype \@IEEEtablestring \footnotesize \bgroup \par \centering \@IEEEtabletopskipstrut {\normalfont \footnotesize #1}\\{\normalfont \footnotesize \scshape #2}\par \addvspace {0.5\baselineskip }\egroup \@IEEEtablecaptionsepspace \else \@IEEEfigurecaptionsepspace \setbox \@tempboxa \hbox {\normalfont \footnotesize {#1.}\nobreakspace \nobreakspace #2}\ifdim \wd \@tempboxa >\hsize \setbox \@tempboxa \hbox {\normalfont \footnotesize {#1.}\nobreakspace \nobreakspace }\parbox [t]{\hsize }{\normalfont \footnotesize \noindent \unhbox \@tempboxa #2}\else \ifCLASSOPTIONconference \hbox to\hsize {\normalfont \footnotesize \hfil \box \@tempboxa \hfil }\else \hbox to\hsize {\normalfont \footnotesize \box \@tempboxa \hfil }\fi \fi \fi  on input line 1139.
+)
+
+Package caption Warning: Unknown document class (or package),
+(caption)                standard defaults will be used.
+See the caption package documentation for explanation.
+
+\c@caption@flags=\count289
+\c@continuedfloat=\count290
+Package caption Info: float package is loaded.
+)
+\c@subfigure=\count291
+\c@subtable=\count292
+) (/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.sty (/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty (/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2022-01-21 L3 programming layer (loader) 
+ (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-luatex.def
+File: l3backend-luatex.def 2022-01-12 L3 backend support: PDF output (LuaTeX)
+\l__color_backend_stack_int=\count293
+\l__pdf_internal_box=\box56
+))
+Package: xparse 2022-01-12 L3 Experimental document command parser
+)
+Package: fontspec 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX
+Lua module: fontspec 2022/01/15 2.8a Font selection for XeLaTeX and LuaLaTeX (/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec-luatex.sty
+Package: fontspec-luatex 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX
+\l__fontspec_script_int=\count294
+\l__fontspec_language_int=\count295
+\l__fontspec_strnum_int=\count296
+\l__fontspec_tmp_int=\count297
+\l__fontspec_tmpa_int=\count298
+\l__fontspec_tmpb_int=\count299
+\l__fontspec_tmpc_int=\count300
+\l__fontspec_em_int=\count301
+\l__fontspec_emdef_int=\count302
+\l__fontspec_strong_int=\count303
+\l__fontspec_strongdef_int=\count304
+\l__fontspec_tmpa_dim=\dimen192
+\l__fontspec_tmpb_dim=\dimen193
+\l__fontspec_tmpc_dim=\dimen194
+ (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.cfg)))) (/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen195
+\WF@size=\dimen196
+\c@WF@wrappedlines=\count305
+\WF@box=\box57
+\WF@everypar=\toks26
+Package: wrapfig 2003/01/31  v 3.6
+) (./preamble/fonts.tex)
+luaotfload | cache : Lookup cache loaded from /home/nodys/.texlive2021/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc.
+
+Package fontspec Info: Font family 'TeXGyreTermes(0)' created for font 'TeX
+(fontspec)             Gyre Termes' with options [Ligatures=TeX,UprightFont =
+(fontspec)             *,BoldFont = * Bold,ItalicFont = *
+(fontspec)             Italic,BoldItalicFont = * Bold Italic].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"TeXGyreTermes:mode=node;script=latn;language=dflt;+tlig;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
+(fontspec)             <->"TeXGyreTermes:mode=node;script=latn;language=dflt;+tlig;+smcp;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->"TeXGyreTermesBold:mode=node;script=latn;language=dflt;+tlig;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
+(fontspec)             <->"TeXGyreTermesBold:mode=node;script=latn;language=dflt;+tlig;+smcp;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->"TeXGyreTermesItalic:mode=node;script=latn;language=dflt;+tlig;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
+(fontspec)             <->"TeXGyreTermesItalic:mode=node;script=latn;language=dflt;+tlig;+smcp;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->"TeXGyreTermesBoldItalic:mode=node;script=latn;language=dflt;+tlig;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
+(fontspec)             <->"TeXGyreTermesBoldItalic:mode=node;script=latn;language=dflt;+tlig;+smcp;"
+
+ (./main.aux)
+\openout1 = main.aux
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 15.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+
+-- Lines per column: 56 (exact).
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count306
+\scratchdimen=\dimen197
+\scratchbox=\box58
+\nofMPsegments=\count307
+\nofMParguments=\count308
+\everyMPshowfont=\toks27
+\MPscratchCnt=\count309
+\MPscratchDim=\dimen198
+\MPnumerator=\count310
+\makeMPintoPDFobject=\count311
+\everyMPtoPDFconversion=\toks28
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: wrapfig package is loaded.
+Package caption Info: End \AtBeginDocument code.
+ (./sections/titlepage.tex
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 53.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 53.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 53.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)) (./sections/introduction.tex
+<figures/svsu2.png, id=1, 204.765pt x 206.4513pt>
+File: figures/svsu2.png Graphic file (type png)
+<use figures/svsu2.png>
+Package luatex.def Info: figures/svsu2.png  used on input line 11.
+(luatex.def)             Requested size: 252.0pt x 254.09108pt.
+
+Underfull \vbox (badness 1342) has occurred while \output is active []
+
+ [1
+Non-PDF special ignored!
+
+
+<./figures/svsu2.png>]) (./sections/related_work.tex) (./sections/methods.tex [2]) (./sections/datasets.tex) (./sections/experimental_setup.tex [3]) (./sections/evaluation.tex
+Underfull \vbox (badness 1939) has occurred while \output is active []
+
+ [4]) (./sections/results.tex [5]
+<figures/HEATMAP_AVG_accuracy_bef.png, id=40, 917.1063pt x 423.7431pt>
+File: figures/HEATMAP_AVG_accuracy_bef.png Graphic file (type png)
+<use figures/HEATMAP_AVG_accuracy_bef.png>
+Package luatex.def Info: figures/HEATMAP_AVG_accuracy_bef.png  used on input line 106.
+(luatex.def)             Requested size: 252.0pt x 116.43594pt.
+<figures/PARETO_AVG_acc_vs_compute_cost_bef.png, id=41, 1002.6258pt x 423.7431pt>
+File: figures/PARETO_AVG_acc_vs_compute_cost_bef.png Graphic file (type png)
+<use figures/PARETO_AVG_acc_vs_compute_cost_bef.png>
+Package luatex.def Info: figures/PARETO_AVG_acc_vs_compute_cost_bef.png  used on input line 113.
+(luatex.def)             Requested size: 252.0pt x 106.5045pt.
+<figures/gen_bef.png, id=42, 464.73625pt x 359.3425pt>
+File: figures/gen_bef.png Graphic file (type png)
+<use figures/gen_bef.png>
+Package luatex.def Info: figures/gen_bef.png  used on input line 136.
+(luatex.def)             Requested size: 201.60077pt x 155.87955pt.
+<figures/train_bef.png, id=43, 464.73625pt x 359.3425pt>
+File: figures/train_bef.png Graphic file (type png)
+<use figures/train_bef.png>
+Package luatex.def Info: figures/train_bef.png  used on input line 143.
+(luatex.def)             Requested size: 201.60077pt x 155.87955pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<figures/mem_bef.png, id=44, 464.73625pt x 359.3425pt>
+File: figures/mem_bef.png Graphic file (type png)
+<use figures/mem_bef.png>
+Package luatex.def Info: figures/mem_bef.png  used on input line 151.
+(luatex.def)             Requested size: 201.60077pt x 155.87955pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[6<./figures/HEATMAP_AVG_accuracy_bef.png><./figures/PARETO_AVG_acc_vs_compute_cost_bef.png><./figures/gen_bef.png>] [7<./figures/train_bef.png><./figures/mem_bef.png>]
+<figures/NetLSD_kmeans_performance.png, id=56, 1156.32pt x 867.24pt>
+File: figures/NetLSD_kmeans_performance.png Graphic file (type png)
+<use figures/NetLSD_kmeans_performance.png>
+Package luatex.def Info: figures/NetLSD_kmeans_performance.png  used on input line 286.
+(luatex.def)             Requested size: 252.0pt x 188.9937pt.
+<figures/Graph2Vec_kmeans_performance.png, id=57, 1156.32pt x 867.24pt>
+File: figures/Graph2Vec_kmeans_performance.png Graphic file (type png)
+<use figures/Graph2Vec_kmeans_performance.png>
+Package luatex.def Info: figures/Graph2Vec_kmeans_performance.png  used on input line 294.
+(luatex.def)             Requested size: 252.0pt x 188.9937pt.
+<figures/GIN_kmeans_performance.png, id=58, 1156.32pt x 867.24pt>
+File: figures/GIN_kmeans_performance.png Graphic file (type png)
+<use figures/GIN_kmeans_performance.png>
+Package luatex.def Info: figures/GIN_kmeans_performance.png  used on input line 302.
+(luatex.def)             Requested size: 252.0pt x 188.9937pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<figures/NetLSD_spectral_performance.png, id=59, 1156.32pt x 867.24pt>
+File: figures/NetLSD_spectral_performance.png Graphic file (type png)
+<use figures/NetLSD_spectral_performance.png>
+Package luatex.def Info: figures/NetLSD_spectral_performance.png  used on input line 310.
+(luatex.def)             Requested size: 252.0pt x 188.9937pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<figures/Graph2Vec_spectral_performance.png, id=60, 1156.32pt x 867.24pt>
+File: figures/Graph2Vec_spectral_performance.png Graphic file (type png)
+<use figures/Graph2Vec_spectral_performance.png>
+Package luatex.def Info: figures/Graph2Vec_spectral_performance.png  used on input line 318.
+(luatex.def)             Requested size: 252.0pt x 188.9937pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<figures/GIN_spectral_performance.png, id=61, 1156.32pt x 867.24pt>
+File: figures/GIN_spectral_performance.png Graphic file (type png)
+<use figures/GIN_spectral_performance.png>
+Package luatex.def Info: figures/GIN_spectral_performance.png  used on input line 326.
+(luatex.def)             Requested size: 252.0pt x 188.9937pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[8<./figures/NetLSD_kmeans_performance.png><./figures/Graph2Vec_kmeans_performance.png><./figures/GIN_kmeans_performance.png><./figures/NetLSD_spectral_performance.png>]) (./sections/references.tex [9<./figures/Graph2Vec_spectral_performance.png><./figures/GIN_spectral_performance.png>]
+Underfull \hbox (badness 3449) in paragraph at lines 75--79
+[]\TU/TeXGyreTermes(0)/m/n/8 V. P. Dwivedi, C. K. Joshi, T. Lau-rent, Y. Ben-gio, and X.
+ []
+
+)
+
+** Conference Paper **
+Before submitting the final camera ready copy, remember to:
+
+ 1. Manually equalize the lengths of two columns on the last page
+ of your paper;
+
+ 2. Ensure that any PostScript and/or PDF output post-processing
+ uses only Type 1 fonts and that every step in the generation
+ process uses the appropriate paper size.
+
+[10
+
+] (./main.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+)
+
+Here is how much of LuaTeX's memory you used:
+ 8950 strings out of 477805
+ 156265,662416 words of node,token memory allocated
+ 521 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 14 attribute, 53 glue_spec, 14 attribute_list, 1 write nodes
+   avail lists: 1:1,2:1647,3:423,4:172,5:1138,6:112,7:13840,8:47,9:901,10:20,11:1354
+ 29252 multiletter control sequences out of 65536+600000
+ 126 fonts using 14241887 bytes
+ 73i,12n,84p,859b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
+<</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi7.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr7.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy10.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr10.pk>></usr/share/texmf/fonts/opentype/public/lm/lmmono10-regular.otf><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi5.600pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr6.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/amsfonts/cmextra/cmex8.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi6.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmsy6.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/amsfonts/symbols/msbm10.480pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr8.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi8.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmsy8.600pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi10.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy7.pk>></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-bold.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-bolditalic.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-italic.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf>
+Output written on main.pdf (10 pages, 1594065 bytes).
+
+PDF statistics: 284 PDF objects out of 1000 (max. 8388607)
+ 102 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 131072)
+ 1 words of extra memory for PDF output out of 10000 (max. 100000000)
+
