@@ -6,13 +6,6 @@ Many learning tasks are defined at the graph level.
 However, graphs exhibit irregular structures with variable sizes and features, 
 which pose challenges for traditional machine learning algorithms.
 
-\begin{figure}[!t]
-    \centering
-    \includegraphics[width=\linewidth]{figures/svsu2.png}
-    \caption{Comparison between unsupervised (a) and supervised learning (b).}  
-    \label{fig:SupervsUn}
-\end{figure}
-
 Graph embedding methods address these limitations by mapping entire graphs 
 into fixed-size vector representations, enabling standard machine learning techniques 
 to be applied efficiently to downstream tasks. 
@@ -20,7 +13,14 @@ Early approaches based on handcrafted features or graph kernels
 suffer from high computational complexity or limited expressiveness~\cite{shervashidze2011wl,vishwanathan2010graphkernels}. 
 More recent methods automatically learn graph representations and can be broadly categorized into 
 unsupervised~\cite{narayanangraph2vec,tsitsulin2018netlsd} and supervised techniques
-~\cite{xu2019gin}. 
+~\cite{xu2019gin}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/svsu1.jpeg}
+    \caption{Comparison between unsupervised (a) and supervised learning (b).}  
+    \label{fig:SupervsUn}
+\end{figure}
 
 Figure~\ref{fig:SupervsUn} illustrates the conceptual difference between unsupervised and supervised graph embedding methods. 
 In the supervised setting node representations are learned solely from the graph structure and 
