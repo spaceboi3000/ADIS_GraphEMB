@@ -1,0 +1,321 @@
+
+======================================================================
+STARTING IMPROVED EVALUATION PIPELINE
+======================================================================
+
+======================================================================
+Evaluating NetLSD | MUTAG | dim64
+======================================================================
+Samples: 188 | Features: 64 | Classes: 2
+  SVM                  | Acc: 0.8684 | F1: 0.8636 | AUC: 0.8646 | Time: 0.01s
+  LogisticRegression   | Acc: 0.7105 | F1: 0.7177 | AUC: 0.7077 | Time: 0.04s
+  RandomForest         | Acc: 0.8684 | F1: 0.8636 | AUC: 0.9262 | Time: -1.16s
+  GradientBoosting     | Acc: 0.8421 | F1: 0.8445 | AUC: 0.9077 | Time: 0.77s
+  MLP                  | Acc: 0.7368 | F1: 0.6965 | AUC: 0.6738 | Time: 0.04s
+  Ensemble             | Acc: 0.8684 | F1: 0.8671 | AUC: 0.9415 | Time: 1.97s
+
+  ★ Best Model: SVM with Accuracy: 0.8684
+
+======================================================================
+Evaluating NetLSD | MUTAG | dim128
+======================================================================
+Samples: 188 | Features: 128 | Classes: 2
+  SVM                  | Acc: 0.7368 | F1: 0.6965 | AUC: 0.8031 | Time: 0.01s
+  LogisticRegression   | Acc: 0.7632 | F1: 0.7651 | AUC: 0.7415 | Time: 0.05s
+  RandomForest         | Acc: 0.7368 | F1: 0.6765 | AUC: 0.8985 | Time: 0.67s
+  GradientBoosting     | Acc: 0.8684 | F1: 0.8695 | AUC: 0.8738 | Time: 1.55s
+  MLP                  | Acc: 0.7368 | F1: 0.6765 | AUC: 0.7785 | Time: 0.11s
+  Ensemble             | Acc: 0.8421 | F1: 0.8421 | AUC: 0.9200 | Time: 2.00s
+
+  ★ Best Model: GradientBoosting with Accuracy: 0.8684
+
+======================================================================
+Evaluating NetLSD | MUTAG | dim256
+======================================================================
+Samples: 188 | Features: 256 | Classes: 2
+  SVM                  | Acc: 0.8158 | F1: 0.8139 | AUC: 0.8738 | Time: 0.01s
+  LogisticRegression   | Acc: 0.7895 | F1: 0.7848 | AUC: 0.8708 | Time: 0.01s
+  RandomForest         | Acc: 0.8421 | F1: 0.8445 | AUC: 0.9077 | Time: 0.58s
+  GradientBoosting     | Acc: 0.8158 | F1: 0.8173 | AUC: 0.8815 | Time: 1.98s
+  MLP                  | Acc: 0.8421 | F1: 0.8458 | AUC: 0.8554 | Time: 0.21s
+  Ensemble             | Acc: 0.8421 | F1: 0.8445 | AUC: 0.8985 | Time: 2.52s
+
+  ★ Best Model: RandomForest with Accuracy: 0.8421
+
+======================================================================
+Evaluating NetLSD | ENZYMES | dim64
+======================================================================
+Samples: 600 | Features: 64 | Classes: 6
+  SVM                  | Acc: 0.2083 | F1: 0.2063 | AUC: 0.5246 | Time: 0.10s
+  LogisticRegression   | Acc: 0.1833 | F1: 0.1820 | AUC: 0.5192 | Time: 0.01s
+  RandomForest         | Acc: 0.2167 | F1: 0.2105 | AUC: 0.5860 | Time: 0.61s
+  GradientBoosting     | Acc: 0.1250 | F1: 0.1166 | AUC: 0.5147 | Time: 14.22s
+  MLP                  | Acc: 0.1667 | F1: 0.1444 | AUC: 0.4751 | Time: 0.12s
+  Ensemble             | Acc: 0.1667 | F1: 0.1577 | AUC: 0.5418 | Time: 9.32s
+
+  ★ Best Model: RandomForest with Accuracy: 0.2167
+
+======================================================================
+Evaluating NetLSD | ENZYMES | dim128
+======================================================================
+Samples: 600 | Features: 128 | Classes: 6
+  SVM                  | Acc: 0.1667 | F1: 0.1623 | AUC: 0.5368 | Time: 0.11s
+  LogisticRegression   | Acc: 0.2000 | F1: 0.1919 | AUC: 0.5222 | Time: 0.01s
+  RandomForest         | Acc: 0.2250 | F1: 0.2211 | AUC: 0.5627 | Time: 0.57s
+  GradientBoosting     | Acc: 0.1917 | F1: 0.1938 | AUC: 0.5027 | Time: 25.15s
+  MLP                  | Acc: 0.2333 | F1: 0.2382 | AUC: 0.5500 | Time: 0.29s
+  Ensemble             | Acc: 0.1500 | F1: 0.1466 | AUC: 0.5230 | Time: 20.71s
+
+  ★ Best Model: MLP with Accuracy: 0.2333
+
+======================================================================
+Evaluating NetLSD | ENZYMES | dim256
+======================================================================
+Samples: 600 | Features: 256 | Classes: 6
+  SVM                  | Acc: 0.2583 | F1: 0.2458 | AUC: 0.5992 | Time: 0.13s
+  LogisticRegression   | Acc: 0.2083 | F1: 0.1641 | AUC: 0.5868 | Time: 0.05s
+  RandomForest         | Acc: 0.2333 | F1: 0.2283 | AUC: 0.6053 | Time: 0.60s
+  GradientBoosting     | Acc: 0.1917 | F1: 0.1894 | AUC: 0.5759 | Time: 42.91s
+  MLP                  | Acc: 0.2417 | F1: 0.1981 | AUC: 0.6338 | Time: 0.93s
+  Ensemble             | Acc: 0.2250 | F1: 0.2238 | AUC: 0.6137 | Time: 33.98s
+
+  ★ Best Model: SVM with Accuracy: 0.2583
+
+======================================================================
+Evaluating NetLSD | IMDB-MULTI | dim64
+======================================================================
+Samples: 1500 | Features: 64 | Classes: 3
+  SVM                  | Acc: 0.3567 | F1: 0.3545 | AUC: 0.5354 | Time: 0.42s
+  LogisticRegression   | Acc: 0.3567 | F1: 0.3514 | AUC: 0.5362 | Time: 0.00s
+  RandomForest         | Acc: 0.3933 | F1: 0.3868 | AUC: 0.5609 | Time: 0.87s
+  GradientBoosting     | Acc: 0.3900 | F1: 0.3888 | AUC: 0.5550 | Time: 17.00s
+  MLP                  | Acc: 0.3833 | F1: 0.3816 | AUC: 0.5367 | Time: 0.57s
+  Ensemble             | Acc: 0.4000 | F1: 0.3954 | AUC: 0.5690 | Time: 11.65s
+
+  ★ Best Model: Ensemble with Accuracy: 0.4000
+
+======================================================================
+Evaluating NetLSD | IMDB-MULTI | dim128
+======================================================================
+Samples: 1500 | Features: 128 | Classes: 3
+  SVM                  | Acc: 0.3567 | F1: 0.3556 | AUC: 0.5200 | Time: 0.50s
+  LogisticRegression   | Acc: 0.3700 | F1: 0.3651 | AUC: 0.5376 | Time: 0.01s
+  RandomForest         | Acc: 0.3800 | F1: 0.3759 | AUC: 0.5567 | Time: 0.93s
+  GradientBoosting     | Acc: 0.3867 | F1: 0.3846 | AUC: 0.5623 | Time: 32.00s
+  MLP                  | Acc: 0.3567 | F1: 0.3474 | AUC: 0.5201 | Time: 0.64s
+  Ensemble             | Acc: 0.4100 | F1: 0.4079 | AUC: 0.5703 | Time: 23.58s
+
+  ★ Best Model: Ensemble with Accuracy: 0.4100
+
+======================================================================
+Evaluating NetLSD | IMDB-MULTI | dim256
+======================================================================
+Samples: 1500 | Features: 256 | Classes: 3
+  SVM                  | Acc: 0.4100 | F1: 0.3832 | AUC: 0.5956 | Time: 0.75s
+  LogisticRegression   | Acc: 0.3933 | F1: 0.3742 | AUC: 0.5732 | Time: 0.07s
+  RandomForest         | Acc: 0.3533 | F1: 0.3528 | AUC: 0.5500 | Time: 1.02s
+  GradientBoosting     | Acc: 0.3333 | F1: 0.3325 | AUC: 0.5306 | Time: 53.97s
+  MLP                  | Acc: 0.3567 | F1: 0.3307 | AUC: 0.5668 | Time: 2.25s
+  Ensemble             | Acc: 0.3433 | F1: 0.3422 | AUC: 0.5565 | Time: 42.12s
+
+  ★ Best Model: SVM with Accuracy: 0.4100
+
+======================================================================
+Results saved to: ../csvs/perturbated_netlsd_classification_results.csv
+======================================================================
+
+======================================================================
+AVERAGE PERFORMANCE BY CLASSIFIER
+======================================================================
+                   Accuracy              F1             AUC        
+                       mean     std    mean     std    mean     std
+Model                                                              
+Ensemble             0.4720  0.2989  0.4697  0.3010  0.6816  0.1808
+GradientBoosting     0.4605  0.3004  0.4597  0.3025  0.6560  0.1755
+LogisticRegression   0.4416  0.2477  0.4329  0.2557  0.6217  0.1236
+MLP                  0.4505  0.2527  0.4288  0.2490  0.6211  0.1271
+RandomForest         0.4721  0.2684  0.4622  0.2633  0.6838  0.1712
+SVM                  0.4642  0.2701  0.4535  0.2670  0.6504  0.1515
+
+======================================================================
+AVERAGE PERFORMANCE BY DATASET
+======================================================================
+           Accuracy              F1             AUC        
+               mean     max    mean     max    mean     max
+Dataset                                                    
+ENZYMES      0.1995  0.2583  0.1901  0.2458  0.5541  0.6338
+IMDB-MULTI   0.3739  0.4100  0.3673  0.4079  0.5518  0.5956
+MUTAG        0.8070  0.8684  0.7961  0.8695  0.8514  0.9415
+
+======================================================================
+BEST CONFIGURATION PER DATASET
+======================================================================
+   Dataset    Dim    Model  Accuracy       F1      AUC
+   ENZYMES dim256      SVM  0.258333 0.245839 0.599250
+IMDB-MULTI dim128 Ensemble  0.410000 0.407866 0.570333
+     MUTAG  dim64      SVM  0.868421 0.863564 0.864615
+
+======================================================================
+Evaluating Graph2Vec | MUTAG | dim64
+======================================================================
+Samples: 188 | Features: 64 | Classes: 2
+  SVM                  | Acc: 0.7368 | F1: 0.7368 | AUC: 0.8000 | Time: 0.01s
+  LogisticRegression   | Acc: 0.6579 | F1: 0.6544 | AUC: 0.6646 | Time: 0.05s
+  RandomForest         | Acc: 0.7105 | F1: 0.6998 | AUC: 0.8554 | Time: 0.60s
+  GradientBoosting     | Acc: 0.6842 | F1: 0.6771 | AUC: 0.7969 | Time: 0.79s
+  MLP                  | Acc: 0.7895 | F1: 0.7944 | AUC: 0.8708 | Time: 0.03s
+  Ensemble             | Acc: 0.7368 | F1: 0.7309 | AUC: 0.8400 | Time: 0.73s
+
+  ★ Best Model: MLP with Accuracy: 0.7895
+
+======================================================================
+Evaluating Graph2Vec | MUTAG | dim128
+======================================================================
+Samples: 188 | Features: 128 | Classes: 2
+  SVM                  | Acc: 0.7105 | F1: 0.7076 | AUC: 0.7969 | Time: 0.01s
+  LogisticRegression   | Acc: 0.6842 | F1: 0.6771 | AUC: 0.7446 | Time: 0.01s
+  RandomForest         | Acc: 0.7632 | F1: 0.7678 | AUC: 0.8800 | Time: 0.58s
+  GradientBoosting     | Acc: 0.7895 | F1: 0.7895 | AUC: 0.8738 | Time: 1.33s
+  MLP                  | Acc: 0.6579 | F1: 0.6607 | AUC: 0.7938 | Time: 0.11s
+  Ensemble             | Acc: 0.8158 | F1: 0.8139 | AUC: 0.8431 | Time: 1.20s
+
+  ★ Best Model: Ensemble with Accuracy: 0.8158
+
+======================================================================
+Evaluating Graph2Vec | MUTAG | dim256
+======================================================================
+Samples: 188 | Features: 256 | Classes: 2
+  SVM                  | Acc: 0.7105 | F1: 0.7076 | AUC: 0.7538 | Time: 0.01s
+  LogisticRegression   | Acc: 0.6053 | F1: 0.6131 | AUC: 0.6338 | Time: 0.01s
+  RandomForest         | Acc: 0.7368 | F1: 0.7408 | AUC: 0.8769 | Time: 0.58s
+  GradientBoosting     | Acc: 0.7895 | F1: 0.7895 | AUC: 0.8062 | Time: 2.50s
+  MLP                  | Acc: 0.7105 | F1: 0.6998 | AUC: 0.8338 | Time: 0.25s
+  Ensemble             | Acc: 0.7895 | F1: 0.7895 | AUC: 0.8062 | Time: 2.12s
+
+  ★ Best Model: GradientBoosting with Accuracy: 0.7895
+
+======================================================================
+Evaluating Graph2Vec | ENZYMES | dim64
+======================================================================
+Samples: 600 | Features: 64 | Classes: 6
+  SVM                  | Acc: 0.2000 | F1: 0.1960 | AUC: 0.4762 | Time: 0.10s
+  LogisticRegression   | Acc: 0.1750 | F1: 0.1696 | AUC: 0.4925 | Time: 0.02s
+  RandomForest         | Acc: 0.1750 | F1: 0.1665 | AUC: 0.5138 | Time: 0.57s
+  GradientBoosting     | Acc: 0.2333 | F1: 0.2266 | AUC: 0.5087 | Time: 12.37s
+  MLP                  | Acc: 0.1667 | F1: 0.1445 | AUC: 0.5187 | Time: 0.12s
+  Ensemble             | Acc: 0.1833 | F1: 0.1740 | AUC: 0.4973 | Time: 11.25s
+
+  ★ Best Model: GradientBoosting with Accuracy: 0.2333
+
+======================================================================
+Evaluating Graph2Vec | ENZYMES | dim128
+======================================================================
+Samples: 600 | Features: 128 | Classes: 6
+  SVM                  | Acc: 0.1750 | F1: 0.1742 | AUC: 0.5109 | Time: 0.11s
+  LogisticRegression   | Acc: 0.1583 | F1: 0.1509 | AUC: 0.4921 | Time: 0.04s
+  RandomForest         | Acc: 0.2500 | F1: 0.2508 | AUC: 0.5813 | Time: 0.58s
+  GradientBoosting     | Acc: 0.2167 | F1: 0.2173 | AUC: 0.5328 | Time: 25.28s
+  MLP                  | Acc: 0.1917 | F1: 0.1717 | AUC: 0.5462 | Time: 0.23s
+  Ensemble             | Acc: 0.2250 | F1: 0.2115 | AUC: 0.5699 | Time: 19.12s
+
+  ★ Best Model: RandomForest with Accuracy: 0.2500
+
+======================================================================
+Evaluating Graph2Vec | ENZYMES | dim256
+======================================================================
+Samples: 600 | Features: 256 | Classes: 6
+  SVM                  | Acc: 0.2417 | F1: 0.2357 | AUC: 0.5633 | Time: 0.17s
+  LogisticRegression   | Acc: 0.1833 | F1: 0.1806 | AUC: 0.5295 | Time: 0.08s
+  RandomForest         | Acc: 0.1750 | F1: 0.1622 | AUC: 0.5672 | Time: 0.69s
+  GradientBoosting     | Acc: 0.1833 | F1: 0.1773 | AUC: 0.5337 | Time: 50.43s
+  MLP                  | Acc: 0.2333 | F1: 0.2304 | AUC: 0.5576 | Time: 0.62s
+  Ensemble             | Acc: 0.2250 | F1: 0.2173 | AUC: 0.5589 | Time: 37.83s
+
+  ★ Best Model: SVM with Accuracy: 0.2417
+
+======================================================================
+Evaluating Graph2Vec | IMDB-MULTI | dim64
+======================================================================
+Samples: 1500 | Features: 64 | Classes: 3
+  SVM                  | Acc: 0.3433 | F1: 0.3431 | AUC: 0.5183 | Time: 0.48s
+  LogisticRegression   | Acc: 0.3367 | F1: 0.3366 | AUC: 0.5269 | Time: 0.01s
+  RandomForest         | Acc: 0.3800 | F1: 0.3776 | AUC: 0.5509 | Time: 0.84s
+  GradientBoosting     | Acc: 0.3400 | F1: 0.3405 | AUC: 0.5392 | Time: 18.18s
+  MLP                  | Acc: 0.3533 | F1: 0.3444 | AUC: 0.5470 | Time: 0.26s
+  Ensemble             | Acc: 0.3367 | F1: 0.3358 | AUC: 0.5427 | Time: 12.49s
+
+  ★ Best Model: RandomForest with Accuracy: 0.3800
+
+======================================================================
+Evaluating Graph2Vec | IMDB-MULTI | dim128
+======================================================================
+Samples: 1500 | Features: 128 | Classes: 3
+  SVM                  | Acc: 0.3400 | F1: 0.3399 | AUC: 0.5109 | Time: 0.58s
+  LogisticRegression   | Acc: 0.3267 | F1: 0.3245 | AUC: 0.4635 | Time: 0.04s
+  RandomForest         | Acc: 0.3467 | F1: 0.3385 | AUC: 0.5222 | Time: 0.99s
+  GradientBoosting     | Acc: 0.3333 | F1: 0.3337 | AUC: 0.5143 | Time: 33.60s
+  MLP                  | Acc: 0.3033 | F1: 0.3023 | AUC: 0.4842 | Time: 0.86s
+  Ensemble             | Acc: 0.3367 | F1: 0.3372 | AUC: 0.5091 | Time: 25.57s
+
+  ★ Best Model: RandomForest with Accuracy: 0.3467
+
+======================================================================
+Evaluating Graph2Vec | IMDB-MULTI | dim256
+======================================================================
+Samples: 1500 | Features: 256 | Classes: 3
+  SVM                  | Acc: 0.3700 | F1: 0.3686 | AUC: 0.5229 | Time: 0.89s
+  LogisticRegression   | Acc: 0.3833 | F1: 0.3835 | AUC: 0.5495 | Time: 0.12s
+  RandomForest         | Acc: 0.3433 | F1: 0.3376 | AUC: 0.5470 | Time: 1.11s
+  GradientBoosting     | Acc: 0.4133 | F1: 0.4129 | AUC: 0.5587 | Time: 66.38s
+  MLP                  | Acc: 0.3500 | F1: 0.3419 | AUC: 0.5480 | Time: 3.24s
+  Ensemble             | Acc: 0.4067 | F1: 0.4059 | AUC: 0.5507 | Time: 53.21s
+
+  ★ Best Model: GradientBoosting with Accuracy: 0.4133
+
+======================================================================
+Results saved to: ../csvs/perturbated_graph2vec_classification_results.csv
+======================================================================
+
+======================================================================
+AVERAGE PERFORMANCE BY CLASSIFIER
+======================================================================
+                   Accuracy              F1             AUC        
+                       mean     std    mean     std    mean     std
+Model                                                              
+Ensemble             0.4506  0.2577  0.4462  0.2601  0.6353  0.1479
+GradientBoosting     0.4426  0.2461  0.4405  0.2466  0.6294  0.1494
+LogisticRegression   0.3901  0.2104  0.3878  0.2118  0.5663  0.0940
+MLP                  0.4174  0.2376  0.4100  0.2436  0.6333  0.1524
+RandomForest         0.4312  0.2406  0.4269  0.2440  0.6550  0.1633
+SVM                  0.4253  0.2302  0.4233  0.2305  0.6059  0.1357
+
+======================================================================
+AVERAGE PERFORMANCE BY DATASET
+======================================================================
+           Accuracy              F1             AUC        
+               mean     max    mean     max    mean     max
+Dataset                                                    
+ENZYMES      0.1995  0.2500  0.1921  0.2508  0.5306  0.5812
+IMDB-MULTI   0.3524  0.4133  0.3502  0.4129  0.5281  0.5587
+MUTAG        0.7266  0.8158  0.7250  0.8139  0.8039  0.8800
+
+======================================================================
+BEST CONFIGURATION PER DATASET
+======================================================================
+   Dataset    Dim            Model  Accuracy       F1      AUC
+   ENZYMES dim128     RandomForest  0.250000 0.250830 0.581250
+IMDB-MULTI dim256 GradientBoosting  0.413333 0.412865 0.558717
+     MUTAG dim128         Ensemble  0.815789 0.813911 0.843077
+
+======================================================================
+EVALUATION COMPLETE!
+======================================================================
+
+======================================================================
+COMPARISON: NetLSD vs Graph2Vec
+======================================================================
+            NetLSD_Acc  Graph2Vec_Acc  NetLSD_F1  Graph2Vec_F1     Winner
+Dataset                                                                  
+ENZYMES         0.1995         0.1995     0.1901        0.1921  Graph2Vec
+IMDB-MULTI      0.3739         0.3524     0.3673        0.3502     NetLSD
+MUTAG           0.8070         0.7266     0.7961        0.7250     NetLSD
