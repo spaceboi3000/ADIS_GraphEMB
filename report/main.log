@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (TeX Live 2023)  (format=lualatex 2026.1.21)  21 JAN 2026 18:09
+This is LuaHBTeX, Version 1.17.0 (TeX Live 2023)  (format=lualatex 2026.1.21)  21 JAN 2026 18:11
  restricted system commands enabled.
 **main.tex
 (./main.tex
@@ -548,12 +548,12 @@ braces):
 >  {greek/Localnumeral}  =>  {Greeknumerals}
 >  {greek/DefineCommandsCmd}  =>  {xpg_define_language_commands:e}.
 Module polyglossia Info: Language data for greek
-(polyglossia)            synonyms	polygreek
-(polyglossia)            righthyphenmin	1
 (polyglossia)            loader	loadhyph-el-polyton.tex
-(polyglossia)            patterns	hyph-el-polyton.pat.txt
+(polyglossia)            synonyms	polygreek
+(polyglossia)            hyphenation	
 (polyglossia)            lefthyphenmin	1
-(polyglossia)            hyphenation	 on input line 16
+(polyglossia)            patterns	hyph-el-polyton.pat.txt
+(polyglossia)            righthyphenmin	1 on input line 16
 
 Module polyglossia Warning: Hyphenation file hyph-el-polyton.pat.txt not found o
 n input line 16
@@ -561,12 +561,12 @@ Module polyglossia Info: Language greek was not yet loaded; created with id 2 on
  input line 16
 (/usr/share/texlive/texmf-dist/tex/latex/polyglossia/xgreek-fixes.def)
 Module polyglossia Info: Language data for monogreek
-(polyglossia)            synonyms	
-(polyglossia)            righthyphenmin	1
 (polyglossia)            loader	loadhyph-el-monoton.tex
-(polyglossia)            patterns	hyph-el-monoton.pat.txt
+(polyglossia)            synonyms	
+(polyglossia)            hyphenation	
 (polyglossia)            lefthyphenmin	1
-(polyglossia)            hyphenation	 on input line 99
+(polyglossia)            patterns	hyph-el-monoton.pat.txt
+(polyglossia)            righthyphenmin	1 on input line 99
 
 Module polyglossia Warning: Hyphenation file hyph-el-monoton.pat.txt not found o
 n input line 99
