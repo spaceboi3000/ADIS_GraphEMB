@@ -290,6 +290,21 @@ graph2vec_results = evaluate_embeddings(
     out_file=Path("../csvs/graph2vec_classification_results.csv"),
 )
 
+
+
+#----------------- GENERATE PERTURBATION RESULTS -----------------#
+# netlsd_results = evaluate_embeddings(
+#     method_name="NetLSD",
+#     emb_root=Path("../permutated_embeddings/permutated_netlsd"),
+#     out_file=Path("../csvs/perturbated_netlsd_classification_results.csv"),
+# )
+
+# graph2vec_results = evaluate_embeddings(
+#     method_name="Graph2Vec",
+#     emb_root=Path("../permutated_embeddings/permutated_graph2vec"),
+#     out_file=Path("../csvs/perturbated_graph2vec_classification_results.csv"),
+# )
+
 print("\n" + "="*70)
 print("EVALUATION COMPLETE!")
 print("="*70)

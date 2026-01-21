@@ -1,17 +1,3 @@
-"""
-Enhanced plotting script for graph embedding classification performance analysis.
-
-Generates comprehensive visualizations including:
-- Method comparison plots (accuracy, F1, AUC)
-- Performance vs embedding dimension curves
-- Computational cost analysis (time and memory)
-- Trade-off analysis (accuracy vs efficiency)
-- Heatmaps and correlation plots
-
-Requirements:
-    pip install pandas numpy matplotlib seaborn
-"""
-
 from __future__ import annotations
 import re
 from pathlib import Path
@@ -37,7 +23,6 @@ plt.style.use('bmh')
 # Configuration
 # =============================
 class Config:
-    """Centralized configuration for plotting."""
     OUT_DIR = Path("./plots_classification/")
     
     # Data paths
