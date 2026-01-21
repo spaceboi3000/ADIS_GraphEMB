@@ -581,7 +581,8 @@ NetLSD achieves very strong stability only at higher dim sizes
 and GIN shows the most sensitivity to perturbations. 
 
 Executing again the classification task after perturbing the graphs we receive
-the values we see on Tables~\ref{tab:gin_best_per}-\ref{tab:netlsd_best_per}
+the results we see on Tables~\ref{tab:gin_best_per}-\ref{tab:netlsd_best_per}. 
+Comparing these results with the pre-perturbation setting reveals clear differences in robustness across embedding methods.
 
 \begin{table}
 \centering
@@ -656,3 +657,52 @@ IMDB-MULTI & 128 & RF  & \textbf{0.380} & \textbf{0.376} & \textbf{0.557} \\
 After the perturbations.}
 \label{tab:netlsd_best_per}
 \end{table}
+
+We observe that GIN exhibits the largest performance degradation across all datasets following perturbation.
+On MUTAG accuracy drops from nearly 90\% before perturbation to approximately 79\%, 
+while the F1 score has more noticeable decrease in its its values. 
+Interesting is that AUC values remain relatively high for some configurations, 
+meaning that GIN still preserves its class seperating behavior,
+but still its predictions have become less consistent.
+On ENZYMES, the impact of perturbations is severe. 
+Accuracy values fall and both F1 and AUC suffer substantial degradation. 
+This is because GIN relies on precise local graph structure and the 
+pertubations strongly interrupted this interaction.
+For IMDB-MULTI, where node features are absent, 
+GIN experiences a smaller drop in its values. 
+This indicates that in structure only settings  
+GIN behaves more similarly to unsupervised structural methods.
+Overall these results highlight that supervised GNNs, while being powerful 
+are thought sensitive to structural noise particularly when trained on small datasets.
+
+
+Graph2Vec, on the other side, demonstrates mixed robustness behavior. 
+On MUTAG, performance remains unchanged compared to the non perturbed case and 
+also accuracy and AUC stay within a similar range. 
+This shows that G2V's structure are stable under random perturbations.
+On ENZYMES performance remains low both for before and after perturbation, 
+meaning that G2V's embeddings already lack strong class discriminative behavior and also
+perturbations do not worsen the classification results.
+For IMDB-MULTI Graph2Vec shows a modest performance drop, 
+but the relative change is smaller than that we observed on GIN. 
+This confirms that unsupervised structure based embeddings are less sensitive to different permutations.
+
+
+Lastly, NetLSD shows the highest robustness to perturbations among all evaluated methods. 
+On MUTAG it maintains high accuracy and even achieves an AUC of 0.941 outperforming GIN in the perturbed setting. 
+This confirms that global spectral descriptors are stable to local noise.
+For ENZYMES, while the general performance is modest, 
+NetLSD shows minor modification and still outperforms G2V and approaching GIN under perturbation.
+On IMDB-MULTI, NetLSD achieves the strongest unsupervised performance after perturbation.
+
+We observe that the perturbation experiments on classification reveal clear differences in robustness among the three evaluated embedding methods. 
+GIN achieves the highest classification performance on unperturbed graphs, but has the largest 
+downgrade after the experiments, meaning that it is extremely sensitive. 
+Graph2Vec has moderate robustness, because its performance remaining relatively stable under perturbation. 
+In contrast, NetLSD shows the highest stability, because it maintains relatively good accuracy 
+and its AUC scores are consistently strong. 
+These results highlight a trade-off between expressiveness and robustness. specifically
+supervised models excel under clean conditions without any kind of permutation, 
+while global spectral embeddings are more resilient to structural noise, 
+making them well suited for real-world scenarios.
+
