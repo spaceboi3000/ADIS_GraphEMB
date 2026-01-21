@@ -555,9 +555,6 @@ class Plotter:
         cls.save_figure(fig, filename)
 
 
-# =============================
-# Main Pipeline
-# =============================
 def select_rows_for_comparison(df: pd.DataFrame) -> pd.DataFrame:
     """Select one row per method for bar chart comparisons."""
     if df.empty:

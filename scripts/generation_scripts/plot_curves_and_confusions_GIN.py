@@ -1,8 +1,3 @@
-"""
-Generate per-run plots for GIN experiments:
-- training_curve.png  (from train_val_curve.csv)
-- confusion_matrix.png (from test_confusion_matrix.csv)
-"""
 
 import argparse
 from pathlib import Path

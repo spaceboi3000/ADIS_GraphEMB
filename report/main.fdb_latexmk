@@ -1,0 +1,12 @@
+# Fdb version 4
+["latex"] 1769005671.63388 "main.tex" "main.dvi" "main" 1769005701.14075 2
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1754438400 40900 887e0dc8cac988a9e9c574af364cf837 ""
+  "/var/lib/texmf/web2c/pdftex/latex.fmt" 1769005662 6444367 573dc5ff2121a64bfb43cefff4593022 ""
+  "IEEEtran.cls" 0 -1 0 ""
+  "main.aux" 1769003491.45045 10002 bb329c318a1dfba82d1e85489920914c "latex"
+  "main.tex" 1769003491.46419 837 50c59a120a026d4c7881a098b3f6058e ""
+  (generated)
+  "main.aux"
+  "main.dvi"
+  "main.log"
+  (rewritten before read)

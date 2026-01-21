@@ -1,5 +1,3 @@
-# /content/gin_embeddings_permutated_emb1.py
-
 import argparse, time, csv, traceback, os, tracemalloc, math, json, random
 from pathlib import Path
 from typing import Tuple, List

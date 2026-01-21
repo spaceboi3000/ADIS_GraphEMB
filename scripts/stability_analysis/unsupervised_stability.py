@@ -5,10 +5,6 @@ from typing import Dict, List
 import numpy as np
 import pandas as pd
 
-#cos_mean -> close to 1, embeddings barely changed -> HIGH stability
-#cos_mean -> close to 0, embeddings changed a lot
-#l2_mean -> close to 0, almost identical
-#large l2_mean, embeddings changed significantly
 
 DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
 DIMS = [64, 128, 256]
