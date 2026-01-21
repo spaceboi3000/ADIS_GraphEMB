@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2026.1.20)  21 JAN 2026 18:23
+This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2026.1.20)  21 JAN 2026 18:29
  restricted system commands enabled.
 **/home/nodys/Documents/ADIS/ADIS_GraphEMB/report/main
 (/home/nodys/Documents/ADIS/ADIS_GraphEMB/report/main.tex
@@ -312,79 +312,329 @@ Package: fontspec-luatex 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTe
 \l__fontspec_tmpc_dim=\dimen194
  (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
-) (/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.cfg)))) (/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen195
 \WF@size=\dimen196
 \c@WF@wrappedlines=\count305
 \WF@box=\box57
 \WF@everypar=\toks26
 Package: wrapfig 2003/01/31  v 3.6
-) (./preamble/fonts.tex)
+) (/usr/share/texlive/texmf-dist/tex/latex/polyglossia/polyglossia.sty
+Package: polyglossia 2021/04/12 v1.53 Modern multilingual typesetting with XeLaTeX and LuaLaTeX
+ (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count306
+) (/usr/share/texlive/texmf-dist/tex/latex/makecmds/makecmds.sty
+Package: makecmds 2009/09/03 v1.0a extra command making commands
+) (/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
+ (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks27
+\XKV@tempa@toks=\toks28
+)
+\XKV@depth=\count307
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+)) (/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+) (/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+Package: l3keys2e 2022-01-12 LaTeX2e option processing using LaTeX3 keys
+)
+
+LaTeX hooks Warning: Generic hook 'file/after/tracklang.sty' is deprecated.
+(hooks)              Use hook 'file/tracklang.sty/after' instead.
+
+(/usr/share/texlive/texmf-dist/tex/luatex/luatexbase/luatexbase.sty
+Package: luatexbase 2015/10/04 v1.3 luatexbase interface to LuaTeX 
+ (/usr/share/texlive/texmf-dist/tex/luatex/ctablestack/ctablestack.sty
+Package: ctablestack 2015/10/01 v1.0 Catcode table stable support
+\@catcodetablestackcnt=\count308
+)
+\CatcodeTableOther=\catcodetable12
+\CatcodeTableExpl=\catcodetable13
+)
+Lua module: polyglossia 2013/05/11 1.3 Polyglossia...texlive/texmf-dist/tex/latex/polyglossia/polyglossia.lua:71: module 'language.dat.lua' not found:
+	no field package.preload['language.dat.lua']
+	[kpse lua searcher] file not found: 'language.dat.lua'
+stack traceback:
+	[C]: in function 'require'
+	...texlive/texmf-dist/tex/latex/polyglossia/polyglossia.lua:71: in main chunk
+	[C]: in function 'require'
+	[\directlua]:1: in main chunk.
+\RequireLuaModule #1->\directlua {require("#1")}
+                                                \@gobbleoptarg 
+l.38   \RequireLuaModule{polyglossia}
+                                   
+The lua interpreter ran into a problem, so the
+remainder of this lua chunk will be ignored.
+
+
+LaTeX hooks Warning: Generic hook 'package/after/bidi' is deprecated.
+(hooks)              Use hook 'package/bidi/after' instead.
+
+
+LaTeX hooks Warning: Generic hook 'package/after/luabidi' is deprecated.
+(hooks)              Use hook 'package/luabidi/after' instead.
+
+(/usr/share/texlive/texmf-dist/tex/latex/polyglossia/gloss-latex.ldf
+File: gloss-latex.ldf polyglossia: module for default language
+The property list \polyglossia@langsetup contains the pairs (without outer
+braces):
+>  {latex/script}  =>  {latin}
+>  {latex/lcscript}  =>  {latin}
+>  {latex/scripttag}  =>  {}
+>  {latex/language}  =>  {Latex}
+>  {latex/langtag}  =>  {ENG}
+>  {latex/bcp47}  =>  {}
+>  {latex/hyphennames}  =>  {english}
+>  {latex/direction}  =>  {LR}
+>  {latex/hyphenmins}  =>  {2,3}
+>  {latex/frenchspacing}  =>  {false}
+>  {latex/indentfirst}  =>  {false}
+>  {latex/fontsetup}  =>  {true}
+>  {latex/envname}  =>  {latex}
+>  {latex/babelname}  =>  {latex}
+>  {latex/localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {latex/Localnumeral}  =>  {polyglossia@C@localnumeral}.
+)
+Package polyglossia Info: Default language is latex.
+[\directlua]:1: attempt to call a nil value (field 'set_default_language')
+stack traceback:
+	[\directlua]:1: in main chunk.
+\polyglossia@set@default@language:nn ...ing #2}')}
+                                                  \fi 
+l.2299 \setmainlanguage{latex}
+                            
+The lua interpreter ran into a problem, so the
+remainder of this lua chunk will be ignored.
+
+Package polyglossia Info: Setting LuaTeX font renderer to Harfbuzz.
+) (/usr/share/texlive/texmf-dist/tex/latex/polyglossia/gloss-english.ldf
+File: gloss-english.ldf polyglossia: module for english
+The property list \polyglossia@langsetup contains the pairs (without outer
+braces):
+>  {latex/script}  =>  {latin}
+>  {latex/lcscript}  =>  {latin}
+>  {latex/scripttag}  =>  {}
+>  {latex/language}  =>  {Latex}
+>  {latex/langtag}  =>  {ENG}
+>  {latex/bcp47}  =>  {}
+>  {latex/hyphennames}  =>  {english}
+>  {latex/direction}  =>  {LR}
+>  {latex/hyphenmins}  =>  {2,3}
+>  {latex/frenchspacing}  =>  {false}
+>  {latex/indentfirst}  =>  {false}
+>  {latex/fontsetup}  =>  {true}
+>  {latex/envname}  =>  {latex}
+>  {latex/babelname}  =>  {latex}
+>  {latex/localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {latex/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {english/script}  =>  {latin}
+>  {english/lcscript}  =>  {latin}
+>  {english/scripttag}  =>  {}
+>  {english/language}  =>  {English}
+>  {english/langtag}  =>  {ENG}
+>  {english/bcp47}  =>  {en-US}
+>  {english/hyphennames}  =>  {english,american,usenglish,USenglish}
+>  {english/direction}  =>  {LR}
+>  {english/hyphenmins}  =>  {2,3}
+>  {english/frenchspacing}  =>  {false}
+>  {english/indentfirst}  =>  {false}
+>  {english/fontsetup}  =>  {true}
+>  {english/envname}  =>  {english}
+>  {english/babelname}  =>  {english}
+>  {english/localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {english/Localnumeral}  =>  {polyglossia@C@localnumeral}.
+Package polyglossia Info: Option: English, variant=american.
+)
+Package polyglossia Info: Default language is english.
+[\directlua]:1: attempt to call a nil value (field 'set_default_language')
+stack traceback:
+	[\directlua]:1: in main chunk.
+\polyglossia@set@default@language:nn ...ing #2}')}
+                                                  \fi 
+l.14 \setdefaultlanguage{english}
+                               
+The lua interpreter ran into a problem, so the
+remainder of this lua chunk will be ignored.
+
+(/usr/share/texlive/texmf-dist/tex/latex/polyglossia/gloss-greek.ldf
+File: gloss-greek.ldf polyglossia: module for greek
+The property list \polyglossia@langsetup contains the pairs (without outer
+braces):
+>  {latex/script}  =>  {latin}
+>  {latex/lcscript}  =>  {latin}
+>  {latex/scripttag}  =>  {}
+>  {latex/language}  =>  {Latex}
+>  {latex/langtag}  =>  {ENG}
+>  {latex/bcp47}  =>  {}
+>  {latex/hyphennames}  =>  {english}
+>  {latex/direction}  =>  {LR}
+>  {latex/hyphenmins}  =>  {2,3}
+>  {latex/frenchspacing}  =>  {false}
+>  {latex/indentfirst}  =>  {false}
+>  {latex/fontsetup}  =>  {true}
+>  {latex/envname}  =>  {latex}
+>  {latex/babelname}  =>  {latex}
+>  {latex/localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {latex/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {english/script}  =>  {latin}
+>  {english/lcscript}  =>  {latin}
+>  {english/scripttag}  =>  {}
+>  {english/language}  =>  {English}
+>  {english/langtag}  =>  {ENG}
+>  {english/bcp47}  =>  {en-US}
+>  {english/hyphennames}  =>  {english,american,usenglish,USenglish}
+>  {english/direction}  =>  {LR}
+>  {english/hyphenmins}  =>  {2,3}
+>  {english/frenchspacing}  =>  {false}
+>  {english/indentfirst}  =>  {false}
+>  {english/fontsetup}  =>  {true}
+>  {english/envname}  =>  {english}
+>  {english/babelname}  =>  {american}
+>  {english/localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {english/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {greek/script}  =>  {Greek}
+>  {greek/lcscript}  =>  {greek}
+>  {greek/scripttag}  =>  {grek}
+>  {greek/language}  =>  {Greek}
+>  {greek/langtag}  =>  {ELL}
+>  {greek/bcp47}  =>  {el-monoton}
+>  {greek/hyphennames}  =>  {}
+>  {greek/direction}  =>  {LR}
+>  {greek/hyphenmins}  =>  {2,3}
+>  {greek/frenchspacing}  =>  {true}
+>  {greek/indentfirst}  =>  {true}
+>  {greek/fontsetup}  =>  {true}
+>  {greek/envname}  =>  {greek}
+>  {greek/babelname}  =>  {greek}
+>  {greek/localnumeral}  =>  {greeknumerals}
+>  {greek/Localnumeral}  =>  {Greeknumerals}.
+[\directlua]:1: attempt to call a nil value (field 'newloader')
+stack traceback:
+	[\directlua]:1: in main chunk.
+<argument> ...tlua {tex.sprint(polyglossia.newloader'greek')}
+                                                  \relax 
+l.14 }
+    
+The lua interpreter ran into a problem, so the
+remainder of this lua chunk will be ignored.
+
+! Missing number, treated as zero.
+<to be read again> 
+\relax 
+l.14 }
+    
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+(/usr/share/texlive/texmf-dist/tex/latex/polyglossia/xgreek-fixes.def)[\directlua]:1: attempt to call a nil value (field 'newloader')
+stack traceback:
+	[\directlua]:1: in main chunk.
+<argument> ... {tex.sprint(polyglossia.newloader'monogreek')}
+                                                  \relax 
+l.97 ...ons{greek}{variant=monotonic,numerals=greek}
+                                                  
+The lua interpreter ran into a problem, so the
+remainder of this lua chunk will be ignored.
+
+! Missing number, treated as zero.
+<to be read again> 
+\relax 
+l.97 ...ons{greek}{variant=monotonic,numerals=greek}
+                                                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+Package polyglossia Info: Option: Monotonic Greek.
+\@attic@num=\count309
+)) (./preamble/fonts.tex
 luaotfload | cache : Lookup cache loaded from /home/nodys/.texlive2021/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc.
 
 Package fontspec Info: Font family 'TeXGyreTermes(0)' created for font 'TeX
-(fontspec)             Gyre Termes' with options [Ligatures=TeX,UprightFont =
-(fontspec)             *,BoldFont = * Bold,ItalicFont = *
-(fontspec)             Italic,BoldItalicFont = * Bold Italic].
+(fontspec)             Gyre Termes' with options
+(fontspec)             [Renderer=Harfbuzz,Ligatures=TeX].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->"TeXGyreTermes:mode=node;script=latn;language=dflt;+tlig;"
+(fontspec)             <->"TeXGyreTermes:mode=harf;script=latn;language=dflt;+tlig;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->"TeXGyreTermes:mode=node;script=latn;language=dflt;+tlig;+smcp;"
+(fontspec)             <->"TeXGyreTermes:mode=harf;script=latn;language=dflt;+tlig;+smcp;"
 (fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->"TeXGyreTermesBold:mode=node;script=latn;language=dflt;+tlig;"
+(fontspec)             <->"TeXGyreTermes/B:mode=harf;script=latn;language=dflt;+tlig;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->"TeXGyreTermesBold:mode=node;script=latn;language=dflt;+tlig;+smcp;"
+(fontspec)             <->"TeXGyreTermes/B:mode=harf;script=latn;language=dflt;+tlig;+smcp;"
 (fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->"TeXGyreTermesItalic:mode=node;script=latn;language=dflt;+tlig;"
+(fontspec)             <->"TeXGyreTermes/I:mode=harf;script=latn;language=dflt;+tlig;"
 (fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->"TeXGyreTermesItalic:mode=node;script=latn;language=dflt;+tlig;+smcp;"
+(fontspec)             <->"TeXGyreTermes/I:mode=harf;script=latn;language=dflt;+tlig;+smcp;"
 (fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->"TeXGyreTermesBoldItalic:mode=node;script=latn;language=dflt;+tlig;"
+(fontspec)             <->"TeXGyreTermes/BI:mode=harf;script=latn;language=dflt;+tlig;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->"TeXGyreTermesBoldItalic:mode=node;script=latn;language=dflt;+tlig;+smcp;"
+(fontspec)             <->"TeXGyreTermes/BI:mode=harf;script=latn;language=dflt;+tlig;+smcp;"
 
- (./main.aux)
+
+Package fontspec Info: Font family 'FreeSerif(0)' created for font 'FreeSerif'
+(fontspec)             with options [Renderer=Harfbuzz,Script=Greek].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"FreeSerif:mode=harf;script=grek;language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->"FreeSerif/B:mode=harf;script=grek;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->"FreeSerif/I:mode=harf;script=grek;language=dflt;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.: 
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->"FreeSerif/BI:mode=harf;script=grek;language=dflt;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
+
+)
+No file main.aux.
+
 \openout1 = main.aux
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 15.
- (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 8.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 8.
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
 
 -- Lines per column: 56 (exact).
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count306
+\scratchcounter=\count310
 \scratchdimen=\dimen197
 \scratchbox=\box58
-\nofMPsegments=\count307
-\nofMParguments=\count308
-\everyMPshowfont=\toks27
-\MPscratchCnt=\count309
+\nofMPsegments=\count311
+\nofMParguments=\count312
+\everyMPshowfont=\toks29
+\MPscratchCnt=\count313
 \MPscratchDim=\dimen198
-\MPnumerator=\count310
-\makeMPintoPDFobject=\count311
-\everyMPtoPDFconversion=\toks28
+\MPnumerator=\count314
+\makeMPintoPDFobject=\count315
+\everyMPtoPDFconversion=\toks30
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -394,7 +644,76 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
- (./sections/titlepage.tex
+
+Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
+(fontspec)             this).
+
+\symlegacymaths=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 8.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 8.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 8.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 8.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 8.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 8.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 8.
+LaTeX Font Info:    Redeclaring math accent \check on input line 8.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 8.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 8.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 8.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 8.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 8.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 8.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 8.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 8.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 8.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 8.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 8.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 8.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 8.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 8.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 8.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 8.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `normal' on input line 8.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> TU/TeXGyreTermes(0)/m/n on input line 8.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `bold' on input line 8.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> TU/TeXGyreTermes(0)/m/n on input line 8.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  TU/TeXGyreTermes(0)/m/n --> TU/TeXGyreTermes(0)/m/n on input line 8.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> TU/TeXGyreTermes(0)/m/it on input line 8.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> TU/TeXGyreTermes(0)/b/n on input line 8.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 8.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 8.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  TU/TeXGyreTermes(0)/m/n --> TU/TeXGyreTermes(0)/b/n on input line 8.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> TU/TeXGyreTermes(0)/b/it on input line 8.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 8.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 8.
+LaTeX Info: Redefining \rmfamily on input line 8.
+LaTeX Info: Redefining \sffamily on input line 8.
+LaTeX Info: Redefining \ttfamily on input line 8.
+[\directlua]:1: attempt to call a nil value (field 'select_language')
+stack traceback:
+	[\directlua]:1: in main chunk.
+\polyglossia@select@language:nnn ...3\endcsname )}
+                                                  \fi \polyglossia@register@...
+l.8 \begin{document}
+                  
+The lua interpreter ran into a problem, so the
+remainder of this lua chunk will be ignored.
+
+(./sections/titlepage.tex
 LaTeX Font Info:    Calculating math sizes for size <11> on input line 88.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 88.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -403,43 +722,161 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 88.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)) (./sections/introduction.tex
+)
+LaTeX Info: Redefining \rmfamily on input line 88.
+LaTeX Info: Redefining \sffamily on input line 88.
+LaTeX Info: Redefining \ttfamily on input line 88.
+LaTeX Info: Redefining \rmfamily on input line 88.
+LaTeX Info: Redefining \sffamily on input line 88.
+LaTeX Info: Redefining \ttfamily on input line 88.
+LaTeX Info: Redefining \rmfamily on input line 88.
+LaTeX Info: Redefining \sffamily on input line 88.
+LaTeX Info: Redefining \ttfamily on input line 88.
+LaTeX Info: Redefining \rmfamily on input line 88.
+LaTeX Info: Redefining \sffamily on input line 88.
+LaTeX Info: Redefining \ttfamily on input line 88.
+LaTeX Info: Redefining \rmfamily on input line 88.
+LaTeX Info: Redefining \sffamily on input line 88.
+LaTeX Info: Redefining \ttfamily on input line 88.
+LaTeX Info: Redefining \rmfamily on input line 88.
+LaTeX Info: Redefining \sffamily on input line 88.
+LaTeX Info: Redefining \ttfamily on input line 88.
+LaTeX Info: Redefining \rmfamily on input line 88.
+LaTeX Info: Redefining \sffamily on input line 88.
+LaTeX Info: Redefining \ttfamily on input line 88.
+LaTeX Info: Redefining \rmfamily on input line 88.
+LaTeX Info: Redefining \sffamily on input line 88.
+LaTeX Info: Redefining \ttfamily on input line 88.
+LaTeX Info: Redefining \rmfamily on input line 88.
+LaTeX Info: Redefining \sffamily on input line 88.
+LaTeX Info: Redefining \ttfamily on input line 88.
+) (./sections/introduction.tex
+
+LaTeX Font Warning: Font shape `TU/FreeSerif(0)/m/sc' undefined
+(Font)              using `TU/FreeSerif(0)/m/n' instead on input line 2.
+
+
+LaTeX Warning: Citation `shervashidze2011wl' on page 1 undefined on input line 13.
+
+
+LaTeX Warning: Citation `vishwanathan2010graphkernels' on page 1 undefined on input line 13.
+
+
+LaTeX Warning: Citation `narayanangraph2vec' on page 1 undefined on input line 15.
+
+
+LaTeX Warning: Citation `tsitsulin2018netlsd' on page 1 undefined on input line 15.
+
+
+LaTeX Warning: Citation `xu2019gin' on page 1 undefined on input line 16.
+
 <figures/svsu1.jpeg, id=1, 1268.74pt x 447.6725pt>
 File: figures/svsu1.jpeg Graphic file (type jpg)
 <use figures/svsu1.jpeg>
 Package luatex.def Info: figures/svsu1.jpeg  used on input line 20.
 (luatex.def)             Requested size: 252.0pt x 88.91129pt.
- [1
+
+LaTeX Warning: Reference `fig:SupervsUn' on page 1 undefined on input line 25.
+
+
+LaTeX Warning: Citation `errica2019fairgnn' on page 1 undefined on input line 44.
+
+
+LaTeX Warning: Citation `dwivedi2020benchmarking' on page 1 undefined on input line 44.
+
+[1
 Non-PDF special ignored!
-Missing character: There is no ί (U+03AF) in font TeXGyreTermes:mode=node;script=latn;language=dflt;+tlig;!
-Missing character: There is no ί (U+03AF) in font TeXGyreTermes:mode=node;script=latn;language=dflt;+tlig;!
-Missing character: There is no ί (U+03AF) in font TeXGyreTermes:mode=node;script=latn;language=dflt;+tlig;!
-Missing character: There is no ί (U+03AF) in font TeXGyreTermes:mode=node;script=latn;language=dflt;+tlig;!
-Missing character: There is no ό (U+03CC) in font TeXGyreTermes:mode=node;script=latn;language=dflt;+tlig;!
-Missing character: There is no ΐ (U+0390) in font TeXGyreTermes:mode=node;script=latn;language=dflt;+tlig;!
 
 
-<./figures/svsu1.jpeg>]) (./sections/related_work.tex) (./sections/methods.tex [2]) (./sections/datasets.tex) (./sections/experimental_setup.tex [3]) (./sections/evaluation.tex [4]) (./sections/results.tex [5]
-<figures/HEATMAP_AVG_accuracy_bef.png, id=39, 917.1063pt x 423.7431pt>
+<./figures/svsu1.jpeg>]) (./sections/related_work.tex) (./sections/methods.tex
+
+LaTeX Warning: Citation `narayanangraph2vec' on page 2 undefined on input line 13.
+
+
+LaTeX Warning: Reference `alg:getwlsubgraph' on page 2 undefined on input line 113.
+
+
+LaTeX Warning: Reference `alg:graph2vec' on page 2 undefined on input line 115.
+
+
+LaTeX Warning: Citation `tsitsulin2018netlsd' on page 2 undefined on input line 118.
+
+
+LaTeX Warning: Reference `alg:netlsd' on page 2 undefined on input line 123.
+
+
+LaTeX Warning: Citation `xu2019gin' on page 2 undefined on input line 183.
+
+
+LaTeX Warning: Reference `alg:gin_forward' on page 2 undefined on input line 187.
+
+
+LaTeX Warning: Reference `alg:gin_train' on page 2 undefined on input line 190.
+
+) (./sections/datasets.tex
+
+LaTeX Warning: Citation `narayanangraph2vec' on page 2 undefined on input line 8.
+
+
+LaTeX Warning: Citation `tsitsulin2018netlsd' on page 2 undefined on input line 8.
+
+
+LaTeX Warning: Citation `xu2019gin' on page 2 undefined on input line 8.
+
+[2]
+
+LaTeX Warning: Citation `debnath1991mutag' on page 3 undefined on input line 12.
+
+
+LaTeX Warning: Citation `rossi2015networkrepository' on page 3 undefined on input line 19.
+
+
+LaTeX Warning: Citation `rossi2015networkrepository' on page 3 undefined on input line 24.
+
+) (./sections/experimental_setup.tex [3]
+
+LaTeX Warning: Reference `alg:gin_forward' on page 4 undefined on input line 73.
+
+
+LaTeX Warning: Reference `alg:gin_train' on page 4 undefined on input line 73.
+
+) (./sections/evaluation.tex [4]) (./sections/results.tex
+
+LaTeX Warning: Reference `tab:gin_best' on page 5 undefined on input line 5.
+
+
+LaTeX Warning: Reference `tab:graph2vec_best' on page 5 undefined on input line 5.
+
+
+LaTeX Warning: Reference `tab:netlsd_best' on page 5 undefined on input line 5.
+
+[5]
+<figures/HEATMAP_AVG_accuracy_bef.png, id=42, 917.1063pt x 423.7431pt>
 File: figures/HEATMAP_AVG_accuracy_bef.png Graphic file (type png)
 <use figures/HEATMAP_AVG_accuracy_bef.png>
 Package luatex.def Info: figures/HEATMAP_AVG_accuracy_bef.png  used on input line 106.
 (luatex.def)             Requested size: 252.0pt x 116.43594pt.
-<figures/PARETO_AVG_acc_vs_compute_cost_bef.png, id=40, 1002.6258pt x 423.7431pt>
+<figures/PARETO_AVG_acc_vs_compute_cost_bef.png, id=43, 1002.6258pt x 423.7431pt>
 File: figures/PARETO_AVG_acc_vs_compute_cost_bef.png Graphic file (type png)
 <use figures/PARETO_AVG_acc_vs_compute_cost_bef.png>
 Package luatex.def Info: figures/PARETO_AVG_acc_vs_compute_cost_bef.png  used on input line 113.
 (luatex.def)             Requested size: 252.0pt x 106.5045pt.
-<figures/gen_bef.png, id=41, 464.73625pt x 359.3425pt>
+
+
+LaTeX Warning: Reference `fig:heatmap' on page 6 undefined on input line 130.
+
+
+LaTeX Warning: Reference `fig:peak_mem' on page 6 undefined on input line 130.
+
+<figures/gen_bef.png, id=44, 464.73625pt x 359.3425pt>
 File: figures/gen_bef.png Graphic file (type png)
 <use figures/gen_bef.png>
 Package luatex.def Info: figures/gen_bef.png  used on input line 136.
 (luatex.def)             Requested size: 201.60077pt x 155.87955pt.
 
-
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<figures/train_bef.png, id=42, 464.73625pt x 359.3425pt>
+<figures/train_bef.png, id=45, 464.73625pt x 359.3425pt>
 File: figures/train_bef.png Graphic file (type png)
 <use figures/train_bef.png>
 Package luatex.def Info: figures/train_bef.png  used on input line 143.
@@ -447,7 +884,7 @@ Package luatex.def Info: figures/train_bef.png  used on input line 143.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<figures/mem_bef.png, id=43, 464.73625pt x 359.3425pt>
+<figures/mem_bef.png, id=46, 464.73625pt x 359.3425pt>
 File: figures/mem_bef.png Graphic file (type png)
 <use figures/mem_bef.png>
 Package luatex.def Info: figures/mem_bef.png  used on input line 151.
@@ -455,17 +892,55 @@ Package luatex.def Info: figures/mem_bef.png  used on input line 151.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[6<./figures/HEATMAP_AVG_accuracy_bef.png><./figures/PARETO_AVG_acc_vs_compute_cost_bef.png><./figures/gen_bef.png>]
-<figures/NetLSD_kmeans_performance.png, id=50, 1156.32pt x 867.24pt>
+
+LaTeX Warning: Reference `fig:heatmap' on page 6 undefined on input line 156.
+
+
+LaTeX Warning: Reference `fig:pareto' on page 6 undefined on input line 159.
+
+[6<./figures/HEATMAP_AVG_accuracy_bef.png><./figures/PARETO_AVG_acc_vs_compute_cost_bef.png><./figures/gen_bef.png><./figures/train_bef.png>]
+
+LaTeX Warning: Reference `fig:embed_time' on page 7 undefined on input line 169.
+
+
+LaTeX Warning: Reference `fig:peak_mem' on page 7 undefined on input line 169.
+
+
+LaTeX Warning: Reference `fig:train_time' on page 7 undefined on input line 170.
+
+
+LaTeX Warning: Reference `fig:embed_time' on page 7 undefined on input line 171.
+
+
+LaTeX Warning: Reference `fig:peak_mem' on page 7 undefined on input line 173.
+
+
+LaTeX Warning: Reference `tab:graph2vec_cluster_best' on page 7 undefined on input line 177.
+
+
+LaTeX Warning: Reference `tab:netlsd_cluster_best' on page 7 undefined on input line 177.
+
+
+LaTeX Warning: Reference `tab:gin_cluster_best' on page 7 undefined on input line 177.
+
+
+LaTeX Warning: Reference `tab:graph2vec_cluster_best' on page 7 undefined on input line 180.
+
+
+LaTeX Warning: Reference `fig:netlsd_kmeans' on page 7 undefined on input line 280.
+
+
+LaTeX Warning: Reference `fig:gin_spectral' on page 7 undefined on input line 280.
+
+<figures/NetLSD_kmeans_performance.png, id=54, 1156.32pt x 867.24pt>
 File: figures/NetLSD_kmeans_performance.png Graphic file (type png)
 <use figures/NetLSD_kmeans_performance.png>
 Package luatex.def Info: figures/NetLSD_kmeans_performance.png  used on input line 286.
 (luatex.def)             Requested size: 252.0pt x 188.9937pt.
 
-
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<figures/Graph2Vec_kmeans_performance.png, id=51, 1156.32pt x 867.24pt>
+<figures/Graph2Vec_kmeans_performance.png, id=55, 1156.32pt x 867.24pt>
 File: figures/Graph2Vec_kmeans_performance.png Graphic file (type png)
 <use figures/Graph2Vec_kmeans_performance.png>
 Package luatex.def Info: figures/Graph2Vec_kmeans_performance.png  used on input line 294.
@@ -473,7 +948,7 @@ Package luatex.def Info: figures/Graph2Vec_kmeans_performance.png  used on input
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<figures/GIN_kmeans_performance.png, id=52, 1156.32pt x 867.24pt>
+<figures/GIN_kmeans_performance.png, id=56, 1156.32pt x 867.24pt>
 File: figures/GIN_kmeans_performance.png Graphic file (type png)
 <use figures/GIN_kmeans_performance.png>
 Package luatex.def Info: figures/GIN_kmeans_performance.png  used on input line 302.
@@ -481,7 +956,7 @@ Package luatex.def Info: figures/GIN_kmeans_performance.png  used on input line 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<figures/NetLSD_spectral_performance.png, id=53, 1156.32pt x 867.24pt>
+<figures/NetLSD_spectral_performance.png, id=57, 1156.32pt x 867.24pt>
 File: figures/NetLSD_spectral_performance.png Graphic file (type png)
 <use figures/NetLSD_spectral_performance.png>
 Package luatex.def Info: figures/NetLSD_spectral_performance.png  used on input line 310.
@@ -489,7 +964,7 @@ Package luatex.def Info: figures/NetLSD_spectral_performance.png  used on input 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<figures/Graph2Vec_spectral_performance.png, id=54, 1156.32pt x 867.24pt>
+<figures/Graph2Vec_spectral_performance.png, id=58, 1156.32pt x 867.24pt>
 File: figures/Graph2Vec_spectral_performance.png Graphic file (type png)
 <use figures/Graph2Vec_spectral_performance.png>
 Package luatex.def Info: figures/Graph2Vec_spectral_performance.png  used on input line 318.
@@ -497,7 +972,7 @@ Package luatex.def Info: figures/Graph2Vec_spectral_performance.png  used on inp
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<figures/GIN_spectral_performance.png, id=55, 1156.32pt x 867.24pt>
+<figures/GIN_spectral_performance.png, id=59, 1156.32pt x 867.24pt>
 File: figures/GIN_spectral_performance.png Graphic file (type png)
 <use figures/GIN_spectral_performance.png>
 Package luatex.def Info: figures/GIN_spectral_performance.png  used on input line 326.
@@ -506,10 +981,26 @@ Package luatex.def Info: figures/GIN_spectral_performance.png  used on input lin
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \vbox (badness 2913) has occurred while \output is active []
+LaTeX Warning: Reference `tab:stability_gin_best_cos' on page 7 undefined on input line 337.
 
- [7<./figures/train_bef.png><./figures/mem_bef.png>] [8<./figures/NetLSD_kmeans_performance.png><./figures/Graph2Vec_kmeans_performance.png><./figures/GIN_kmeans_performance.png><./figures/NetLSD_spectral_performance.png>] [9<./figures/Graph2Vec_spectral_performance.png><./figures/GIN_spectral_performance.png>]) (./sections/references.tex
-Underfull \hbox (badness 3449) in paragraph at lines 75--79
+
+LaTeX Warning: Reference `tab:stability_gin_best_l2' on page 7 undefined on input line 337.
+
+
+LaTeX Warning: Reference `tab:stability_graph2vec' on page 7 undefined on input line 337.
+
+
+LaTeX Warning: Reference `tab:stability_netlsd' on page 7 undefined on input line 337.
+
+[7<./figures/mem_bef.png>] [8<./figures/NetLSD_kmeans_performance.png><./figures/Graph2Vec_kmeans_performance.png><./figures/GIN_kmeans_performance.png><./figures/NetLSD_spectral_performance.png>]
+
+LaTeX Warning: Reference `tab:gin_best_per' on page 9 undefined on input line 584.
+
+
+LaTeX Warning: Reference `tab:netlsd_best_per' on page 9 undefined on input line 584.
+
+[9<./figures/Graph2Vec_spectral_performance.png><./figures/GIN_spectral_performance.png>]) (./sections/references.tex
+Underfull \hbox (badness 2653) in paragraph at lines 75--79
 []\TU/TeXGyreTermes(0)/m/n/8 V. P. Dwivedi, C. K. Joshi, T. Lau-rent, Y. Ben-gio, and X.
  []
 
@@ -525,26 +1016,96 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[10] (./main.aux)
+The property list \polyglossia@langsetup contains the pairs (without outer
+braces):
+>  {latex/script}  =>  {latin}
+>  {latex/lcscript}  =>  {latin}
+>  {latex/scripttag}  =>  {}
+>  {latex/language}  =>  {Latex}
+>  {latex/langtag}  =>  {ENG}
+>  {latex/bcp47}  =>  {}
+>  {latex/hyphennames}  =>  {english}
+>  {latex/direction}  =>  {LR}
+>  {latex/hyphenmins}  =>  {2,3}
+>  {latex/frenchspacing}  =>  {false}
+>  {latex/indentfirst}  =>  {false}
+>  {latex/fontsetup}  =>  {true}
+>  {latex/envname}  =>  {latex}
+>  {latex/babelname}  =>  {latex}
+>  {latex/localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {latex/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {english/script}  =>  {latin}
+>  {english/lcscript}  =>  {latin}
+>  {english/scripttag}  =>  {}
+>  {english/language}  =>  {English}
+>  {english/langtag}  =>  {ENG}
+>  {english/bcp47}  =>  {en-US}
+>  {english/hyphennames}  =>  {english,american,usenglish,USenglish}
+>  {english/direction}  =>  {LR}
+>  {english/hyphenmins}  =>  {2,3}
+>  {english/frenchspacing}  =>  {false}
+>  {english/indentfirst}  =>  {false}
+>  {english/fontsetup}  =>  {true}
+>  {english/envname}  =>  {english}
+>  {english/babelname}  =>  {american}
+>  {english/localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {english/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {greek/script}  =>  {Greek}
+>  {greek/lcscript}  =>  {greek}
+>  {greek/scripttag}  =>  {grek}
+>  {greek/language}  =>  {Greek}
+>  {greek/langtag}  =>  {ELL}
+>  {greek/bcp47}  =>  {el-monoton}
+>  {greek/hyphennames}  =>  {}
+>  {greek/direction}  =>  {LR}
+>  {greek/hyphenmins}  =>  {2,3}
+>  {greek/frenchspacing}  =>  {true}
+>  {greek/indentfirst}  =>  {true}
+>  {greek/fontsetup}  =>  {true}
+>  {greek/envname}  =>  {greek}
+>  {greek/babelname}  =>  {greek}
+>  {greek/localnumeral}  =>  {greeknumerals}
+>  {greek/Localnumeral}  =>  {Greeknumerals}.
+[10] (./main.aux
+LaTeX Info: Redefining \rmfamily on input line 6.
+LaTeX Info: Redefining \sffamily on input line 6.
+LaTeX Info: Redefining \ttfamily on input line 6.
+[\directlua]:1: attempt to call a nil value (field 'select_language')
+stack traceback:
+	[\directlua]:1: in main chunk.
+\polyglossia@select@language:nnn ...3\endcsname )}
+                                                  \fi \polyglossia@register@...
+l.6 \selectlanguage *{english}
+                            
+The lua interpreter ran into a problem, so the
+remainder of this lua chunk will be ignored.
+
+)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 )
 
 Here is how much of LuaTeX's memory you used:
- 8953 strings out of 477805
- 156265,662416 words of node,token memory allocated
+ 10577 strings out of 477805
+ 195333,662416 words of node,token memory allocated
  521 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 14 attribute, 53 glue_spec, 14 attribute_list, 1 write nodes
-   avail lists: 2:2133,3:451,4:196,5:1258,6:115,7:15002,8:47,9:1014,10:20,11:1403
- 29255 multiletter control sequences out of 65536+600000
- 126 fonts using 14241887 bytes
- 73i,12n,84p,848b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
-<</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi7.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr7.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy10.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr10.pk>></usr/share/texmf/fonts/opentype/public/lm/lmmono10-regular.otf><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi5.600pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr6.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/amsfonts/cmextra/cmex8.600pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi10.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy7.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi6.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmsy6.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/amsfonts/symbols/msbm10.480pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr8.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi8.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmsy8.600pk>></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-bold.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-bolditalic.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-italic.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf>
-Output written on main.pdf (10 pages, 1526998 bytes).
+   avail lists: 1:1,2:2887,3:554,4:242,5:1160,6:143,7:16785,8:47,9:1233,10:20,11:1540
+ 30775 multiletter control sequences out of 65536+600000
+ 151 fonts using 73085959 bytes
+ 73i,12n,87p,848b,512s stack positions out of 5000i,500n,10000p,200000b,80000s
+<</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi7.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr7.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy10.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr10.pk>></usr/share/texmf/fonts/opentype/public/lm/lmmono10-regular.otf><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi5.600pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr6.pk>></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-italic.otf><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi10.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/amsfonts/cmextra/cmex8.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi6.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmsy6.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/amsfonts/symbols/msbm10.480pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr8.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi8.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmsy8.600pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy7.pk>></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-bold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerifBold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerifBoldItalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerifItalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerif.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf>
+Output written on main.pdf (10 pages, 1542010 bytes).
 
-PDF statistics: 283 PDF objects out of 1000 (max. 8388607)
- 102 compressed objects within 2 object streams
+PDF statistics: 299 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 
