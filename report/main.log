@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2026.1.20)  21 JAN 2026 18:29
+This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2026.1.20)  21 JAN 2026 19:08
  restricted system commands enabled.
 **/home/nodys/Documents/ADIS/ADIS_GraphEMB/report/main
 (/home/nodys/Documents/ADIS/ADIS_GraphEMB/report/main.tex
@@ -999,7 +999,16 @@ LaTeX Warning: Reference `tab:gin_best_per' on page 9 undefined on input line 58
 
 LaTeX Warning: Reference `tab:netlsd_best_per' on page 9 undefined on input line 584.
 
-[9<./figures/Graph2Vec_spectral_performance.png><./figures/GIN_spectral_performance.png>]) (./sections/references.tex
+[9<./figures/Graph2Vec_spectral_performance.png><./figures/GIN_spectral_performance.png>]
+
+LaTeX Warning: Reference `fig:heatmap_perm' on page 10 undefined on input line 709.
+
+<figures/HEATMAP_AVG_accuracy_PERM.png, id=76, 917.3472pt x 423.2613pt>
+File: figures/HEATMAP_AVG_accuracy_PERM.png Graphic file (type png)
+<use figures/HEATMAP_AVG_accuracy_PERM.png>
+Package luatex.def Info: figures/HEATMAP_AVG_accuracy_PERM.png  used on input line 713.
+(luatex.def)             Requested size: 252.0pt x 116.27127pt.
+) (./sections/references.tex
 Underfull \hbox (badness 2653) in paragraph at lines 75--79
 []\TU/TeXGyreTermes(0)/m/n/8 V. P. Dwivedi, C. K. Joshi, T. Lau-rent, Y. Ben-gio, and X.
  []
@@ -1066,7 +1075,7 @@ braces):
 >  {greek/babelname}  =>  {greek}
 >  {greek/localnumeral}  =>  {greeknumerals}
 >  {greek/Localnumeral}  =>  {Greeknumerals}.
-[10] (./main.aux
+[10<./figures/HEATMAP_AVG_accuracy_PERM.png>] (./main.aux
 LaTeX Info: Redefining \rmfamily on input line 6.
 LaTeX Info: Redefining \sffamily on input line 6.
 LaTeX Info: Redefining \ttfamily on input line 6.
@@ -1093,18 +1102,18 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 )
 
 Here is how much of LuaTeX's memory you used:
- 10577 strings out of 477805
+ 10590 strings out of 477805
  195333,662416 words of node,token memory allocated
  521 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 14 attribute, 53 glue_spec, 14 attribute_list, 1 write nodes
-   avail lists: 1:1,2:2887,3:554,4:242,5:1160,6:143,7:16785,8:47,9:1233,10:20,11:1540
- 30775 multiletter control sequences out of 65536+600000
+   avail lists: 1:1,2:2887,3:554,4:242,5:1178,6:143,7:16785,8:47,9:1233,10:20,11:1540
+ 30782 multiletter control sequences out of 65536+600000
  151 fonts using 73085959 bytes
  73i,12n,87p,848b,512s stack positions out of 5000i,500n,10000p,200000b,80000s
 <</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi7.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr7.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy10.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr10.pk>></usr/share/texmf/fonts/opentype/public/lm/lmmono10-regular.otf><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi5.600pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr6.pk>></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-italic.otf><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi10.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/amsfonts/cmextra/cmex8.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi6.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmsy6.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/amsfonts/symbols/msbm10.480pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr8.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi8.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmsy8.600pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy7.pk>></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-bold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerifBold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerifBoldItalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerifItalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerif.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf>
-Output written on main.pdf (10 pages, 1542010 bytes).
+Output written on main.pdf (10 pages, 1688490 bytes).
 
-PDF statistics: 299 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 301 PDF objects out of 1000 (max. 8388607)
  114 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
