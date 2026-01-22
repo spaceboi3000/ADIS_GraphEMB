@@ -100,78 +100,121 @@ So overall, the supervised method is the most effective method and NetLSD is sec
 while Graph2Vec shows the weakest performance across all datasets and metrics.
 The results confirm that supervised GNNs provide the highest predictive power, while spectral descriptors such as 
 NetLSD remain surprisingly strong for unsupervised graph representation learning.
+Figure~\ref{fig:heatmap} presents a heatmap that summarizes the average classification accuracy across datasets
+as a function of embedding method and dimensionality.
+We can confirm that GIN consistently outperforms the other two methods across all dimensions 
+like we said earlier.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{figures/HEATMAP_AVG_accuracy_bef.png}
+    \includegraphics[width=\linewidth]{figures/HEATMAP_AVG_accuracy_before.png}
     \caption{Average accuracy heatmap across methods and embedding dimensions.}
     \label{fig:heatmap}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{figures/PARETO_AVG_acc_vs_compute_cost_bef.png}
-    \caption{Pareto frontier illustrating the trade-off between accuracy and normalized compute cost.}
-    \label{fig:pareto}
-\end{figure}
 
-
-% \begin{figure}[H]
+% \begin{figure}
 %     \centering
-%     \includegraphics[width=\linewidth]{figures/DUAL_AVG_acc_vs_compute_cost_bef.png}
-%     \caption{Accuracy and total compute cost versus embedding dimension (averaged across datasets).}
-%     \label{fig:acc_vs_cost}
+%     \includegraphics[width=\linewidth]{figures/COSTCURVE_AVG_acc_vs_total_time_before.png}
+%     \caption{Accuracy vs Total Compute Time}
+%     \label{fig:accvstotal}
 % \end{figure}
+
+% Figure~\ref{fig:accvstotal} shows the trade-off between classification accuracy and 
+% total computational cost, meaning embedding/generation plus classifier training.
+
+
 
 
 
 The experimental results reveal clear trade offs between classification 
 accuracy and computational efficiency across GIN, Graph2Vec and NetLSD, 
-as illustrated in Figures~\ref{fig:heatmap}-\ref{fig:peak_mem}. All figures are computed with the 
+as illustrated in Figures~\ref{fig:pareto}-\ref{fig:stacked_mem}. All figures are computed with the 
 average results across the three dimensions and three datasets.
-We chose these 3 images, from the 39 we generated for the classification section, to summarize and make our conclusions.
+We chose these images, from the 47 we generated for the classification section, to summarize and make our conclusions.
 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/PARETO_AVG_acc_vs_compute_cost_before.png}
+    \caption{Pareto frontier illustrating the trade-off between accuracy and normalized compute cost.}
+    \label{fig:pareto}
+\end{figure}
+
+
+The Pareto frontier in Figure~\ref{fig:pareto} provides 
+a compact overview of the balance between efficiency and performance.
+It is again the average across the datasets with a normalized combnination of cost.
+Specifically, the cost metric combines time and memory with weights 0.7 and 0.3, respectively.
+NetLSD lies on the left most side of the optimal region, meaning that it achieves reasonable accuracy with minimal compute cost.
+GIN dominates with its accuracy, but still with a significantlt higher compute cost.
+Graph2Vec is at the lower part of the graph, showing both lower accuracy from the  two other methodsand higher compute cost than NetLSD.
+From the same figure, we can see that GIN 
+benefits monotonically from increased embedding dimensionality, 
+achieving the highest average accuracy at 256 dimensions.
+In contrast, Graph2Vec and NetLSD reach their peak accuracy at 128 dimensions,
+beyond which performance declines, indicating diminishing returns with higher dimensions.
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\linewidth]{figures/gen_bef.png}
+    \includegraphics[width=0.8\linewidth]{figures/embee_before.png}
     \caption{Embedding time as a function of embedding dimension.}
     \label{fig:embed_time}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\linewidth]{figures/train_bef.png}
+    \includegraphics[width=0.8\linewidth]{figures/training_before.png}
     \caption{Training time as a function of embedding dimension.}
     \label{fig:train_time}
 \end{figure}
 
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\linewidth]{figures/mem_bef.png}
-    \caption{Peak memory usage as a function of embedding dimension.}
-    \label{fig:peak_mem}
-\end{figure}
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=0.8\linewidth]{figures/memory_before.png}
+%     \caption{Peak memory usage as a function of embedding dimension.}
+%     \label{fig:peak_mem}
+% \end{figure}
 
-Figure~\ref{fig:heatmap} presents a heatmap of average accuracy across methods and embedding dimensions.
-We can confirm that GIN consistently outperforms the other two methods across all dimensions.
 
-The Pareto frontier in Figure~\ref{fig:pareto} highlights the balance between efficiency and performance.
-NetLSD lies on the left most side of the optimal region, meaning that it achieves reasonable accuracy with minimal compute cost.
-GIN dominates with its accuracy, but with a significantlt higher compute cost.
-Graph2Vec is at the lower part of the graph, showing both lower accuracy from both other methods  and higher compute cost than NetLSD.
-From the same figure, we can see that GIN 
-benefits monotonically from increased embedding dimensionality, 
-achieving the highest average accuracy at 256 dimensions.
-In contrast, Graph2Vec and NetLSD reach their peak accuracy at 128 dimensions,
-beyond which performance declines, indicating diminishing returns with higher dimensions.
-
-Figures~\ref{fig:embed_time}-\ref{fig:peak_mem} break down the compute cost into embedding time, training time and peak memory usage.
+Figures~\ref{fig:embed_time}-\ref{fig:train_mem} break down the compute cost into embedding time and training time and 
+on figures~\ref{fig:stacked_time}-\ref{fig:stacked_mem} we can see a consolidated view of time and memory consumption for each method at the maximum embedding dimensionality (256). 
 Training time (Figure~\ref{fig:train_time}) is dominated by GIN and increases substantially with embedding dimension.
 Embedding time (Figure~\ref{fig:embed_time}) is highest for NetLSD at lower dimensions 
-due to its spectral computations but decreases at higher dim sizes.
-Peak memory usage (Figure~\ref{fig:peak_mem}) is highest for Graph2Vec,
-while NetLSD remains more memory efficient. 
+due to its spectral computations but decreases at higher dim sizes, 
+highlighting its scalability advantages for graph level representation learning.
+% Peak memory usage (Figure~\ref{fig:peak_mem}) is highest for Graph2Vec,
+% while NetLSD remains more memory efficient. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/stacked_time_before.png}
+    \caption{Overall Resource Usage (Stacked Time)}
+    \label{fig:stacked_time}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/stacked_mem_before.png}
+    \caption{Overall Resource Usage (Stacked Memory)}
+    \label{fig:stacked_mem}
+\end{figure}
+
+
+From the stacked bars, GIN achieves the highest total runtime, 
+dominated by classifier training and model fitting, 
+confirming that supervised learning is the primary computational bottleneck.
+Its memory footprint is also significantly larger  
+driven by high peak RSS usage during training.
+Graph2Vec shows moderate runtime and memory usage, but without corresponding gains in accuracy.
+NetLSD achieves the lowest overall runtime and memory footprint 
+while maintaining relatively competitive accuracy between GIN, 
+reinforcing its suitability for large-scale or resource-limited scenarios.
+So finally, these results show that NetLSD provides the best overall efficiency, 
+whereas GIN delivers the highest accuracy at a substantially higher resource cost.
+
+
+
 
 
 Continuing with the clustering task, tables~\ref{tab:graph2vec_cluster_best}, ~\ref{tab:netlsd_cluster_best} and ~\ref{tab:gin_cluster_best} 
@@ -672,11 +715,18 @@ For IMDB-MULTI, where node features are absent,
 GIN experiences a smaller drop in its values. 
 This indicates that in structure only settings  
 GIN behaves more similarly to unsupervised structural methods.
-Overall these results highlight that supervised GNNs, while being powerful 
+Overall these results indicate that supervised GNNs, while being powerful 
 are thought sensitive to structural noise particularly when trained on small datasets.
+Figure~\ref{fig:heatmap_after} presents the average heatmap after the permutations. 
 
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/HEATMAP_AVG_accuracy_after.png}
+    \caption{After permutation: average accuracy heatmap across methods and embedding dimensions.}
+    \label{fig:heatmap_after}
+\end{figure}
 
-Graph2Vec, on the other side, demonstrates mixed robustness behavior. 
+Graph2Vec, on the other side, shows mixed signals. 
 On MUTAG, performance remains unchanged compared to the non perturbed case and 
 also accuracy and AUC stay within a similar range. 
 This shows that G2V's structure are stable under random perturbations.
@@ -706,11 +756,26 @@ supervised models excel under clean conditions without any kind of permutation,
 while global spectral embeddings are more resilient to structural noise, 
 making them well suited for real-world scenarios.
 
-Figure~\ref{fig:heatmap_perm} presents the average heatmap after the permutations. 
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/PARETO_AVG_acc_vs_compute_cost_after.png}
+    \caption{After permutation: Pareto frontier}
+    \label{fig:pareto_after}
+\end{figure}
+
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{figures/HEATMAP_AVG_accuracy_PERM.png}
-    \caption{After permutation: average accuracy heatmap across methods and embedding dimensions.}
-    \label{fig:heatmap_perm}
+    \includegraphics[width=0.8\linewidth]{figures/stacked_time_after.png}
+    \caption{After permutation: Stacked time}
+    \label{fig:stacked_time_after}
 \end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/stacked_mem_after.png}
+    \caption{After permutation: Stacked Memory}
+    \label{fig:stacked_mem_after}
+\end{figure}
+
+
