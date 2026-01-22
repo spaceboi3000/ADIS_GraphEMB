@@ -744,6 +744,13 @@ This confirms that global spectral descriptors are stable to local noise.
 For ENZYMES, while the general performance is modest, 
 NetLSD shows minor modification and still outperforms G2V and approaching GIN under perturbation.
 On IMDB-MULTI, NetLSD achieves the strongest unsupervised performance after perturbation.
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/PARETO_AVG_acc_vs_compute_cost_after.png}
+    \caption{After permutation: Pareto frontier}
+    \label{fig:pareto_after}
+\end{figure}
+
 
 We observe that the perturbation experiments on classification reveal clear differences in robustness among the three evaluated embedding methods. 
 GIN achieves the highest classification performance on unperturbed graphs, but has the largest 
@@ -756,12 +763,6 @@ supervised models excel under clean conditions without any kind of permutation,
 while global spectral embeddings are more resilient to structural noise, 
 making them well suited for real-world scenarios.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{figures/PARETO_AVG_acc_vs_compute_cost_after.png}
-    \caption{After permutation: Pareto frontier}
-    \label{fig:pareto_after}
-\end{figure}
 
 
 \begin{figure}
@@ -777,5 +778,12 @@ making them well suited for real-world scenarios.
     \caption{After permutation: Stacked Memory}
     \label{fig:stacked_mem_after}
 \end{figure}
+
+The figures~\ref{fig:pareto_after}-\ref{fig:stacked_mem_after} verify what we already have told and 
+show a clear shift in the optimal trade off between accuracy and computational cost.
+NetLSD configurations dominate achieving the highest accuracy at the lowest normalized compute cost, which combines runtime and memory usage, 
+as we can see from Pareto frontier plot and the two stacked plots. 
+
+
 
 
