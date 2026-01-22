@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2026.1.20)  22 JAN 2026 19:48
+This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2026.1.20)  22 JAN 2026 19:59
  restricted system commands enabled.
 **main
 (./main.tex
@@ -516,12 +516,6 @@ stack traceback:
                                                   \fi 
 l.14 \setdefaultlanguage{english}
                                
-? [A[A
-Type <return> to proceed, S to scroll future error messages,
-R to run without stopping, Q to run quietly,
-I to insert something, E to edit your file,
-1 or ... or 9 to ignore the next 1 to 9 tokens of input,
-H for help, X to quit.
 ? 
 (/usr/share/texlive/texmf-dist/tex/latex/polyglossia/gloss-greek.ldf
 File: gloss-greek.ldf polyglossia: module for greek
@@ -603,6 +597,12 @@ l.97 ...ons{greek}{variant=monotonic,numerals=greek}
 \relax 
 l.97 ...ons{greek}{variant=monotonic,numerals=greek}
                                                   
+? \
+Type <return> to proceed, S to scroll future error messages,
+R to run without stopping, Q to run quietly,
+I to insert something, E to edit your file,
+1 or ... or 9 to ignore the next 1 to 9 tokens of input,
+H for help, X to quit.
 ? 
 Package polyglossia Info: Option: Monotonic Greek.
 \@attic@num=\count309
@@ -887,10 +887,6 @@ Package luatex.def Info: figures/training_before.png  used on input line 166.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-LaTeX Warning: Reference `fig:train_mem' on page 6 undefined on input line 180.
-
-
 [6<./figures/HEATMAP_AVG_accuracy_before.png><./figures/PARETO_AVG_acc_vs_comput
 e_cost_before.png><./figures/embee_before.png>]
 <figures/stacked_time_before.png, id=52, 596.2275pt x 417.56pt>
@@ -1076,20 +1072,17 @@ l.6 \selectlanguage *{english}
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: There were undefined references.
-
 )
 
 Here is how much of LuaTeX's memory you used:
- 10658 strings out of 477805
+ 10657 strings out of 477805
  156265,662416 words of node,token memory allocated
  521 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 14 attribute, 53 glue_spec
 , 14 attribute_list, 1 write nodes
    avail lists: 2:2139,3:556,4:242,5:1006,6:143,7:16788,8:47,9:843,10:20,11:1540
 
- 30813 multiletter control sequences out of 65536+600000
+ 30812 multiletter control sequences out of 65536+600000
  151 fonts using 73085959 bytes
  73i,12n,87p,800b,521s stack positions out of 5000i,500n,10000p,200000b,80000s
 <</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi7.pk>><</us
@@ -1115,7 +1108,86 @@ FreeSerifBoldItalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu
 -freefont/FreeSerifItalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/publ
 ic/gnu-freefont/FreeSerif.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/t
 exgyretermes-regular.otf>
-Output written on main.pdf (11 pages, 1768198 bytes).
+Output written on main.pdf (11 pages, 1768146 bytes).
+
+PDF statistics: 314 PDF objects out of 1000 (max. 8388607)
+ 118 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 131072)
+ 1 words of extra memory for PDF output out of 10000 (max. 100000000)
+
+>  {latex}
+>  {latex/babelname}  =>  {latex}
+>  {latex/localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {latex/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {english/script}  =>  {latin}
+>  {english/lcscript}  =>  {latin}
+>  {english/scripttag}  =>  {}
+>  {english/language}  =>  {English}
+>  {english/langtag}  =>  {ENG}
+>  {english/bcp47}  =>  {en-US}
+>  {english/hyphennames}  =>  {english,american,usenglish,USenglish}
+>  {english/direction}  =>  {LR}
+>  {english/hyphenmins}  =>  {2,3}
+>  {english/frenchspacing}  =>  {false}
+>  {english/indentfirst}  =>  {false}
+>  {english/fontsetup}  =>  {true}
+>  {english/envname}  =>  {english}
+>  {english/babelname}  =>  {american}
+>  {english/localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {english/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {greek/script}  =>  {Greek}
+>  {greek/lcscript}  =>  {greek}
+>  {greek/scripttag}  =>  {grek}
+>  {greek/language}  =>  {Greek}
+>  {greek/langtag}  =>  {ELL}
+>  {greek/bcp47}  =>  {el-monoton}
+>  {greek/hyphennames}  =>  {}
+>  {greek/direction}  =>  {LR}
+>  {greek/hyphenmins}  =>  {2,3}
+>  {greek/frenchspacing}  =>  {true}
+>  {greek/indentfirst}  =>  {true}
+>  {greek/fontsetup}  =>  {true}
+>  {greek/envname}  =>  {greek}
+>  {greek/babelname}  =>  {greek}
+>  {greek/localnumeral}  =>  {greeknumerals}
+>  {greek/Localnumeral}  =>  {Greeknumerals}.
+[11<./figures/stacked_time_after.png><./figures/stacked_mem_after.png>] (./main.aux
+LaTeX Info: Redefining \rmfamily on input line 6.
+LaTeX Info: Redefining \sffamily on input line 6.
+LaTeX Info: Redefining \ttfamily on input line 6.
+[\directlua]:1: attempt to call a nil value (field 'select_language')
+stack traceback:
+	[\directlua]:1: in main chunk.
+\polyglossia@select@language:nnn ...3\endcsname )}
+                                                  \fi \polyglossia@register@...
+l.6 \selectlanguage *{english}
+                            
+The lua interpreter ran into a problem, so the
+remainder of this lua chunk will be ignored.
+
+)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+)
+
+Here is how much of LuaTeX's memory you used:
+ 10653 strings out of 477805
+ 156265,662416 words of node,token memory allocated
+ 521 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 14 attribute, 53 glue_spec, 14 attribute_list, 1 write nodes
+   avail lists: 2:2155,3:554,4:242,5:1006,6:143,7:16785,8:47,9:843,10:20,11:1540
+ 30812 multiletter control sequences out of 65536+600000
+ 151 fonts using 73085959 bytes
+ 73i,12n,87p,848b,512s stack positions out of 5000i,500n,10000p,200000b,80000s
+<</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi7.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr7.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy10.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr10.pk>></usr/share/texmf/fonts/opentype/public/lm/lmmono10-regular.otf><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi5.600pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr6.pk>></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-italic.otf><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi10.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/amsfonts/cmextra/cmex8.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi6.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmsy6.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/amsfonts/symbols/msbm10.480pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr8.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi8.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmsy8.600pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy7.pk>></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-bold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerifBold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerifBoldItalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerifItalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerif.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf>
+Output written on main.pdf (11 pages, 1769006 bytes).
 
 PDF statistics: 314 PDF objects out of 1000 (max. 8388607)
  118 compressed objects within 2 object streams
