@@ -805,6 +805,305 @@ def create_metrics_heatmap(df, cluster_alg='kmeans', output_path=None):
 
 
 # =============================================================================
+# NEW: t-SNE vs UMAP PER DATASET (2×3)
+# =============================================================================
+
+def create_tsne_vs_umap_per_dataset(df, dataset, dim, base_dir, datasets_dir, output_path=None):
+    """
+    t-SNE vs UMAP comparison for a single dataset.
+    Layout: 2×3 (rows: t-SNE/UMAP, cols: GIN/Graph2Vec/NetLSD)
+    """
+    if not UMAP_AVAILABLE:
+        print("UMAP not available.")
+        return None
+    
+    fig, axes = plt.subplots(2, 3, figsize=Config.FIGSIZE_2x3)
+    
+    for col, method in enumerate(Config.METHODS):
+        best_config = get_best_config_for_method_dataset_dim(df, method, dataset, dim)
+        
+        embeddings, labels = None, None
+        if best_config is not None:
+            run_name = best_config.get('run_name') if pd.notna(best_config.get('run_name')) else None
+            embeddings, labels = load_embeddings(method, dataset, dim, base_dir, datasets_dir, run_name)
+        
+        for row, proj_type in enumerate(['tsne', 'umap']):
+            ax = axes[row, col]
+            
+            if embeddings is None:
+                plot_empty_cell(ax, 'N/A', method if row == 0 else None)
+                if col == 0:
+                    ax.set_ylabel('t-SNE' if proj_type == 'tsne' else 'UMAP',
+                                 fontsize=Config.LABEL_SIZE, fontweight='bold')
+                continue
+            
+            projection = compute_projection(embeddings, proj_type)
+            metrics_text = f"ARI={best_config['ari']:.3f}\nNMI={best_config['nmi']:.3f}"
+            
+            title = method if row == 0 else None
+            plot_embedding_scatter(ax, projection, labels, title=title,
+                                  metrics_text=metrics_text, show_legend=(row == 0 and col == 2))
+            
+            if col == 0:
+                ax.set_ylabel('t-SNE' if proj_type == 'tsne' else 'UMAP',
+                             fontsize=Config.LABEL_SIZE, fontweight='bold')
+    
+    fig.suptitle(f"{dataset} - t-SNE vs UMAP (dim={dim})",
+                fontsize=Config.TITLE_SIZE + 1, fontweight='bold', y=0.98)
+    plt.tight_layout()
+    
+    if output_path:
+        plt.savefig(output_path, dpi=Config.DPI, bbox_inches='tight')
+        print(f"Saved: {output_path}")
+    
+    return fig
+
+
+# =============================================================================
+# NEW: K-MEANS vs SPECTRAL PER DATASET (2×3)
+# =============================================================================
+
+def create_kmeans_vs_spectral_per_dataset(df, dataset, dim, base_dir, datasets_dir,
+                                          projection_type='tsne', output_path=None):
+    """
+    K-means vs Spectral clustering comparison for a single dataset.
+    Layout: 2×3 (rows: K-means/Spectral, cols: GIN/Graph2Vec/NetLSD)
+    """
+    fig, axes = plt.subplots(2, 3, figsize=Config.FIGSIZE_2x3)
+    
+    cluster_algs = ['kmeans', 'spectral']
+    cluster_labels = ['K-means', 'Spectral']
+    
+    for col, method in enumerate(Config.METHODS):
+        # Load embeddings once (same for both clustering methods)
+        best_config_km = get_best_config_for_method_dataset_dim(df, method, dataset, dim, cluster_alg='kmeans')
+        
+        embeddings, labels = None, None
+        if best_config_km is not None:
+            run_name = best_config_km.get('run_name') if pd.notna(best_config_km.get('run_name')) else None
+            embeddings, labels = load_embeddings(method, dataset, dim, base_dir, datasets_dir, run_name)
+        
+        # Compute projection once
+        projection = None
+        if embeddings is not None:
+            projection = compute_projection(embeddings, projection_type)
+        
+        for row, (alg, alg_label) in enumerate(zip(cluster_algs, cluster_labels)):
+            ax = axes[row, col]
+            
+            best_config = get_best_config_for_method_dataset_dim(df, method, dataset, dim, cluster_alg=alg)
+            
+            if embeddings is None or best_config is None:
+                plot_empty_cell(ax, 'N/A', method if row == 0 else None)
+                if col == 0:
+                    ax.set_ylabel(alg_label, fontsize=Config.LABEL_SIZE, fontweight='bold')
+                continue
+            
+            metrics_text = f"ARI={best_config['ari']:.3f}\nNMI={best_config['nmi']:.3f}"
+            
+            title = method if row == 0 else None
+            plot_embedding_scatter(ax, projection, labels, title=title,
+                                  metrics_text=metrics_text, show_legend=(row == 0 and col == 2))
+            
+            if col == 0:
+                ax.set_ylabel(alg_label, fontsize=Config.LABEL_SIZE, fontweight='bold')
+    
+    fig.suptitle(f"{dataset} - K-means vs Spectral ({projection_type.upper()}, dim={dim})",
+                fontsize=Config.TITLE_SIZE + 1, fontweight='bold', y=0.98)
+    plt.tight_layout()
+    
+    if output_path:
+        plt.savefig(output_path, dpi=Config.DPI, bbox_inches='tight')
+        print(f"Saved: {output_path}")
+    
+    return fig
+
+
+# =============================================================================
+# NEW: COMPREHENSIVE GRID - SEPARATE FOR ORIGINAL AND PERMUTED (3×3)
+# =============================================================================
+
+def create_comprehensive_single_source(df, base_dir, datasets_dir, projection_type='tsne',
+                                       dim=128, source_label='Original', output_path=None):
+    """
+    Comprehensive grid for a single source (original OR permuted).
+    Layout: 3×3 (rows: Methods, cols: Datasets)
+    """
+    fig, axes = plt.subplots(3, 3, figsize=Config.FIGSIZE_3x3)
+    
+    for m_idx, method in enumerate(Config.METHODS):
+        for d_idx, dataset in enumerate(Config.DATASETS):
+            ax = axes[m_idx, d_idx]
+            
+            best_config = get_best_config_for_method_dataset_dim(df, method, dataset, dim)
+            
+            if best_config is None:
+                plot_empty_cell(ax, 'N/A')
+                if m_idx == 0:
+                    ax.set_title(dataset, fontsize=Config.TITLE_SIZE, fontweight='bold')
+                if d_idx == 0:
+                    ax.set_ylabel(method, fontsize=Config.LABEL_SIZE, fontweight='bold')
+                continue
+            
+            run_name = best_config.get('run_name') if pd.notna(best_config.get('run_name')) else None
+            embeddings, labels = load_embeddings(method, dataset, dim, base_dir, datasets_dir, run_name)
+            
+            if embeddings is None:
+                plot_empty_cell(ax, 'Missing')
+                if m_idx == 0:
+                    ax.set_title(dataset, fontsize=Config.TITLE_SIZE, fontweight='bold')
+                if d_idx == 0:
+                    ax.set_ylabel(method, fontsize=Config.LABEL_SIZE, fontweight='bold')
+                continue
+            
+            projection = compute_projection(embeddings, projection_type)
+            metrics_text = f"ARI={best_config['ari']:.3f}"
+            
+            plot_embedding_scatter(ax, projection, labels, metrics_text=metrics_text,
+                                  show_legend=(m_idx == 0 and d_idx == 2))
+            
+            if m_idx == 0:
+                ax.set_title(dataset, fontsize=Config.TITLE_SIZE, fontweight='bold')
+            if d_idx == 0:
+                ax.set_ylabel(method, fontsize=Config.LABEL_SIZE, fontweight='bold')
+    
+    fig.suptitle(f"{source_label} Embeddings - Methods × Datasets ({projection_type.upper()}, dim={dim})",
+                fontsize=Config.TITLE_SIZE + 1, fontweight='bold', y=0.99)
+    plt.tight_layout()
+    
+    if output_path:
+        plt.savefig(output_path, dpi=Config.DPI, bbox_inches='tight')
+        print(f"Saved: {output_path}")
+    
+    return fig
+
+
+# =============================================================================
+# NEW: t-SNE vs UMAP COMPREHENSIVE (3×3 per projection, side by side = 3×6)
+# =============================================================================
+
+def create_tsne_umap_all_methods_datasets(df, base_dir, datasets_dir, dim=128, output_path=None):
+    """
+    Comprehensive t-SNE vs UMAP: All methods × all datasets.
+    Layout: 3×6 (rows: Methods, cols: Datasets × t-SNE/UMAP)
+    """
+    if not UMAP_AVAILABLE:
+        print("UMAP not available.")
+        return None
+    
+    fig = plt.figure(figsize=Config.FIGSIZE_3x6)
+    gs = gridspec.GridSpec(3, 6, figure=fig, wspace=0.08, hspace=0.25)
+    
+    for m_idx, method in enumerate(Config.METHODS):
+        for d_idx, dataset in enumerate(Config.DATASETS):
+            best_config = get_best_config_for_method_dataset_dim(df, method, dataset, dim)
+            
+            embeddings, labels = None, None
+            if best_config is not None:
+                run_name = best_config.get('run_name') if pd.notna(best_config.get('run_name')) else None
+                embeddings, labels = load_embeddings(method, dataset, dim, base_dir, datasets_dir, run_name)
+            
+            for p_idx, proj_type in enumerate(['tsne', 'umap']):
+                col = d_idx * 2 + p_idx
+                ax = fig.add_subplot(gs[m_idx, col])
+                
+                if embeddings is None:
+                    plot_empty_cell(ax, 'N/A')
+                    if m_idx == 0:
+                        label = 't-SNE' if proj_type == 'tsne' else 'UMAP'
+                        ax.set_title(f"{dataset}\n({label})", fontsize=7, fontweight='bold')
+                    if col == 0:
+                        ax.set_ylabel(method, fontsize=8, fontweight='bold')
+                    continue
+                
+                projection = compute_projection(embeddings, proj_type)
+                metrics_text = f"ARI={best_config['ari']:.2f}"
+                
+                plot_embedding_scatter(ax, projection, labels, metrics_text=metrics_text, marker_size=5)
+                
+                if m_idx == 0:
+                    label = 't-SNE' if proj_type == 'tsne' else 'UMAP'
+                    ax.set_title(f"{dataset}\n({label})", fontsize=7, fontweight='bold')
+                if col == 0:
+                    ax.set_ylabel(method, fontsize=8, fontweight='bold')
+    
+    fig.suptitle(f"t-SNE vs UMAP - All Methods × All Datasets (dim={dim})",
+                fontsize=10, fontweight='bold', y=0.99)
+    plt.tight_layout()
+    
+    if output_path:
+        plt.savefig(output_path, dpi=Config.DPI, bbox_inches='tight')
+        print(f"Saved: {output_path}")
+    
+    return fig
+
+
+# =============================================================================
+# NEW: K-MEANS vs SPECTRAL COMPREHENSIVE (3×6)
+# =============================================================================
+
+def create_kmeans_spectral_all_methods_datasets(df, base_dir, datasets_dir, 
+                                                 projection_type='tsne', dim=128, output_path=None):
+    """
+    Comprehensive K-means vs Spectral: All methods × all datasets.
+    Layout: 3×6 (rows: Methods, cols: Datasets × K-means/Spectral)
+    """
+    fig = plt.figure(figsize=Config.FIGSIZE_3x6)
+    gs = gridspec.GridSpec(3, 6, figure=fig, wspace=0.08, hspace=0.25)
+    
+    cluster_algs = ['kmeans', 'spectral']
+    cluster_short = ['KM', 'Spec']
+    
+    for m_idx, method in enumerate(Config.METHODS):
+        for d_idx, dataset in enumerate(Config.DATASETS):
+            # Load embeddings once
+            best_config_km = get_best_config_for_method_dataset_dim(df, method, dataset, dim, cluster_alg='kmeans')
+            
+            embeddings, labels = None, None
+            if best_config_km is not None:
+                run_name = best_config_km.get('run_name') if pd.notna(best_config_km.get('run_name')) else None
+                embeddings, labels = load_embeddings(method, dataset, dim, base_dir, datasets_dir, run_name)
+            
+            # Compute projection once
+            projection = None
+            if embeddings is not None:
+                projection = compute_projection(embeddings, projection_type)
+            
+            for c_idx, (alg, alg_short) in enumerate(zip(cluster_algs, cluster_short)):
+                col = d_idx * 2 + c_idx
+                ax = fig.add_subplot(gs[m_idx, col])
+                
+                best_config = get_best_config_for_method_dataset_dim(df, method, dataset, dim, cluster_alg=alg)
+                
+                if embeddings is None or best_config is None:
+                    plot_empty_cell(ax, 'N/A')
+                    if m_idx == 0:
+                        ax.set_title(f"{dataset}\n({alg_short})", fontsize=7, fontweight='bold')
+                    if col == 0:
+                        ax.set_ylabel(method, fontsize=8, fontweight='bold')
+                    continue
+                
+                metrics_text = f"ARI={best_config['ari']:.2f}"
+                
+                plot_embedding_scatter(ax, projection, labels, metrics_text=metrics_text, marker_size=5)
+                
+                if m_idx == 0:
+                    ax.set_title(f"{dataset}\n({alg_short})", fontsize=7, fontweight='bold')
+                if col == 0:
+                    ax.set_ylabel(method, fontsize=8, fontweight='bold')
+    
+    fig.suptitle(f"K-means vs Spectral - All Methods × All Datasets ({projection_type.upper()}, dim={dim})",
+                fontsize=10, fontweight='bold', y=0.99)
+    plt.tight_layout()
+    
+    if output_path:
+        plt.savefig(output_path, dpi=Config.DPI, bbox_inches='tight')
+        print(f"Saved: {output_path}")
+    
+    return fig
+
+
+# =============================================================================
 # MAIN EXECUTION
 # =============================================================================
 
@@ -825,6 +1124,10 @@ def generate_all_figures(base_dir, datasets_dir, permuted_base_dir=None, output_
     (output_dir / "single_row").mkdir(exist_ok=True)
     (output_dir / "comparison").mkdir(exist_ok=True)
     (output_dir / "grids").mkdir(exist_ok=True)
+    (output_dir / "tsne_vs_umap").mkdir(exist_ok=True)
+    (output_dir / "kmeans_vs_spectral").mkdir(exist_ok=True)
+    (output_dir / "comprehensive_original").mkdir(exist_ok=True)
+    (output_dir / "comprehensive_permuted").mkdir(exist_ok=True)
     
     for proj in projection_types:
         if proj == 'umap' and not UMAP_AVAILABLE:
@@ -860,6 +1163,44 @@ def generate_all_figures(base_dir, datasets_dir, permuted_base_dir=None, output_
                 generated.append(f"grids/methods_dims_{dataset}_{proj}.png")
                 plt.close(fig)
         
+        # --- COMPREHENSIVE ORIGINAL (3×3) ---
+        print("Creating comprehensive original grid...")
+        fig = create_comprehensive_single_source(
+            df, base_dir, datasets_dir, proj, 128, 'Original',
+            output_dir / "comprehensive_original" / f"comprehensive_original_{proj}.png")
+        if fig:
+            generated.append(f"comprehensive_original/comprehensive_original_{proj}.png")
+            plt.close(fig)
+        
+        # --- COMPREHENSIVE PERMUTED (3×3) ---
+        if permuted_base_dir:
+            print("Creating comprehensive permuted grid...")
+            fig = create_comprehensive_single_source(
+                df, permuted_base_dir, datasets_dir, proj, 128, 'Permuted',
+                output_dir / "comprehensive_permuted" / f"comprehensive_permuted_{proj}.png")
+            if fig:
+                generated.append(f"comprehensive_permuted/comprehensive_permuted_{proj}.png")
+                plt.close(fig)
+        
+        # --- K-MEANS vs SPECTRAL PER DATASET (2×3) ---
+        print("Creating K-means vs Spectral per dataset...")
+        for dataset in Config.DATASETS:
+            fig = create_kmeans_vs_spectral_per_dataset(
+                df, dataset, 128, base_dir, datasets_dir, proj,
+                output_dir / "kmeans_vs_spectral" / f"kmeans_vs_spectral_{dataset}_{proj}.png")
+            if fig:
+                generated.append(f"kmeans_vs_spectral/kmeans_vs_spectral_{dataset}_{proj}.png")
+                plt.close(fig)
+        
+        # --- K-MEANS vs SPECTRAL COMPREHENSIVE (3×6) ---
+        print("Creating K-means vs Spectral comprehensive...")
+        fig = create_kmeans_spectral_all_methods_datasets(
+            df, base_dir, datasets_dir, proj, 128,
+            output_dir / "kmeans_vs_spectral" / f"kmeans_vs_spectral_comprehensive_{proj}.png")
+        if fig:
+            generated.append(f"kmeans_vs_spectral/kmeans_vs_spectral_comprehensive_{proj}.png")
+            plt.close(fig)
+        
         # --- COMPARISON FIGURES (if permuted exists) ---
         if permuted_base_dir:
             print("Creating comparison figures...")
@@ -878,14 +1219,33 @@ def generate_all_figures(base_dir, datasets_dir, permuted_base_dir=None, output_
                 generated.append(f"comparison/comprehensive_orig_vs_perm_{proj}.png")
                 plt.close(fig)
     
-    # --- t-SNE vs UMAP COMPARISON ---
+    # --- t-SNE vs UMAP PER DATASET (2×3) ---
     if UMAP_AVAILABLE:
-        print("Creating t-SNE vs UMAP comparisons...")
+        print("Creating t-SNE vs UMAP per dataset...")
+        for dataset in Config.DATASETS:
+            fig = create_tsne_vs_umap_per_dataset(
+                df, dataset, 128, base_dir, datasets_dir,
+                output_dir / "tsne_vs_umap" / f"tsne_vs_umap_{dataset}.png")
+            if fig:
+                generated.append(f"tsne_vs_umap/tsne_vs_umap_{dataset}.png")
+                plt.close(fig)
+        
+        # --- t-SNE vs UMAP COMPREHENSIVE (3×6) ---
+        print("Creating t-SNE vs UMAP comprehensive...")
+        fig = create_tsne_umap_all_methods_datasets(
+            df, base_dir, datasets_dir, 128,
+            output_dir / "tsne_vs_umap" / "tsne_vs_umap_comprehensive.png")
+        if fig:
+            generated.append("tsne_vs_umap/tsne_vs_umap_comprehensive.png")
+            plt.close(fig)
+        
+        # --- t-SNE vs UMAP per method (existing) ---
+        print("Creating t-SNE vs UMAP comparisons per method...")
         fig = create_tsne_umap_comparison_grid(
             df, base_dir, datasets_dir, 128,
-            output_dir / "grids" / "tsne_vs_umap_comprehensive.png")
+            output_dir / "grids" / "tsne_vs_umap_grid.png")
         if fig:
-            generated.append("grids/tsne_vs_umap_comprehensive.png")
+            generated.append("grids/tsne_vs_umap_grid.png")
             plt.close(fig)
         
         for method in Config.METHODS:
