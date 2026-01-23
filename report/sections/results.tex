@@ -371,6 +371,15 @@ The theoretic differences are  clearly represented in figures~\ref{fig:netlsd_km
     \label{fig:gin_spectral}
 \end{figure}
 
+We also plot the clusters using two different dimensionality reduction techniques t-SNE and UMAP.
+It is apparent that the technique used fundamentally affects the cluster visualization \ref{fig:tsne_umap_clusters}.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\columnwidth]{figures/tsne_vs_umap_comprehensive.png}
+    \caption{\textbf{t-SNE vs UMAP Clusters Comparison accross algorithms and datasets} The dimensionality reduction 
+    technique greatly influences cluster visualization.}
+    \label{fig:tsne_umap_clusters}
+\end{figure}
 
 
 \subsection{After Permutation}
@@ -783,6 +792,28 @@ The figures~\ref{fig:pareto_after}-\ref{fig:stacked_mem_after} verify what we al
 show a clear shift in the optimal trade off between accuracy and computational cost.
 NetLSD configurations dominate achieving the highest accuracy at the lowest normalized compute cost, which combines runtime and memory usage, 
 as we can see from Pareto frontier plot and the two stacked plots. 
+
+
+We then perfomed TSNE and UMAP visualizations of the perturbed embeddings alongside the original ones.
+The results in Figures~\ref{fig:tsne_before_after}, \ref{fig:umap_before_after}. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\columnwidth]{figures/comprehensive_grid_tsne.png}
+    \caption{\textbf{t-SNE Clusters Comparison accross datasets} We can visualize the differences
+    between the original and berturbed embeddings.}
+    \label{fig:tsne_before_after}
+\end{figure}
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\columnwidth]{figures/comprehensive_grid_umap.png}
+    \caption{\textbf{UMAP Clusters Comparison accross datasets} We can visualize the differences
+    between the original and berturbed embeddings.}
+    \label{fig:umap_before_after}
+\end{figure}
+
 
 
 
