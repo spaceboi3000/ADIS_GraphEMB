@@ -1,4 +1,3 @@
-
 \section{Introduction}
 Graphs are widely used to model relationships and interactions 
 in data from multiple domains, such as network analysis, bioinformatics, and chemistry. 
@@ -23,17 +22,17 @@ unsupervised~\cite{narayanangraph2vec,tsitsulin2018netlsd} and supervised techni
 \end{figure}
 
 Figure~\ref{fig:SupervsUn} illustrates the conceptual difference between unsupervised and supervised graph embedding methods. 
-In the supervised setting node representations are learned solely from the graph structure and 
+In the supervised setting graph representations are learned solely from the graph structure and 
 feature similarity without access to label information. 
-As a result, the embedding space organizes nodes into clusters which may correspond to 
+As a result, the embedding space organizes graphs into clusters which may correspond to 
 latent communities but are not explicitly aligned with semantic classes. 
 In contrast, supervised graph embedding methods leverage labeled data during training to 
 shape the embedding space. 
-Nodes belonging to the same class are encouraged to be close as we can see from the figure, 
-while nodes from different classes are pushed apart leading to embeddings that are explicitly discriminative and 
+Graphs belonging to the same class are encouraged to be close as we can see from the figure, 
+while graphs from different classes are pushed apart leading to embeddings that are explicitly discriminative and 
 separable by a decision boundary. 
 This distinction highlights how supervision guides representation learning toward task specific objectives, 
-such as node classification, whereas unsupervised embeddings primarily capture the underlying geometry 
+such as graph classification, whereas unsupervised embeddings primarily capture the underlying geometry 
 and connectivity of the graph.
 
 
