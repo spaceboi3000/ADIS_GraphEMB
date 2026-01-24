@@ -9,16 +9,26 @@ The project evaluates both **unsupervised** and **supervised** graph embedding m
 
 The goal of this project is to systematically compare representative whole-graph embedding approaches, including:
 
-- **Unsupervised methods** (e.g., Graph2Vec, NetLSD)
-- **Supervised deep learning models** (e.g., Graph Isomorphism Networks – GIN)
+- **Unsupervised methods** (Graph2Vec, NetLSD)
+- **Supervised deep learning models** (Graph Isomorphism Networks – GIN)
 
-The comparison is performed across multiple benchmark graph datasets using a unified evaluation protocol.  
-Specifically, the project analyzes:
+The comparison is conducted across multiple benchmark graph datasets following a unified evaluation protocol.  
+In particular, the project investigates three main evaluation axes:
 
-- Graph classification performance
-- Clustering quality and visualization (t-SNE, UMAP)
-- Sensitivity to structural and attribute perturbations
-- Trade-offs between embedding dimensionality, accuracy, and computational cost
+- **Performance**, assessed through downstream tasks:
+  - *Graph classification*, evaluated using Accuracy, F1-score, and AUC.
+  - *Graph clustering*, evaluated using external clustering metrics such as ARI and NMI, as well as qualitative visualization.
+
+- **Scalability**, analyzed by measuring computational efficiency, including:
+  - Embedding generation time,
+  - Model training time (for supervised methods),
+  - Memory consumption across different embedding dimensions.
+
+- **Robustness**, examined via stability analysis:
+  - Random structural and attribute perturbations are applied to the input graphs,
+  - Changes in the resulting embeddings are quantified,
+  - The impact of perturbations on classification and clustering performance is evaluated.
+
 
 ---
 
@@ -34,7 +44,7 @@ Editor-specific configuration files used during development.
 ---
 
 ### `DATASETS/`
-Contains the **original benchmark graph datasets** used in the experiments, including datasets from the TUDataset collection (e.g., MUTAG, ENZYMES, IMDB-MULTI).
+Contains the **original benchmark graph datasets** used in the experiments, including datasets from the TUDataset collection (MUTAG, ENZYMES, IMDB-MULTI).
 
 ---
 
