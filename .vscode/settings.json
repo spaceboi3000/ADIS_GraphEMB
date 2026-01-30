@@ -1,20 +1,24 @@
 {
 "latex-workshop.latex.tools": [
-  {
-    "name": "lualatex",
-    "command": "lualatex",
-    "args": [
-      "-interaction=nonstopmode",
-      "-synctex=1",
-      "%DOC%"
-    ]
-  }
+    {
+        "name": "lualatex",
+        "command": "lualatex",
+        "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "%DOC%"
+        ]
+    }
 ],
 "latex-workshop.latex.recipes": [
-  {
-    "name": "LuaLaTeX",
-    "tools": ["lualatex"]
-  }
-]
-
+    {
+        "name": "lualatex × 2",
+        "tools": [
+            "lualatex",
+            "lualatex"
+        ]
+    }
+],
+"latex-workshop.latex.recipe.default": "lualatex × 2"
 }

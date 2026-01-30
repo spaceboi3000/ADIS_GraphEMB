@@ -1,44 +1,46 @@
-This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2026.1.20)  24 JAN 2026 18:31
+This is LuaHBTeX, Version 1.17.0 (TeX Live 2023)  (format=lualatex 2026.1.22)  30 JAN 2026 20:21
  restricted system commands enabled.
-**/home/nodys/Documents/ADIS/ADIS_GraphEMB/report/main
-(/home/nodys/Documents/ADIS/ADIS_GraphEMB/report/main.tex
-LaTeX2e <2021-11-15> patch level 1
-Lua module: luaotfload 2021-05-21 3.18 Lua based OpenType font support
-Lua module: lualibs 2021-05-20 2.74 ConTeXt Lua standard libraries.
-Lua module: lualibs-extended 2021-05-20 2.74 ConTeXt Lua libraries -- extended collection.
-luaotfload | conf : Root cache directory is "/home/nodys/.texlive2021/texmf-var/luatex-cache/generic/names".
-luaotfload | init : Loading fontloader "fontloader-2021-05-20.lua" from kpse-resolved path "/usr/share/texlive/texmf-dist/tex/luatex/luaotfload/fontloader-2021-05-20.lua".
+ file:line:error style messages enabled.
+**/home/nick/Uni/ADIS_GraphEMB/report/main
+(/home/nick/Uni/ADIS_GraphEMB/report/main.tex
+LaTeX2e <2022-11-01> patch level 1
+Lua module: luaotfload 2022-10-03 3.23 Lua based OpenType font support
+Lua module: lualibs 2022-10-04 2.75 ConTeXt Lua standard libraries.
+Lua module: lualibs-extended 2022-10-04 2.75 ConTeXt Lua libraries -- extended collection.
+luaotfload | conf : Root cache directory is "/home/nick/.texlive2023/texmf-var/luatex-cache/generic/names".
+luaotfload | init : Loading fontloader "fontloader-2022-10-03.lua" from kpse-resolved path "/usr/share/texlive/texmf-dist/tex/luatex/luaotfload/fontloader-2022-10-03.lua".
 Lua-only attribute luaotfload@noligature = 1
-Lua-only attribute luaotfload@syllabe = 2
-luaotfload | init : Context OpenType loader version 3.116
-Inserting `luaotfload.node_processor' at position 1 in `pre_linebreak_filter'.
-Inserting `luaotfload.node_processor' at position 1 in `hpack_filter'.
-Inserting `luaotfload.glyph_stream' at position 1 in `glyph_stream_provider'.
-Inserting `luaotfload.define_font' at position 1 in `define_font'.
-Lua-only attribute luaotfload_color_attribute = 3
-luaotfload | conf : Root cache directory is "/home/nodys/.texlive2021/texmf-var/luatex-cache/generic/names".
-Inserting `luaotfload.harf.strip_prefix' at position 1 in `find_opentype_file'.
-Inserting `luaotfload.harf.strip_prefix' at position 1 in `find_truetype_file'.
-Inserting `luaotfload.harf.finalize_vlist' at position 1 in `post_linebreak_filter'.
-Inserting `luaotfload.harf.finalize_hlist' at position 2 in `hpack_filter'.
-Inserting `luaotfload.cleanup_files' at position 1 in `wrapup_run'.
-Inserting `luaotfload.harf.finalize_unicode' at position 1 in `finish_pdffile'.
-Inserting `luaotfload.glyphinfo' at position 1 in `glyph_info'.
-Lua-only attribute luaotfload.letterspace_done = 4
-Inserting `luaotfload.aux.set_sscale_dimens' at position 1 in `luaotfload.patch_font'.
-Inserting `luaotfload.aux.set_font_index' at position 2 in `luaotfload.patch_font'.
-Inserting `luaotfload.aux.patch_cambria_domh' at position 3 in `luaotfload.patch_font'.
-Inserting `luaotfload.aux.fixup_fontdata' at position 1 in `luaotfload.patch_font_unsafe'.
-Inserting `luaotfload.aux.set_capheight' at position 4 in `luaotfload.patch_font'.
-Inserting `luaotfload.aux.set_xheight' at position 5 in `luaotfload.patch_font'.
-Inserting `luaotfload.rewrite_fontname' at position 6 in `luaotfload.patch_font'. L3 programming layer <2022-01-21>
-Inserting `tracingstacklevels' at position 1 in `input_level_string'. (/usr/share/texlive/texmf-dist/tex/latex/ieeetran/IEEEtran.cls
+luaotfload | init : Context OpenType loader version 3.120
+Inserting `luaotfload.node_processor' in `pre_linebreak_filter'.
+Inserting `luaotfload.node_processor' in `hpack_filter'.
+Inserting `luaotfload.glyph_stream' in `glyph_stream_provider'.
+Inserting `luaotfload.define_font' in `define_font'.
+Lua-only attribute luaotfload_color_attribute = 2
+luaotfload | conf : Root cache directory is "/home/nick/.texlive2023/texmf-var/luatex-cache/generic/names".
+Inserting `luaotfload.harf.strip_prefix' in `find_opentype_file'.
+Inserting `luaotfload.harf.strip_prefix' in `find_truetype_file'.
+Removing  `luaotfload.glyph_stream' from `glyph_stream_provider'.
+Inserting `luaotfload.harf.glyphstream' in `glyph_stream_provider'.
+Inserting `luaotfload.harf.finalize_vlist' in `post_linebreak_filter'.
+Inserting `luaotfload.harf.finalize_hlist' in `hpack_filter'.
+Inserting `luaotfload.cleanup_files' in `wrapup_run'.
+Inserting `luaotfload.harf.finalize_unicode' in `finish_pdffile'.
+Inserting `luaotfload.glyphinfo' in `glyph_info'.
+Lua-only attribute luaotfload.letterspace_done = 3
+Inserting `luaotfload.aux.set_sscale_dimens' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.set_font_index' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.patch_cambria_domh' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.fixup_fontdata' in `luaotfload.patch_font_unsafe'.
+Inserting `luaotfload.aux.set_capheight' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.set_xheight' in `luaotfload.patch_font'.
+Inserting `luaotfload.rewrite_fontname' in `luaotfload.patch_font'. L3 programming layer <2023-02-22>
+Inserting `tracingstacklevels' in `input_level_string'. (/usr/share/texlive/texmf-dist/tex/latex/ieeetran/IEEEtran.cls
 Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
 -- See the "IEEEtran_HOWTO" manual for usage information.
 -- http://www.michaelshell.org/tex/ieeetran/
-\@IEEEtrantmpdimenA=\dimen137
-\@IEEEtrantmpdimenB=\dimen138
-\@IEEEtrantmpdimenC=\dimen139
+\@IEEEtrantmpdimenA=\dimen139
+\@IEEEtrantmpdimenB=\dimen140
+\@IEEEtrantmpdimenC=\dimen141
 \@IEEEtrantmpcountA=\count183
 \@IEEEtrantmpcountB=\count184
 \@IEEEtrantmpcountC=\count185
@@ -49,14 +51,14 @@ LaTeX Font Info:    No file TUptm.fd. on input line 503.
 LaTeX Font Warning: Font shape `TU/ptm/m/n' undefined
 (Font)              using `TU/lmr/m/n' instead on input line 503.
 
-luaotfload | db : Font names database loaded from /home/nodys/.texlive2021/texmf-var/luatex-cache/generic/names/luaotfload-names.luc
+luaotfload | db : Font names database loaded from /home/nick/.texlive2023/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz
 -- Using 8.5in x 11in (letter) paper.
 -- Using DVI output.
-\@IEEEnormalsizeunitybaselineskip=\dimen140
+\@IEEEnormalsizeunitybaselineskip=\dimen142
 -- This is a 10 point document.
-\CLASSINFOnormalsizebaselineskip=\dimen141
-\CLASSINFOnormalsizeunitybaselineskip=\dimen142
-\IEEEnormaljot=\dimen143
+\CLASSINFOnormalsizebaselineskip=\dimen143
+\CLASSINFOnormalsizeunitybaselineskip=\dimen144
+\IEEEnormaljot=\dimen145
 
 LaTeX Font Warning: Font shape `TU/ptm/bx/n' undefined
 (Font)              using `TU/ptm/m/n' instead on input line 1090.
@@ -69,40 +71,40 @@ LaTeX Font Warning: Font shape `TU/ptm/m/it' undefined
 LaTeX Font Warning: Font shape `TU/ptm/bx/it' undefined
 (Font)              using `TU/ptm/bx/n' instead on input line 1090.
 
-\IEEEquantizedlength=\dimen144
-\IEEEquantizedlengthdiff=\dimen145
-\IEEEquantizedtextheightdiff=\dimen146
-\IEEEilabelindentA=\dimen147
-\IEEEilabelindentB=\dimen148
-\IEEEilabelindent=\dimen149
-\IEEEelabelindent=\dimen150
-\IEEEdlabelindent=\dimen151
-\IEEElabelindent=\dimen152
-\IEEEiednormlabelsep=\dimen153
-\IEEEiedmathlabelsep=\dimen154
-\IEEEiedtopsep=\skip47
+\IEEEquantizedlength=\dimen146
+\IEEEquantizedlengthdiff=\dimen147
+\IEEEquantizedtextheightdiff=\dimen148
+\IEEEilabelindentA=\dimen149
+\IEEEilabelindentB=\dimen150
+\IEEEilabelindent=\dimen151
+\IEEEelabelindent=\dimen152
+\IEEEdlabelindent=\dimen153
+\IEEElabelindent=\dimen154
+\IEEEiednormlabelsep=\dimen155
+\IEEEiedmathlabelsep=\dimen156
+\IEEEiedtopsep=\skip48
 \c@section=\count186
 \c@subsection=\count187
 \c@subsubsection=\count188
 \c@paragraph=\count189
 \c@IEEEsubequation=\count190
-\abovecaptionskip=\skip48
-\belowcaptionskip=\skip49
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
 \c@figure=\count191
 \c@table=\count192
 \@IEEEeqnnumcols=\count193
 \@IEEEeqncolcnt=\count194
 \@IEEEsubeqnnumrollback=\count195
-\@IEEEquantizeheightA=\dimen155
-\@IEEEquantizeheightB=\dimen156
-\@IEEEquantizeheightC=\dimen157
-\@IEEEquantizeprevdepth=\dimen158
+\@IEEEquantizeheightA=\dimen157
+\@IEEEquantizeheightB=\dimen158
+\@IEEEquantizeheightC=\dimen159
+\@IEEEquantizeprevdepth=\dimen160
 \@IEEEquantizemultiple=\count196
-\@IEEEquantizeboxA=\box50
-\@IEEEtmpitemindent=\dimen159
-\IEEEPARstartletwidth=\dimen160
+\@IEEEquantizeboxA=\box51
+\@IEEEtmpitemindent=\dimen161
+\IEEEPARstartletwidth=\dimen162
 \c@IEEEbiography=\count197
-\@IEEEtranrubishbin=\box51
+\@IEEEtranrubishbin=\box52
 )
 ** ATTENTION: Overriding command lockouts (line 2).
 (./preamble/packages.tex (/usr/share/texlive/texmf-dist/tex/latex/cite/cite.sty
@@ -110,8 +112,8 @@ LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
 ) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2021/10/15 v2.17l AMS math features
-\@mathmargin=\skip50
+Package: amsmath 2022/04/08 v2.17n AMS math features
+\@mathmargin=\skip51
 
 For additional information on amsmath, use the `?' option.
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -119,29 +121,39 @@ Package: amstext 2021/08/26 v2.01 AMS text
  (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks17
-\ex@=\dimen161
+\ex@=\dimen163
 )) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen162
+\pmbraise@=\dimen164
 ) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
-Package: amsopn 2021/08/26 v2.02 operator names
+Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count198
 LaTeX Info: Redefining \frac on input line 236.
 \uproot@=\count199
 \leftroot@=\count266
 LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
 \classnum@=\count267
 \DOTSCASE@=\count268
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
-\Mathstrutbox@=\box52
-\strutbox@=\box53
-\big@size=\dimen163
+\Mathstrutbox@=\box53
+\strutbox@=\box54
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen165
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 \macc@depth=\count269
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
 \c@MaxMatrixCols=\count270
 \dotsspace@=\muskip16
 \c@parentequation=\count271
@@ -151,18 +163,18 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 \column@=\count274
 \maxfields@=\count275
 \andhelp@=\toks19
-\eqnshift@=\dimen164
-\alignsep@=\dimen165
-\tagshift@=\dimen166
-\tagwidth@=\dimen167
-\totwidth@=\dimen168
-\lineht@=\dimen169
+\eqnshift@=\dimen166
+\alignsep@=\dimen167
+\tagshift@=\dimen168
+\tagwidth@=\dimen169
+\totwidth@=\dimen170
+\lineht@=\dimen171
 \@envbody=\toks20
-\multlinegap=\skip51
-\multlinetaggap=\skip52
+\multlinegap=\skip52
+\multlinetaggap=\skip53
 \mathdisplay@stack=\toks21
-LaTeX Info: Redefining \[ on input line 2938.
-LaTeX Info: Redefining \] on input line 2939.
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
 ) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
@@ -175,10 +187,10 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 )) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
  (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks22
 ) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
  (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
 ) (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
@@ -186,55 +198,56 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: luatex.def on input line 107.
  (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/luatex.def
-File: luatex.def 2021/06/01 v1.2c Graphics/color driver for luatex
+File: luatex.def 2022/09/22 v1.2d Graphics/color driver for luatex
 ))
-\Gin@req@height=\dimen170
-\Gin@req@width=\dimen171
+\Gin@req@height=\dimen172
+\Gin@req@width=\dimen173
 ) (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen172
-\lightrulewidth=\dimen173
-\cmidrulewidth=\dimen174
-\belowrulesep=\dimen175
-\belowbottomsep=\dimen176
-\aboverulesep=\dimen177
-\abovetopsep=\dimen178
-\cmidrulesep=\dimen179
-\cmidrulekern=\dimen180
-\defaultaddspace=\dimen181
+\heavyrulewidth=\dimen174
+\lightrulewidth=\dimen175
+\cmidrulewidth=\dimen176
+\belowrulesep=\dimen177
+\belowbottomsep=\dimen178
+\aboverulesep=\dimen179
+\abovetopsep=\dimen180
+\cmidrulesep=\dimen181
+\cmidrulekern=\dimen182
+\defaultaddspace=\dimen183
 \@cmidla=\count276
 \@cmidlb=\count277
-\@aboverulesep=\dimen182
-\@belowrulesep=\dimen183
+\@aboverulesep=\dimen184
+\@belowrulesep=\dimen185
 \@thisruleclass=\count278
 \@lastruleclass=\count279
-\@thisrulewidth=\dimen184
+\@thisrulewidth=\dimen186
 ) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
-Package: xcolor 2021/10/31 v2.13 LaTeX color extensions (UK)
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
  (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: luatex.def on input line 227.
-Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1352.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1356.
-Package xcolor Info: Model `RGB' extended on input line 1368.
-Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1370.
-Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1371.
-Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1372.
-Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
-Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
-Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
 ) (/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
  (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count280
 \float@exts=\toks23
-\float@box=\box54
+\float@box=\box55
 \@float@everytoks=\toks24
-\@floatcapt=\box55
+\@floatcapt=\box56
 ) (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
 )
 \@float@every@algorithm=\toks25
 \c@algorithm=\count281
@@ -247,31 +260,32 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \c@ALG@line=\count282
 \c@ALG@rem=\count283
 \c@ALG@nested=\count284
-\ALG@tlm=\skip53
-\ALG@thistlm=\skip54
+\ALG@tlm=\skip54
+\ALG@thistlm=\skip55
 \c@ALG@Lnr=\count285
 \c@ALG@blocknr=\count286
 \c@ALG@storecount=\count287
 \c@ALG@tmpcounter=\count288
-\ALG@tmplength=\skip55
+\ALG@tmplength=\skip56
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
 ) (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
-Package: subcaption 2020/10/07 v1.3j Sub-captions (AR)
+Package: subcaption 2023/02/19 v1.6 Sub-captions (AR)
  (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2020/10/26 v3.5g Customizing captions (AR)
+Package: caption 2023/03/12 v3.6j Customizing captions (AR)
  (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
-\captionmargin=\dimen185
-\captionmargin@=\dimen186
-\captionwidth=\dimen187
-\caption@tempdima=\dimen188
-\caption@indent=\dimen189
-\caption@parindent=\dimen190
-\caption@hangindent=\dimen191
+Package: caption3 2023/03/12 v2.4 caption3 kernel (AR)
+\caption@tempdima=\dimen187
+\captionmargin=\dimen188
+\caption@leftmargin=\dimen189
+\caption@rightmargin=\dimen190
+\caption@width=\dimen191
+\caption@indent=\dimen192
+\caption@parindent=\dimen193
+\caption@hangindent=\dimen194
 Package caption Info: Unknown document class (or package),
 (caption)             standard defaults will be used.
-Package caption Info: \@makecaption = \long macro:#1#2->\ifx \@captype \@IEEEtablestring \footnotesize \bgroup \par \centering \@IEEEtabletopskipstrut {\normalfont \footnotesize #1}\\{\normalfont \footnotesize \scshape #2}\par \addvspace {0.5\baselineskip }\egroup \@IEEEtablecaptionsepspace \else \@IEEEfigurecaptionsepspace \setbox \@tempboxa \hbox {\normalfont \footnotesize {#1.}\nobreakspace \nobreakspace #2}\ifdim \wd \@tempboxa >\hsize \setbox \@tempboxa \hbox {\normalfont \footnotesize {#1.}\nobreakspace \nobreakspace }\parbox [t]{\hsize }{\normalfont \footnotesize \noindent \unhbox \@tempboxa #2}\else \ifCLASSOPTIONconference \hbox to\hsize {\normalfont \footnotesize \hfil \box \@tempboxa \hfil }\else \hbox to\hsize {\normalfont \footnotesize \box \@tempboxa \hfil }\fi \fi \fi  on input line 1139.
+Package caption Info: \@makecaption = \long macro:#1#2->\ifx \@captype \@IEEEtablestring \footnotesize \bgroup \par \centering \@IEEEtabletopskipstrut {\normalfont \footnotesize #1}\\{\normalfont \footnotesize \scshape #2}\par \addvspace {0.5\baselineskip }\egroup \@IEEEtablecaptionsepspace \else \@IEEEfigurecaptionsepspace \setbox \@tempboxa \hbox {\normalfont \footnotesize {#1.}\nobreakspace \nobreakspace #2}\ifdim \wd \@tempboxa >\hsize \setbox \@tempboxa \hbox {\normalfont \footnotesize {#1.}\nobreakspace \nobreakspace }\parbox [t]{\hsize }{\normalfont \footnotesize \noindent \unhbox \@tempboxa #2}\else \ifCLASSOPTIONconference \hbox to\hsize {\normalfont \footnotesize \hfil \box \@tempboxa \hfil }\else \hbox to\hsize {\normalfont \footnotesize \box \@tempboxa \hfil }\fi \fi \fi  on input line 1176.
 )
 
 Package caption Warning: Unknown document class (or package),
@@ -282,16 +296,18 @@ See the caption package documentation for explanation.
 \c@continuedfloat=\count290
 Package caption Info: float package is loaded.
 )
+Package caption Info: New subtype `subfigure' on input line 239.
 \c@subfigure=\count291
+Package caption Info: New subtype `subtable' on input line 239.
 \c@subtable=\count292
 ) (/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.sty (/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty (/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2022-01-21 L3 programming layer (loader) 
+Package: expl3 2023-02-22 L3 programming layer (loader) 
  (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-luatex.def
-File: l3backend-luatex.def 2022-01-12 L3 backend support: PDF output (LuaTeX)
+File: l3backend-luatex.def 2023-01-16 L3 backend support: PDF output (LuaTeX)
 \l__color_backend_stack_int=\count293
-\l__pdf_internal_box=\box56
+\l__pdf_internal_box=\box57
 ))
-Package: xparse 2022-01-12 L3 Experimental document command parser
+Package: xparse 2023-02-02 L3 Experimental document command parser
 )
 Package: fontspec 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX
 Lua module: fontspec 2022/01/15 2.8a Font selection for XeLaTeX and LuaLaTeX (/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec-luatex.sty
@@ -307,27 +323,27 @@ Package: fontspec-luatex 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTe
 \l__fontspec_emdef_int=\count302
 \l__fontspec_strong_int=\count303
 \l__fontspec_strongdef_int=\count304
-\l__fontspec_tmpa_dim=\dimen192
-\l__fontspec_tmpb_dim=\dimen193
-\l__fontspec_tmpc_dim=\dimen194
+\l__fontspec_tmpa_dim=\dimen195
+\l__fontspec_tmpb_dim=\dimen196
+\l__fontspec_tmpc_dim=\dimen197
  (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 ) (/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
-\wrapoverhang=\dimen195
-\WF@size=\dimen196
+\wrapoverhang=\dimen198
+\WF@size=\dimen199
 \c@WF@wrappedlines=\count305
-\WF@box=\box57
+\WF@box=\box58
 \WF@everypar=\toks26
 Package: wrapfig 2003/01/31  v 3.6
 ) (/usr/share/texlive/texmf-dist/tex/latex/polyglossia/polyglossia.sty
-Package: polyglossia 2021/04/12 v1.53 Modern multilingual typesetting with XeLaTeX and LuaLaTeX
+Package: polyglossia 2023/02/11 v1.60 Modern multilingual typesetting with XeLaTeX and LuaLaTeX
  (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count306
 ) (/usr/share/texlive/texmf-dist/tex/latex/makecmds/makecmds.sty
 Package: makecmds 2009/09/03 v1.0a extra command making commands
 ) (/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
-Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
  (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
 \XKV@toks=\toks27
 \XKV@tempa@toks=\toks28
@@ -335,15 +351,10 @@ Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
 \XKV@depth=\count307
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )) (/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2020/03/06 v1.0d TeX engine tests
+Package: iftex 2022/02/03 v1.0f TeX engine tests
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
-Package: l3keys2e 2022-01-12 LaTeX2e option processing using LaTeX3 keys
-)
-
-LaTeX hooks Warning: Generic hook 'file/after/tracklang.sty' is deprecated.
-(hooks)              Use hook 'file/tracklang.sty/after' instead.
-
-(/usr/share/texlive/texmf-dist/tex/luatex/luatexbase/luatexbase.sty
+Package: l3keys2e 2023-02-02 LaTeX2e option processing using LaTeX3 keys
+) (/usr/share/texlive/texmf-dist/tex/luatex/luatexbase/luatexbase.sty
 Package: luatexbase 2015/10/04 v1.3 luatexbase interface to LuaTeX 
  (/usr/share/texlive/texmf-dist/tex/luatex/ctablestack/ctablestack.sty
 Package: ctablestack 2015/10/01 v1.0 Catcode table stable support
@@ -352,64 +363,8 @@ Package: ctablestack 2015/10/01 v1.0 Catcode table stable support
 \CatcodeTableOther=\catcodetable12
 \CatcodeTableExpl=\catcodetable13
 )
-Lua module: polyglossia 2013/05/11 1.3 Polyglossia...texlive/texmf-dist/tex/latex/polyglossia/polyglossia.lua:71: module 'language.dat.lua' not found:
-	no field package.preload['language.dat.lua']
-	[kpse lua searcher] file not found: 'language.dat.lua'
-stack traceback:
-	[C]: in function 'require'
-	...texlive/texmf-dist/tex/latex/polyglossia/polyglossia.lua:71: in main chunk
-	[C]: in function 'require'
-	[\directlua]:1: in main chunk.
-\RequireLuaModule #1->\directlua {require("#1")}
-                                                \@gobbleoptarg 
-l.38   \RequireLuaModule{polyglossia}
-                                   
-The lua interpreter ran into a problem, so the
-remainder of this lua chunk will be ignored.
-
-
-LaTeX hooks Warning: Generic hook 'package/after/bidi' is deprecated.
-(hooks)              Use hook 'package/bidi/after' instead.
-
-
-LaTeX hooks Warning: Generic hook 'package/after/luabidi' is deprecated.
-(hooks)              Use hook 'package/luabidi/after' instead.
-
-(/usr/share/texlive/texmf-dist/tex/latex/polyglossia/gloss-latex.ldf
-File: gloss-latex.ldf polyglossia: module for default language
-The property list \polyglossia@langsetup contains the pairs (without outer
-braces):
->  {latex/script}  =>  {latin}
->  {latex/lcscript}  =>  {latin}
->  {latex/scripttag}  =>  {}
->  {latex/language}  =>  {Latex}
->  {latex/langtag}  =>  {ENG}
->  {latex/bcp47}  =>  {}
->  {latex/hyphennames}  =>  {english}
->  {latex/direction}  =>  {LR}
->  {latex/hyphenmins}  =>  {2,3}
->  {latex/frenchspacing}  =>  {false}
->  {latex/indentfirst}  =>  {false}
->  {latex/fontsetup}  =>  {true}
->  {latex/envname}  =>  {latex}
->  {latex/babelname}  =>  {latex}
->  {latex/localnumeral}  =>  {polyglossia@C@localnumeral}
->  {latex/Localnumeral}  =>  {polyglossia@C@localnumeral}.
-)
-Package polyglossia Info: Default language is latex.
-[\directlua]:1: attempt to call a nil value (field 'set_default_language')
-stack traceback:
-	[\directlua]:1: in main chunk.
-\polyglossia@set@default@language:nn ...ing #2}')}
-                                                  \fi 
-l.2299 \setmainlanguage{latex}
-                            
-The lua interpreter ran into a problem, so the
-remainder of this lua chunk will be ignored.
-
-Package polyglossia Info: Setting LuaTeX font renderer to Harfbuzz.
-) (/usr/share/texlive/texmf-dist/tex/latex/polyglossia/gloss-english.ldf
-File: gloss-english.ldf polyglossia: module for english
+Lua module: polyglossia 2013/05/11 1.3 Polyglossia (/usr/share/texlive/texmf-dist/tex/latex/polyglossia/gloss-latex.lde
+Package: gloss-latex 2023/02/11 vv1.60 polyglossia: module for default language
 The property list \polyglossia@langsetup contains the pairs (without outer
 braces):
 >  {latex/script}  =>  {latin}
@@ -428,6 +383,31 @@ braces):
 >  {latex/babelname}  =>  {latex}
 >  {latex/localnumeral}  =>  {polyglossia@C@localnumeral}
 >  {latex/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {latex/DefineCommandsCmd}  =>  {use_none:n}.
+)
+Package polyglossia Info: Default language is latex.
+Package polyglossia Info: Setting LuaTeX font renderer to Harfbuzz.
+) (/usr/share/texlive/texmf-dist/tex/latex/polyglossia/gloss-english.ldf
+File: gloss-english.ldf polyglossia: module for English
+The property list \polyglossia@langsetup contains the pairs (without outer
+braces):
+>  {latex/script}  =>  {latin}
+>  {latex/lcscript}  =>  {latin}
+>  {latex/scripttag}  =>  {}
+>  {latex/language}  =>  {Latex}
+>  {latex/langtag}  =>  {ENG}
+>  {latex/bcp47}  =>  {}
+>  {latex/hyphennames}  =>  {english}
+>  {latex/direction}  =>  {LR}
+>  {latex/hyphenmins}  =>  {2,3}
+>  {latex/frenchspacing}  =>  {false}
+>  {latex/indentfirst}  =>  {false}
+>  {latex/fontsetup}  =>  {true}
+>  {latex/envname}  =>  {latex}
+>  {latex/babelname}  =>  {latex}
+>  {latex/localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {latex/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {latex/DefineCommandsCmd}  =>  {use_none:n}
 >  {english/script}  =>  {latin}
 >  {english/lcscript}  =>  {latin}
 >  {english/scripttag}  =>  {}
@@ -443,22 +423,13 @@ braces):
 >  {english/envname}  =>  {english}
 >  {english/babelname}  =>  {english}
 >  {english/localnumeral}  =>  {polyglossia@C@localnumeral}
->  {english/Localnumeral}  =>  {polyglossia@C@localnumeral}.
+>  {english/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {english/DefineCommandsCmd}  =>  {xpg_define_language_commands:e}.
 Package polyglossia Info: Option: English, variant=american.
 )
 Package polyglossia Info: Default language is english.
-[\directlua]:1: attempt to call a nil value (field 'set_default_language')
-stack traceback:
-	[\directlua]:1: in main chunk.
-\polyglossia@set@default@language:nn ...ing #2}')}
-                                                  \fi 
-l.14 \setdefaultlanguage{english}
-                               
-The lua interpreter ran into a problem, so the
-remainder of this lua chunk will be ignored.
-
-(/usr/share/texlive/texmf-dist/tex/latex/polyglossia/gloss-greek.ldf
-File: gloss-greek.ldf polyglossia: module for greek
+ (/usr/share/texlive/texmf-dist/tex/latex/polyglossia/gloss-greek.ldf
+File: gloss-greek.ldf polyglossia: module for Greek
 The property list \polyglossia@langsetup contains the pairs (without outer
 braces):
 >  {latex/script}  =>  {latin}
@@ -477,6 +448,7 @@ braces):
 >  {latex/babelname}  =>  {latex}
 >  {latex/localnumeral}  =>  {polyglossia@C@localnumeral}
 >  {latex/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {latex/DefineCommandsCmd}  =>  {use_none:n}
 >  {english/script}  =>  {latin}
 >  {english/lcscript}  =>  {latin}
 >  {english/scripttag}  =>  {}
@@ -493,6 +465,7 @@ braces):
 >  {english/babelname}  =>  {american}
 >  {english/localnumeral}  =>  {polyglossia@C@localnumeral}
 >  {english/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {english/DefineCommandsCmd}  =>  {xpg_define_language_commands:e}
 >  {greek/script}  =>  {Greek}
 >  {greek/lcscript}  =>  {greek}
 >  {greek/scripttag}  =>  {grek}
@@ -508,49 +481,33 @@ braces):
 >  {greek/envname}  =>  {greek}
 >  {greek/babelname}  =>  {greek}
 >  {greek/localnumeral}  =>  {greeknumerals}
->  {greek/Localnumeral}  =>  {Greeknumerals}.
-[\directlua]:1: attempt to call a nil value (field 'newloader')
-stack traceback:
-	[\directlua]:1: in main chunk.
-<argument> ...tlua {tex.sprint(polyglossia.newloader'greek')}
-                                                  \relax 
-l.14 }
-    
-The lua interpreter ran into a problem, so the
-remainder of this lua chunk will be ignored.
+>  {greek/Localnumeral}  =>  {Greeknumerals}
+>  {greek/DefineCommandsCmd}  =>  {xpg_define_language_commands:e}.
+Module polyglossia Info: Language data for greek
+(polyglossia)            synonyms	polygreek
+(polyglossia)            lefthyphenmin	1
+(polyglossia)            righthyphenmin	1
+(polyglossia)            hyphenation	
+(polyglossia)            loader	loadhyph-el-polyton.tex
+(polyglossia)            patterns	hyph-el-polyton.pat.txt on input line 16
 
-! Missing number, treated as zero.
-<to be read again> 
-\relax 
-l.14 }
-    
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
+Module polyglossia Warning: Hyphenation file hyph-el-polyton.pat.txt not found on input line 16
+Module polyglossia Info: Language greek was not yet loaded; created with id 2 on input line 16
+(/usr/share/texlive/texmf-dist/tex/latex/polyglossia/xgreek-fixes.def)
+Module polyglossia Info: Language data for monogreek
+(polyglossia)            synonyms	
+(polyglossia)            lefthyphenmin	1
+(polyglossia)            righthyphenmin	1
+(polyglossia)            hyphenation	
+(polyglossia)            loader	loadhyph-el-monoton.tex
+(polyglossia)            patterns	hyph-el-monoton.pat.txt on input line 99
 
-(/usr/share/texlive/texmf-dist/tex/latex/polyglossia/xgreek-fixes.def)[\directlua]:1: attempt to call a nil value (field 'newloader')
-stack traceback:
-	[\directlua]:1: in main chunk.
-<argument> ... {tex.sprint(polyglossia.newloader'monogreek')}
-                                                  \relax 
-l.97 ...ons{greek}{variant=monotonic,numerals=greek}
-                                                  
-The lua interpreter ran into a problem, so the
-remainder of this lua chunk will be ignored.
-
-! Missing number, treated as zero.
-<to be read again> 
-\relax 
-l.97 ...ons{greek}{variant=monotonic,numerals=greek}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
+Module polyglossia Warning: Hyphenation file hyph-el-monoton.pat.txt not found on input line 99
+Module polyglossia Info: Language monogreek was not yet loaded; created with id 3 on input line 99
 Package polyglossia Info: Option: Monotonic Greek.
 \@attic@num=\count309
 )) (./preamble/fonts.tex
-luaotfload | cache : Lookup cache loaded from /home/nodys/.texlive2021/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc.
+luaotfload | cache : Lookup cache loaded from /home/nick/.texlive2023/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc.
 
 Package fontspec Info: Font family 'TeXGyreTermes(0)' created for font 'TeX
 (fontspec)             Gyre Termes' with options
@@ -596,10 +553,13 @@ Package fontspec Info: Font family 'FreeSerif(0)' created for font 'FreeSerif'
 (fontspec)             <->"FreeSerif/BI:mode=harf;script=grek;language=dflt;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
+) (./main.aux
+LaTeX Info: Redefining \rmfamily on input line 7.
+LaTeX Info: Redefining \sffamily on input line 7.
+LaTeX Info: Redefining \ttfamily on input line 7.
 )
-No file main.aux.
-
 \openout1 = main.aux
+
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
 LaTeX Font Info:    ... okay on input line 8.
 LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
@@ -610,8 +570,8 @@ LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
 LaTeX Font Info:    ... okay on input line 8.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 8.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 8.
-(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
-File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 8.
 LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 8.
@@ -625,13 +585,13 @@ LaTeX Font Info:    ... okay on input line 8.
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count310
-\scratchdimen=\dimen197
-\scratchbox=\box58
+\scratchdimen=\dimen256
+\scratchbox=\box59
 \nofMPsegments=\count311
 \nofMParguments=\count312
 \everyMPshowfont=\toks29
 \MPscratchCnt=\count313
-\MPscratchDim=\dimen198
+\MPscratchDim=\dimen257
 \MPnumerator=\count314
 \makeMPintoPDFobject=\count315
 \everyMPtoPDFconversion=\toks30
@@ -700,20 +660,57 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 (Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 8.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 8.
+The property list \__xpg_alias contains the pairs (without outer braces):
+>  {latex/target}  =>  {latex}
+>  {english/target}  =>  {english}
+>  {en/target}  =>  {english}
+>  {en-AU/target}  =>  {english}
+>  {en-AU/variant}  =>  {australian}
+>  {en-AU/options}  =>  {variant=australian}
+>  {en-CA/target}  =>  {english}
+>  {en-CA/variant}  =>  {canadian}
+>  {en-CA/options}  =>  {variant=canadian}
+>  {en-GB/target}  =>  {english}
+>  {en-GB/variant}  =>  {british}
+>  {en-GB/options}  =>  {variant=british}
+>  {en-NZ/target}  =>  {english}
+>  {en-NZ/variant}  =>  {newzealand}
+>  {en-NZ/options}  =>  {variant=newzealand}
+>  {en-US/target}  =>  {english}
+>  {en-US/variant}  =>  {us}
+>  {en-US/options}  =>  {variant=us}
+>  {american/target}  =>  {english}
+>  {american/variant}  =>  {us}
+>  {american/options}  =>  {variant=us}
+>  {australian/target}  =>  {english}
+>  {australian/variant}  =>  {australian}
+>  {australian/options}  =>  {variant=australian}
+>  {british/target}  =>  {english}
+>  {british/variant}  =>  {british}
+>  {british/options}  =>  {variant=british}
+>  {canadian/target}  =>  {english}
+>  {canadian/variant}  =>  {canadian}
+>  {canadian/options}  =>  {variant=canadian}
+>  {newzealand/target}  =>  {english}
+>  {newzealand/variant}  =>  {newzealand}
+>  {newzealand/options}  =>  {variant=newzealand}
+>  {greek/target}  =>  {greek}
+>  {grc/target}  =>  {greek}
+>  {grc/variant}  =>  {ancient}
+>  {grc/options}  =>  {variant=ancient}
+>  {el-polyton/target}  =>  {greek}
+>  {el-polyton/options}  =>  {varant=polytonic}
+>  {el-monoton/target}  =>  {greek}
+>  {el-monoton/variant}  =>  {monotonic}
+>  {el-monoton/options}  =>  {variant=monotonic}
+>  {el/target}  =>  {greek}
+>  {polutonikogreek/target}  =>  {greek}
+>  {polutonikogreek/variant}  =>  {polytonic}
+>  {polutonikogreek/options}  =>  {variant=polytonic}.
 LaTeX Info: Redefining \rmfamily on input line 8.
 LaTeX Info: Redefining \sffamily on input line 8.
 LaTeX Info: Redefining \ttfamily on input line 8.
-[\directlua]:1: attempt to call a nil value (field 'select_language')
-stack traceback:
-	[\directlua]:1: in main chunk.
-\polyglossia@select@language:nnn ...3\endcsname )}
-                                                  \fi \polyglossia@register@...
-l.8 \begin{document}
-                  
-The lua interpreter ran into a problem, so the
-remainder of this lua chunk will be ignored.
-
-(./sections/titlepage.tex
+ (./sections/titlepage.tex
 LaTeX Font Info:    Calculating math sizes for size <11> on input line 88.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 88.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -722,157 +719,31 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 88.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Info: Redefining \rmfamily on input line 88.
-LaTeX Info: Redefining \sffamily on input line 88.
-LaTeX Info: Redefining \ttfamily on input line 88.
-LaTeX Info: Redefining \rmfamily on input line 88.
-LaTeX Info: Redefining \sffamily on input line 88.
-LaTeX Info: Redefining \ttfamily on input line 88.
-LaTeX Info: Redefining \rmfamily on input line 88.
-LaTeX Info: Redefining \sffamily on input line 88.
-LaTeX Info: Redefining \ttfamily on input line 88.
-LaTeX Info: Redefining \rmfamily on input line 88.
-LaTeX Info: Redefining \sffamily on input line 88.
-LaTeX Info: Redefining \ttfamily on input line 88.
-LaTeX Info: Redefining \rmfamily on input line 88.
-LaTeX Info: Redefining \sffamily on input line 88.
-LaTeX Info: Redefining \ttfamily on input line 88.
-LaTeX Info: Redefining \rmfamily on input line 88.
-LaTeX Info: Redefining \sffamily on input line 88.
-LaTeX Info: Redefining \ttfamily on input line 88.
-LaTeX Info: Redefining \rmfamily on input line 88.
-LaTeX Info: Redefining \sffamily on input line 88.
-LaTeX Info: Redefining \ttfamily on input line 88.
-LaTeX Info: Redefining \rmfamily on input line 88.
-LaTeX Info: Redefining \sffamily on input line 88.
-LaTeX Info: Redefining \ttfamily on input line 88.
-LaTeX Info: Redefining \rmfamily on input line 88.
-LaTeX Info: Redefining \sffamily on input line 88.
-LaTeX Info: Redefining \ttfamily on input line 88.
-) (./sections/introduction.tex
+)) (./sections/introduction.tex
 
 LaTeX Font Warning: Font shape `TU/FreeSerif(0)/m/sc' undefined
 (Font)              using `TU/FreeSerif(0)/m/n' instead on input line 1.
-
-
-LaTeX Warning: Citation `shervashidze2011wl' on page 1 undefined on input line 12.
-
-
-LaTeX Warning: Citation `vishwanathan2010graphkernels' on page 1 undefined on input line 12.
-
-
-LaTeX Warning: Citation `narayanangraph2vec' on page 1 undefined on input line 14.
-
-
-LaTeX Warning: Citation `tsitsulin2018netlsd' on page 1 undefined on input line 14.
-
-
-LaTeX Warning: Citation `xu2019gin' on page 1 undefined on input line 15.
 
 <figures/svsu1.jpeg, id=1, 1268.74pt x 447.6725pt>
 File: figures/svsu1.jpeg Graphic file (type jpg)
 <use figures/svsu1.jpeg>
 Package luatex.def Info: figures/svsu1.jpeg  used on input line 19.
 (luatex.def)             Requested size: 252.0pt x 88.91129pt.
-
-LaTeX Warning: Reference `fig:SupervsUn' on page 1 undefined on input line 24.
-
-
-LaTeX Warning: Citation `errica2019fairgnn' on page 1 undefined on input line 43.
-
-
-LaTeX Warning: Citation `dwivedi2020benchmarking' on page 1 undefined on input line 43.
-
 [1
-Non-PDF special ignored!
+Non-PDF special ignored!{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
-<./figures/svsu1.jpeg>]) (./sections/related_work.tex) (./sections/methods.tex
-
-LaTeX Warning: Citation `narayanangraph2vec' on page 2 undefined on input line 13.
-
-
-LaTeX Warning: Reference `alg:getwlsubgraph' on page 2 undefined on input line 113.
-
-
-LaTeX Warning: Reference `alg:graph2vec' on page 2 undefined on input line 115.
-
-
-LaTeX Warning: Citation `tsitsulin2018netlsd' on page 2 undefined on input line 118.
-
-
-LaTeX Warning: Reference `alg:netlsd' on page 2 undefined on input line 123.
-
-
-LaTeX Warning: Citation `xu2019gin' on page 2 undefined on input line 183.
-
-
-LaTeX Warning: Reference `alg:gin_forward' on page 2 undefined on input line 187.
-
-
-LaTeX Warning: Reference `alg:gin_train' on page 2 undefined on input line 190.
-
-) (./sections/datasets.tex
-
-LaTeX Warning: Citation `narayanangraph2vec' on page 2 undefined on input line 8.
-
-
-LaTeX Warning: Citation `tsitsulin2018netlsd' on page 2 undefined on input line 8.
-
-
-LaTeX Warning: Citation `xu2019gin' on page 2 undefined on input line 8.
-
-[2]
-
-LaTeX Warning: Citation `debnath1991mutag' on page 3 undefined on input line 12.
-
-
-LaTeX Warning: Citation `rossi2015networkrepository' on page 3 undefined on input line 19.
-
-
-LaTeX Warning: Citation `rossi2015networkrepository' on page 3 undefined on input line 24.
-
-) (./sections/experimental_setup.tex [3]
-
-LaTeX Warning: Reference `alg:gin_forward' on page 4 undefined on input line 73.
-
-
-LaTeX Warning: Reference `alg:gin_train' on page 4 undefined on input line 73.
-
-) (./sections/evaluation.tex [4]) (./sections/results.tex
-
-LaTeX Warning: Reference `tab:gin_best' on page 5 undefined on input line 5.
-
-
-LaTeX Warning: Reference `tab:graph2vec_best' on page 5 undefined on input line 5.
-
-
-LaTeX Warning: Reference `tab:netlsd_best' on page 5 undefined on input line 5.
-
-[5]
-
-LaTeX Warning: Reference `fig:heatmap' on page 6 undefined on input line 103.
-
+<./figures/svsu1.jpeg>]) (./sections/related_work.tex) (./sections/methods.tex) (./sections/datasets.tex [2]) (./sections/experimental_setup.tex [3]) (./sections/evaluation.tex [4]) (./sections/results.tex [5]
 <figures/HEATMAP_AVG_accuracy_before.png, id=42, 917.3472pt x 423.2613pt>
 File: figures/HEATMAP_AVG_accuracy_before.png Graphic file (type png)
 <use figures/HEATMAP_AVG_accuracy_before.png>
 Package luatex.def Info: figures/HEATMAP_AVG_accuracy_before.png  used on input line 110.
 (luatex.def)             Requested size: 252.0pt x 116.27127pt.
-
-LaTeX Warning: Reference `fig:pareto' on page 6 undefined on input line 132.
-
-
-LaTeX Warning: Reference `fig:stacked_mem' on page 6 undefined on input line 132.
-
 <figures/PARETO_AVG_acc_vs_compute_cost_before.png, id=43, 1002.3849pt x 423.2613pt>
 File: figures/PARETO_AVG_acc_vs_compute_cost_before.png Graphic file (type png)
 <use figures/PARETO_AVG_acc_vs_compute_cost_before.png>
 Package luatex.def Info: figures/PARETO_AVG_acc_vs_compute_cost_before.png  used on input line 139.
 (luatex.def)             Requested size: 252.0pt x 106.40277pt.
-
-LaTeX Warning: Reference `fig:pareto' on page 6 undefined on input line 145.
-
 <figures/embee_before.png, id=44, 401.5pt x 303.1325pt>
 File: figures/embee_before.png Graphic file (type png)
 <use figures/embee_before.png>
@@ -884,25 +755,8 @@ File: figures/training_before.png Graphic file (type png)
 Package luatex.def Info: figures/training_before.png  used on input line 166.
 (luatex.def)             Requested size: 201.60077pt x 152.21342pt.
 
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: Reference `fig:embed_time' on page 6 undefined on input line 180.
-
-
-LaTeX Warning: Reference `fig:train_time' on page 6 undefined on input line 180.
-
-
-LaTeX Warning: Reference `fig:stacked_time' on page 6 undefined on input line 181.
-
-
-LaTeX Warning: Reference `fig:stacked_mem' on page 6 undefined on input line 181.
-
-
-LaTeX Warning: Reference `fig:train_time' on page 6 undefined on input line 182.
-
-
-LaTeX Warning: Reference `fig:embed_time' on page 6 undefined on input line 183.
 
 [6<./figures/HEATMAP_AVG_accuracy_before.png><./figures/PARETO_AVG_acc_vs_compute_cost_before.png><./figures/embee_before.png>]
 <figures/stacked_time_before.png, id=52, 596.2275pt x 417.56pt>
@@ -915,26 +769,7 @@ File: figures/stacked_mem_before.png Graphic file (type png)
 <use figures/stacked_mem_before.png>
 Package luatex.def Info: figures/stacked_mem_before.png  used on input line 198.
 (luatex.def)             Requested size: 201.60077pt x 141.18481pt.
-
-
-LaTeX Warning: Reference `tab:graph2vec_cluster_best' on page 7 undefined on input line 220.
-
-
-LaTeX Warning: Reference `tab:netlsd_cluster_best' on page 7 undefined on input line 220.
-
-
-LaTeX Warning: Reference `tab:gin_cluster_best' on page 7 undefined on input line 220.
-
-
-LaTeX Warning: Reference `tab:graph2vec_cluster_best' on page 7 undefined on input line 223.
-
-
-LaTeX Warning: Reference `fig:netlsd_kmeans' on page 7 undefined on input line 323.
-
-
-LaTeX Warning: Reference `fig:gin_spectral' on page 7 undefined on input line 323.
-
-[7<./figures/training_before.png><./figures/stacked_time_before.png><./figures/stacked_mem_before.png>]
+ [7<./figures/training_before.png><./figures/stacked_time_before.png><./figures/stacked_mem_before.png>]
 <figures/NetLSD_kmeans_performance.png, id=60, 1156.32pt x 867.24pt>
 File: figures/NetLSD_kmeans_performance.png Graphic file (type png)
 <use figures/NetLSD_kmeans_performance.png>
@@ -981,9 +816,6 @@ Package luatex.def Info: figures/GIN_spectral_performance.png  used on input lin
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-LaTeX Warning: Reference `fig:tsne_umap_clusters' on page 8 undefined on input line 375.
-
 <figures/tsne_vs_umap_comprehensive.png, id=66, 579.1236pt x 420.6114pt>
 File: figures/tsne_vs_umap_comprehensive.png Graphic file (type png)
 <use figures/tsne_vs_umap_comprehensive.png>
@@ -992,28 +824,7 @@ Package luatex.def Info: figures/tsne_vs_umap_comprehensive.png  used on input l
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-LaTeX Warning: Reference `tab:stability_gin_best_cos' on page 8 undefined on input line 389.
-
-
-LaTeX Warning: Reference `tab:stability_gin_best_l2' on page 8 undefined on input line 389.
-
-
-LaTeX Warning: Reference `tab:stability_graph2vec' on page 8 undefined on input line 389.
-
-
-LaTeX Warning: Reference `tab:stability_netlsd' on page 8 undefined on input line 389.
-
 [8<./figures/NetLSD_kmeans_performance.png><./figures/Graph2Vec_kmeans_performance.png><./figures/GIN_kmeans_performance.png>] [9<./figures/NetLSD_spectral_performance.png><./figures/Graph2Vec_spectral_performance.png><./figures/GIN_spectral_performance.png><./figures/tsne_vs_umap_comprehensive.png>]
-
-LaTeX Warning: Reference `tab:gin_best_per' on page 10 undefined on input line 636.
-
-
-LaTeX Warning: Reference `tab:netlsd_best_per' on page 10 undefined on input line 636.
-
-
-LaTeX Warning: Reference `fig:heatmap_after' on page 10 undefined on input line 729.
-
 <figures/HEATMAP_AVG_accuracy_after.png, id=80, 917.3472pt x 423.2613pt>
 File: figures/HEATMAP_AVG_accuracy_after.png Graphic file (type png)
 <use figures/HEATMAP_AVG_accuracy_after.png>
@@ -1024,7 +835,7 @@ File: figures/PARETO_AVG_acc_vs_compute_cost_after.png Graphic file (type png)
 <use figures/PARETO_AVG_acc_vs_compute_cost_after.png>
 Package luatex.def Info: figures/PARETO_AVG_acc_vs_compute_cost_after.png  used on input line 758.
 (luatex.def)             Requested size: 252.0pt x 106.40277pt.
-[10<./figures/HEATMAP_AVG_accuracy_after.png>]
+ [10<./figures/HEATMAP_AVG_accuracy_after.png>]
 <figures/stacked_time_after.png, id=86, 604.2575pt x 420.57124pt>
 File: figures/stacked_time_after.png Graphic file (type png)
 <use figures/stacked_time_after.png>
@@ -1035,24 +846,12 @@ File: figures/stacked_mem_after.png Graphic file (type png)
 <use figures/stacked_mem_after.png>
 Package luatex.def Info: figures/stacked_mem_after.png  used on input line 786.
 (luatex.def)             Requested size: 201.60077pt x 140.31627pt.
-
-
-LaTeX Warning: Reference `fig:pareto_after' on page 11 undefined on input line 791.
-
-
-LaTeX Warning: Reference `fig:stacked_mem_after' on page 11 undefined on input line 791.
-
-
-LaTeX Warning: Reference `fig:tsne_before_after' on page 11 undefined on input line 798.
-
-
-LaTeX Warning: Reference `fig:umap_before_after' on page 11 undefined on input line 798.
-
 <figures/comprehensive_grid_tsne.png, id=88, 590.4459pt x 447.3513pt>
 File: figures/comprehensive_grid_tsne.png Graphic file (type png)
 <use figures/comprehensive_grid_tsne.png>
 Package luatex.def Info: figures/comprehensive_grid_tsne.png  used on input line 802.
 (luatex.def)             Requested size: 226.79846pt x 171.83145pt.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -1102,6 +901,7 @@ braces):
 >  {latex/babelname}  =>  {latex}
 >  {latex/localnumeral}  =>  {polyglossia@C@localnumeral}
 >  {latex/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {latex/DefineCommandsCmd}  =>  {use_none:n}
 >  {english/script}  =>  {latin}
 >  {english/lcscript}  =>  {latin}
 >  {english/scripttag}  =>  {}
@@ -1118,6 +918,7 @@ braces):
 >  {english/babelname}  =>  {american}
 >  {english/localnumeral}  =>  {polyglossia@C@localnumeral}
 >  {english/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {english/DefineCommandsCmd}  =>  {xpg_define_language_commands:e}
 >  {greek/script}  =>  {Greek}
 >  {greek/lcscript}  =>  {greek}
 >  {greek/scripttag}  =>  {grek}
@@ -1133,49 +934,81 @@ braces):
 >  {greek/envname}  =>  {greek}
 >  {greek/babelname}  =>  {greek}
 >  {greek/localnumeral}  =>  {greeknumerals}
->  {greek/Localnumeral}  =>  {Greeknumerals}.
+>  {greek/Localnumeral}  =>  {Greeknumerals}
+>  {greek/DefineCommandsCmd}  =>  {xpg_define_language_commands:e}.
+The property list \__xpg_alias contains the pairs (without outer braces):
+>  {latex/target}  =>  {latex}
+>  {english/target}  =>  {english}
+>  {en/target}  =>  {english}
+>  {en-AU/target}  =>  {english}
+>  {en-AU/variant}  =>  {australian}
+>  {en-AU/options}  =>  {variant=australian}
+>  {en-CA/target}  =>  {english}
+>  {en-CA/variant}  =>  {canadian}
+>  {en-CA/options}  =>  {variant=canadian}
+>  {en-GB/target}  =>  {english}
+>  {en-GB/variant}  =>  {british}
+>  {en-GB/options}  =>  {variant=british}
+>  {en-NZ/target}  =>  {english}
+>  {en-NZ/variant}  =>  {newzealand}
+>  {en-NZ/options}  =>  {variant=newzealand}
+>  {en-US/target}  =>  {english}
+>  {en-US/variant}  =>  {us}
+>  {en-US/options}  =>  {variant=us}
+>  {american/target}  =>  {english}
+>  {american/variant}  =>  {us}
+>  {american/options}  =>  {variant=us}
+>  {australian/target}  =>  {english}
+>  {australian/variant}  =>  {australian}
+>  {australian/options}  =>  {variant=australian}
+>  {british/target}  =>  {english}
+>  {british/variant}  =>  {british}
+>  {british/options}  =>  {variant=british}
+>  {canadian/target}  =>  {english}
+>  {canadian/variant}  =>  {canadian}
+>  {canadian/options}  =>  {variant=canadian}
+>  {newzealand/target}  =>  {english}
+>  {newzealand/variant}  =>  {newzealand}
+>  {newzealand/options}  =>  {variant=newzealand}
+>  {greek/target}  =>  {greek}
+>  {grc/target}  =>  {greek}
+>  {grc/variant}  =>  {ancient}
+>  {grc/options}  =>  {variant=ancient}
+>  {el-polyton/target}  =>  {greek}
+>  {el-polyton/options}  =>  {varant=polytonic}
+>  {el-monoton/target}  =>  {greek}
+>  {el-monoton/variant}  =>  {monotonic}
+>  {el-monoton/options}  =>  {variant=monotonic}
+>  {el/target}  =>  {greek}
+>  {polutonikogreek/target}  =>  {greek}
+>  {polutonikogreek/variant}  =>  {polytonic}
+>  {polutonikogreek/options}  =>  {variant=polytonic}.
 [12
 
 ] (./main.aux
-LaTeX Info: Redefining \rmfamily on input line 6.
-LaTeX Info: Redefining \sffamily on input line 6.
-LaTeX Info: Redefining \ttfamily on input line 6.
-[\directlua]:1: attempt to call a nil value (field 'select_language')
-stack traceback:
-	[\directlua]:1: in main chunk.
-\polyglossia@select@language:nnn ...3\endcsname )}
-                                                  \fi \polyglossia@register@...
-l.6 \selectlanguage *{english}
-                            
-The lua interpreter ran into a problem, so the
-remainder of this lua chunk will be ignored.
-
+LaTeX Info: Redefining \rmfamily on input line 7.
+LaTeX Info: Redefining \sffamily on input line 7.
+LaTeX Info: Redefining \ttfamily on input line 7.
 )
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 )
 
 Here is how much of LuaTeX's memory you used:
- 10692 strings out of 477805
- 195340,662416 words of node,token memory allocated
- 521 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 14 attribute, 53 glue_spec, 14 attribute_list, 1 write nodes
-   avail lists: 2:2155,3:554,4:242,5:1006,6:143,7:16798,8:47,9:1017,10:20,11:1540
- 30833 multiletter control sequences out of 65536+600000
- 151 fonts using 73085959 bytes
- 73i,12n,87p,848b,512s stack positions out of 5000i,500n,10000p,200000b,80000s
-<</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi7.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr7.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy10.pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr10.pk>></usr/share/texmf/fonts/opentype/public/lm/lmmono10-regular.otf><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi5.600pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr6.pk>></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-italic.otf><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi10.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/amsfonts/cmextra/cmex8.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi6.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmsy6.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/amsfonts/symbols/msbm10.480pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr8.pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmmi8.600pk>><</home/nodys/.texlive2021/texmf-var/fonts/pk/ljfour/public/cm/cmsy8.600pk>><</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy7.pk>></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-bold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerifBold.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerifBoldItalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerifItalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu-freefont/FreeSerif.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf>
-Output written on main.pdf (12 pages, 4377537 bytes).
+ 11083 strings out of 478285
+ 195340,1977958 words of node,token memory allocated
+ 526 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 14 attribute, 54 glue_spec, 14 attribute_list, 1 write nodes
+   avail lists: 2:2027,3:573,4:242,5:1074,6:143,7:16905,8:47,9:1017,10:20,11:1540
+ 30718 multiletter control sequences out of 65536+600000
+ 151 fonts using 73087879 bytes
+ 77i,12n,87p,836b,534s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-italic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-bold.otf></usr/share/fonts/gnu-free/FreeSerifBold.ttf></usr/share/fonts/gnu-free/FreeSerifBoldItalic.ttf></usr/share/fonts/gnu-free/FreeSerifItalic.ttf></usr/share/fonts/gnu-free/FreeSerif.ttf></usr/share/texlive/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (12 pages, 4298808 bytes).
 
-PDF statistics: 323 PDF objects out of 1000 (max. 8388607)
- 120 compressed objects within 2 object streams
+PDF statistics: 200 PDF objects out of 1000 (max. 8388607)
+ 105 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 
