@@ -1,30 +1,3 @@
-"""
-Extended Clustering Visualizations with t-SNE and UMAP
-For academic paper figures - compact, information-dense layouts
-
-Figure Types:
-=============
-SINGLE-ROW FIGURES (for individual chapters - original OR permuted):
-- Method comparison: 1×3 grid (GIN, Graph2Vec, NetLSD)
-- Dataset comparison: 1×3 grid (ENZYMES, IMDB-MULTI, MUTAG)
-- Dimension comparison: 1×3 grid (dim64, dim128, dim256)
-
-COMPARISON FIGURES (for comparison chapter - original VS permuted):
-- Method comparison: 2×3 grid (Original/Permuted × Methods)
-- Comprehensive grid: 3×6 grid (Methods × Datasets×Orig/Perm)
-
-COMPREHENSIVE FIGURES:
-- Methods × Dimensions: 3×3 grid for single dataset
-- t-SNE vs UMAP: side-by-side comparison across all methods/datasets
-
-Usage:
-    python clustering_vis_extended.py
-    python clustering_vis_extended.py --embeddings-dir ../embeddings --permuted-dir ../permutated_embeddings
-
-Requirements:
-    pip install numpy pandas matplotlib seaborn scikit-learn umap-learn
-"""
-
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from matplotlib.lines import Line2D
@@ -49,12 +22,7 @@ except ImportError:
     print("Warning: umap-learn not installed. Install with: pip install umap-learn")
 
 
-# =============================================================================
-# Configuration
-# =============================================================================
-
 class Config:
-    """Configuration for visualizations."""
     PROJECT_ROOT = Path(__file__).parent.parent
     EMBEDDINGS_DIR = PROJECT_ROOT / "embeddings"
     PERMUTED_EMBEDDINGS_DIR = PROJECT_ROOT / "permutated_embeddings"
@@ -62,15 +30,13 @@ class Config:
     PLOTS_DIR = PROJECT_ROOT / "plots"
     DATASETS_DIR = PROJECT_ROOT / "DATASETS"
     METRICS_CSV = SCRIPTS_DIR / "clustering_merged.csv"
-    
-    # Visualization settings
+
     RANDOM_STATE = 42
     TSNE_PERPLEXITY = 30
     TSNE_N_ITER = 1000
     UMAP_N_NEIGHBORS = 15
     UMAP_MIN_DIST = 0.1
     
-    # Academic paper plot sizes (in inches)
     FIGSIZE_1x3 = (7, 2.3)         # Single row, 3 columns
     FIGSIZE_2x3 = (7, 4.5)         # Two rows, 3 columns
     FIGSIZE_3x3 = (7, 6.5)         # Three rows, 3 columns
@@ -86,19 +52,9 @@ class Config:
     MARKER_SIZE = 8
     ALPHA = 0.6
     
-    # Color schemes
-    DATASET_COLORS = {
-        'ENZYMES': '#1f77b4',
-        'IMDB-MULTI': '#2ca02c',
-        'MUTAG': '#d62728'
-    }
-    
-    METHOD_COLORS = {
-        'GIN': '#1f77b4',
-        'Graph2Vec': '#ff7f0e',
-        'NetLSD': '#2ca02c'
-    }
-    
+
+    DATASET_COLORS = {'ENZYMES': '#1f77b4', 'IMDB-MULTI': '#2ca02c','MUTAG': '#d62728'}
+    METHOD_COLORS = {'GIN': '#1f77b4','Graph2Vec': '#ff7f0e','NetLSD': '#2ca02c'}
     CLUSTER_PALETTE = sns.color_palette("colorblind", 10)
     
     DATASETS = ['ENZYMES', 'IMDB-MULTI', 'MUTAG']
@@ -107,37 +63,20 @@ class Config:
 
 
 def setup_matplotlib_style():
-    """Set up matplotlib for academic paper figures."""
-    plt.rcParams.update({
-        'font.size': Config.FONT_SIZE,
-        'axes.titlesize': Config.TITLE_SIZE,
-        'axes.labelsize': Config.LABEL_SIZE,
-        'xtick.labelsize': Config.TICK_SIZE,
-        'ytick.labelsize': Config.TICK_SIZE,
-        'legend.fontsize': Config.LEGEND_SIZE,
-        'figure.dpi': Config.DPI,
-        'savefig.dpi': Config.DPI,
-        'savefig.bbox': 'tight',
-        'savefig.pad_inches': 0.05,
-        'axes.spines.top': False,
-        'axes.spines.right': False,
-        'font.family': 'sans-serif',
-    })
+    plt.rcParams.update({'font.size': Config.FONT_SIZE,'axes.titlesize': Config.TITLE_SIZE,  'axes.labelsize': Config.LABEL_SIZE,'xtick.labelsize': Config.TICK_SIZE,
+        'ytick.labelsize': Config.TICK_SIZE, 'legend.fontsize': Config.LEGEND_SIZE,'figure.dpi': Config.DPI, 'savefig.dpi': Config.DPI, 'savefig.bbox': 'tight',savefig.pad_inches': 0.05,
+        'axes.spines.top': False, 'axes.spines.right': False,'font.family': 'sans-serif', })
 
-
-# =============================================================================
-# Data Loading Functions
-# =============================================================================
 
 def load_metrics(csv_path=None):
-    """Load clustering metrics from CSV."""
+
     if csv_path is None:
         csv_path = Config.METRICS_CSV
     return pd.read_csv(csv_path)
 
 
 def get_best_config_for_method_dataset_dim(df, method, dataset, dim, cluster_alg='kmeans', metric='ari'):
-    """Get the run configuration with best ARI for a given method/dataset/dim."""
+   
     mask = (df['method'] == method) & (df['dataset'] == dataset) & (df['cluster_alg'] == cluster_alg)
     
     if method == 'GIN':
@@ -160,7 +99,6 @@ def get_best_config_for_method_dataset_dim(df, method, dataset, dim, cluster_alg
 
 
 def load_labels_for_dataset(dataset, datasets_dir):
-    """Load ground truth labels for a dataset."""
     labels_file = datasets_dir / dataset / "labels.csv"
     if labels_file.exists():
         labels_df = pd.read_csv(labels_file)
@@ -171,7 +109,6 @@ def load_labels_for_dataset(dataset, datasets_dir):
 
 
 def load_gin_embeddings(dataset, run_name, base_dir, datasets_dir):
-    """Load GIN embeddings combining train/val/test splits."""
     run_dir = base_dir / "embeddings_gin" / dataset / run_name
     
     embeddings_list = []
@@ -197,9 +134,8 @@ def load_gin_embeddings(dataset, run_name, base_dir, datasets_dir):
 
 
 def load_graph2vec_embeddings(dataset, dim, base_dir, datasets_dir):
-    """Load Graph2Vec embeddings."""
+
     emb_file = base_dir / "embeddings_graph2vec" / dataset / f"dim{dim}" / "Graph2Vec_embeddings.npy"
-    
     if not emb_file.exists():
         return None, None
     
@@ -213,7 +149,7 @@ def load_graph2vec_embeddings(dataset, dim, base_dir, datasets_dir):
 
 
 def load_netlsd_embeddings(dataset, dim, base_dir, datasets_dir):
-    """Load NetLSD embeddings."""
+
     emb_file = base_dir / "embeddings_netlsd" / dataset / f"dim{dim}" / "NetLSD_embeddings.npy"
     
     if not emb_file.exists():
@@ -224,12 +160,11 @@ def load_netlsd_embeddings(dataset, dim, base_dir, datasets_dir):
     
     if labels is None:
         labels = np.zeros(len(embeddings))
-    
     return embeddings, labels
 
 
+
 def load_embeddings(method, dataset, dim, base_dir, datasets_dir, run_name=None):
-    """Generic embedding loader."""
     if method == 'GIN':
         if run_name is None:
             return None, None
@@ -241,12 +176,10 @@ def load_embeddings(method, dataset, dim, base_dir, datasets_dir, run_name=None)
     return None, None
 
 
-# =============================================================================
-# Dimensionality Reduction
-# =============================================================================
 
+# Dimensionality Reduction
 def compute_tsne(embeddings, perplexity=None, random_state=None):
-    """Compute t-SNE projection."""
+
     if perplexity is None:
         perplexity = min(Config.TSNE_PERPLEXITY, len(embeddings) - 1)
     if random_state is None:
@@ -255,7 +188,6 @@ def compute_tsne(embeddings, perplexity=None, random_state=None):
     scaler = StandardScaler()
     embeddings_scaled = scaler.fit_transform(embeddings)
     
-    # Handle different scikit-learn versions
     import sklearn
     sklearn_version = tuple(map(int, sklearn.__version__.split('.')[:2]))
     
@@ -269,8 +201,9 @@ def compute_tsne(embeddings, perplexity=None, random_state=None):
     return tsne.fit_transform(embeddings_scaled)
 
 
+
 def compute_umap(embeddings, n_neighbors=None, min_dist=None, random_state=None):
-    """Compute UMAP projection."""
+
     if not UMAP_AVAILABLE:
         return None
     
@@ -291,7 +224,7 @@ def compute_umap(embeddings, n_neighbors=None, min_dist=None, random_state=None)
 
 
 def compute_projection(embeddings, projection_type='tsne'):
-    """Compute projection with fallback."""
+
     if projection_type == 'umap':
         proj = compute_umap(embeddings)
         if proj is not None:
@@ -299,13 +232,9 @@ def compute_projection(embeddings, projection_type='tsne'):
     return compute_tsne(embeddings)
 
 
-# =============================================================================
-# Plotting Helpers
-# =============================================================================
 
-def plot_embedding_scatter(ax, projection, labels, title=None, metrics_text=None,
-                          show_legend=False, palette=None, marker_size=None):
-    """Plot a single embedding scatter plot."""
+def plot_embedding_scatter(ax, projection, labels, title=None, metrics_text=None, show_legend=False, palette=None, marker_size=None):
+
     if palette is None:
         palette = Config.CLUSTER_PALETTE
     if marker_size is None:
@@ -315,28 +244,23 @@ def plot_embedding_scatter(ax, projection, labels, title=None, metrics_text=None
     
     for i, label in enumerate(unique_labels):
         mask = labels == label
-        ax.scatter(projection[mask, 0], projection[mask, 1],
-                   c=[palette[i % len(palette)]], label=f'Class {int(label)}',
-                   s=marker_size, alpha=Config.ALPHA, edgecolors='none')
+        ax.scatter(projection[mask, 0], projection[mask, 1], c=[palette[i % len(palette)]], label=f'Class {int(label)}', s=marker_size, alpha=Config.ALPHA, edgecolors='none')
     
     if title:
         ax.set_title(title, fontsize=Config.TITLE_SIZE, fontweight='bold')
     
     if metrics_text:
-        ax.text(0.02, 0.98, metrics_text, transform=ax.transAxes,
-                fontsize=Config.LEGEND_SIZE, verticalalignment='top',
-                bbox=dict(boxstyle='round', facecolor='white', alpha=0.8, edgecolor='none'))
+        ax.text(0.02, 0.98, metrics_text, transform=ax.transAxes,fontsize=Config.LEGEND_SIZE, verticalalignment='top',  bbox=dict(boxstyle='round', facecolor='white', alpha=0.8, edgecolor='none'))
     
     ax.set_xticks([])
     ax.set_yticks([])
     
     if show_legend:
-        ax.legend(loc='lower right', framealpha=0.8, edgecolor='none',
-                 markerscale=1.5, handletextpad=0.1)
+        ax.legend(loc='lower right', framealpha=0.8, edgecolor='none',markerscale=1.5, handletextpad=0.1)
 
 
 def plot_empty_cell(ax, message='N/A', title=None):
-    """Plot an empty cell with message."""
+
     ax.text(0.5, 0.5, message, ha='center', va='center', transform=ax.transAxes, fontsize=7)
     ax.set_xticks([])
     ax.set_yticks([])
@@ -344,16 +268,8 @@ def plot_empty_cell(ax, message='N/A', title=None):
         ax.set_title(title, fontsize=Config.TITLE_SIZE, fontweight='bold')
 
 
-# =============================================================================
-# SINGLE-ROW FIGURES (for individual chapters)
-# =============================================================================
-
-def create_method_comparison_single(df, dataset, dim, base_dir, datasets_dir,
-                                    projection_type='tsne', output_path=None):
-    """
-    Compare all methods for a single dataset - SINGLE ROW.
-    Layout: 1×3 (GIN, Graph2Vec, NetLSD)
-    """
+def create_method_comparison_single(df, dataset, dim, base_dir, datasets_dir, projection_type='tsne', output_path=None):
+    
     fig, axes = plt.subplots(1, 3, figsize=Config.FIGSIZE_1x3)
     
     for col, method in enumerate(Config.METHODS):
@@ -373,12 +289,9 @@ def create_method_comparison_single(df, dataset, dim, base_dir, datasets_dir,
         
         projection = compute_projection(embeddings, projection_type)
         metrics_text = f"ARI={best_config['ari']:.3f}\nNMI={best_config['nmi']:.3f}"
-        
-        plot_embedding_scatter(ax, projection, labels, title=method,
-                              metrics_text=metrics_text, show_legend=(col == 2))
-    
-    fig.suptitle(f"{dataset} (dim={dim}, {projection_type.upper()})",
-                fontsize=Config.TITLE_SIZE + 1, fontweight='bold', y=1.02)
+        plot_embedding_scatter(ax, projection, labels, title=method, metrics_text=metrics_text, show_legend=(col == 2))
+
+    fig.suptitle(f"{dataset} (dim={dim}, {projection_type.upper()})",fontsize=Config.TITLE_SIZE + 1, fontweight='bold', y=1.02)
     plt.tight_layout()
     
     if output_path:
@@ -388,12 +301,8 @@ def create_method_comparison_single(df, dataset, dim, base_dir, datasets_dir,
     return fig
 
 
-def create_dataset_comparison_single(df, method, dim, base_dir, datasets_dir,
-                                     projection_type='tsne', output_path=None):
-    """
-    Compare all datasets for a single method - SINGLE ROW.
-    Layout: 1×3 (ENZYMES, IMDB-MULTI, MUTAG)
-    """
+def create_dataset_comparison_single(df, method, dim, base_dir, datasets_dir, projection_type='tsne', output_path=None):
+    
     fig, axes = plt.subplots(1, 3, figsize=Config.FIGSIZE_1x3)
     
     for col, dataset in enumerate(Config.DATASETS):
@@ -428,12 +337,8 @@ def create_dataset_comparison_single(df, method, dim, base_dir, datasets_dir,
     return fig
 
 
-def create_dimension_comparison_single(df, method, dataset, base_dir, datasets_dir,
-                                       projection_type='tsne', output_path=None):
-    """
-    Compare all dimensions for a single method/dataset - SINGLE ROW.
-    Layout: 1×3 (dim64, dim128, dim256)
-    """
+def create_dimension_comparison_single(df, method, dataset, base_dir, datasets_dir, projection_type='tsne', output_path=None):
+    
     fig, axes = plt.subplots(1, 3, figsize=Config.FIGSIZE_1x3)
     
     for col, dim in enumerate(Config.DIMS):
@@ -468,16 +373,9 @@ def create_dimension_comparison_single(df, method, dataset, base_dir, datasets_d
     return fig
 
 
-# =============================================================================
-# COMPARISON FIGURES (Original vs Permuted)
-# =============================================================================
 
-def create_method_comparison_dual(df, dataset, dim, base_dir, datasets_dir,
-                                  permuted_base_dir, projection_type='tsne', output_path=None):
-    """
-    Compare methods: Original vs Permuted.
-    Layout: 2×3 (Original/Permuted × GIN/Graph2Vec/NetLSD)
-    """
+def create_method_comparison_dual(df, dataset, dim, base_dir, datasets_dir,  permuted_base_dir, projection_type='tsne', output_path=None):
+   
     fig, axes = plt.subplots(2, 3, figsize=Config.FIGSIZE_2x3)
     
     dirs = [('Original', base_dir), ('Permuted', permuted_base_dir)]
@@ -532,10 +430,7 @@ def create_method_comparison_dual(df, dataset, dim, base_dir, datasets_dir,
 
 def create_comprehensive_comparison_grid(df, base_dir, datasets_dir, permuted_base_dir,
                                          projection_type='tsne', dim=128, output_path=None):
-    """
-    Comprehensive comparison: Methods × (Datasets × Orig/Perm).
-    Layout: 3×6 grid
-    """
+ "
     fig = plt.figure(figsize=Config.FIGSIZE_3x6)
     gs = gridspec.GridSpec(3, 6, figure=fig, wspace=0.08, hspace=0.25)
     
@@ -595,16 +490,8 @@ def create_comprehensive_comparison_grid(df, base_dir, datasets_dir, permuted_ba
     return fig
 
 
-# =============================================================================
-# METHODS × DIMENSIONS GRID (3×3)
-# =============================================================================
-
-def create_methods_dimensions_grid(df, dataset, base_dir, datasets_dir,
-                                   projection_type='tsne', output_path=None):
-    """
-    Methods × Dimensions grid for a single dataset.
-    Layout: 3×3 (Methods × Dimensions)
-    """
+def create_methods_dimensions_grid(df, dataset, base_dir, datasets_dir, projection_type='tsne', output_path=None):
+   
     fig, axes = plt.subplots(3, 3, figsize=Config.FIGSIZE_3x3)
     
     for m_idx, method in enumerate(Config.METHODS):
@@ -654,15 +541,11 @@ def create_methods_dimensions_grid(df, dataset, base_dir, datasets_dir,
     return fig
 
 
-# =============================================================================
-# t-SNE vs UMAP COMPREHENSIVE COMPARISON
-# =============================================================================
+
+
 
 def create_tsne_umap_comparison_grid(df, base_dir, datasets_dir, dim=128, output_path=None):
-    """
-    Comprehensive t-SNE vs UMAP comparison across all methods and datasets.
-    Layout: 3×6 (Methods × Datasets×TSNE/UMAP)
-    """
+   
     if not UMAP_AVAILABLE:
         print("UMAP not available. Skipping t-SNE vs UMAP comparison.")
         return None
@@ -705,8 +588,7 @@ def create_tsne_umap_comparison_grid(df, base_dir, datasets_dir, dim=128, output
                 if col == 0:
                     ax.set_ylabel(method, fontsize=8, fontweight='bold')
     
-    fig.suptitle(f"t-SNE vs UMAP Comparison (dim={dim})",
-                fontsize=10, fontweight='bold', y=0.99)
+    fig.suptitle(f"t-SNE vs UMAP Comparison (dim={dim})", fontsize=10, fontweight='bold', y=0.99)
     plt.tight_layout()
     
     if output_path:
@@ -717,10 +599,7 @@ def create_tsne_umap_comparison_grid(df, base_dir, datasets_dir, dim=128, output
 
 
 def create_tsne_umap_single_method(df, method, base_dir, datasets_dir, dim=128, output_path=None):
-    """
-    t-SNE vs UMAP for a single method across all datasets.
-    Layout: 2×3 (t-SNE/UMAP × Datasets)
-    """
+    
     if not UMAP_AVAILABLE:
         print("UMAP not available.")
         return None
@@ -743,23 +622,19 @@ def create_tsne_umap_single_method(df, method, base_dir, datasets_dir, dim=128, 
             if embeddings is None:
                 plot_empty_cell(ax, 'N/A', dataset if p_idx == 0 else None)
                 if d_idx == 0:
-                    ax.set_ylabel('t-SNE' if proj_type == 'tsne' else 'UMAP',
-                                 fontsize=Config.LABEL_SIZE, fontweight='bold')
+                    ax.set_ylabel('t-SNE' if proj_type == 'tsne' else 'UMAP',  fontsize=Config.LABEL_SIZE, fontweight='bold')
                 continue
             
             projection = compute_projection(embeddings, proj_type)
             metrics_text = f"ARI={best_config['ari']:.3f}"
             
             title = dataset if p_idx == 0 else None
-            plot_embedding_scatter(ax, projection, labels, title=title,
-                                  metrics_text=metrics_text, show_legend=(p_idx == 0 and d_idx == 2))
+            plot_embedding_scatter(ax, projection, labels, title=title,  metrics_text=metrics_text, show_legend=(p_idx == 0 and d_idx == 2))
             
             if d_idx == 0:
-                ax.set_ylabel('t-SNE' if proj_type == 'tsne' else 'UMAP',
-                             fontsize=Config.LABEL_SIZE, fontweight='bold')
+                ax.set_ylabel('t-SNE' if proj_type == 'tsne' else 'UMAP',fontsize=Config.LABEL_SIZE, fontweight='bold')
     
-    fig.suptitle(f"{method} - t-SNE vs UMAP (dim={dim})",
-                fontsize=Config.TITLE_SIZE + 1, fontweight='bold', y=0.98)
+    fig.suptitle(f"{method} - t-SNE vs UMAP (dim={dim})",  fontsize=Config.TITLE_SIZE + 1, fontweight='bold', y=0.98)
     plt.tight_layout()
     
     if output_path:
@@ -769,12 +644,7 @@ def create_tsne_umap_single_method(df, method, base_dir, datasets_dir, dim=128, 
     return fig
 
 
-# =============================================================================
-# METRICS HEATMAP
-# =============================================================================
-
 def create_metrics_heatmap(df, cluster_alg='kmeans', output_path=None):
-    """Create heatmap showing ARI/NMI across methods and datasets."""
     fig, axes = plt.subplots(1, 2, figsize=(7, 2.5))
     
     for ax, metric, title in zip(axes, ['ari', 'nmi'],
@@ -804,15 +674,9 @@ def create_metrics_heatmap(df, cluster_alg='kmeans', output_path=None):
     return fig
 
 
-# =============================================================================
-# NEW: t-SNE vs UMAP PER DATASET (2×3)
-# =============================================================================
 
 def create_tsne_vs_umap_per_dataset(df, dataset, dim, base_dir, datasets_dir, output_path=None):
-    """
-    t-SNE vs UMAP comparison for a single dataset.
-    Layout: 2×3 (rows: t-SNE/UMAP, cols: GIN/Graph2Vec/NetLSD)
-    """
+   
     if not UMAP_AVAILABLE:
         print("UMAP not available.")
         return None
@@ -833,8 +697,7 @@ def create_tsne_vs_umap_per_dataset(df, dataset, dim, base_dir, datasets_dir, ou
             if embeddings is None:
                 plot_empty_cell(ax, 'N/A', method if row == 0 else None)
                 if col == 0:
-                    ax.set_ylabel('t-SNE' if proj_type == 'tsne' else 'UMAP',
-                                 fontsize=Config.LABEL_SIZE, fontweight='bold')
+                    ax.set_ylabel('t-SNE' if proj_type == 'tsne' else 'UMAP',  fontsize=Config.LABEL_SIZE, fontweight='bold')
                 continue
             
             projection = compute_projection(embeddings, proj_type)
@@ -845,11 +708,9 @@ def create_tsne_vs_umap_per_dataset(df, dataset, dim, base_dir, datasets_dir, ou
                                   metrics_text=metrics_text, show_legend=(row == 0 and col == 2))
             
             if col == 0:
-                ax.set_ylabel('t-SNE' if proj_type == 'tsne' else 'UMAP',
-                             fontsize=Config.LABEL_SIZE, fontweight='bold')
+                ax.set_ylabel('t-SNE' if proj_type == 'tsne' else 'UMAP',fontsize=Config.LABEL_SIZE, fontweight='bold')
     
-    fig.suptitle(f"{dataset} - t-SNE vs UMAP (dim={dim})",
-                fontsize=Config.TITLE_SIZE + 1, fontweight='bold', y=0.98)
+    fig.suptitle(f"{dataset} - t-SNE vs UMAP (dim={dim})",fontsize=Config.TITLE_SIZE + 1, fontweight='bold', y=0.98)
     plt.tight_layout()
     
     if output_path:
@@ -859,16 +720,9 @@ def create_tsne_vs_umap_per_dataset(df, dataset, dim, base_dir, datasets_dir, ou
     return fig
 
 
-# =============================================================================
-# NEW: K-MEANS vs SPECTRAL PER DATASET (2×3)
-# =============================================================================
 
-def create_kmeans_vs_spectral_per_dataset(df, dataset, dim, base_dir, datasets_dir,
-                                          projection_type='tsne', output_path=None):
-    """
-    K-means vs Spectral clustering comparison for a single dataset.
-    Layout: 2×3 (rows: K-means/Spectral, cols: GIN/Graph2Vec/NetLSD)
-    """
+def create_kmeans_vs_spectral_per_dataset(df, dataset, dim, base_dir, datasets_dir,projection_type='tsne', output_path=None):
+   
     fig, axes = plt.subplots(2, 3, figsize=Config.FIGSIZE_2x3)
     
     cluster_algs = ['kmeans', 'spectral']
@@ -919,16 +773,8 @@ def create_kmeans_vs_spectral_per_dataset(df, dataset, dim, base_dir, datasets_d
     return fig
 
 
-# =============================================================================
-# NEW: COMPREHENSIVE GRID - SEPARATE FOR ORIGINAL AND PERMUTED (3×3)
-# =============================================================================
+def create_comprehensive_single_source(df, base_dir, datasets_dir, projection_type='tsne', dim=128, source_label='Original', output_path=None):
 
-def create_comprehensive_single_source(df, base_dir, datasets_dir, projection_type='tsne',
-                                       dim=128, source_label='Original', output_path=None):
-    """
-    Comprehensive grid for a single source (original OR permuted).
-    Layout: 3×3 (rows: Methods, cols: Datasets)
-    """
     fig, axes = plt.subplots(3, 3, figsize=Config.FIGSIZE_3x3)
     
     for m_idx, method in enumerate(Config.METHODS):
@@ -978,15 +824,9 @@ def create_comprehensive_single_source(df, base_dir, datasets_dir, projection_ty
     return fig
 
 
-# =============================================================================
-# NEW: t-SNE vs UMAP COMPREHENSIVE (3×3 per projection, side by side = 3×6)
-# =============================================================================
 
 def create_tsne_umap_all_methods_datasets(df, base_dir, datasets_dir, dim=128, output_path=None):
-    """
-    Comprehensive t-SNE vs UMAP: All methods × all datasets.
-    Layout: 3×6 (rows: Methods, cols: Datasets × t-SNE/UMAP)
-    """
+  
     if not UMAP_AVAILABLE:
         print("UMAP not available.")
         return None
@@ -1038,16 +878,9 @@ def create_tsne_umap_all_methods_datasets(df, base_dir, datasets_dir, dim=128, o
     return fig
 
 
-# =============================================================================
-# NEW: K-MEANS vs SPECTRAL COMPREHENSIVE (3×6)
-# =============================================================================
-
 def create_kmeans_spectral_all_methods_datasets(df, base_dir, datasets_dir, 
                                                  projection_type='tsne', dim=128, output_path=None):
-    """
-    Comprehensive K-means vs Spectral: All methods × all datasets.
-    Layout: 3×6 (rows: Methods, cols: Datasets × K-means/Spectral)
-    """
+ 
     fig = plt.figure(figsize=Config.FIGSIZE_3x6)
     gs = gridspec.GridSpec(3, 6, figure=fig, wspace=0.08, hspace=0.25)
     
@@ -1102,10 +935,6 @@ def create_kmeans_spectral_all_methods_datasets(df, base_dir, datasets_dir,
     
     return fig
 
-
-# =============================================================================
-# MAIN EXECUTION
-# =============================================================================
 
 def generate_all_figures(base_dir, datasets_dir, permuted_base_dir=None, output_dir=None,
                         metrics_csv=None, projection_types=['tsne', 'umap']):
@@ -1256,7 +1085,6 @@ def generate_all_figures(base_dir, datasets_dir, permuted_base_dir=None, output_
                 generated.append(f"grids/tsne_vs_umap_{method}.png")
                 plt.close(fig)
     
-    # --- METRICS HEATMAPS ---
     print("Creating metrics heatmaps...")
     for alg in ['kmeans', 'spectral']:
         fig = create_metrics_heatmap(df, alg, output_dir / f"metrics_heatmap_{alg}.png")
