@@ -11,7 +11,7 @@ print("Unique methods:", df['method'].unique())
 print("Unique dims:", df['dim'].unique())
 print("Unique cluster_alg:", df['cluster_alg'].unique())
 
-# Check dimension consistency
+#dimension consistency?
 methods = df['method'].unique()
 for m in methods:
     print(f"Method: {m}")
@@ -20,30 +20,28 @@ for m in methods:
         print(f"  Dataset: {d}, Dims: {sorted(dims)}")
 
 
-# Constants
 metrics = ['nmi', 'ari', 'acc', 'silhouette']
 methods = df['method'].unique()
 cluster_algs = ['kmeans', 'spectral']
 datasets = df['dataset'].unique()
 colors = {'ENZYMES': 'blue', 'IMDB-MULTI': 'green', 'MUTAG': 'red'}
 
-# Prepare Rank for GIN averaging
-# We rank dims within each (method, dataset) group to identify Low(1), Mid(2), High(3)
+
+#we rank dims within each (method, dataset) group to identify Low(1), Mid(2), High(3)
 df['dim_rank'] = df.groupby(['method', 'dataset'])['dim'].rank(method='dense').astype(int)
 
 def generate_plots_v2():
     plot_files = []
-    
     for alg in cluster_algs:
         for method in methods:
-            # Filter for Method and Alg
+            
+            #filter for Method and Alg
             mask = (df['method'] == method) & (df['cluster_alg'] == alg)
             data_subset = df[mask].copy()
             
             if data_subset.empty:
                 continue
             
-            # Create figure
             fig, axes = plt.subplots(2, 2, figsize=(16, 12))
             fig.suptitle(f"Method: {method} | Clustering: {alg}", fontsize=18)
             axes = axes.flatten()
@@ -51,28 +49,18 @@ def generate_plots_v2():
             for idx, metric in enumerate(metrics):
                 ax = axes[idx]
                 
-                # Get best score for each dataset+dim combination
-                # We group by dataset, dim (and dim_rank to keep it)
+                # best score for each dataset+dim combination
                 best_scores = data_subset.groupby(['dataset', 'dim', 'dim_rank'])[metric].max().reset_index()
                 
-                # Plot individual dataset lines
                 for ds in datasets:
                     ds_data = best_scores[best_scores['dataset'] == ds].sort_values('dim')
                     if not ds_data.empty:
                         ax.plot(ds_data['dim'], ds_data[metric], marker='o', label=ds, color=colors.get(ds, 'gray'))
+    
+                #average the Metric and the Dimension for the points
+                avg_data = best_scores.groupby('dim_rank').agg({metric: 'mean','dim': 'mean'}).reset_index().sort_values('dim_rank')
                 
-                # Plot Average Line
-                # Calculate average based on Rank (1, 2, 3)
-                # We average the Metric and the Dimension for the points
-                avg_data = best_scores.groupby('dim_rank').agg({
-                    metric: 'mean',
-                    'dim': 'mean'
-                }).reset_index().sort_values('dim_rank')
-                
-                ax.plot(avg_data['dim'], avg_data[metric], marker='s', label='Average', 
-                        color='black', linewidth=2, linestyle='--')
-                
-                # Formatting
+                ax.plot(avg_data['dim'], avg_data[metric], marker='s', label='Average', color='black', linewidth=2, linestyle='--')
                 ax.set_title(metric.upper())
                 ax.set_ylabel(metric)
                 ax.set_xlabel('Embedding Dimension')
@@ -88,7 +76,6 @@ def generate_plots_v2():
                     # For others, dims are usually 64, 128, 256
                     unique_dims = sorted(best_scores['dim'].unique())
                     ax.set_xticks(unique_dims)
-
                 if idx == 0:
                     ax.legend()
 
@@ -97,7 +84,6 @@ def generate_plots_v2():
             plt.savefig(filename)
             plot_files.append(filename)
             plt.close()
-            
     return plot_files
 
 created_files = generate_plots_v2()

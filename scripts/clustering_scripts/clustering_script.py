@@ -1,48 +1,15 @@
-"""
-Graph Embedding Clustering Analysis
-====================================
-
-A comprehensive toolkit for analyzing graph embeddings using clustering algorithms.
-
-Features:
-- Multiple clustering algorithms (K-Means, Spectral Clustering)
-- Dimensionality reduction visualizations (t-SNE, UMAP)
-- Performance metrics (ARI, NMI, Silhouette Score)
-- Automated report generation
-
-Usage:
-    from graph_clustering_analysis import ClusteringAnalyzer, AnalysisConfig
-    
-    config = AnalysisConfig(
-        base_path='./embeddings',
-        datasets=['MUTAG', 'ENZYMES'],
-        dimensions=['dim64', 'dim128']
-    )
-    
-    analyzer = ClusteringAnalyzer(config)
-    results = analyzer.run_analysis()
-    
-Author: Graph Analysis Team
-Version: 2.0.0
-"""
-
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
 import warnings
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import umap
 from sklearn.cluster import KMeans, SpectralClustering
-from sklearn.metrics import (
-    adjusted_rand_score,
-    silhouette_score,
-    normalized_mutual_info_score
-)
+from sklearn.metrics import (adjusted_rand_score,silhouette_score,normalized_mutual_info_score)
 from sklearn.manifold import TSNE
 from sklearn.preprocessing import StandardScaler
 
@@ -50,19 +17,8 @@ warnings.filterwarnings('ignore')
 
 
 @dataclass
-class AnalysisConfig:
-    """Configuration for clustering analysis.
-    
-    Attributes:
-        base_path: Root directory containing embedding files
-        datasets: List of dataset names to analyze
-        dimensions: List of embedding dimensions (e.g., ['dim64', 'dim128'])
-        output_dir: Directory for saving results and plots (relative to script location)
-        embedding_filename: Name of embedding files (default: 'Graph2Vec_embeddings')
-        random_state: Random seed for reproducibility
-        max_k_clusters: Maximum number of clusters to consider
-        n_init_kmeans: Number of K-means initializations
-    """
+class AnalysisConfig: # Clustering analysis Configuration
+ 
     base_path: str = '.'
     datasets: List[str] = field(default_factory=lambda: ['MUTAG', 'ENZYMES', 'IMDB-MULTI'])
     dimensions: List[str] = field(default_factory=lambda: ['dim64', 'dim128', 'dim256'])

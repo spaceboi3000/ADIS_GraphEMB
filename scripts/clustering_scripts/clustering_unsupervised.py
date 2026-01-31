@@ -1,27 +1,16 @@
 from __future__ import annotations
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
-
 import numpy as np
 import pandas as pd
-
 from sklearn.cluster import KMeans, SpectralClustering
-from sklearn.metrics import (
-    normalized_mutual_info_score,
-    adjusted_rand_score,
-    silhouette_score,
-    confusion_matrix,
-)
+from sklearn.metrics import (normalized_mutual_info_score,adjusted_rand_score,silhouette_score,confusion_matrix,)
 from scipy.optimize import linear_sum_assignment
 
 
-# ================== CONFIG ==================
 
 DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
-
-# Base directory where all embeddings live
 BASE_EMB_DIR = Path("../embeddings")
-
 METHODS = {
     "Graph2Vec": {
         "out_dir": BASE_EMB_DIR / "embeddings_graph2vec",
@@ -36,84 +25,55 @@ METHODS = {
 }
 
 RANDOM_STATE = 42
-KMEANS_N_INIT = 10  # was 10
+KMEANS_N_INIT = 10 
 KMEANS_MAX_ITER = 3000
-# ===========================================
 
 
+#cluser acc with Hungarian matching
 def clustering_accuracy(y_true: np.ndarray, y_pred: np.ndarray) -> float:
-    """
-    Clustering accuracy via Hungarian matching.
-    """
+  
     cm = confusion_matrix(y_true, y_pred)
     row_ind, col_ind = linear_sum_assignment(-cm)
     acc = cm[row_ind, col_ind].sum() / cm.sum()
     return float(acc)
 
 
+# metric computation for both algorithm
 def _compute_metrics(y_true: np.ndarray, y_pred: np.ndarray, X: np.ndarray) -> Dict:
-    """
-    Common metric computation for any clustering algorithm.
-    """
+  
     nmi = normalized_mutual_info_score(y_true, y_pred)
     ari = adjusted_rand_score(y_true, y_pred)
     acc = clustering_accuracy(y_true, y_pred)
-    # silhouette can fail if only 1 cluster or weird label config
-    if len(np.unique(y_pred)) > 1 and X.shape[0] > len(np.unique(y_pred)):
+    
+    if len(np.unique(y_pred)) > 1 and X.shape[0] > len(np.unique(y_pred)):    # silhouette can fail if only 1 cluster or weird label config
         sil = silhouette_score(X, y_pred)
     else:
         sil = float("nan")
     return dict(nmi=nmi, ari=ari, acc=acc, silhouette=sil)
 
 
-def run_kmeans_for_embeddings(
-    X: np.ndarray,
-    y: np.ndarray,
-    n_clusters: int,
-) -> Dict:
-    """
-    Run KMeans and compute metrics for given embeddings X and labels y.
-    """
-    kmeans = KMeans(
-        n_clusters=n_clusters,
-        random_state=RANDOM_STATE,
-        n_init=KMEANS_N_INIT,
-        max_iter=KMEANS_MAX_ITER,
-    )
+#kmeans embeddings X and labels y
+def run_kmeans_for_embeddings(X: np.ndarray,y: np.ndarray,n_clusters: int,) -> Dict:
+
+    kmeans = KMeans(n_clusters=n_clusters,random_state=RANDOM_STATE,n_init=KMEANS_N_INIT,max_iter=KMEANS_MAX_ITER,)
     y_pred = kmeans.fit_predict(X)
     return _compute_metrics(y, y_pred, X)
 
 
-def run_spectral_for_embeddings(
-    X: np.ndarray,
-    y: np.ndarray,
-    n_clusters: int,
-) -> Dict:
-    """
-    Run Spectral Clustering and compute metrics.
-    """
-    sc = SpectralClustering(
-        n_clusters=n_clusters,
-        affinity="nearest_neighbors",
-        assign_labels="kmeans",
-        random_state=RANDOM_STATE,
-    )
+#spectral
+def run_spectral_for_embeddings(X: np.ndarray,y: np.ndarray,n_clusters: int,) -> Dict:
+
+    sc = SpectralClustering(n_clusters=n_clusters,affinity="nearest_neighbors",assign_labels="kmeans",random_state=RANDOM_STATE,)
     y_pred = sc.fit_predict(X)
+    
     return _compute_metrics(y, y_pred, X)
 
 
-def load_embeddings_csv(
-    method: str,
-    method_cfg: Dict,
-    dataset: str,
-    dim: Optional[int],
-) -> Tuple[np.ndarray, np.ndarray]:
-    """
-    Load embeddings and labels for a given method/dataset/(dim).
-    """
+def load_embeddings_csv(method: str,method_cfg: Dict,dataset: str,dim: Optional[int],) -> Tuple[np.ndarray, np.ndarray]:
+    
     out_dir = method_cfg["out_dir"]
     has_dims = method_cfg["has_dims"]
-
+    
     if has_dims:
         if dim is None:
             raise ValueError(f"Method {method} expects a dim but got None.")
@@ -160,20 +120,7 @@ def main():
                     f"ACC={km_metrics['acc']:.4f}, "
                     f"SIL={km_metrics['silhouette']:.4f}"
                 )
-                rows.append(
-                    dict(
-                        dataset=dataset,
-                        method=method,
-                        dim=dim if dim is not None else emb_dim,
-                        n_graphs=n_samples,
-                        n_clusters=n_clusters,
-                        cluster_alg="kmeans",
-                        nmi=round(km_metrics["nmi"], 6),
-                        ari=round(km_metrics["ari"], 6),
-                        acc=round(km_metrics["acc"], 6),
-                        silhouette=round(km_metrics["silhouette"], 6),
-                    )
-                )
+                rows.append(dict(dataset=dataset, method=method, dim=dim if dim is not None else emb_dim,  n_graphs=n_samples,n_clusters=n_clusters,cluster_alg="kmeans",nmi=round(km_metrics["nmi"], 6),ari=round(km_metrics["ari"], 6),acc=round(km_metrics["acc"], 6),silhouette=round(km_metrics["silhouette"], 6),))
 
                 # --------- SPECTRAL ----------
                 try:
@@ -184,20 +131,7 @@ def main():
                         f"ACC={sp_metrics['acc']:.4f}, "
                         f"SIL={sp_metrics['silhouette']:.4f}"
                     )
-                    rows.append(
-                        dict(
-                            dataset=dataset,
-                            method=method,
-                            dim=dim if dim is not None else emb_dim,
-                            n_graphs=n_samples,
-                            n_clusters=n_clusters,
-                            cluster_alg="spectral",
-                            nmi=round(sp_metrics["nmi"], 6),
-                            ari=round(sp_metrics["ari"], 6),
-                            acc=round(sp_metrics["acc"], 6),
-                            silhouette=round(sp_metrics["silhouette"], 6),
-                        )
-                    )
+                    rows.append(dict(dataset=dataset, method=method,dim=dim if dim is not None else emb_dim,n_graphs=n_samples, n_clusters=n_clusters,cluster_alg="spectral",  nmi=round(sp_metrics["nmi"], 6),  ari=round(sp_metrics["ari"], 6), acc=round(sp_metrics["acc"], 6),silhouette=round(sp_metrics["silhouette"], 6),))
                 except Exception as e:
                     print(f"    [SPECTRAL] failed: {e}")
 
@@ -205,11 +139,9 @@ def main():
             print(f"\nNo results to save for {method}.")
             continue
 
-        # One CSV per method (overwrite each run)
         out_dir = cfg["out_dir"]
         out_dir.mkdir(parents=True, exist_ok=True)
         results_path = out_dir / f"cluster_results_{method.lower()}.csv"
-
         df_new = pd.DataFrame(rows)
         df_new.to_csv(results_path, index=False)
         print(f"\nClustering metrics for {method} written to {results_path}")
