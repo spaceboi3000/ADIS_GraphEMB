@@ -1,9 +1,7 @@
 from __future__ import annotations
-
 import re
 from pathlib import Path
 from typing import Optional
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -34,11 +32,10 @@ class Config:
     NETLSD_METRICS_PATH = Path("../../permutated_embeddings/permutated_netlsd/permutated_metrics.csv")
     METRICS_SUMMARY_PATH = Path("../../permutated_embeddings/permutated_gin/metrics_summary.csv")
     
-    # Plot toggles
+
     MAKE_PER_DATASET = True
     MAKE_AVG_PLOTS = True
 
-    # Method comparison settings
     USE_MAX_DIM_PER_METHOD = True
     USE_FIXED_DIM = False
     FIXED_DIM = 128
@@ -59,45 +56,36 @@ class Config:
 
         # plt.style.use("default")
         plt.style.use("bmh")
-        
-        plt.rcParams.update({
-            "font.size": cls.FONT_SIZE,
-            "figure.figsize": cls.FIG_SIZE,
-            "axes.labelsize": cls.FONT_SIZE,
-            "axes.titlesize": cls.FONT_SIZE + 1,
-            "xtick.labelsize": cls.FONT_SIZE - 1,
-            "ytick.labelsize": cls.FONT_SIZE - 1,
-            "legend.fontsize": cls.FONT_SIZE - 1,
-
-            "figure.facecolor": cls.FIG_FACE,
-            "axes.facecolor": cls.AX_FACE,
-            "savefig.facecolor": cls.SAVE_FACE,
-            "savefig.transparent": False,
-        })
+        plt.rcParams.update({  "font.size": cls.FONT_SIZE,"figure.figsize": cls.FIG_SIZE, "axes.labelsize": cls.FONT_SIZE, "axes.titlesize": cls.FONT_SIZE + 1, "xtick.labelsize": cls.FONT_SIZE - 1, "ytick.labelsize": cls.FONT_SIZE - 1, "legend.fontsize": cls.FONT_SIZE - 1, "figure.facecolor": cls.FIG_FACE, "axes.facecolor": cls.AX_FACE, "savefig.facecolor": cls.SAVE_FACE, "savefig.transparent": False,})
 
 
 # DATA PROCESSING
 class DataProcessor:
+    
     @staticmethod
     def read_csv_safe(path: Path) -> Optional[pd.DataFrame]:
         return pd.read_csv(path) if path.exists() else None
 
     @staticmethod
     def parse_dimension(x) -> float:
+        
         if pd.isna(x):
             return np.nan
         if isinstance(x, (int, np.integer)):
             return int(x)
+        
         s = str(x).strip()
         m = re.search(r"(\d+)", s)
         return int(m.group(1)) if m else np.nan
 
     @staticmethod
     def standardize_method_name(s: str) -> str:
+      
         if s is None:
             return "Unknown"
         s = str(s).strip()
         low = s.lower()
+       
         if low in ["gin", "graph isomorphism network"]:
             return "GIN"
         if low.startswith("graph2vec"):
@@ -105,9 +93,11 @@ class DataProcessor:
         if low.startswith("netlsd"):
             return "NetLSD"
         return s
-
+    
+    
     @classmethod
     def process_gin_data(cls, df: pd.DataFrame) -> pd.DataFrame:
+        
         df = df.copy()
         df["method"] = "GIN"
         df["dataset"] = df["dataset"].astype(str)
@@ -131,12 +121,11 @@ class DataProcessor:
 
         return df[cls._get_standard_columns()]
 
-    @classmethod
-    def process_unsupervised_data(
-        cls, cls_df: pd.DataFrame, metrics_df: Optional[pd.DataFrame], method_name: str
-    ) -> pd.DataFrame:
-        df = cls_df.copy()
 
+    @classmethod
+    def process_unsupervised_data( cls, cls_df: pd.DataFrame, metrics_df: Optional[pd.DataFrame], method_name: str) -> pd.DataFrame:
+        
+        df = cls_df.copy()
         df["method"] = df.get("Method", method_name).apply(cls.standardize_method_name)
         df["dataset"] = df.get("Dataset", df.get("dataset")).astype(str)
         df["dim"] = df.get("Dim", df.get("dim")).apply(cls.parse_dimension)
@@ -148,8 +137,7 @@ class DataProcessor:
         df["clf_train_time_s"] = df.get("TrainTime", df.get("clf_train_time_s", np.nan))
 
         # Initialize timing/memory columns
-        for c in ["embed_time_s", "fit_time_s", "peak_tracemalloc_mb",
-                  "rss_before_mb", "rss_after_mb"]:
+        for c in ["embed_time_s", "fit_time_s", "peak_tracemalloc_mb", "rss_before_mb", "rss_after_mb"]:
             if c not in df.columns:
                 df[c] = np.nan
         df["rss_delta_mb"] = np.nan
@@ -168,6 +156,7 @@ class DataProcessor:
 
     @classmethod
     def _merge_metrics(cls, df: pd.DataFrame, metrics_df: pd.DataFrame, method_name: str) -> pd.DataFrame:
+       
         m = metrics_df.copy()
         m["method"] = m.get("method", method_name).apply(cls.standardize_method_name)
         m["dataset"] = m.get("dataset", m.get("Dataset")).astype(str)
@@ -196,18 +185,15 @@ class DataProcessor:
 
     @staticmethod
     def _get_standard_columns() -> list:
-        return [
-            "method", "dataset", "dim",
-            "accuracy", "f1", "auc",
-            "clf_train_time_s", "embed_time_s", "fit_time_s",
-            "peak_tracemalloc_mb", "rss_before_mb", "rss_after_mb", "rss_delta_mb",
-        ]
+        return [ "method", "dataset", "dim", "accuracy", "f1", "auc","clf_train_time_s", "embed_time_s", "fit_time_s", "peak_tracemalloc_mb", "rss_before_mb", "rss_after_mb", "rss_delta_mb",  ]
 
 
 # PLOTTING
 class Plotter:
+    
     @staticmethod
     def _force_white(fig, ax=None):
+        
         fig.patch.set_facecolor(Config.FIG_FACE)
         if ax is None:
             for a in fig.get_axes():
@@ -215,8 +201,10 @@ class Plotter:
         else:
             ax.set_facecolor(Config.AX_FACE)
 
+
     @staticmethod
     def save_figure(fig, filename: str):
+        
         Plotter._force_white(fig)
         out_path = Config.OUT_DIR / filename
         fig.tight_layout()
@@ -241,6 +229,8 @@ class Plotter:
         methods = plot_df["method"].tolist()
         x = np.arange(len(methods))
         width = 0.25
+        
+        
         fig, ax = plt.subplots(figsize=Config.FIG_SIZE)
         ax.bar(x - width, plot_df["accuracy"], width, label="Accuracy", alpha=0.85, edgecolor="black", linewidth=0.3)
         ax.bar(x, plot_df["f1"], width, label="F1-Score", alpha=0.85, edgecolor="black", linewidth=0.3)
@@ -254,6 +244,7 @@ class Plotter:
         ax.grid(axis="y", alpha=0.25)
         cls.save_figure(fig, filename)
 
+
     @classmethod
     def metric_vs_dimension_lines(cls, df: pd.DataFrame, metric_col: str, title: str, filename: str):
         plot_df = df.dropna(subset=["dim", metric_col]).copy()
@@ -264,6 +255,8 @@ class Plotter:
         for method, g in plot_df.groupby("method"):
             g = g.sort_values("dim")
             ax.plot(g["dim"], g[metric_col], marker="o", label=method, linewidth=2, markersize=6)
+        
+        
         ax.set_xlabel("Embedding Dimension")
         ax.set_ylabel(metric_col.replace("_", " ").title())
         ax.set_title(title)
@@ -271,29 +264,23 @@ class Plotter:
         ax.grid(True, alpha=0.25)
 
         cls.save_figure(fig, filename)
-
+        
+        
     @classmethod
     def accuracy_efficiency_scatter(cls, df: pd.DataFrame, time_col: str, title: str, filename: str):
+        
         plot_df = df.dropna(subset=[time_col, "accuracy"]).copy()
         if plot_df.empty:
             return
 
         fig, ax = plt.subplots(figsize=Config.FIG_SIZE)
         for method, method_df in plot_df.groupby("method"):
-            ax.scatter(
-                method_df[time_col], method_df["accuracy"],
-                label=method, alpha=0.75, s=100,
-                edgecolors="black", linewidth=0.4
-            )
+            ax.scatter(  method_df[time_col], method_df["accuracy"], label=method, alpha=0.75, s=100, edgecolors="black", linewidth=0.4)
+            
             for _, row in method_df.iterrows():
                 dim_val = row.get("dim", np.nan)
                 if pd.notna(dim_val):
-                    ax.annotate(
-                        f"{int(dim_val)}",
-                        (row[time_col], row["accuracy"]),
-                        xytext=(5, 5), textcoords="offset points",
-                        fontsize=8, alpha=0.8
-                    )
+                    ax.annotate(  f"{int(dim_val)}",(row[time_col], row["accuracy"]), xytext=(5, 5), textcoords="offset points", fontsize=8, alpha=0.8 )
 
         ax.set_xlabel(time_col.replace("_", " ").title())
         ax.set_ylabel("Accuracy")
@@ -301,6 +288,7 @@ class Plotter:
         ax.legend(loc="best")
         ax.grid(True, alpha=0.25)
         cls.save_figure(fig, filename)
+
 
     @classmethod
     def performance_heatmap(cls, df: pd.DataFrame, metric_col: str, title: str, filename: str):
@@ -314,15 +302,13 @@ class Plotter:
 
         fig, ax = plt.subplots(figsize=Config.FIG_SIZE_WIDE)
         cls._force_white(fig, ax)
-        sns.heatmap(
-            pivot, annot=True, fmt=".3f",
-            cmap="YlGnBu",
-            cbar_kws={"label": metric_col.replace("_", " ").title()},
-            ax=ax)
+        sns.heatmap( pivot, annot=True, fmt=".3f", cmap="YlGnBu", cbar_kws={"label": metric_col.replace("_", " ").title()},  ax=ax)
+        
         ax.set_title(title)
         ax.set_xlabel("Embedding Dimension")
         ax.set_ylabel("Method")
         cls.save_figure(fig, filename)
+
 
     @classmethod
     def memory_usage_bars(cls, df: pd.DataFrame, title: str, filename: str):
@@ -334,10 +320,8 @@ class Plotter:
         fig, ax = plt.subplots(figsize=Config.FIG_SIZE)
         ax.bar(range(len(plot_df)), plot_df["peak_tracemalloc_mb"], alpha=0.85, edgecolor="black", linewidth=0.3)
         ax.set_xticks(range(len(plot_df)))
-        ax.set_xticklabels(
-            [f"{m}\n(d={int(d)})" for m, d in zip(plot_df["method"], plot_df["dim"])],
-            rotation=45, ha="right"
-        )
+        
+        ax.set_xticklabels( [f"{m}\n(d={int(d)})" for m, d in zip(plot_df["method"], plot_df["dim"])],  rotation=45, ha="right")
         ax.set_ylabel("Peak Memory (MB)")
         ax.set_title(title)
         ax.grid(axis="y", alpha=0.25)
@@ -347,6 +331,7 @@ class Plotter:
 
     @classmethod
     def accuracy_vs_compute_cost_dual(cls, df: pd.DataFrame, title: str, filename: str):
+        
         plot_df = df.dropna(subset=["dim", "accuracy"]).copy()
         if plot_df.empty:
             return
@@ -374,6 +359,7 @@ class Plotter:
 
         lines1, labels1 = ax1.get_legend_handles_labels()
         lines2, labels2 = ax2.get_legend_handles_labels()
+        
         ax1.legend(lines1 + lines2, labels1 + labels2, loc="best", fontsize=9)
         fig.suptitle(title)
         cls.save_figure(fig, filename)
@@ -400,11 +386,10 @@ class Plotter:
 
         for method, method_df in plot_df.groupby("method"):
             method_df = method_df.sort_values("dim")
+            
             ax.plot(method_df["compute_cost"], method_df["accuracy"], alpha=0.25, linewidth=1)
-            ax.scatter(
-                method_df["compute_cost"], method_df["accuracy"],
-                s=100, alpha=0.75, edgecolors="black", linewidth=0.5, label=method
-            )
+            ax.scatter(  method_df["compute_cost"], method_df["accuracy"], s=100, alpha=0.75, edgecolors="black", linewidth=0.5, label=method )
+           
             for _, row in method_df.iterrows():
                 dim_val = row.get("dim", np.nan)
                 if pd.notna(dim_val):
@@ -433,15 +418,12 @@ class Plotter:
         ax.set_title(title)
         ax.legend(loc="best")
         ax.grid(True, alpha=0.25)
-        ax.text(
-            0.02, 0.98, "← Better\n(Lower Cost)",
-            transform=ax.transAxes, fontsize=9, va="top",
-            bbox=dict(boxstyle="round", facecolor="lightgreen", alpha=0.25),)
-        ax.text(
-            0.98, 0.02, "Better →\n(Higher Accuracy)",
-            transform=ax.transAxes, fontsize=9, ha="right", va="bottom",
-            bbox=dict(boxstyle="round", facecolor="lightblue", alpha=0.25),)
+       
+        ax.text(0.02, 0.98, "← Better\n(Lower Cost)",  transform=ax.transAxes, fontsize=9, va="top", bbox=dict(boxstyle="round", facecolor="lightgreen", alpha=0.25),)
+        ax.text(  0.98, 0.02, "Better →\n(Higher Accuracy)",  transform=ax.transAxes, fontsize=9, ha="right", va="bottom", bbox=dict(boxstyle="round", facecolor="lightblue", alpha=0.25),)
         cls.save_figure(fig, filename)
+
+
 
     @classmethod
     def accuracy_vs_compute_cost_faceted(cls, df: pd.DataFrame, title_prefix: str, filename: str):
@@ -449,11 +431,7 @@ class Plotter:
         if plot_df.empty:
             return
 
-        cost_metrics = [
-            ("clf_train_time_s", "Training Time (s)"),
-            ("embed_time_s", "Embedding Time (s)"),
-            ("peak_tracemalloc_mb", "Peak Memory (MB)"),
-        ]
+        cost_metrics = [ ("clf_train_time_s", "Training Time (s)"),  ("embed_time_s", "Embedding Time (s)"), ("peak_tracemalloc_mb", "Peak Memory (MB)"), ]
         
         available_metrics = [(col, label) for col, label in cost_metrics
                              if col in plot_df.columns and plot_df[col].notna().any()]
@@ -490,8 +468,7 @@ class Plotter:
     def stacked_time_memory_bars(cls, df: pd.DataFrame, title: str, filename: str):
         plot_df = df.copy()
 
-        for c in ["clf_train_time_s", "embed_time_s", "fit_time_s",
-                  "rss_before_mb", "rss_after_mb", "rss_delta_mb", "peak_tracemalloc_mb"]:
+        for c in ["clf_train_time_s", "embed_time_s", "fit_time_s","rss_before_mb", "rss_after_mb", "rss_delta_mb", "peak_tracemalloc_mb"]:
             if c in plot_df.columns:
                 plot_df[c] = pd.to_numeric(plot_df[c], errors="coerce")
 
@@ -563,6 +540,8 @@ class Plotter:
         fig.suptitle(title)
         cls.save_figure(fig, filename)
 
+
+
     #Accuracy vs total compute time (varies by dim)
     @classmethod
     def accuracy_vs_total_cost_curve(cls, df: pd.DataFrame, title: str, filename: str):
@@ -598,6 +577,7 @@ class Plotter:
         cls.save_figure(fig, filename)
 
 
+
 def select_rows_for_comparison(df: pd.DataFrame) -> pd.DataFrame:
     if df.empty:
         return df
@@ -617,8 +597,8 @@ def select_rows_for_comparison(df: pd.DataFrame) -> pd.DataFrame:
     return out.groupby("method", as_index=False).mean(numeric_only=True)
 
 
+
 def generate_all_plots(agg: pd.DataFrame):
-    
     datasets = sorted(agg["dataset"].dropna().unique().tolist())
     avg_by_method_dim = agg.groupby(["method", "dim"], as_index=False).mean(numeric_only=True)
 
@@ -634,72 +614,52 @@ def generate_all_plots(agg: pd.DataFrame):
         overall_chosen = select_rows_for_comparison(avg_by_method_dim.assign(dataset="AVG"))
         if not overall_chosen.empty:
             
-            Plotter.grouped_metric_bars(overall_chosen,
-                                        title=f"Overall Performance Comparison {dim_note}",
-                                        filename="BAR_OVERALL_ACC_F1_AUC.png")
-
-            Plotter.stacked_time_memory_bars(overall_chosen,
-                                             title=f"Overall Resource Usage (stacked) {dim_note}",
-                                             filename="STACKED_OVERALL_time_memory.png")
+            Plotter.grouped_metric_bars(overall_chosen, title=f"Overall Performance Comparison {dim_note}", filename="BAR_OVERALL_ACC_F1_AUC.png")
+            Plotter.stacked_time_memory_bars(overall_chosen,title=f"Overall Resource Usage (stacked) {dim_note}", filename="STACKED_OVERALL_time_memory.png")
 
         for metric in ["accuracy", "f1", "auc"]:
-            Plotter.metric_vs_dimension_lines(
-                avg_by_method_dim.assign(dataset="AVG"),
-                metric_col=metric,
-                title=f"Average {metric.title()} vs Embedding Dimension",
-                filename=f"LINE_AVG_{metric}_vs_dim.png",
-            )
+            Plotter.metric_vs_dimension_lines( avg_by_method_dim.assign(dataset="AVG"),metric_col=metric, title=f"Average {metric.title()} vs Embedding Dimension",  filename=f"LINE_AVG_{metric}_vs_dim.png",)
 
-        for col, label in [
-            ("clf_train_time_s", "Classifier Training Time"),
-            ("embed_time_s", "Embedding Generation Time"),
-            ("peak_tracemalloc_mb", "Peak Memory Usage"),
-        ]:
+        for col, label in [("clf_train_time_s", "Classifier Training Time"), ("embed_time_s", "Embedding Generation Time"), ("peak_tracemalloc_mb", "Peak Memory Usage"), ]:
             if col in avg_by_method_dim.columns:
+               
                 Plotter.metric_vs_dimension_lines(
                     avg_by_method_dim.assign(dataset="AVG"),
                     metric_col=col,
                     title=f"Average {label} vs Embedding Dimension",
-                    filename=f"LINE_AVG_{col}_vs_dim.png",
-                )
+                    filename=f"LINE_AVG_{col}_vs_dim.png", )
 
         Plotter.accuracy_efficiency_scatter(
             avg_by_method_dim.assign(dataset="AVG"),
             time_col="clf_train_time_s",
             title="Accuracy vs Training Time Trade-off (Average)",
-            filename="SCATTER_AVG_acc_vs_train_time.png",
-        )
+            filename="SCATTER_AVG_acc_vs_train_time.png", )
 
         Plotter.accuracy_vs_compute_cost_dual(
             avg_by_method_dim.assign(dataset="AVG"),
             title="Accuracy vs Compute Cost by Embedding Dimension (Average)",
-            filename="DUAL_AVG_acc_vs_compute_cost.png",
-        )
+            filename="DUAL_AVG_acc_vs_compute_cost.png",)
 
         Plotter.accuracy_vs_compute_cost_pareto(
             avg_by_method_dim.assign(dataset="AVG"),
             title="Pareto Frontier: Accuracy vs Compute Cost (Average)",
-            filename="PARETO_AVG_acc_vs_compute_cost.png",
-        )
+            filename="PARETO_AVG_acc_vs_compute_cost.png",)
 
         Plotter.accuracy_vs_compute_cost_faceted(
             avg_by_method_dim.assign(dataset="AVG"),
             title_prefix="Accuracy vs Individual Cost Metrics (Average)",
-            filename="FACETED_AVG_acc_vs_costs.png",
-        )
+            filename="FACETED_AVG_acc_vs_costs.png",)
 
         Plotter.accuracy_vs_total_cost_curve(
             avg_by_method_dim.assign(dataset="AVG"),
             title="Accuracy vs Total Compute Time (Average, varies by dimension)",
-            filename="COSTCURVE_AVG_acc_vs_total_time.png",
-        )
+            filename="COSTCURVE_AVG_acc_vs_total_time.png",)
 
         Plotter.performance_heatmap(
             avg_by_method_dim.assign(dataset="AVG"),
             metric_col="accuracy",
             title="Average Accuracy Heatmap (Method × Dimension)",
-            filename="HEATMAP_AVG_accuracy.png",
-        )
+            filename="HEATMAP_AVG_accuracy.png",)
 
     if Config.MAKE_PER_DATASET:
         print("\nCreating per-dataset plots...")
@@ -713,59 +673,51 @@ def generate_all_plots(agg: pd.DataFrame):
             Plotter.grouped_metric_bars(
                 chosen,
                 title=f"{ds}: Performance Comparison {dim_note}",
-                filename=f"BAR_{ds}_ACC_F1_AUC.png",
-            )
+                filename=f"BAR_{ds}_ACC_F1_AUC.png", )
 
             Plotter.stacked_time_memory_bars(
                 chosen,
                 title=f"{ds}: Resource Usage (stacked) {dim_note}",
-                filename=f"STACKED_{ds}_time_memory.png",
-            )
+                filename=f"STACKED_{ds}_time_memory.png", )
 
             for metric in ["accuracy", "f1", "auc"]:
                 Plotter.metric_vs_dimension_lines(
                     df_ds,
                     metric_col=metric,
                     title=f"{ds}: {metric.title()} vs Embedding Dimension",
-                    filename=f"LINE_{ds}_{metric}_vs_dim.png",
-                )
+                    filename=f"LINE_{ds}_{metric}_vs_dim.png",)
 
             Plotter.accuracy_efficiency_scatter(
                 df_ds,
                 time_col="clf_train_time_s",
                 title=f"{ds}: Accuracy vs Training Time",
-                filename=f"SCATTER_{ds}_acc_vs_train_time.png",
-            )
+                filename=f"SCATTER_{ds}_acc_vs_train_time.png", )
 
             Plotter.memory_usage_bars(
                 chosen,
                 title=f"{ds}: Peak Memory Usage {dim_note}",
-                filename=f"BAR_{ds}_memory.png",
-            )
+                filename=f"BAR_{ds}_memory.png",)
 
             Plotter.accuracy_vs_compute_cost_dual(
                 df_ds,
                 title=f"{ds}: Accuracy vs Compute Cost by Dimension",
-                filename=f"DUAL_{ds}_acc_vs_compute_cost.png",
-            )
+                filename=f"DUAL_{ds}_acc_vs_compute_cost.png",)
 
             Plotter.accuracy_vs_compute_cost_pareto(
                 df_ds,
                 title=f"{ds}: Pareto Frontier - Accuracy vs Compute Cost",
-                filename=f"PARETO_{ds}_acc_vs_compute_cost.png",
-            )
+                filename=f"PARETO_{ds}_acc_vs_compute_cost.png",)
 
             Plotter.accuracy_vs_compute_cost_faceted(
                 df_ds,
                 title_prefix=f"{ds}: Accuracy vs Individual Cost Metrics",
-                filename=f"FACETED_{ds}_acc_vs_costs.png",
-            )
-
+                filename=f"FACETED_{ds}_acc_vs_costs.png",)
+            
             Plotter.accuracy_vs_total_cost_curve(
                 df_ds,
                 title=f"{ds}: Accuracy vs Total Compute Time (varies by dimension)",
-                filename=f"COSTCURVE_{ds}_acc_vs_total_time.png",
-            )
+                filename=f"COSTCURVE_{ds}_acc_vs_total_time.png",)
+            
 
 
 def main():
@@ -785,7 +737,6 @@ def main():
 
     print("Processing data...")
     all_rows = []
-
     if gin is not None:
         print("  - GIN data found")
         all_rows.append(DataProcessor.process_gin_data(gin))
@@ -815,7 +766,6 @@ def main():
     print(f"Saved unified results to: {unified_path}")
 
     generate_all_plots(agg)
-
     print("\n" + "=" * 60)
     print("COMPLETE!")
     print(f"Output directory: {Config.OUT_DIR.resolve()}")

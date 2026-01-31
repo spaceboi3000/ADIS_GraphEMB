@@ -8,7 +8,6 @@ from glob import glob
 
 
 def safe_read_csv(path, **kwargs):
-    """Read CSV safely; return None if failed."""
     try:
         return pd.read_csv(path, **kwargs)
     except Exception:
@@ -16,15 +15,14 @@ def safe_read_csv(path, **kwargs):
 
 
 def plot_training_curve(run_dir: Path, curve_csv: Path):
-    """Plot training and validation accuracy vs epochs."""
+    
     df = safe_read_csv(curve_csv)
-    if df is None or df.empty:
-        return None
+    if df is None or df.empty: return None
 
-    # Clean and convert numeric
     df = df.rename(columns={"epoch": "epoch", "train_acc": "train_acc", "val_acc": "val_acc", "lr": "lr"})
     df = df[pd.to_numeric(df["epoch"], errors="coerce").notna()].copy()
     df["epoch"] = pd.to_numeric(df["epoch"], errors="coerce").astype(int)
+    
     for col in ["train_acc", "val_acc"]:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
@@ -37,6 +35,7 @@ def plot_training_curve(run_dir: Path, curve_csv: Path):
     plt.ylabel("Accuracy")
     plt.title(f"Training Curve: {run_dir.name}")
     plt.legend()
+   
     out_path = run_dir / "training_curve.png"
     fig.savefig(out_path, bbox_inches="tight", dpi=150)
     plt.close(fig)
@@ -44,8 +43,8 @@ def plot_training_curve(run_dir: Path, curve_csv: Path):
     return out_path
 
 
-def plot_confusion_matrix(run_dir: Path, cm_csv: Path):
-    """Plot confusion matrix heatmap."""
+def plot_confusion_matrix(run_dir: Path, cm_csv: Path): ## heatmmap
+
     try:
         cm = np.loadtxt(cm_csv, delimiter=",").astype(int)
     except Exception:
@@ -64,7 +63,9 @@ def plot_confusion_matrix(run_dir: Path, cm_csv: Path):
     return out_path
 
 
+
 def main(out_root: str):
+    
     OUT_ROOT = Path(out_root)
     if not OUT_ROOT.exists():
         print(f"[ERROR] Output directory not found: {OUT_ROOT}")
@@ -82,7 +83,6 @@ def main(out_root: str):
         return
 
     print(f"[INFO] Found {len(run_dirs)} runs under {OUT_ROOT}")
-
     for rd in run_dirs:
         curve_csv = rd / "train_val_curve.csv"
         if curve_csv.exists():
