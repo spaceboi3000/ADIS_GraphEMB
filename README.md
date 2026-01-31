@@ -68,10 +68,11 @@ These are used to quantify how much the embeddings change under random perturbat
 
 ### `results/`
 Contains numerical evaluation outputs, including:
-- Classification metrics (accuracy, F1-score, AUC)
+- Classification metrics (accuracy, F1-score, AUC) 
 - Clustering metrics (ARI)
 - Stability scores
 - Runtime and memory measurements
+- Overall generating embeddings metrics   
 
 ---
 
