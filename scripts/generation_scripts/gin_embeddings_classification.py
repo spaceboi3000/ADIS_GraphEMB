@@ -30,7 +30,6 @@ from torch_geometric.utils import dropout_edge
 import psutil
 
 
-# Config 
 # DATASETS_ROOT = Path("../../DATASETS")      
 # DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
 # OUT_DIR = Path("../../embeddings/embeddings_classification_gin")
@@ -44,17 +43,17 @@ DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
 OUT_DIR = f"{BASE}/gin_embedding_classification"
 SEED = 42
 
-# ----------------------------
-# Utilities
-# ----------------------------
+
 def set_seed(seed: int = 42):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
+    
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)
         torch.backends.cudnn.deterministic = True
         torch.backends.cudnn.benchmark = False
+
 
 def _rss_mb():
     try:
@@ -62,6 +61,7 @@ def _rss_mb():
         return float(p.memory_info().rss) / (1024.0**2)
     except Exception:
         return float('nan')
+
 
 def _append_csv_row(csv_path: Path, header: list, row: list):
     csv_path.parent.mkdir(parents=True, exist_ok=True)
@@ -74,12 +74,14 @@ def _append_csv_row(csv_path: Path, header: list, row: list):
 
 
 def compute_metrics(y_true: np.ndarray, probs: np.ndarray) -> Tuple[float, float, float, np.ndarray]:
+    
     if probs.size == 0:
         return float('nan'), float('nan'), float('nan'), np.array([], dtype=int)
     y_pred = probs.argmax(axis=1)
     acc = accuracy_score(y_true, y_pred)
     f1_macro = f1_score(y_true, y_pred, average='macro')
     classes = np.unique(y_true)
+    
     try:
         if len(classes) == 1:
             auc_macro = float('nan')
@@ -94,10 +96,12 @@ def compute_metrics(y_true: np.ndarray, probs: np.ndarray) -> Tuple[float, float
             auc_macro = roc_auc_score(y_true, probs, multi_class='ovr', average='macro')
     except Exception:
         auc_macro = float('nan')
+   
     return acc, f1_macro, auc_macro, y_pred
 
 
 class DropEdgeTransform(BaseTransform):
+    
     def __init__(self, p: float = 0.2):
         super().__init__()
         self.p = float(p)
@@ -116,9 +120,7 @@ class DropEdgeTransform(BaseTransform):
 
 
 class EnsureStrongX(BaseTransform):
-    """
-    If x is missing, create [one_hot_degree (<=max_degree), raw_degree] features.
-    """
+ 
     def __init__(self, max_degree: int = 128):
         super().__init__()
         self.max_degree = max_degree
@@ -133,6 +135,7 @@ class EnsureStrongX(BaseTransform):
         return data
 
 def build_transform_chain(apply_norm: bool) -> T.Compose:  # optional: annotate as Compose
+   
     tr_list = [EnsureStrongX(max_degree=128)]
     if apply_norm:
         tr_list.append(NormalizeFeatures())
@@ -140,6 +143,7 @@ def build_transform_chain(apply_norm: bool) -> T.Compose:  # optional: annotate 
 
 
 class MLP(nn.Module):
+    
     def __init__(self, in_dim, hidden, out_dim, p=0.5):
         super().__init__()
         self.net = nn.Sequential(
@@ -152,6 +156,7 @@ class MLP(nn.Module):
     def forward(self, x): return self.net(x)
 
 class GINBlock(nn.Module):
+    
     def __init__(self, in_dim, out_dim, p=0.5, train_eps=True):
         super().__init__()
         self.mlp = MLP(in_dim, out_dim, out_dim, p=p)
@@ -161,6 +166,7 @@ class GINBlock(nn.Module):
         self.p = p
 
     def forward(self, x, edge_index):
+        
         out = self.conv(x, edge_index)
         out = self.bn(out)
         out = F.relu(out)
@@ -170,6 +176,7 @@ class GINBlock(nn.Module):
         return out + x
 
 def _graph_level_features(edge_index: torch.Tensor, batch: torch.Tensor) -> torch.Tensor:
+    
     n_per_g = torch.bincount(batch)
     e_batch = batch[edge_index[0]]
     m_per_g = torch.bincount(e_batch, minlength=n_per_g.size(0))
@@ -180,12 +187,14 @@ def _graph_level_features(edge_index: torch.Tensor, batch: torch.Tensor) -> torc
     return torch.stack([n, m, dens], dim=1)
 
 class GINGraphEncoder(nn.Module):
+    
     def __init__(self, in_dim, hidden_dim, num_layers=5, pooling="add", dropout=0.5, train_eps=True, jk_mode="cat"):
         super().__init__()
         self.dropout = dropout
         self.pooling = pooling
         self.layers = nn.ModuleList()
         self.layers.append(GINBlock(in_dim, hidden_dim, p=dropout, train_eps=train_eps))
+        
         for _ in range(num_layers - 1):
             self.layers.append(GINBlock(hidden_dim, hidden_dim, p=dropout, train_eps=train_eps))
         self.jk = JumpingKnowledge(jk_mode)
@@ -206,6 +215,7 @@ class GINGraphEncoder(nn.Module):
             return global_add_pool(x, batch)
 
     def forward(self, x, edge_index, batch):
+        
         xs = []
         for layer in self.layers:
             x = layer(x, edge_index)
@@ -215,6 +225,7 @@ class GINGraphEncoder(nn.Module):
         return g
 
 class GINForClassification(nn.Module):
+    
     def __init__(self, in_dim, hidden_dim, num_classes, num_layers=5, pooling="add",
                  dropout=0.5, use_gfeat=False, jk_mode="cat", train_eps=True):
         super().__init__()
@@ -222,6 +233,7 @@ class GINForClassification(nn.Module):
         self.pooling = pooling
         self.encoder = GINGraphEncoder(in_dim, hidden_dim, num_layers, pooling, dropout, train_eps, jk_mode)
         enc_out = hidden_dim * num_layers if jk_mode == "cat" else hidden_dim
+        
         if pooling == "concat":
             enc_out *= 3
         if self.use_gfeat:
@@ -237,12 +249,14 @@ class GINForClassification(nn.Module):
 
 
 class EarlyStopper:
+    
     def __init__(self, patience: int = 20, min_delta: float = 1e-4):
         self.patience = patience
         self.min_delta = min_delta
         self.best = -math.inf
         self.epochs_no_improve = 0
         self.best_state = None
+    
     def step(self, val_acc: float, model: nn.Module):
         if val_acc > self.best + self.min_delta:
             self.best = val_acc
@@ -254,10 +268,12 @@ class EarlyStopper:
             return self.epochs_no_improve > self.patience
 
 class WarmupCosine(torch.optim.lr_scheduler._LRScheduler):
+    
     def __init__(self, optimizer, warmup_epochs, max_epochs, last_epoch=-1):
         self.warmup = warmup_epochs
         self.max_epochs = max_epochs
         super().__init__(optimizer, last_epoch)
+   
     def get_lr(self):
         epoch = self.last_epoch + 1
         if epoch <= self.warmup:
@@ -272,11 +288,12 @@ def train_epoch(model, loader, optimizer, device, scaler=None, grad_clip: float 
     model.train()
     total = 0.0
     for data in loader:
-        # train-only DropEdge augmentation (apply on CPU tensors before .to(device))
+        
         if dropedge_transform is not None:
             data = dropedge_transform(data)
         data = data.to(device)
         optimizer.zero_grad(set_to_none=True)
+        
         if scaler is not None and device.type == "cuda":
             with torch.autocast(device_type=device.type, dtype=torch.float16):
                 logits, _ = model(data)
@@ -288,6 +305,7 @@ def train_epoch(model, loader, optimizer, device, scaler=None, grad_clip: float 
                 torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip)
             scaler.step(optimizer)
             scaler.update()
+       
         else:
             logits, _ = model(data)
             loss = F.cross_entropy(logits, data.y.view(-1).long(),
@@ -299,10 +317,14 @@ def train_epoch(model, loader, optimizer, device, scaler=None, grad_clip: float 
         total += float(loss.item()) * data.num_graphs
     return total / max(len(loader.dataset), 1)
 
+
+
 @torch.no_grad()
 def eval_epoch(model, loader, device):
+    
     model.eval()
     correct, total = 0, 0
+    
     all_embeds, all_labels, all_logits = [], [], []
     for data in loader:
         data = data.to(device)
@@ -313,6 +335,8 @@ def eval_epoch(model, loader, device):
         all_embeds.append(z.detach().cpu().numpy())
         all_labels.append(data.y.view(-1).detach().cpu().numpy())
         all_logits.append(logits.detach().cpu().numpy())
+    
+    
     acc = correct / max(total, 1)
     embeds = np.concatenate(all_embeds, axis=0) if all_embeds else np.zeros((0,))
     labels = np.concatenate(all_labels, axis=0) if all_labels else np.zeros((0,))
@@ -320,30 +344,34 @@ def eval_epoch(model, loader, device):
     probs = torch.softmax(torch.from_numpy(logits), dim=1).numpy() if logits.size else np.zeros((0,))
     return acc, embeds, labels, logits, probs
 
+
 def split_dataset(dataset, test_size=0.1, val_size=0.1, seed=42):
     y = np.array([int(d.y.item()) for d in dataset])
     idx = np.arange(len(dataset))
     try:
         idx_trainval, idx_test = train_test_split(idx, test_size=test_size, random_state=seed, stratify=y)
         y_trainval = y[idx_trainval]
-        idx_train, idx_val = train_test_split(
-            idx_trainval, test_size=val_size/(1.0-test_size), random_state=seed, stratify=y_trainval
-        )
+        idx_train, idx_val = train_test_split( idx_trainval, test_size=val_size/(1.0-test_size), random_state=seed, stratify=y_trainval)
+    
     except Exception:
+        
         rng = np.random.RandomState(seed); rng.shuffle(idx)
         n_test = int(len(idx) * test_size); n_val = int(len(idx) * val_size)
         idx_test = idx[:n_test]; idx_val = idx[n_test:n_test+n_val]; idx_train = idx[n_test+n_val:]
     return dataset[idx_train.tolist()], dataset[idx_val.tolist()], dataset[idx_test.tolist()], idx_train, idx_val, idx_test
 
 def save_embeddings(run_dir: Path, split_name: str, embeddings: np.ndarray, labels: np.ndarray, indices: np.ndarray):
+    
     run_dir.mkdir(parents=True, exist_ok=True)
     np.save(run_dir / f"{split_name}_embeddings.npy", embeddings)
     with open(run_dir / f"{split_name}_labels.csv", "w", newline="") as f:
         w = csv.writer(f); w.writerow(["graph_index", "label"])
         for i, lbl in zip(indices, labels):
             w.writerow([int(i), int(lbl)])
+    
     D = embeddings.shape[1] if embeddings.ndim == 2 else 0
     wide_csv = run_dir / f"{split_name}_embeddings_wide.csv"
+    
     with open(wide_csv, "w", newline="") as f:
         w = csv.writer(f)
         header = ["label"] + [f"dim{j}" for j in range(D)]
@@ -361,15 +389,7 @@ def run(args):
     root = Path(args.data_root)
     out_root = Path(args.out_root); out_root.mkdir(parents=True, exist_ok=True)
     summary_csv = out_root / "metrics_summary.csv"
-
-    summary_header = [
-        "dataset","dim","epochs","lr","dropout",
-        "it_time_s","embed_time_s","total_time_s",
-        "train_acc","val_acc","test_acc",
-        "train_f1_macro","val_f1_macro","test_f1_macro",
-        "train_auc_macro","val_auc_macro","test_auc_macro",
-        "peak_tracemalloc_mb","rss_before_mb","rss_after_mb"
-    ]
+    summary_header = [ "dataset","dim","epochs","lr","dropout", "it_time_s","embed_time_s","total_time_s", "train_acc","val_acc","test_acc","train_f1_macro","val_f1_macro","test_f1_macro","train_auc_macro","val_auc_macro","test_auc_macro", "peak_tracemalloc_mb","rss_before_mb","rss_after_mb"]
 
     for ds_name in args.datasets:
         ds_dir = out_root / ds_name
@@ -399,8 +419,6 @@ def run(args):
             weights = (1.0 / (class_counts.float() + 1e-6))
             weights = (weights / weights.mean()).to(device)
 
-            # train-time augmentation transform (DropEdge) applied per-batch in train_epoch
-            # dropedge_transform = T.DropEdge(p=args.dropedge) if args.dropedge > 0.0 else None
             dropedge_transform = DropEdgeTransform(p=args.dropedge) if args.dropedge > 0.0 else None
 
             for dim in args.dims:
@@ -411,12 +429,8 @@ def run(args):
                                   f"pool={args.pool}, gfeat={args.gfeat}, norm={args.norm_feats}, "
                                   f"use_node_attr={args.use_node_attr}, jk=cat, train_eps=True, "
                                   f"ls={args.label_smoothing}, dropedge={args.dropedge}")
-                            model = GINForClassification(
-                                in_dim, dim, num_classes,
-                                num_layers=args.num_layers, pooling=args.pool, dropout=dropout,
-                                use_gfeat=args.gfeat, jk_mode="cat", train_eps=True
-                            ).to(device)
-
+                            
+                            model = GINForClassification( in_dim, dim, num_classes, num_layers=args.num_layers, pooling=args.pool, dropout=dropout, use_gfeat=args.gfeat, jk_mode="cat", train_eps=True ).to(device)
                             optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=args.weight_decay)
                             scheduler = WarmupCosine(optimizer, warmup_epochs=min(10, max(3, ep//10)), max_epochs=ep)
 
@@ -434,10 +448,8 @@ def run(args):
                             best_val = -1.0
 
                             for epoch in range(1, ep + 1):
-                                loss = train_epoch(model, train_loader_tr, optimizer, device,
-                                                   scaler=scaler, grad_clip=args.grad_clip,
-                                                   ce_weight=weights, label_smooth=args.label_smoothing,
-                                                   dropedge_transform=dropedge_transform)
+                                
+                                loss = train_epoch(model, train_loader_tr, optimizer, device,scaler=scaler, grad_clip=args.grad_clip, ce_weight=weights, label_smooth=args.label_smoothing, dropedge_transform=dropedge_transform)
                                 tr_acc, *_ = eval_epoch(model, train_loader_ev, device)
                                 val_acc_cur, *_ = eval_epoch(model, val_loader, device)
 
@@ -460,27 +472,26 @@ def run(args):
 
                             it_time_s = time.time() - t0
 
-                            # Load best model by val acc
+                           
                             if early.best_state is not None:
                                 model.load_state_dict({k: v.to(device) for k, v in early.best_state.items()})
 
-                            # Embedding/generation timing
+        
                             t_emb0 = time.time()
                             train_acc, train_emb, train_lbl, _, train_probs = eval_epoch(model, train_loader_ev, device)
                             val_acc,   val_emb,   val_lbl,   _, val_probs   = eval_epoch(model, val_loader,     device)
                             test_acc,  test_emb,  test_lbl,  _, test_probs  = eval_epoch(model, test_loader,    device)
                             embed_time_s = time.time() - t_emb0
 
-
                             # train_acc, train_emb, train_lbl = eval_epoch(model, train_loader, device)
                             # val_acc,   val_emb,   val_lbl   = eval_epoch(model, val_loader, device)
                             # test_acc,  test_emb,  test_lbl  = eval_epoch(model, test_loader, device)
-                            
                             # train_acc, train_emb, train_lbl, train_logits, train_probs = eval_epoch(model, train_loader, device)
                             # val_acc,   val_emb,   val_lbl,   val_logits,   val_probs   = eval_epoch(model, val_loader, device)
                             # test_acc,  test_emb,  test_lbl,  test_logits,  test_probs  = eval_epoch(model, test_loader, device)
 
-                            # Secondary metrics
+                    
+                    
                             test_acc2, test_f1, test_auc, test_pred = compute_metrics(test_lbl, test_probs)
                             val_acc2,  val_f1,  val_auc,  _        = compute_metrics(val_lbl,  val_probs)
                             train_acc2,train_f1,train_auc,_       = compute_metrics(train_lbl, train_probs)
@@ -500,28 +511,12 @@ def run(args):
                             save_embeddings(run_dir, "val",   val_emb,   val_lbl,   idx_val)
                             save_embeddings(run_dir, "test",  test_emb,  test_lbl,  idx_test)
 
-                            metrics = {
-                                "dataset": ds_name,
-                                "embedding_dim": dim, "epochs": ep, "lr": lr, "dropout": dropout,
-                                "batch_size": args.batch_size, "num_layers": args.num_layers, "pooling": args.pool,
-                                "train_time_sec": float(it_time_s),
-                                "embed_time_sec": float(embed_time_s),
-                                "total_time_sec": float(total_time_s),
-                                "val_best_acc": float(early.best if early.best != -math.inf else best_val),
-                                "train_acc": float(train_acc), "val_acc": float(val_acc), "test_acc": float(test_acc),
-                                "train_f1_macro": float(train_f1), "val_f1_macro": float(val_f1), "test_f1_macro": float(test_f1),
-                                "train_auc_macro": float(train_auc), "val_auc_macro": float(val_auc), "test_auc_macro": float(test_auc),
-                                "peak_tracemalloc_mb": float(peak_tracemalloc_mb),
-                                "rss_before_mb": float(rss_before), "rss_after_mb": float(rss_after),
-                                "device": str(device),
-                            }
+                            metrics = { "dataset": ds_name, "embedding_dim": dim, "epochs": ep, "lr": lr, "dropout": dropout, "batch_size": args.batch_size, "num_layers": args.num_layers, "pooling": args.pool, "train_time_sec": float(it_time_s), "embed_time_sec": float(embed_time_s), "total_time_sec": float(total_time_s), "val_best_acc": float(early.best if early.best != -math.inf else best_val), "train_acc": float(train_acc), "val_acc": float(val_acc), "test_acc": float(test_acc), "train_f1_macro": float(train_f1), "val_f1_macro": float(val_f1), "test_f1_macro": float(test_f1), "train_auc_macro": float(train_auc), "val_auc_macro": float(val_auc), "test_auc_macro": float(test_auc), "peak_tracemalloc_mb": float(peak_tracemalloc_mb), "rss_before_mb": float(rss_before), "rss_after_mb": float(rss_after), "device": str(device),}
                             (run_dir / "metrics.json").write_text(json.dumps(metrics, indent=2))
 
                             cm = confusion_matrix(test_lbl, test_pred)
                             np.savetxt(run_dir / "test_confusion_matrix.csv", cm, delimiter=",", fmt="%d")
-                            (run_dir / "classification_report_test.txt").write_text(
-                                classification_report(test_lbl, test_pred, digits=4)
-                            )
+                            (run_dir / "classification_report_test.txt").write_text( classification_report(test_lbl, test_pred, digits=4) )
 
                             row = [ds_name, dim, ep, lr, dropout,
                                    it_time_s, embed_time_s, total_time_s,
@@ -556,7 +551,7 @@ def run(args):
 
 
 
-# Entry
+
 
 # MUTAG epochs 500 // dropout 0.0, 0.4 // num_layers 5 // weight_decay 5e-4 //batch_size 64
 # ENZYMES epochs 500 // dropout 0.0, 0.5 // num_layers 6 // weight_decay 5e-4 //batch_size 32 

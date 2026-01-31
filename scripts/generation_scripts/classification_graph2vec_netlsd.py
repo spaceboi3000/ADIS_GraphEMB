@@ -41,28 +41,16 @@ def evaluate_model(model_name, clf, X_train, X_test, y_train, y_test, n_classes)
     return dict(Accuracy=acc, F1=f1, AUC=auc, TrainTime=train_time, Model=model_name)
 
 def get_balanced_classifiers(n_samples, n_classes, n_features):
-    """Return classifiers with balanced hyperparameters to prevent overfitting"""
+    
     
     classifiers = {}
     
     # SVM 
     c_param = 10.0 if n_samples > 150 else 1.0
-    classifiers["SVM"] = SVC(
-        kernel="rbf", 
-        C=c_param,
-        gamma="scale", 
-        probability=True, 
-        random_state=42
-    )
+    classifiers["SVM"] = SVC( kernel="rbf",  C=c_param, gamma="scale",  probability=True,  random_state=42)
     
     # Logistic Regression
-    classifiers["LogisticRegression"] = LogisticRegression(
-        C=5.0 if n_samples < 200 else 1.0,
-        max_iter=2000,
-        random_state=42,
-        solver="lbfgs",
-        multi_class="multinomial" if n_classes > 2 else "auto"
-    )
+    classifiers["LogisticRegression"] = LogisticRegression(C=5.0 if n_samples < 200 else 1.0, max_iter=2000,random_state=42, solver="lbfgs",multi_class="multinomial" if n_classes > 2 else "auto")
     
     # Random Forest
     if n_samples < 150:
@@ -72,26 +60,10 @@ def get_balanced_classifiers(n_samples, n_classes, n_features):
         max_depth = 20
         n_trees = 300
     
-    classifiers["RandomForest"] = RandomForestClassifier(
-        n_estimators=n_trees,
-        max_depth=max_depth,
-        min_samples_split=5,
-        min_samples_leaf=2,
-        max_features="sqrt",
-        random_state=42,
-        n_jobs=-1,
-        bootstrap=True
-    )
+    classifiers["RandomForest"] = RandomForestClassifier(  n_estimators=n_trees, max_depth=max_depth,min_samples_split=5,min_samples_leaf=2, max_features="sqrt",  random_state=42, n_jobs=-1, bootstrap=True )
     
     # Gradient Boosting 
-    classifiers["GradientBoosting"] = GradientBoostingClassifier(
-        n_estimators=200 if n_samples > 150 else 150,
-        learning_rate=0.1,
-        max_depth=5 if n_samples > 150 else 4,
-        min_samples_split=10,
-        subsample=0.8,
-        random_state=42
-    )
+    classifiers["GradientBoosting"] = GradientBoostingClassifier(  n_estimators=200 if n_samples > 150 else 150,learning_rate=0.1, max_depth=5 if n_samples > 150 else 4, min_samples_split=10,subsample=0.8,random_state=42)
     
     # MLP 
     if n_features > 200:
@@ -101,18 +73,7 @@ def get_balanced_classifiers(n_samples, n_classes, n_features):
     else:
         hidden = (64, 32)
     
-    classifiers["MLP"] = MLPClassifier(
-        hidden_layer_sizes=hidden,
-        activation="relu",
-        solver="adam",
-        max_iter=1000,
-        learning_rate_init=0.001,
-        alpha=0.005, 
-        early_stopping=True,
-        validation_fraction=0.15,
-        n_iter_no_change=30,
-        random_state=42
-    )
+    classifiers["MLP"] = MLPClassifier( hidden_layer_sizes=hidden,activation="relu", solver="adam",max_iter=1000, learning_rate_init=0.001, alpha=0.005, early_stopping=True, validation_fraction=0.15, n_iter_no_change=30,random_state=42)
     
     return classifiers
 
@@ -122,44 +83,13 @@ def create_ensemble(n_samples):
     
     #adaptive ensemble based on dataset size
     if n_samples < 150:
-        rf = RandomForestClassifier(
-            n_estimators=500, 
-            max_depth=8,
-            min_samples_split=5,
-            min_samples_leaf=2,
-            random_state=42,
-            n_jobs=-1
-        )
+        rf = RandomForestClassifier(  n_estimators=500,   max_depth=8,min_samples_split=5, min_samples_leaf=2,random_state=42,n_jobs=-1 )
     else:
-        rf = RandomForestClassifier(
-            n_estimators=300, 
-            max_depth=20,
-            min_samples_split=5,
-            min_samples_leaf=2,
-            random_state=42,
-            n_jobs=-1
-        )
+        rf = RandomForestClassifier( n_estimators=300,   max_depth=20, min_samples_split=5, min_samples_leaf=2, random_state=42, n_jobs=-1 )
     
-    gb = GradientBoostingClassifier(
-        n_estimators=150,
-        learning_rate=0.1,
-        max_depth=5,
-        subsample=0.8,
-        random_state=42
-    )
-    
-    svm = SVC(
-        kernel="rbf",
-        C=10.0 if n_samples > 150 else 1.0,
-        probability=True,
-        random_state=42
-    )
-    
-    ensemble = VotingClassifier(
-        estimators=[('rf', rf), ('gb', gb), ('svm', svm)],
-        voting='soft',
-        n_jobs=-1
-    )
+    gb = GradientBoostingClassifier( n_estimators=150,learning_rate=0.1, max_depth=5, subsample=0.8,random_state=42 )
+    svm = SVC( kernel="rbf", C=10.0 if n_samples > 150 else 1.0,probability=True,random_state=42)
+    ensemble = VotingClassifier( estimators=[('rf', rf), ('gb', gb), ('svm', svm)], voting='soft',n_jobs=-1 )
     
     return ensemble
 
@@ -186,9 +116,7 @@ def evaluate_embeddings(method_name: str, emb_root: Path, out_file: Path):
             
             print(f"Samples: {n_samples} | Features: {n_features} | Classes: {n_classes}")
             
-            X_train, X_test, y_train, y_test = train_test_split(
-                X, y, test_size=0.2, random_state=42, stratify=y
-            )
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
             
             # Feature scaling
             scaler = StandardScaler()
@@ -213,8 +141,8 @@ def evaluate_embeddings(method_name: str, emb_root: Path, out_file: Path):
             for clf_name, clf in classifiers.items():
                 try:
                     print(f"  {clf_name:20s}", end=" ")
-                    metrics = evaluate_model(clf_name, clf, X_train_scaled, X_test_scaled, 
-                                            y_train, y_test, n_classes)
+                    
+                    metrics = evaluate_model(clf_name, clf, X_train_scaled, X_test_scaled,  y_train, y_test, n_classes)
                     
                     acc_str = f"Acc: {metrics['Accuracy']:.4f}"
                     f1_str = f"F1: {metrics['F1']:.4f}"
@@ -227,16 +155,8 @@ def evaluate_embeddings(method_name: str, emb_root: Path, out_file: Path):
                         best_acc = metrics['Accuracy']
                         best_model = clf_name
                     
-                    results.append(dict(
-                        Method=method_name,
-                        Dataset=name,
-                        Dim=dim,
-                        Model=metrics["Model"],
-                        Accuracy=metrics["Accuracy"],
-                        F1=metrics["F1"],
-                        AUC=metrics["AUC"],
-                        TrainTime=metrics["TrainTime"]
-                    ))
+                    results.append(dict( Method=method_name,Dataset=name,  Dim=dim, Model=metrics["Model"], Accuracy=metrics["Accuracy"], F1=metrics["F1"], AUC=metrics["AUC"],TrainTime=metrics["TrainTime"]))
+                
                 except Exception as e:
                     print(f"ERROR: {str(e)}")
                     continue
@@ -278,32 +198,14 @@ print("\n" + "="*70)
 print("STARTING IMPROVED EVALUATION PIPELINE")
 print("="*70)
 
-netlsd_results = evaluate_embeddings(
-    method_name="NetLSD",
-    emb_root=Path("../embeddings/embeddings_netlsd"),
-    out_file=Path("../csvs/netlsd_classification_results.csv"),
-)
-
-graph2vec_results = evaluate_embeddings(
-    method_name="Graph2Vec",
-    emb_root=Path("../embeddings/embeddings_graph2vec"),
-    out_file=Path("../csvs/graph2vec_classification_results.csv"),
-)
-
+netlsd_results = evaluate_embeddings( method_name="NetLSD", emb_root=Path("../embeddings/embeddings_netlsd"), out_file=Path("../csvs/netlsd_classification_results.csv"),)
+graph2vec_results = evaluate_embeddings(method_name="Graph2Vec", emb_root=Path("../embeddings/embeddings_graph2vec"),out_file=Path("../csvs/graph2vec_classification_results.csv"),)
 
 
 #----------------- GENERATE PERTURBATION RESULTS -----------------#
-# netlsd_results = evaluate_embeddings(
-#     method_name="NetLSD",
-#     emb_root=Path("../permutated_embeddings/permutated_netlsd"),
-#     out_file=Path("../csvs/perturbated_netlsd_classification_results.csv"),
-# )
+# netlsd_results = evaluate_embeddings( method_name="NetLSD",emb_root=Path("../permutated_embeddings/permutated_netlsd"),out_file=Path("../csvs/perturbated_netlsd_classification_results.csv"), )
 
-# graph2vec_results = evaluate_embeddings(
-#     method_name="Graph2Vec",
-#     emb_root=Path("../permutated_embeddings/permutated_graph2vec"),
-#     out_file=Path("../csvs/perturbated_graph2vec_classification_results.csv"),
-# )
+# graph2vec_results = evaluate_embeddings( method_name="Graph2Vec",emb_root=Path("../permutated_embeddings/permutated_graph2vec"),out_file=Path("../csvs/perturbated_graph2vec_classification_results.csv"),)
 
 print("\n" + "="*70)
 print("EVALUATION COMPLETE!")
@@ -313,13 +215,7 @@ print("="*70)
 print("\n" + "="*70)
 print("COMPARISON: NetLSD vs Graph2Vec")
 print("="*70)
-comparison = pd.DataFrame({
-    'NetLSD_Acc': netlsd_results.groupby('Dataset')['Accuracy'].mean(),
-    'Graph2Vec_Acc': graph2vec_results.groupby('Dataset')['Accuracy'].mean(),
-    'NetLSD_F1': netlsd_results.groupby('Dataset')['F1'].mean(),
-    'Graph2Vec_F1': graph2vec_results.groupby('Dataset')['F1'].mean()
-})
-comparison['Winner'] = comparison.apply(
-    lambda x: 'NetLSD' if x['NetLSD_Acc'] > x['Graph2Vec_Acc'] else 'Graph2Vec', axis=1
-)
+
+comparison = pd.DataFrame({ 'NetLSD_Acc': netlsd_results.groupby('Dataset')['Accuracy'].mean(),'Graph2Vec_Acc': graph2vec_results.groupby('Dataset')['Accuracy'].mean(),'NetLSD_F1': netlsd_results.groupby('Dataset')['F1'].mean(),'Graph2Vec_F1': graph2vec_results.groupby('Dataset')['F1'].mean()})
+comparison['Winner'] = comparison.apply(lambda x: 'NetLSD' if x['NetLSD_Acc'] > x['Graph2Vec_Acc'] else 'Graph2Vec', axis=1)
 print(comparison.round(4))
