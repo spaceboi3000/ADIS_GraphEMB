@@ -2,20 +2,20 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Dict, List, Tuple
 import csv
-
 import numpy as np
 
-DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
 
+
+DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
 GIN_ORIG_ROOT = Path("../embeddings/embeddings_gin")
 GIN_PERM_ROOT = Path("../permutated_embeddings/permutated_gin_embedding_classification")
-
 OUT_CSV = Path("../permutated_embeddings/stability_gin.csv")
 
 def rowwise_cosine(A: np.ndarray, B: np.ndarray) -> np.ndarray:
-    """Cosine similarity per row between A and B."""
+ 
     if A.shape != B.shape:
         raise ValueError(f"Shape mismatch in rowwise_cosine: A{A.shape} vs B{B.shape}")
+    
     A_norm = A / np.linalg.norm(A, axis=1, keepdims=True)
     B_norm = B / np.linalg.norm(B, axis=1, keepdims=True)
     A_norm = np.nan_to_num(A_norm)
@@ -24,14 +24,7 @@ def rowwise_cosine(A: np.ndarray, B: np.ndarray) -> np.ndarray:
 
 
 def load_gin_embeddings_and_labels(run_dir: Path, split: str = "test") -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """
-    Load embeddings + labels CSV for given run_dir and split (train/val/test).
-
-    Returns:
-      E: (N, D) embeddings
-      graph_index: (N,) int array
-      labels: (N,) int array
-    """
+   
     emb_path = run_dir / f"{split}_embeddings.npy"
     lab_path = run_dir / f"{split}_labels.csv"
 
@@ -41,10 +34,9 @@ def load_gin_embeddings_and_labels(run_dir: Path, split: str = "test") -> Tuple[
         raise FileNotFoundError(f"Labels not found: {lab_path}")
 
     E = np.load(emb_path)
-
     graph_indices: List[int] = []
     labels: List[int] = []
-
+    
     with open(lab_path, "r", newline="") as f:
         reader = csv.DictReader(f)
         if "graph_index" not in reader.fieldnames or "label" not in reader.fieldnames:
@@ -54,22 +46,13 @@ def load_gin_embeddings_and_labels(run_dir: Path, split: str = "test") -> Tuple[
             labels.append(int(row["label"]))
 
     if E.shape[0] != len(graph_indices):
-        raise ValueError(
-            f"Row mismatch: {emb_path} has {E.shape[0]} rows, {lab_path} has {len(graph_indices)} rows"
-        )
+        raise ValueError( f"Row mismatch: {emb_path} has {E.shape[0]} rows, {lab_path} has {len(graph_indices)} rows" )
 
     return E, np.array(graph_indices, dtype=int), np.array(labels, dtype=int)
 
 
-def compute_gin_stability_for_run(
-    dataset: str,
-    run_name: str,
-    split: str = "test",
-) -> Dict:
-    """
-    Compare original vs permutated GIN embeddings for a specific dataset + run directory.
-    Align by graph_index using the labels CSVs.
-    """
+def compute_gin_stability_for_run(dataset: str,run_name: str, split: str = "test",) -> Dict:
+ 
     run_orig = GIN_ORIG_ROOT / dataset / run_name
     run_perm = GIN_PERM_ROOT / dataset / run_name
 
@@ -81,11 +64,10 @@ def compute_gin_stability_for_run(
     E_orig, gidx_orig, labels_orig = load_gin_embeddings_and_labels(run_orig, split=split)
     E_perm, gidx_perm, labels_perm = load_gin_embeddings_and_labels(run_perm, split=split)
 
-    # Build mapping from graph_index -> row_idx
     map_orig = {int(g): i for i, g in enumerate(gidx_orig)}
     map_perm = {int(g): i for i, g in enumerate(gidx_perm)}
 
-    # intersection of graph indices
+    #intersection of graph indices
     common_g = sorted(set(map_orig.keys()) & set(map_perm.keys()))
 
     if not common_g:
@@ -93,32 +75,16 @@ def compute_gin_stability_for_run(
 
     row_orig = np.array([map_orig[g] for g in common_g], dtype=int)
     row_perm = np.array([map_perm[g] for g in common_g], dtype=int)
-
     Z_orig = E_orig[row_orig]
     Z_perm = E_perm[row_perm]
 
-    # Extra debug: print dimensions if mismatch
     if Z_orig.shape[1] != Z_perm.shape[1]:
-        raise ValueError(
-            f"Embedding dim mismatch for {dataset}/{run_name}: "
-            f"orig D={Z_orig.shape[1]}, perm D={Z_perm.shape[1]}"
-        )
+        raise ValueError( f"Embedding dim mismatch for {dataset}/{run_name}: " f"orig D={Z_orig.shape[1]}, perm D={Z_perm.shape[1]}")
 
     cos = rowwise_cosine(Z_orig, Z_perm)
     l2 = np.linalg.norm(Z_orig - Z_perm, axis=1)
 
-    return {
-        "dataset": dataset,
-        "run_name": run_name,
-        "split": split,
-        "n_graphs": int(Z_orig.shape[0]),
-        "cos_mean": float(cos.mean()),
-        "cos_median": float(np.median(cos)),
-        "cos_std": float(cos.std()),
-        "l2_mean": float(l2.mean()),
-        "l2_median": float(np.median(l2)),
-        "l2_std": float(l2.std()),
-    }
+    return { "dataset": dataset, "run_name": run_name, "split": split, "n_graphs": int(Z_orig.shape[0]), "cos_mean": float(cos.mean()), "cos_median": float(np.median(cos)),"cos_std": float(cos.std()), "l2_mean": float(l2.mean()),  "l2_median": float(np.median(l2)),"l2_std": float(l2.std()),}
 
 
 if __name__ == "__main__":
