@@ -2,42 +2,29 @@ from __future__ import annotations
 import time, os, warnings
 from pathlib import Path
 from typing import List, Tuple
-
 import numpy as np
 import pandas as pd
 import networkx as nx
-
 from sklearn.decomposition import PCA
-
 import torch
 from torch_geometric.utils import to_networkx
+import tracemalloc, psutil
 
-#permutated datas
 PERMUTATED_ROOT = Path("../permutated_DATASETS")
-
 DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
 TARGET_DIMS = [64, 128, 256]
-
 OUT_DIR = Path("../permutated_embeddings/permutated_netlsd")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
-
 METRICS_PATH = OUT_DIR / "permutated_metrics.csv"
-
-# Length of NetLSD heat kernel signature before dimensionality reduction
 NETLSD_SCALE_N = 250 
 
 
 def load_permutated_dataset(name: str, perm_root: Path) -> Tuple[List[nx.Graph], np.ndarray]:
-    """
-    Load a permutated dataset list saved via torch.save(permutated_list, ...).
-    Each element is a PyG Data with perturbed edges and maybe shuffled node features.
-    Convert each to a NetworkX graph and attach node features under 'feat' if present.
-    """
     perm_path = perm_root / name / f"{name}_permutated.pt"
     if not perm_path.exists():
         raise FileNotFoundError(f"Permutated dataset file not found: {perm_path}")
 
-    # FutureWarning is fine; you're loading your own files
+
     data_list = torch.load(perm_path, weights_only=False) 
     graphs: List[nx.Graph] = []
     labels = []
@@ -45,7 +32,7 @@ def load_permutated_dataset(name: str, perm_root: Path) -> Tuple[List[nx.Graph],
     for data in data_list:
         g = to_networkx(data, to_undirected=True)
 
-        # Add node features as "feat" if they exist
+ 
         if getattr(data, "x", None) is not None:
             x_np = data.x.cpu().numpy()
             for i, (_, d) in enumerate(g.nodes(data=True)):
@@ -58,11 +45,7 @@ def load_permutated_dataset(name: str, perm_root: Path) -> Tuple[List[nx.Graph],
 
 
 def ensure_dimensionality(X: np.ndarray, target_dim: int) -> np.ndarray:
-    """
-    Make sure NetLSD signatures X (n x d) become (n x target_dim):
-    - If d > target_dim: PCA
-    - If d < target_dim: zero-pad
-    """
+    """ If d > target_dim: PCA ORRR  If d < target_dim: zero-pad"""
     n, d = X.shape
     if d == target_dim:
         return X.astype(np.float32)
@@ -76,18 +59,12 @@ def ensure_dimensionality(X: np.ndarray, target_dim: int) -> np.ndarray:
 
 
 def _dense_netlsd_signatures(graphs: List[nx.Graph], scale_n: int = 250) -> np.ndarray:
-    """
-    Dense NetLSD-style signatures using normalized Laplacian eigenvalues directly.
-    We implement the normalized Laplacian ourselves to avoid SciPy completely.
 
-    L = I - D^{-1/2} A D^{-1/2}
-    """
     scales = np.logspace(-2, 2, scale_n, base=10.0, dtype=np.float64)
     embs = []
 
     for g in graphs:
-        # Adjacency matrix (dense)
-        # Order of nodes is deterministic in nx.to_numpy_array
+  
         A = nx.to_numpy_array(g, dtype=np.float64)
         n = A.shape[0]
 
@@ -95,15 +72,12 @@ def _dense_netlsd_signatures(graphs: List[nx.Graph], scale_n: int = 250) -> np.n
             embs.append(np.zeros(scale_n, dtype=np.float32))
             continue
 
-        # Degree vector
         deg = A.sum(axis=1)
-        # D^{-1/2}, careful with zeros
         with np.errstate(divide="ignore"):
             inv_sqrt_deg = 1.0 / np.sqrt(deg)
         inv_sqrt_deg[np.isinf(inv_sqrt_deg)] = 0.0
         inv_sqrt_deg[np.isnan(inv_sqrt_deg)] = 0.0
 
-        # Construct normalized Laplacian: L = I - D^{-1/2} A D^{-1/2}
         D_half = np.diag(inv_sqrt_deg)
         L = np.eye(n, dtype=np.float64) - D_half @ A @ D_half
 
@@ -114,7 +88,6 @@ def _dense_netlsd_signatures(graphs: List[nx.Graph], scale_n: int = 250) -> np.n
             L = L + 1e-10 * np.eye(n, dtype=np.float64) #small regularization in case of numerical issues
             evals = np.linalg.eigvalsh(L)
 
-        # Heat kernel signature
         sig = np.exp(-np.outer(scales, evals)).sum(axis=1)
         embs.append(sig.astype(np.float32))
 
@@ -140,12 +113,10 @@ def run_dense_netlsd_for_permutated_dataset(name: str):
     graphs, y = load_permutated_dataset(name, PERMUTATED_ROOT)
     print(f"Loaded {len(graphs)} permutated graphs; classes: {sorted(set(y.tolist()))}")
 
-    import tracemalloc, psutil
     proc = psutil.Process(os.getpid())
-
     metrics_rows = []
 
-    #Compute raw NetLSD signatures once
+
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         t_fit0 = time.time()
@@ -156,10 +127,10 @@ def run_dense_netlsd_for_permutated_dataset(name: str):
     fit_time = t_fit1 - t_fit0
 
     for dim in TARGET_DIMS:
+       
         tracemalloc.start()
         rss_before = proc.memory_info().rss
         t0 = time.time()
-
         X = ensure_dimensionality(X_raw, dim)
 
         t1 = time.time()
@@ -173,26 +144,9 @@ def run_dense_netlsd_for_permutated_dataset(name: str):
         rss_before_mb = rss_before / (1024 ** 2)
         rss_after_mb = rss_after / (1024 ** 2)
 
-        print(
-            f"dim={dim} -> raw {X_raw.shape} -> {X.shape}, "
-            f"fit {fit_time:.2f}s, PCA/pad {pca_time:.2f}s, peak_mem {peak_mb:.1f} MB"
-        )
-
+        print( f"dim={dim} -> raw {X_raw.shape} -> {X.shape}, "f"fit {fit_time:.2f}s, PCA/pad {pca_time:.2f}s, peak_mem {peak_mb:.1f} MB" )
         save_embeddings(name, "NetLSD", dim, X, y)
-
-        metrics_rows.append({
-            "dataset": name,
-            "method": "NetLSD_permutated_dense",
-            "dim": dim,
-            "n_graphs": len(graphs),
-            "fit_time_s": round(fit_time, 4),
-            "pca_time_s": round(pca_time, 4),
-            "total_time_s": round(total_time, 4),
-            "rss_before_mb": round(rss_before_mb, 2),
-            "rss_after_mb": round(rss_after_mb, 2),
-            "peak_tracemalloc_mb": round(peak_mb, 2),
-            "raw_sig_len": X_raw.shape[1],
-        })
+        metrics_rows.append({ "dataset": name,"method": "NetLSD_permutated_dense","dim": dim, "n_graphs": len(graphs),"fit_time_s": round(fit_time, 4),"pca_time_s": round(pca_time, 4),"total_time_s": round(total_time, 4),"rss_before_mb": round(rss_before_mb, 2), "rss_after_mb": round(rss_after_mb, 2),"peak_tracemalloc_mb": round(peak_mb, 2), "raw_sig_len": X_raw.shape[1],  })
 
     return metrics_rows
 
@@ -202,7 +156,6 @@ if __name__ == "__main__":
     print("OUT_DIR:", OUT_DIR)
 
     all_metrics = []
-
     for ds in DATASETS:
         try:
             rows = run_dense_netlsd_for_permutated_dataset(ds)
@@ -211,6 +164,7 @@ if __name__ == "__main__":
             print(f"[ERROR] {ds}: {e}")
 
     if all_metrics:
+        
         mdf = pd.DataFrame(all_metrics)
         if METRICS_PATH.exists():
             old = pd.read_csv(METRICS_PATH)
