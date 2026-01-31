@@ -64,7 +64,7 @@ class Config:
 
 def setup_matplotlib_style():
     plt.rcParams.update({'font.size': Config.FONT_SIZE,'axes.titlesize': Config.TITLE_SIZE,  'axes.labelsize': Config.LABEL_SIZE,'xtick.labelsize': Config.TICK_SIZE,
-        'ytick.labelsize': Config.TICK_SIZE, 'legend.fontsize': Config.LEGEND_SIZE,'figure.dpi': Config.DPI, 'savefig.dpi': Config.DPI, 'savefig.bbox': 'tight',savefig.pad_inches': 0.05,
+        'ytick.labelsize': Config.TICK_SIZE, 'legend.fontsize': Config.LEGEND_SIZE,'figure.dpi': Config.DPI, 'savefig.dpi': Config.DPI, 'savefig.bbox': 'tight', 'savefig.pad_inches': 0.05,
         'axes.spines.top': False, 'axes.spines.right': False,'font.family': 'sans-serif', })
 
 
@@ -430,7 +430,7 @@ def create_method_comparison_dual(df, dataset, dim, base_dir, datasets_dir,  per
 
 def create_comprehensive_comparison_grid(df, base_dir, datasets_dir, permuted_base_dir,
                                          projection_type='tsne', dim=128, output_path=None):
- "
+
     fig = plt.figure(figsize=Config.FIGSIZE_3x6)
     gs = gridspec.GridSpec(3, 6, figure=fig, wspace=0.08, hspace=0.25)
     
