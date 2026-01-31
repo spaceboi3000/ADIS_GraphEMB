@@ -12,7 +12,7 @@ OUTPUT_ROOT.mkdir(exist_ok=True)
 DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
 
 PERTURB_EDGE_PERCENT = 0.10    # 10% edges removed + 10% added
-SHUFFLE_NODE_ATTR = True       # random permutation of node features
+SHUFFLE_NODE_ATTR = True       #random permutation of node features
 
 
 #we permutated the graphs by chaning edge_index (removing/adding edges) but not updating edge_attr
@@ -26,7 +26,6 @@ def perturb_graph(data, perturb_ratio=0.10, shuffle_attr=False):
     #Remove Edge
     num_edges = edge_index.size(1)
     num_remove = int(perturb_ratio * num_edges)
-
     if num_remove > 0:
         perm = torch.randperm(num_edges)[:num_remove]
         edge_index = edge_index[:, perm]  # keep only random subset
@@ -47,10 +46,10 @@ def perturb_graph(data, perturb_ratio=0.10, shuffle_attr=False):
     edge_index, _ = remove_self_loops(edge_index)
     edge_index, _ = add_self_loops(edge_index)
     edge_index = to_undirected(edge_index)
-
     data.edge_index = edge_index
     
     return data
+
 
 for ds_name in DATASETS:
     
@@ -59,17 +58,11 @@ for ds_name in DATASETS:
     ds_path = DATASETS_ROOT / ds_name
     perm_path = OUTPUT_ROOT / ds_name
     perm_path.mkdir(exist_ok=True)
-
     dataset = TUDataset(root=ds_path, name=ds_name)
-
+   
     permutated_list = []
-
     for i, data in enumerate(dataset):
-        perturbed = perturb_graph(
-            data, 
-            perturb_ratio=PERTURB_EDGE_PERCENT,
-            shuffle_attr=SHUFFLE_NODE_ATTR
-        )
+        perturbed = perturb_graph( data,  perturb_ratio=PERTURB_EDGE_PERCENT,shuffle_attr=SHUFFLE_NODE_ATTR)
         permutated_list.append(perturbed)
 
     torch.save(permutated_list, perm_path / f"{ds_name}_permutated.pt")
