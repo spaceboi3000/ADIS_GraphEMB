@@ -7,9 +7,9 @@ graph embedding methods.
 These embeddings are then used for three downstream tasks including graph classification,
 clustering and stability analysis.
 
-For \textit{unsupervised} methods (Graph2Vec and NetLSD), graph representations are learned independently of any label information. 
+For \textit{unsupervised} methods (Graph2Vec \& NetLSD), graph representations are learned independently of any label information. 
 The resulting embeddings are computed once per configuration and stored for subsequent evaluation.
-Classification is performed by training standard machine learning models, as we will refer to them in detail in the next section, 
+Classification is performed by training standard machine learning models, as we will refer to them in detail in the section \textit{V}, 
 on top of the learned graph vectors. For the \textit{supervised method} (GIN), graph representations are learned jointly with the classification objective
 through end-to-end training. Meaning that graph level embeddings are extracted from the trained network and 
 used both for direct classification performance assessment and for comparative analysis against unsupervised methods.
@@ -22,7 +22,7 @@ study the effect of representation capacity on performance and computational cos
 All experiments are executed on Linux-based systems equipped with multi-core CPUs and sufficient main memory to support
 large-scale graph embedding computation.
 We use a combination of \textbf{CPU-} and \textbf{GPU-based} environments selected according to the computational
-requirements of each embedding method. Specifically, unsupervised graph embedding methods (Graph2Vec and NetLSD) 
+requirements of each embedding method. Specifically, unsupervised graph embedding methods (Graph2Vec \& NetLSD) 
 are executed on CPU-based systems as they don't require
 accelerated hardware and exhibit modest memory and runtime demands.
 On the other side, supervised GNN-based models (GIN) are trained using GPU acceleration to 
@@ -31,7 +31,7 @@ Training and evaluation of GIN models are performed using an at first \textbf{NV
 which provides sufficient computational resources for all datasets considered in this study. 
 
 
-During execution, runtime and memory usage are monitored to capture embedding generation time, training time,
+During execution, runtime and memory usage are monitored to capture embedding generation time, training time
 and peak memory consumption for computational efficiency analysis.
 This hybrid execution strategy enables efficient experimentation while maintaining comparable conditions across all the three
 methods and three datasets. 
@@ -45,7 +45,7 @@ within each experimental configuration.
 Random seeds are fixed across all experiments, including dataset spliting, embedding generation, classifier training etc.,  
 to reduce variance from stochastic effects 
 and to ensure that observed performance differences can be attributed to the embedding methods themselves.
-All reported results are obtained using identical splits, configurations, and evaluation scripts. 
+All reported results are obtained using identical splits, configurations and evaluation scripts. 
 
 
 
@@ -72,7 +72,7 @@ Classifier selection and configuration are kept consistent across methods to iso
 The supervised GIN model follows the architecture and
 training protocol described in Algorithms~\ref{alg:gin_forward} and~\ref{alg:gin_train}.
 GIN models consist of stacked GINConv layers parameterized by multilayer perceptrons, followed by
-batch normalization, ReLU activation, dropout, and residual connections.
+batch normalization, ReLU activation, dropout and residual connections.
 Graph-level representations are obtained using additive global pooling.
 Jumping Knowledge with concatenation is employed to aggregate information from multiple layers.
 

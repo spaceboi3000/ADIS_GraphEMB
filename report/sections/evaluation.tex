@@ -23,11 +23,11 @@
 We evaluate graph embeddings on three benchmark datasets from TUDataset.
 Unsupervised methods are evaluated under a common downstream
 classification pipeline, while the supervised model follows its native
-end-to-end training protocol.
+end-to-end training protocol, as we mentioned earlier.
 
-Classification performance is assessed using Accuracy, F1-score, and Area Under the ROC Curve (AUC).
+Classification performance is assessed using Accuracy, F1-score and Area Under the ROC Curve (AUC).
 In addition to predictive performance, we report computational metrics including
-training time, embedding generation time, and memory consumption, measured via
+training time, embedding generation time and memory consumption, measured via
 peak memory usage and resident set size (RSS).
 To study the effect of representation capacity, all methods are evaluated using three different
 embedding dimensions. Smaller embedding dimensions were initially considered to reduce computational cost and memory consumption.
@@ -111,5 +111,5 @@ For each dataset, method and experimental configuration, we report the mean, med
 and standard deviation of both cosine similarity and Euclidean distance across all
 graphs.
 To evaluate the practical impact of perturbations, we additionally repeat the graph
-classification experiments on the perturbed datasets using the same
+classification and also clustering experiments on the perturbed datasets using the same
 evaluation protocols.

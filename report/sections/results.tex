@@ -131,7 +131,7 @@ The experimental results reveal clear trade offs between classification
 accuracy and computational efficiency across GIN, Graph2Vec and NetLSD, 
 as illustrated in Figures~\ref{fig:pareto}-\ref{fig:stacked_mem}. All figures are computed with the 
 average results across the three dimensions and three datasets.
-We chose these images, from the 47 we generated for the classification section, to summarize and make our conclusions.
+We chose these images, from the all the ones we generated for the classification section, to summarize and make our conclusions.
 
 
 \begin{figure}
@@ -148,7 +148,7 @@ It is again the average across the datasets with a normalized combnination of co
 Specifically, the cost metric combines time and memory with weights 0.7 and 0.3, respectively.
 NetLSD lies on the left most side of the optimal region, meaning that it achieves reasonable accuracy with minimal compute cost.
 GIN dominates with its accuracy, but still with a significantlt higher compute cost.
-Graph2Vec is at the lower part of the graph, showing both lower accuracy from the  two other methodsand higher compute cost than NetLSD.
+Graph2Vec is at the lower part of the graph, showing both lower accuracy from the  two other methods and higher compute cost than NetLSD.
 From the same figure, we can see that GIN 
 benefits monotonically from increased embedding dimensionality, 
 achieving the highest average accuracy at 256 dimensions.
@@ -320,7 +320,7 @@ On the contrary NetLSD embeds graphs using spectral summaries of the Laplacian, 
 Such characteristics are well suited for clustering. This exlplains why NetLSD consitently forms semantically coherent clusters despite being label-free.
 GIN embeddings are designed to maximise separablity rather than maintaining inter-graph distances. Consequently embeddings using GIN perform poorly during 
 clustering.
-The theoretic differences are  clearly represented in figures~\ref{fig:netlsd_kmeans} to ~\ref{fig:gin_spectral}
+The theoretic differences are  clearly represented in figures~\ref{fig:netlsd_kmeans} to~\ref{fig:gin_spectral}.
 
 
 % --- Figure: NetLSD K-Means ---
@@ -386,7 +386,7 @@ It is apparent that the technique used fundamentally affects the cluster visuali
 
 After the permutations where we explained 
 in the section \textit{V}, we present the stability results from the embeddings 
-for each method in Tables ~\ref{tab:stability_gin_best_cos}, ~\ref{tab:stability_gin_best_l2} ~\ref{tab:stability_graph2vec} and ~\ref{tab:stability_netlsd}.
+for each method in Tables~\ref{tab:stability_gin_best_cos},~\ref{tab:stability_gin_best_l2},~\ref{tab:stability_graph2vec} and~\ref{tab:stability_netlsd}.
 
 
 % \begin{table}
@@ -501,16 +501,16 @@ IMDB  & 128 & 1e-3 & 105 & 182 & 0.625 & 0.068 \\
 
 
 The stability behavior of GIN is strongly influenced by training configuration and dataset characteristics.
-When we optimize for max  cosine (closer to value ~1),
-we take models with dropout 0.0 and we have high cosine similarity values (0.66-0.91 range) 
+When we optimize for max  cosine (closer to value~1),
+we take models with dropout 0.0 and we have high cosine similarity values (0.66--0.91 range) 
 with gradually decreasing cosine similarity as dimensionality increases.
-However, the corresponding L2 distances are relatively large (ranging from ~100 to ~1800),
+However, the corresponding L2 distances are relatively large (ranging from~100 to~1800),
 meaning significant magnitude changes in embeddings despite relatively preserved directions.
 
-When we optimize for min L2 (closer to value ~0),
-we take models with dropout 0.4 and we have lower cosine similarity values (0.12-0.77 range),
+When we optimize for min L2 (closer to value~0),
+we take models with dropout 0.4 and we have lower cosine similarity values (0.12--0.77 range),
 indicating more directional changes.
-However, the L2 distances are much smaller (ranging from ~66 to ~483), showing reduced magnitude changes.
+However, the L2 distances are much smaller (ranging from~66 to~483), showing reduced magnitude changes.
 This inverse relationship between cosine similarity and L2 distance across configurations
 highlights the trade off between preserving direction versus magnitude in GIN embeddings under perturbations.
 
@@ -788,16 +788,13 @@ making them well suited for real-world scenarios.
     \label{fig:stacked_mem_after}
 \end{figure}
 
-The figures~\ref{fig:pareto_after}-\ref{fig:stacked_mem_after} verify what we already have told and 
+The figures~\ref{fig:pareto_after}--\ref{fig:stacked_mem_after} verify what we already have told and 
 show a clear shift in the optimal trade off between accuracy and computational cost.
 NetLSD configurations dominate achieving the highest accuracy at the lowest normalized compute cost, which combines runtime and memory usage, 
 as we can see from Pareto frontier plot and the two stacked plots. 
+For the TSNE and UMAP visualizations of the perturbed embeddings, after again the clustering execution, alongside the original ones, we show the results in Figures~\ref{fig:tsne_before_after}, \ref{fig:umap_before_after}. 
 
-
-We then perfomed TSNE and UMAP visualizations of the perturbed embeddings alongside the original ones.
-The results in Figures~\ref{fig:tsne_before_after}, \ref{fig:umap_before_after}. 
-
-\begin{figure}[h!]
+\begin{figure}
     \centering
     \includegraphics[width=0.9\columnwidth]{figures/comprehensive_grid_tsne.png}
     \caption{\textbf{t-SNE Clusters Comparison accross datasets} We can visualize the differences
@@ -806,7 +803,7 @@ The results in Figures~\ref{fig:tsne_before_after}, \ref{fig:umap_before_after}.
 \end{figure}
 
 
-\begin{figure}[h!]
+\begin{figure}
     \centering
     \includegraphics[width=0.9\columnwidth]{figures/comprehensive_grid_umap.png}
     \caption{\textbf{UMAP Clusters Comparison accross datasets} We can visualize the differences

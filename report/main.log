@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2026.1.20)  31 JAN 2026 14:09
+This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2026.1.20)  31 JAN 2026 17:24
  restricted system commands enabled.
 **main
 (./main.tex
@@ -657,33 +657,20 @@ Package fontspec Info: Font family 'FreeSerif(0)' created for font 'FreeSerif'
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
 ) (./main.aux
-LaTeX Info: Redefining \rmfamily on input line 6.
-LaTeX Info: Redefining \sffamily on input line 6.
-LaTeX Info: Redefining \ttfamily on input line 6.
+LaTeX Info: Redefining \rmfamily on input line 10.
+LaTeX Info: Redefining \sffamily on input line 10.
+LaTeX Info: Redefining \ttfamily on input line 10.
 [\directlua]:1: attempt to call a nil value (field 'select_language')
 stack traceback:
 	[\directlua]:1: in main chunk.
 \polyglossia@select@language:nnn ...3\endcsname )}
                                                   \fi \polyglossia@register@...
-l.6 \selectlanguage *{english}
-                            
+l.10 \selectlanguage *{english}
+                             
 ? 
 )
-Runaway argument?
-{\con 
-! File ended while scanning use of \@writefile.
-<inserted text> 
-\par 
-l.8 \begin{document}
-                  
-? \
-Type <return> to proceed, S to scroll future error messages,
-R to run without stopping, Q to run quietly,
-I to insert something, E to edit your file,
-H for help, X to quit.
-? 
-
 \openout1 = main.aux
+
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
 LaTeX Font Info:    ... okay on input line 8.
 LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
@@ -695,7 +682,7 @@ LaTeX Font Info:    ... okay on input line 8.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 8.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 8
 .
-(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 8.
@@ -853,110 +840,25 @@ LaTeX Info: Redefining \ttfamily on input line 88.
 LaTeX Font Warning: Font shape `TU/FreeSerif(0)/m/sc' undefined
 (Font)              using `TU/FreeSerif(0)/m/n' instead on input line 1.
 
-
-LaTeX Warning: Citation `shervashidze2011wl' on page 1 undefined on input line 
-12.
-
-
-LaTeX Warning: Citation `vishwanathan2010graphkernels' on page 1 undefined on i
-nput line 12.
-
-
-LaTeX Warning: Citation `narayanangraph2vec' on page 1 undefined on input line 
-14.
-
-
-LaTeX Warning: Citation `tsitsulin2018netlsd' on page 1 undefined on input line
- 14.
-
-
-LaTeX Warning: Citation `xu2019gin' on page 1 undefined on input line 15.
-
 <figures/svsu1.jpeg, id=1, 1268.74pt x 447.6725pt>
 File: figures/svsu1.jpeg Graphic file (type jpg)
 <use figures/svsu1.jpeg>
-Package luatex.def Info: figures/svsu1.jpeg  used on input line 19.
+Package luatex.def Info: figures/svsu1.jpeg  used on input line 18.
 (luatex.def)             Requested size: 252.0pt x 88.91129pt.
-
-LaTeX Warning: Citation `errica2019fairgnn' on page 1 undefined on input line 4
-3.
-
-
-LaTeX Warning: Citation `dwivedi2020benchmarking' on page 1 undefined on input 
-line 43.
-
 [1
 Non-PDF special ignored!
 
 
 <./figures/svsu1.jpeg>]) (./sections/related_work.tex)
-(./sections/methods.tex
-
-LaTeX Warning: Citation `narayanangraph2vec' on page 2 undefined on input line 
-13.
-
-
-LaTeX Warning: Citation `tsitsulin2018netlsd' on page 2 undefined on input line
- 118.
-
-
-LaTeX Warning: Citation `xu2019gin' on page 2 undefined on input line 183.
-
-) (./sections/datasets.tex
-
-LaTeX Warning: Citation `narayanangraph2vec' on page 2 undefined on input line 
-8.
-
-
-LaTeX Warning: Citation `tsitsulin2018netlsd' on page 2 undefined on input line
- 8.
-
-
-LaTeX Warning: Citation `xu2019gin' on page 2 undefined on input line 8.
-
-[2]
-
-LaTeX Warning: Citation `debnath1991mutag' on page 3 undefined on input line 12
-.
-
-
-LaTeX Warning: Citation `rossi2015networkrepository' on page 3 undefined on inp
-ut line 19.
-
-
-LaTeX Warning: Citation `rossi2015networkrepository' on page 3 undefined on inp
-ut line 24.
-
-) (./sections/experimental_setup.tex [3]) (./sections/evaluation.tex [4])
-(./sections/results.tex
-
-LaTeX Warning: Reference `tab:gin_best' on page 5 undefined on input line 5.
-
-
-LaTeX Warning: Reference `tab:graph2vec_best' on page 5 undefined on input line
- 5.
-
-
-LaTeX Warning: Reference `tab:netlsd_best' on page 5 undefined on input line 5.
-
-
-[5]
-
-LaTeX Warning: Reference `fig:heatmap' on page 6 undefined on input line 103.
-
+(./sections/methods.tex) (./sections/datasets.tex [2])
+(./sections/experimental_setup.tex [3]) (./sections/evaluation.tex [4])
+(./sections/results.tex [5]
 <figures/HEATMAP_AVG_accuracy_before.png, id=42, 917.3472pt x 423.2613pt>
 File: figures/HEATMAP_AVG_accuracy_before.png Graphic file (type png)
 <use figures/HEATMAP_AVG_accuracy_before.png>
 Package luatex.def Info: figures/HEATMAP_AVG_accuracy_before.png  used on input
  line 110.
 (luatex.def)             Requested size: 252.0pt x 116.27127pt.
-
-LaTeX Warning: Reference `fig:pareto' on page 6 undefined on input line 132.
-
-
-LaTeX Warning: Reference `fig:stacked_mem' on page 6 undefined on input line 13
-2.
-
 <figures/PARETO_AVG_acc_vs_compute_cost_before.png, id=43, 1002.3849pt x 423.26
 13pt>
 File: figures/PARETO_AVG_acc_vs_compute_cost_before.png Graphic file (type png)
@@ -965,14 +867,15 @@ File: figures/PARETO_AVG_acc_vs_compute_cost_before.png Graphic file (type png)
 Package luatex.def Info: figures/PARETO_AVG_acc_vs_compute_cost_before.png  use
 d on input line 139.
 (luatex.def)             Requested size: 252.0pt x 106.40277pt.
-
-LaTeX Warning: Reference `fig:pareto' on page 6 undefined on input line 145.
-
 <figures/embee_before.png, id=44, 401.5pt x 303.1325pt>
 File: figures/embee_before.png Graphic file (type png)
 <use figures/embee_before.png>
 Package luatex.def Info: figures/embee_before.png  used on input line 159.
 (luatex.def)             Requested size: 201.60077pt x 152.21342pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 <figures/training_before.png, id=45, 401.5pt x 303.1325pt>
 File: figures/training_before.png Graphic file (type png)
 <use figures/training_before.png>
@@ -981,71 +884,27 @@ Package luatex.def Info: figures/training_before.png  used on input line 166.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-LaTeX Warning: Reference `fig:embed_time' on page 6 undefined on input line 180
-.
-
-
-LaTeX Warning: Reference `fig:train_time' on page 6 undefined on input line 180
-.
-
-
-LaTeX Warning: Reference `fig:stacked_time' on page 6 undefined on input line 1
-81.
-
-
-LaTeX Warning: Reference `fig:stacked_mem' on page 6 undefined on input line 18
-1.
-
-
-LaTeX Warning: Reference `fig:train_time' on page 6 undefined on input line 182
-.
-
-
-LaTeX Warning: Reference `fig:embed_time' on page 6 undefined on input line 183
-.
-
-[6<./figures/HEATMAP_AVG_accuracy_before.png><./figures/PARETO_AVG_acc_vs_comput
-e_cost_before.png><./figures/embee_before.png>]
-<figures/stacked_time_before.png, id=52, 596.2275pt x 417.56pt>
+<figures/stacked_time_before.png, id=46, 596.2275pt x 417.56pt>
 File: figures/stacked_time_before.png Graphic file (type png)
 <use figures/stacked_time_before.png>
 Package luatex.def Info: figures/stacked_time_before.png  used on input line 19
 1.
 (luatex.def)             Requested size: 201.60077pt x 141.18481pt.
-<figures/stacked_mem_before.png, id=53, 596.2275pt x 417.56pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<figures/stacked_mem_before.png, id=47, 596.2275pt x 417.56pt>
 File: figures/stacked_mem_before.png Graphic file (type png)
 <use figures/stacked_mem_before.png>
 Package luatex.def Info: figures/stacked_mem_before.png  used on input line 198
 .
 (luatex.def)             Requested size: 201.60077pt x 141.18481pt.
 
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Warning: Reference `tab:graph2vec_cluster_best' on page 7 undefined on in
-put line 220.
-
-
-LaTeX Warning: Reference `tab:netlsd_cluster_best' on page 7 undefined on input
- line 220.
-
-
-LaTeX Warning: Reference `tab:gin_cluster_best' on page 7 undefined on input li
-ne 220.
-
-
-LaTeX Warning: Reference `tab:graph2vec_cluster_best' on page 7 undefined on in
-put line 223.
-
-
-LaTeX Warning: Reference `fig:netlsd_kmeans' on page 7 undefined on input line 
-323.
-
-
-LaTeX Warning: Reference `fig:gin_spectral' on page 7 undefined on input line 3
-23.
-
-[7<./figures/training_before.png><./figures/stacked_time_before.png><./figures/s
-tacked_mem_before.png>]
+[6<./figures/HEATMAP_AVG_accuracy_before.png><./figures/PARETO_AVG_acc_vs_comput
+e_cost_before.png>] [7<./figures/embee_before.png><./figures/training_before.png
+><./figures/stacked_time_before.png><./figures/stacked_mem_before.png>]
 <figures/NetLSD_kmeans_performance.png, id=60, 1156.32pt x 867.24pt>
 File: figures/NetLSD_kmeans_performance.png Graphic file (type png)
 <use figures/NetLSD_kmeans_performance.png>
@@ -1098,10 +957,6 @@ ne 369.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-LaTeX Warning: Reference `fig:tsne_umap_clusters' on page 8 undefined on input 
-line 375.
-
 <figures/tsne_vs_umap_comprehensive.png, id=66, 579.1236pt x 420.6114pt>
 File: figures/tsne_vs_umap_comprehensive.png Graphic file (type png)
 <use figures/tsne_vs_umap_comprehensive.png>
@@ -1112,51 +967,26 @@ line 378.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-LaTeX Warning: Reference `tab:stability_gin_best_cos' on page 8 undefined on in
-put line 389.
+Underfull \vbox (badness 2990) has occurred while \output is active []
 
-
-LaTeX Warning: Reference `tab:stability_gin_best_l2' on page 8 undefined on inp
-ut line 389.
-
-
-LaTeX Warning: Reference `tab:stability_graph2vec' on page 8 undefined on input
- line 389.
-
-
-LaTeX Warning: Reference `tab:stability_netlsd' on page 8 undefined on input li
-ne 389.
-
-[8<./figures/NetLSD_kmeans_performance.png><./figures/Graph2Vec_kmeans_performan
-ce.png><./figures/GIN_kmeans_performance.png>] [9<./figures/NetLSD_spectral_perf
-ormance.png><./figures/Graph2Vec_spectral_performance.png><./figures/GIN_spectra
-l_performance.png><./figures/tsne_vs_umap_comprehensive.png>]
-
-LaTeX Warning: Reference `tab:gin_best_per' on page 10 undefined on input line 
-636.
-
-
-LaTeX Warning: Reference `tab:netlsd_best_per' on page 10 undefined on input li
-ne 636.
-
-
-LaTeX Warning: Reference `fig:heatmap_after' on page 10 undefined on input line
- 729.
-
+ [8<./figures/NetLSD_kmeans_performance.png><./figures/Graph2Vec_kmeans_performa
+nce.png><./figures/GIN_kmeans_performance.png>] [9<./figures/NetLSD_spectral_per
+formance.png><./figures/Graph2Vec_spectral_performance.png><./figures/GIN_spectr
+al_performance.png><./figures/tsne_vs_umap_comprehensive.png>]
 <figures/HEATMAP_AVG_accuracy_after.png, id=80, 917.3472pt x 423.2613pt>
 File: figures/HEATMAP_AVG_accuracy_after.png Graphic file (type png)
 <use figures/HEATMAP_AVG_accuracy_after.png>
 Package luatex.def Info: figures/HEATMAP_AVG_accuracy_after.png  used on input 
 line 733.
 (luatex.def)             Requested size: 252.0pt x 116.27127pt.
-<figures/PARETO_AVG_acc_vs_compute_cost_after.png, id=81, 1002.3849pt x 423.261
+ [10<./figures/HEATMAP_AVG_accuracy_after.png>]
+<figures/PARETO_AVG_acc_vs_compute_cost_after.png, id=85, 1002.3849pt x 423.261
 3pt>
 File: figures/PARETO_AVG_acc_vs_compute_cost_after.png Graphic file (type png)
 <use figures/PARETO_AVG_acc_vs_compute_cost_after.png>
 Package luatex.def Info: figures/PARETO_AVG_acc_vs_compute_cost_after.png  used
  on input line 758.
 (luatex.def)             Requested size: 252.0pt x 106.40277pt.
-[10<./figures/HEATMAP_AVG_accuracy_after.png>]
 <figures/stacked_time_after.png, id=86, 604.2575pt x 420.57124pt>
 File: figures/stacked_time_after.png Graphic file (type png)
 <use figures/stacked_time_after.png>
@@ -1169,48 +999,23 @@ File: figures/stacked_mem_after.png Graphic file (type png)
 Package luatex.def Info: figures/stacked_mem_after.png  used on input line 786.
 
 (luatex.def)             Requested size: 201.60077pt x 140.31627pt.
-
-
-LaTeX Warning: Reference `fig:pareto_after' on page 11 undefined on input line 
-791.
-
-
-LaTeX Warning: Reference `fig:stacked_mem_after' on page 11 undefined on input 
-line 791.
-
-
-LaTeX Warning: Reference `fig:tsne_before_after' on page 11 undefined on input 
-line 798.
-
-
-LaTeX Warning: Reference `fig:umap_before_after' on page 11 undefined on input 
-line 798.
-
 <figures/comprehensive_grid_tsne.png, id=88, 590.4459pt x 447.3513pt>
 File: figures/comprehensive_grid_tsne.png Graphic file (type png)
 <use figures/comprehensive_grid_tsne.png>
 Package luatex.def Info: figures/comprehensive_grid_tsne.png  used on input lin
-e 802.
+e 799.
 (luatex.def)             Requested size: 226.79846pt x 171.83145pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 <figures/comprehensive_grid_umap.png, id=89, 590.4459pt x 447.3513pt>
 File: figures/comprehensive_grid_umap.png Graphic file (type png)
 <use figures/comprehensive_grid_umap.png>
 Package luatex.def Info: figures/comprehensive_grid_umap.png  used on input lin
-e 811.
+e 808.
 (luatex.def)             Requested size: 226.79846pt x 171.83145pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-) (./sections/conclusion.tex) (./sections/references.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [11<./figures/PARETO_AVG_acc_vs_compute_cost_after.png><./figures/stacked_time_
-after.png><./figures/stacked_mem_after.png><./figures/comprehensive_grid_tsne.pn
-g><./figures/comprehensive_grid_umap.png>]
-Underfull \hbox (badness 2653) in paragraph at lines 75--79
+) (./sections/conclusion.tex [11<./figures/PARETO_AVG_acc_vs_compute_cost_after.
+png><./figures/stacked_time_after.png><./figures/stacked_mem_after.png><./figure
+s/comprehensive_grid_tsne.png>])
+(./sections/references.tex
+Underfull \hbox (badness 2653) in paragraph at lines 93--97
 []\TU/TeXGyreTermes(0)/m/n/8 V. P. Dwivedi, C. K. Joshi, T. Lau-rent, Y. Ben-gio
 , and X.
  []
@@ -1277,41 +1082,33 @@ braces):
 >  {greek/babelname}  =>  {greek}
 >  {greek/localnumeral}  =>  {greeknumerals}
 >  {greek/Localnumeral}  =>  {Greeknumerals}.
-[12
-
-] (./main.aux
-LaTeX Info: Redefining \rmfamily on input line 6.
-LaTeX Info: Redefining \sffamily on input line 6.
-LaTeX Info: Redefining \ttfamily on input line 6.
+[12<./figures/comprehensive_grid_umap.png>] (./main.aux
+LaTeX Info: Redefining \rmfamily on input line 10.
+LaTeX Info: Redefining \sffamily on input line 10.
+LaTeX Info: Redefining \ttfamily on input line 10.
 [\directlua]:1: attempt to call a nil value (field 'select_language')
 stack traceback:
 	[\directlua]:1: in main chunk.
 \polyglossia@select@language:nnn ...3\endcsname )}
                                                   \fi \polyglossia@register@...
-l.6 \selectlanguage *{english}
-                            
+l.10 \selectlanguage *{english}
+                             
 ? 
 )
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 )
 
 Here is how much of LuaTeX's memory you used:
- 10697 strings out of 477805
- 195346,662416 words of node,token memory allocated
+ 10699 strings out of 477805
+ 195340,662416 words of node,token memory allocated
  521 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 14 attribute, 53 glue_spec
 , 14 attribute_list, 1 write nodes
-   avail lists: 1:2,2:2145,3:556,4:242,5:1006,6:143,7:16797,8:47,9:1017,10:20,11
-:1540
- 30834 multiletter control sequences out of 65536+600000
+   avail lists: 2:2371,3:557,4:246,5:1006,6:145,7:17206,8:47,9:1170,10:21,11:156
+9
+ 30836 multiletter control sequences out of 65536+600000
  151 fonts using 73085959 bytes
  73i,12n,87p,800b,521s stack positions out of 5000i,500n,10000p,200000b,80000s
 <</usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi7.pk>><</us
@@ -1337,7 +1134,7 @@ FreeSerifBoldItalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/gnu
 -freefont/FreeSerifItalic.otf></usr/share/texlive/texmf-dist/fonts/opentype/publ
 ic/gnu-freefont/FreeSerif.otf></usr/share/texmf/fonts/opentype/public/tex-gyre/t
 exgyretermes-regular.otf>
-Output written on main.pdf (12 pages, 4377429 bytes).
+Output written on main.pdf (12 pages, 4381708 bytes).
 
 PDF statistics: 323 PDF objects out of 1000 (max. 8388607)
  120 compressed objects within 2 object streams

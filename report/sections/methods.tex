@@ -10,7 +10,7 @@
 
 This section describes the graph embedding methods evaluated in this work.% and experimental setup used to ensure fair comparison across models.
 \subsection{Graph2Vec}
-We begin with Graph2Vec~\cite{narayanangraph2vec}, an unsupervised whole-graph embedding method that learns 
+We begin with \textbf{Graph2Vec}~\cite{narayanangraph2vec}, an unsupervised whole-graph embedding method that learns 
 fixed-length vector representations in a manner analogous to Doc2Vec for documents. 
 The core idea is to treat each graph as a document and its rooted subgraphs, corresponding to local node neighborhoods, as words. 
 Under this formulation, graphs that share similar structural patterns are expected to be mapped to nearby points in the embedding space.
@@ -115,7 +115,7 @@ These rooted subgraphs are then aggregated across all graphs and WL iterations t
 Finally, a skip-gram model is trained to learn graph-level embeddings by maximizing the likelihood of observing the rooted subgraphs associated with each graph (Algorithm~\ref{alg:graph2vec}).
 
 \subsection{NetLSD}
-NetLSD~\cite{tsitsulin2018netlsd} represents a graph using the spectrum of its graph Laplacian, 
+\textbf{NetLSD}~\cite{tsitsulin2018netlsd} represents a graph using the spectrum of its graph Laplacian, 
 capturing global structural information. 
 The underlying idea is that the eigenvalues of the Laplacian matrix encode important properties 
 of the graph structure. 
@@ -180,7 +180,7 @@ To improve computational efficiency, the method approximates the Laplacian spect
 using stochastic trace estimation, thereby avoiding full eigendecomposition. 
 As a result, NetLSD maintains stable performance even for large graphs.
 \subsection{GIN}
-The Graph Isomorphism Network (GIN)~\cite{xu2019gin} is a supervised graph neural network designed to maximize 
+The \textbf{Graph Isomorphism Network (GIN)}~\cite{xu2019gin} is a supervised graph neural network designed to maximize 
 the discriminative power of GNNs. 
 In GIN, node representations are iteratively updated by aggregating information from neighboring nodes. 
 At each layer, node features are updated using a sum aggregation function followed by a multilayer perceptron (MLP), 

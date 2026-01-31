@@ -3,9 +3,28 @@
 This evaluation study emphasize the importance of considering 
 not only the best predictive performance but also what is 
 the most beneficial in terms of cost when selecting 
-which method to use. 
-Our findings suggest that while supervised GNNs are 
-well suited for high accuracy applications, 
-spectral graph embeddings offer a great alternative 
-when the computational resources are missing or 
-when the robustness to noise is critical. 
+which method to use.
+Our findings suggest that GIN consistently achieves the highest classification accuracy, 
+both before and after graph perturbations, confirming the strength of supervised GNNs for discriminative tasks.
+However, GIN also experiences the largest performance degradation under perturbations, indicating sensitivity to structural noise,
+and not forget to menntion its high computational cost.
+In contrast, NetLSD exhibits strong clustering behavior and maintains relatively stable accuracy with consistently high AUC scores.
+Graph2Vec proves to be the most stable method under perturbations, 
+making it particularly suitable for stability analysis, 
+although its classification accuracy remains comparatively low.
+
+Overall, while GIN is preferable for high-accuracy 
+classification, NetLSD and Graph2Vec offer robust 
+and computationally efficient alternatives for 
+noise-prone or resource-constrained settings, 
+emphasizing the need for holistic evaluation beyond accuracy alone.
+
+
+
+
+
+% while supervised GNNs are 
+% well suited for high accuracy applications, 
+% spectral graph embeddings offer a great alternative 
+% when the computational resources are missing or 
+% when the robustness to noise is critical. 
