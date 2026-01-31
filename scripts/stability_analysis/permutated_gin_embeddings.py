@@ -1,29 +1,19 @@
 import argparse, time, csv, traceback, os, tracemalloc, math, json, random
 from pathlib import Path
 from typing import Tuple, List
-
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, confusion_matrix, classification_report
-
-from torch_geometric.nn import (
-    GINConv,
-    global_mean_pool, global_add_pool, global_max_pool,
-    BatchNorm,
-    JumpingKnowledge,
-)
+from torch_geometric.nn import (GINConv, global_mean_pool, global_add_pool, global_max_pool,BatchNorm, JumpingKnowledge,)
 from torch_geometric.utils import degree
 from torch_geometric.loader import DataLoader
 from torch_geometric.transforms import BaseTransform, NormalizeFeatures
 import torch_geometric.transforms as T
-
 from torch_geometric.transforms import BaseTransform
 from torch_geometric.utils import dropout_edge
-
 import psutil
 
 # #run with
@@ -37,11 +27,8 @@ import psutil
 BASE = "../"
 DATASETS_ROOT = f"{BASE}/permutated_DATASETS"
 DATASETS = ["MUTAG", "ENZYMES", "IMDB-MULTI"]
-
 OUT_DIR = f"{BASE}/permutated_embeddings/permutated_gin_embedding_classification"
 SEED = 42
-
-
 
 def set_seed(seed: int = 42):
     random.seed(seed)
@@ -69,7 +56,9 @@ def _append_csv_row(csv_path: Path, header: list, row: list):
         w.writerow(row)
 
 
+
 def compute_metrics(y_true: np.ndarray, probs: np.ndarray) -> Tuple[float, float, float, np.ndarray]:
+    
     if probs.size == 0:
         return float('nan'), float('nan'), float('nan'), np.array([], dtype=int)
     y_pred = probs.argmax(axis=1)
@@ -88,15 +77,19 @@ def compute_metrics(y_true: np.ndarray, probs: np.ndarray) -> Tuple[float, float
                 auc_macro = float('nan')
         else:
             auc_macro = roc_auc_score(y_true, probs, multi_class='ovr', average='macro')
+    
     except Exception:
         auc_macro = float('nan')
+    
     return acc, f1_macro, auc_macro, y_pred
 
 
 class DropEdgeTransform(BaseTransform):
+    
     def __init__(self, p: float = 0.2):
         super().__init__()
         self.p = float(p)
+
 
     def forward(self, data):
         if self.p <= 0.0 or data.edge_index is None:
@@ -111,7 +104,6 @@ class DropEdgeTransform(BaseTransform):
             if data.edge_attr.size(0) == mask.size(0):
                 data.edge_attr = data.edge_attr[mask]
             else:
-                # Mismatch from permutation: just discard edge_attr for safety
                 data.edge_attr = None
 
         # edge_weight
@@ -126,9 +118,8 @@ class DropEdgeTransform(BaseTransform):
 
 
 class EnsureStrongX(BaseTransform):
-    """
-    If x is missing, create [one_hot_degree (<=max_degree), raw_degree] features.
-    """
+    #If x is missing, create [one_hot_degree (<=max_degree), raw_degree] features.
+
     def __init__(self, max_degree: int = 128):
         super().__init__()
         self.max_degree = max_degree
@@ -152,13 +143,7 @@ def build_transform_chain(apply_norm: bool) -> T.Compose:
 
 # SMALL DATASET WRAPPER FOR PERMUTATED .pt LISTS
 class ListDataset(torch.utils.data.Dataset):
-    """
-    Wraps a list of PyG Data objects to mimic a TU dataset:
-    - has .num_classes
-    - has .num_features
-    - supports iteration and len()
-    - split_dataset will still work on it
-    """
+  
     def __init__(self, data_list: List[torch.Tensor]):
         super().__init__()
         self.data_list = data_list
@@ -172,18 +157,16 @@ class ListDataset(torch.utils.data.Dataset):
     def __len__(self):
         return len(self.data_list)
 
+
     def __getitem__(self, idx):
-        # Handle list/array indexing used in split_dataset
+  
         if isinstance(idx, (list, tuple, np.ndarray)):
             return [self.data_list[int(i)] for i in idx]
         return self.data_list[int(idx)]
 
 
 def load_permutated_dataset(ds_name: str, root: Path, base_transform, use_node_attr: bool):
-    """
-    Load ../permutated_DATASETS/<DS>/<DS>_permutated.pt, apply transforms,
-    and wrap into ListDataset so the rest of the code can stay the same.
-    """
+
     perm_path = root / ds_name / f"{ds_name}_permutated.pt"
     if not perm_path.exists():
         raise FileNotFoundError(f"Permutated dataset not found: {perm_path}")
@@ -192,7 +175,7 @@ def load_permutated_dataset(ds_name: str, root: Path, base_transform, use_node_a
 
     processed = []
     for data in data_list:
-        # Optional: if continuous node_attr exists but x is None
+ 
         if use_node_attr and getattr(data, "x", None) is None and getattr(data, "node_attr", None) is not None:
             data.x = data.node_attr
 
@@ -208,44 +191,46 @@ def load_permutated_dataset(ds_name: str, root: Path, base_transform, use_node_a
 class MLP(nn.Module):
     def __init__(self, in_dim, hidden, out_dim, p=0.5):
         super().__init__()
-        self.net = nn.Sequential(
-            nn.Linear(in_dim, hidden),
-            nn.ReLU(),
-            nn.BatchNorm1d(hidden),
-            nn.Dropout(p),
-            nn.Linear(hidden, out_dim),
-        )
+        self.net = nn.Sequential(  nn.Linear(in_dim, hidden), nn.ReLU(),nn.BatchNorm1d(hidden),nn.Dropout(p), nn.Linear(hidden, out_dim), )
+    
     def forward(self, x): return self.net(x)
 
 class GINBlock(nn.Module):
+    
     def __init__(self, in_dim, out_dim, p=0.5, train_eps=True):
         super().__init__()
+        
         self.mlp = MLP(in_dim, out_dim, out_dim, p=p)
         self.conv = GINConv(self.mlp, train_eps=train_eps)
         self.bn   = BatchNorm(out_dim)
         self.res_proj = nn.Linear(in_dim, out_dim) if in_dim != out_dim else None
         self.p = p
 
+
     def forward(self, x, edge_index):
         out = self.conv(x, edge_index)
         out = self.bn(out)
         out = F.relu(out)
         out = F.dropout(out, p=self.p, training=self.training)
+        
         if self.res_proj is not None:
             x = self.res_proj(x)
         return out + x
 
 def _graph_level_features(edge_index: torch.Tensor, batch: torch.Tensor) -> torch.Tensor:
+    
     n_per_g = torch.bincount(batch)
     e_batch = batch[edge_index[0]]
     m_per_g = torch.bincount(e_batch, minlength=n_per_g.size(0))
     n = n_per_g.float()
     m = m_per_g.float()
+    
     denom = torch.clamp(n * (n - 1), min=1.0)
     dens = (2.0 * m) / denom
     return torch.stack([n, m, dens], dim=1)
 
 class GINGraphEncoder(nn.Module):
+    
     def __init__(self, in_dim, hidden_dim, num_layers=5, pooling="add", dropout=0.5, train_eps=True, jk_mode="cat"):
         super().__init__()
         self.dropout = dropout
@@ -258,6 +243,7 @@ class GINGraphEncoder(nn.Module):
         self.num_layers = num_layers
 
     def _pool(self, x, batch):
+        
         if self.pooling == "add":
             return global_add_pool(x, batch)
         elif self.pooling == "mean":
@@ -271,16 +257,21 @@ class GINGraphEncoder(nn.Module):
         else:
             return global_add_pool(x, batch)
 
+
     def forward(self, x, edge_index, batch):
+        
         xs = []
+        
         for layer in self.layers:
             x = layer(x, edge_index)
             xs.append(x)
         x = self.jk(xs)
         g = self._pool(x, batch)
+        
         return g
 
 class GINForClassification(nn.Module):
+    
     def __init__(self, in_dim, hidden_dim, num_classes, num_layers=5, pooling="add",
                  dropout=0.5, use_gfeat=False, jk_mode="cat", train_eps=True):
         super().__init__()
@@ -294,6 +285,8 @@ class GINForClassification(nn.Module):
             enc_out += 3  # |V|,|E|,density
         self.classifier = nn.Linear(enc_out, num_classes)
 
+
+
     def forward(self, data):
         z = self.encoder(data.x, data.edge_index, data.batch)
         if self.use_gfeat:
@@ -303,12 +296,15 @@ class GINForClassification(nn.Module):
 
 
 class EarlyStopper:
+    
     def __init__(self, patience: int = 20, min_delta: float = 1e-4):
         self.patience = patience
         self.min_delta = min_delta
         self.best = -math.inf
         self.epochs_no_improve = 0
         self.best_state = None
+   
+   
     def step(self, val_acc: float, model: nn.Module):
         if val_acc > self.best + self.min_delta:
             self.best = val_acc
@@ -320,10 +316,14 @@ class EarlyStopper:
             return self.epochs_no_improve > self.patience
 
 class WarmupCosine(torch.optim.lr_scheduler._LRScheduler):
+    
     def __init__(self, optimizer, warmup_epochs, max_epochs, last_epoch=-1):
+        
         self.warmup = warmup_epochs
         self.max_epochs = max_epochs
         super().__init__(optimizer, last_epoch)
+    
+    
     def get_lr(self):
         epoch = self.last_epoch + 1
         if epoch <= self.warmup:
@@ -335,31 +335,34 @@ class WarmupCosine(torch.optim.lr_scheduler._LRScheduler):
 
 
 #train/eval helpers 
-def train_epoch(model, loader, optimizer, device, scaler=None, grad_clip: float = 1.0,
-                ce_weight=None, label_smooth: float = 0.0, dropedge_transform=None):
+def train_epoch(model, loader, optimizer, device, scaler=None, grad_clip: float = 1.0,ce_weight=None, label_smooth: float = 0.0, dropedge_transform=None):
+    
     model.train()
     total = 0.0
     for data in loader:
+        
         if dropedge_transform is not None:
             data = dropedge_transform(data)
+        
         data = data.to(device)
         optimizer.zero_grad(set_to_none=True)
         if scaler is not None and device.type == "cuda":
             with torch.autocast(device_type=device.type, dtype=torch.float16):
                 logits, _ = model(data)
-                loss = F.cross_entropy(logits, data.y.view(-1).long(),
-                                       weight=ce_weight, label_smoothing=label_smooth)
+                loss = F.cross_entropy(logits, data.y.view(-1).long(),   weight=ce_weight, label_smoothing=label_smooth)
             scaler.scale(loss).backward()
+            
             if grad_clip is not None:
                 scaler.unscale_(optimizer)
                 torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip)
+            
             scaler.step(optimizer)
             scaler.update()
         else:
             logits, _ = model(data)
-            loss = F.cross_entropy(logits, data.y.view(-1).long(),
-                                   weight=ce_weight, label_smoothing=label_smooth)
+            loss = F.cross_entropy(logits, data.y.view(-1).long(),weight=ce_weight, label_smoothing=label_smooth)
             loss.backward()
+            
             if grad_clip is not None:
                 torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip)
             optimizer.step()
@@ -371,6 +374,7 @@ def eval_epoch(model, loader, device):
     model.eval()
     correct, total = 0, 0
     all_embeds, all_labels, all_logits = [], [], []
+    
     for data in loader:
         data = data.to(device)
         logits, z = model(data)
@@ -380,6 +384,7 @@ def eval_epoch(model, loader, device):
         all_embeds.append(z.detach().cpu().numpy())
         all_labels.append(data.y.view(-1).detach().cpu().numpy())
         all_logits.append(logits.detach().cpu().numpy())
+    
     acc = correct / max(total, 1)
     embeds = np.concatenate(all_embeds, axis=0) if all_embeds else np.zeros((0,))
     labels = np.concatenate(all_labels, axis=0) if all_labels else np.zeros((0,))
@@ -391,29 +396,35 @@ def eval_epoch(model, loader, device):
 def split_dataset(dataset, test_size=0.1, val_size=0.1, seed=42):
     y = np.array([int(d.y.item()) for d in dataset])
     idx = np.arange(len(dataset))
+    
     try:
         idx_trainval, idx_test = train_test_split(idx, test_size=test_size, random_state=seed, stratify=y)
         y_trainval = y[idx_trainval]
-        idx_train, idx_val = train_test_split(
-            idx_trainval, test_size=val_size/(1.0-test_size), random_state=seed, stratify=y_trainval
-        )
+        
+        idx_train, idx_val = train_test_split( idx_trainval, test_size=val_size/(1.0-test_size), random_state=seed, stratify=y_trainval)
+   
     except Exception:
         rng = np.random.RandomState(seed); rng.shuffle(idx)
         n_test = int(len(idx) * test_size); n_val = int(len(idx) * val_size)
         idx_test = idx[:n_test]; idx_val = idx[n_test:n_test+n_val]; idx_train = idx[n_test+n_val:]
-    # For ListDataset, __getitem__ handles list-of-indices and returns a list[Data]
+   
+   
     return dataset[idx_train.tolist()], dataset[idx_val.tolist()], dataset[idx_test.tolist()], idx_train, idx_val, idx_test
 
 
 def save_embeddings(run_dir: Path, split_name: str, embeddings: np.ndarray, labels: np.ndarray, indices: np.ndarray):
+    
     run_dir.mkdir(parents=True, exist_ok=True)
     np.save(run_dir / f"{split_name}_embeddings.npy", embeddings)
+   
     with open(run_dir / f"{split_name}_labels.csv", "w", newline="") as f:
         w = csv.writer(f); w.writerow(["graph_index", "label"])
         for i, lbl in zip(indices, labels):
             w.writerow([int(i), int(lbl)])
+    
     D = embeddings.shape[1] if embeddings.ndim == 2 else 0
     wide_csv = run_dir / f"{split_name}_embeddings_wide.csv"
+   
     with open(wide_csv, "w", newline="") as f:
         w = csv.writer(f)
         header = ["label"] + [f"dim{j}" for j in range(D)]
@@ -450,17 +461,13 @@ def run(args):
             print(f"\n=== Permutated Dataset: {ds_name} ===")
             base_transform = build_transform_chain(apply_norm=args.norm_feats)
 
-            # *** HERE: load permutated dataset instead of TUDataset ***
-            dataset = load_permutated_dataset(
-                ds_name, root, base_transform, use_node_attr=args.use_node_attr
-            )
+            #permutated dataset
+            dataset = load_permutated_dataset(ds_name, root, base_transform, use_node_attr=args.use_node_attr )
 
             num_classes = dataset.num_classes
             in_dim = dataset.num_features if dataset.num_features > 0 else dataset[0].x.size(1)
 
-            train_dataset, val_dataset, test_dataset, idx_train, idx_val, idx_test = split_dataset(
-                dataset, 0.1, 0.1, SEED
-            )
+            train_dataset, val_dataset, test_dataset, idx_train, idx_val, idx_test = split_dataset( dataset, 0.1, 0.1, SEED )
 
             bs = args.batch_size
             train_loader_tr = DataLoader(train_dataset, batch_size=bs, shuffle=True)
@@ -505,10 +512,9 @@ def run(args):
                             best_val = -1.0
 
                             for epoch in range(1, ep + 1):
-                                loss = train_epoch(model, train_loader_tr, optimizer, device,
-                                                   scaler=scaler, grad_clip=args.grad_clip,
-                                                   ce_weight=weights, label_smooth=args.label_smoothing,
-                                                   dropedge_transform=dropedge_transform)
+                                loss = train_epoch(model, train_loader_tr, optimizer, device,    scaler=scaler, grad_clip=args.grad_clip, ce_weight=weights, label_smooth=args.label_smoothing,dropedge_transform=dropedge_transform)
+                               
+                               
                                 tr_acc, *_ = eval_epoch(model, train_loader_ev, device)
                                 val_acc_cur, *_ = eval_epoch(model, val_loader, device)
 
@@ -569,20 +575,15 @@ def run(args):
                                 "train_auc_macro": float(train_auc), "val_auc_macro": float(val_auc), "test_auc_macro": float(test_auc),
                                 "peak_tracemalloc_mb": float(peak_tracemalloc_mb),
                                 "rss_before_mb": float(rss_before), "rss_after_mb": float(rss_after),
-                                "device": str(device),
-                            }
+                                "device": str(device),}
+                            
                             (run_dir / "metrics.json").write_text(json.dumps(metrics, indent=2))
 
                             cm = confusion_matrix(test_lbl, test_pred)
                             np.savetxt(run_dir / "test_confusion_matrix.csv", cm, delimiter=",", fmt="%d")
-                            (run_dir / "classification_report_test.txt").write_text(
-                                classification_report(test_lbl, test_pred, digits=4)
-                            )
+                            (run_dir / "classification_report_test.txt").write_text( classification_report(test_lbl, test_pred, digits=4) )
 
-                            row = [ds_name, dim, ep, lr, dropout,
-                                   it_time_s, embed_time_s, total_time_s,
-                                   train_acc,val_acc, test_acc, train_f1 ,val_f1, test_f1,train_auc, val_auc, test_auc,
-                                   peak_tracemalloc_mb, rss_before, rss_after]
+                            row = [ds_name, dim, ep, lr, dropout,it_time_s, embed_time_s, total_time_s, train_acc,val_acc, test_acc, train_f1 ,val_f1, test_f1,train_auc, val_auc, test_auc,  peak_tracemalloc_mb, rss_before, rss_after]
 
                             _append_csv_row(run_dir / "metrics.csv", summary_header, row)
                             _append_csv_row(summary_csv,          summary_header, row)
