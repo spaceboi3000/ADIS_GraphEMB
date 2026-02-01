@@ -5,7 +5,7 @@
 % Any preprocessing steps.
 The experiments in this work are conducted on three widely used benchmark datasets from \textbf{TUDataset}~\cite{morris2020tudataset}: MUTAG, ENZYMES and IMDB-MULTI.
 Although these datasets are relatively small, they are highly diverse in structure and 
-they do cover domains such as chemistry, biology and social networks.
+they cover domains such as chemistry, biology and social networks.
 They are standard benchmarks in the graph representation learning literature~\cite{narayanangraph2vec,tsitsulin2018netlsd,xu2019gin}
 and are commonly used to evaluate graph embedding and classification methods.
 Their popularity also enables fair comparison with existing methods and published results.
@@ -28,6 +28,6 @@ This benchmark is considered difficult for many graph embedding methods, often e
 \subsection{IMDB-MULTI}
 \textbf{IMDB-MULTI}~\cite{yanardag2015deepgraphkernels} is a social network dataset constructed from movie collaboration data.
 Each graph represents the ego network of actors appearing in a movie, where nodes correspond to actors and edges represent co-appearance relationships.
-Unlike molecular and biological datasets, IMDB-MULTI does not provide node labels or attribute,
+Unlike molecular and biological datasets, IMDB-MULTI does not provide node labels or attributes,
 which makes classification entirely dependent on graph topology.
 This creates a true challenge for graph embedding methods, as they must rely solely on structural patterns such as connectivity, degree distributions and subgraph configurations.
